@@ -1,0 +1,36 @@
+{% if product.metafields.custom_fields.enable_reviews_section == 1 %}
+<div class='c-pdpReview {% if product.metafields.custom_fields["no_review_content"] != blank %}c-pdpReview--noReview{% endif %}'>
+  <div id="productReview" class="product-single__reviews">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item">
+          <div class="product-single__reviews-title text-center">
+          {% if product.metafields.custom_fields["review_section_title"] != blank %}
+            <h3>{{ product.metafields.custom_fields["review_section_title"] }}</h3>
+          {% endif %}
+          {% if product.metafields.custom_fields["review_section_heading"] != blank %}
+              <h5>{{ product.metafields.custom_fields["review_section_heading"] }}</h5>
+          {% endif %}
+          {% if product.metafields.custom_fields["no_review_content"] != blank %}
+            <div class="c-pdpReview__copy">
+              {{ product.metafields.custom_fields["no_review_content"] }}  
+            </div>
+          {% endif %}
+          <div id="y-badges" class="yotpo yotpo-badge badge-init" data-product-id="{{ product.id }}">&nbsp;</div>
+            <div class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
+          </div>
+          <div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<style>
+    @media only screen and (max-width: 767px){
+      #the-deep .yotpo .main-widget .yotpo-regular-box.yotpo-bottomline.yotpo-bottomline-2-boxes .yotpo-default-button.write-question-button{
+        margin: 60px auto 30px;
+      }
+    }
+</style>

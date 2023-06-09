@@ -1,0 +1,48 @@
+<div class="accordion__body-wrapper">
+  <div class="accordion__body-copy">
+    <div class="time-box">
+      <div class="time-box__item time-box__item--active js-time-box" data-time="morning">
+        {% include 'FaqProduct-icon-sun' %}
+
+        <span>MORNING</span>
+      </div>
+
+      <div class="time-box__item js-time-box" data-time="night">
+        {% include 'FaqProduct-icon-moon' %}
+
+        <span>NIGHT</span>
+      </div>
+    </div>
+
+    {% if product.metafields.accordion.how_to_use.value[0]['vimeo-id'] != blank %}
+      <div class="video-wrapper">
+        <iframe id="faq-video" src="https://player.vimeo.com/video/{{- product.metafields.accordion.how_to_use.value[0]['vimeo-id'] -}}?background=0&autoplay=0&loop=0&byline=0&title=0?controls=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+    {% endif %}
+
+    <div class="time-box-tab time-box-tab--active" data-time="morning">
+      <div>
+        <h3>{{ product.metafields.accordion.how_to_use.value[0]['morning-1-1'] }}</h3>
+
+        <p>{{ product.metafields.accordion.how_to_use.value[0]['morning-1-2'] }}</p>
+
+        <h3>{{ product.metafields.accordion.how_to_use.value[0]['morning-2-1'] }}</h3>
+
+        <p>{{ product.metafields.accordion.how_to_use.value[0]['morning-2-2'] }}</p>
+      </div>
+    </div>
+
+    <div class="time-box-tab" data-time="night">
+      <div>
+        <h3>{{ product.metafields.accordion.how_to_use.value[0]['night-1-1'] }}</h3>
+
+        <p>{{ product.metafields.accordion.how_to_use.value[0]['night-1-2'] }}</p>
+
+        <h3>{{ product.metafields.accordion.how_to_use.value[0]['night-2-1'] }}</h3>
+
+        <p>{{ product.metafields.accordion.how_to_use.value[0]['night-2-2'] }}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

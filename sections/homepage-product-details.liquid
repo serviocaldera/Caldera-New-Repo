@@ -1,0 +1,207 @@
+<div class="product-details" data-product-parallax-container>
+  <div class="wrapper">
+    <div class="product-details__content-block content-block--1" data-content-block>
+      <div class="grid--full grid--rev">
+        <div class="grid__item medium--five-twelfths">
+          <div class="product-details__image">
+            <picture>
+              <source
+                media="(min-width:992px)"
+                srcset="{{ section.settings.content_image_1 | img_url: '342x' }},
+                        {{ section.settings.content_image_1 | img_url: '684x' }} 2x">
+              <source
+                srcset="{{ section.settings.content_image_1 | img_url: '480x' }},
+                        {{ section.settings.content_image_1 | img_url: '960x'}} 2x">
+
+              <img class="bg-image" src="{{ section.settings.content_image_1 | img_url: '342x' }}" alt="{{ section.settings.content_image_1.alt }}">
+            </picture>
+            <img class="img--mobile" src="{{ section.settings.content_mobile_image_1 | img_url: '238x' }}" data-rjs="{{ section.settings.content_mobile_image_1 | img_url: '476x' }}" alt="{{ section.settings.content_mobile_image_1.alt }}">
+          </div>
+        </div>
+        <div class="grid__item medium--seven-twelfths">
+          <div class="product-details__content">
+            <h4>{{ section.settings.content_title_1 }}</h4>
+            <p>{{ section.settings.content_text_1 }}</p>
+            {% if section.settings.content_cta_1 %}
+              <a href="{{ section.settings.content_cta_1 }}" class="btn btn--primary">{{ section.settings.content_cta_text_1 }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-details__content-block content-block--2" data-content-block>
+      <div class="grid--full">
+        <div class="grid__item medium--seven-twelfths">
+          <div class="product-details__image">
+            <picture>
+              <source
+                media="(min-width:992px)"
+                srcset="{{ section.settings.content_image_2 | img_url: 'x528'}},
+                        {{ section.settings.content_image_2 | img_url: 'x1056'}} 2x">
+              <source
+                srcset="{{ section.settings.content_mobile_image_2 | img_url: '480x'}},
+                        {{ section.settings.content_mobile_image_2 | img_url: '960x'}} 2x">
+
+              <img class="bg-image" src="{{ section.settings.content_image_2 | img_url: 'x1056' }}" alt="{{ section.settings.content_image_2.alt }}">
+            </picture>
+            <div class="image--overlay" data-colour-block-parallax data-parallax-direction="down" data-parallax-speed="6"></div>
+            <div class="product-details__content">
+              <h4 class="text--light">{{ section.settings.content_title_2 }}</h4>
+              <p class="text--light">{{ section.settings.content_text_2 }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid__item medium--five-twelfths">
+          <span class="pre-header medium--hide large--hide" data-text-parallax>{{ section.settings.content_image_caption_2 }}</span>
+          <div class="product-details__image product-details__image--secondary right">
+            <span class="pre-header hide medium--show" data-text-parallax>{{ section.settings.content_image_caption_2 }}</span>
+            <img src="{{ section.settings.content_secondary_image_2 | img_url: 'x528' }}" data-rjs="{{ section.settings.content_secondary_image_2 | img_url: 'x1056' }}" alt="{{ section.settings.content_secondary_image_2.alt }}">
+            <div class="image--overlay" data-colour-block-parallax data-parallax-direction="up" data-parallax-speed="7"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-details__content-block content-block--3" data-content-block>
+      <div class="grid--full">
+        <div class="grid__item medium--one-half push--medium--one-twelfth">
+          <div class="product-details__image medium--right">
+            <span class="pre-header" data-text-parallax>{{ section.settings.content_image_caption_3 }}</span>
+            <img src="{{ section.settings.content_image_3 | img_url: 'x525' }}" data-rjs="{{ section.settings.content_image_3 | img_url: 'x1050' }}" alt="{{ section.settings.content_image_3.alt }}">
+          </div>
+        </div>
+        <div class="grid__item medium--five-twelfths push--medium--one-twelfth">
+          <div class="product-details__content" data-product-parallax-end>
+            <h4>{{ section.settings.content_title_3 }}</h4>
+            <p>{{ section.settings.content_text_3 }}</p>
+            {% if section.settings.content_cta_3 %}
+              <a href="{{ section.settings.content_cta_3 }}" class="btn btn--primary">{{ section.settings.content_cta_text_3 }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Product Feature",
+    "settings": [
+      {
+        "type":"header",
+        "content":"Content Block 1"
+      },
+      {
+        "type":"image_picker",
+        "id":"content_image_1",
+        "label":"Content Block Image",
+        "info":"Recommended dimensions: 684px x 684px"
+      },
+      {
+        "type":"image_picker",
+        "id":"content_mobile_image_1",
+        "label":"Product Mobile Image",
+        "info":"Recommended dimensions: 476px x 690px"
+      },
+      {
+        "type":"text",
+        "id":"content_title_1",
+        "label":"Content Block Title",
+        "default":"Natural resilience in a bottle."
+      },
+      {
+        "type":"textarea",
+        "id":"content_text_1",
+        "label":"Content Block Copy",
+        "default": "Our serum is a culmination of craftsmanship — a bringing together of the world’s best minds and nature’s most robust ingredients to make something powerful and pure."
+      },
+      {
+        "type":"url",
+        "id":"content_cta_1",
+        "label": "Content Block CTA Link"
+      },
+      {
+        "type":"text",
+        "id":"content_cta_text_1",
+        "label":"Content Block CTA Text",
+        "default":"Start Now"
+      },
+      {
+        "type":"header",
+        "content":"Content Block 2"
+      },
+      {
+        "type":"image_picker",
+        "id":"content_image_2",
+        "label":"Content Block Image",
+        "info":"Recommended dimensions: 1472px x 974px"
+      },
+      {
+        "type":"image_picker",
+        "id":"content_mobile_image_2",
+        "label":"Content Block Mobile Image",
+        "info":"Recommended dimensions: 750px x 1470px"
+      },
+      {
+        "type":"text",
+        "id":"content_title_2",
+        "label":"Content Block Title",
+        "default":"Skincare made simple."
+      },
+      {
+        "type":"textarea",
+        "id":"content_text_2",
+        "label":"Content Block Copy",
+        "default": "Your time is better spent living your life, rather than following a complicated routine.  We poured nature's most robust ingredients into every drop to deliver maxium results with minimal effort."
+      },
+      {
+        "type":"image_picker",
+        "id":"content_secondary_image_2",
+        "label":"Content Block Secondary Image"
+      },
+      {
+        "type":"text",
+        "id":"content_image_caption_2",
+        "label":"Image Caption",
+        "default":"One Step Routine"
+      },
+      {
+        "type":"header",
+        "content":"Content Block 3"
+      },
+      {
+        "type":"image_picker",
+        "id":"content_image_3",
+        "label":"Content Block Image"
+      },
+      {
+        "type":"text",
+        "id":"content_image_caption_3",
+        "label":"Image Caption",
+        "default":"Clinically Proven"
+      },
+      {
+        "type":"text",
+        "id":"content_title_3",
+        "label":"Content Block Title",
+        "default":"Clinically Proven Results."
+      },
+      {
+        "type":"textarea",
+        "id":"content_text_3",
+        "label":"Content Block Copy",
+        "default": "Our lab saw noticeably younger-looking results: skin appeared more energized and much smoother. We call it the brighter and tighter effect."
+      },
+      {
+        "type":"url",
+        "id":"content_cta_3",
+        "label": "Content Block CTA Link"
+      },
+      {
+        "type":"text",
+        "id":"content_cta_text_3",
+        "label":"Content Block CTA Text",
+        "default":"Learn More"
+      }
+    ]
+  }
+{% endschema %}

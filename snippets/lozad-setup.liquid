@@ -1,0 +1,25 @@
+{{ "lozad.js" | asset_url | script_tag }}
+<style>
+    .lozad{
+        opacity: 0;
+        transition: all 0.3s;
+    }
+    .fade {
+        opacity: 1;
+    }
+</style>
+<script>
+    lozad('.lozad', {
+        load: function(el) {
+            if(el.dataset.src){
+                el.src = el.dataset.src;
+            }
+            if(el.dataset.srcset){
+                el.srcset = el.dataset.srcset;
+            }
+            el.onload = function() {
+                el.classList.add('fade')
+            }
+        }
+    }).observe()
+</script>

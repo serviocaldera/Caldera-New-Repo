@@ -1,0 +1,46 @@
+{% if product.metafields.custom_fields["enable_comboreview_section"] == 1 %}
+  <div class="pdpComboReviews" id="pdpComboReviews">
+    <div class="wrapper">
+      <div class="pdpComboReviews__items">
+        {% for item in product.metafields.custom_fields["comboreview_item"] %}
+
+          <div class="pdpComboReviews__item">
+            <div class="pdpComboReviews__item-top">
+              {% if item["comboreview_photo"] != blank %}
+                <div class="pdpComboReviews__photo">
+                  <img src='{{ item["comboreview_photo"] }}' data-src='{{ item["comboreview_photo"] }}' alt="{{ item["comboreview_title"] }}" class="lazyload" />
+                </div>
+              {% endif %}
+              
+              {% if item["comboreview_stars"] != blank %}
+                <div class="pdpComboReviews__stars">
+                  <img src='{{ item["comboreview_stars"] }}' data-src='{{ item["comboreview_stars"] }}' alt="rating" class="lazyload" />
+                </div>
+              {% endif %}
+              
+              {% if item["comboreview_title"] != blank %}
+                <div class="pdpComboReviews__title">{{ item["comboreview_title"] }}</div>
+              {% endif %}
+
+              {% if item["comboreview_copy"] != blank %}
+                <div class="pdpComboReviews__copy">{{ item["comboreview_copy"] }}</div>
+              {% endif %}
+            </div>
+            
+            <div class="pdpComboReviews__item-bottom">
+              {% if item["comboreview_author"] != blank %}
+                <div class="pdpComboReviews__author">{{ item["comboreview_author"] }}</div>
+              {% endif %}
+                
+              {% if item["comboreview_link_text"] != blank %}
+                <a href="{{ item["comboreview_link_url"] }}" class="pdpComboReviews__link">{{ item["comboreview_link_text"] }}</a>
+              {% endif %}
+            </div>
+
+          </div>
+          
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

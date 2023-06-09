@@ -1,0 +1,53 @@
+<div class="c-scienceInov">
+    <div class="c-scienceInov__imageDesktop" style="background-image: url({{ section.settings.image-desktop | img_url: 'master' }});"></div>
+    <div class="wrapper">
+        <div class="c-scienceInov__main">
+            <div class="c-scienceInov__row">
+                <div class="c-scienceInov__content">
+                    <div class="c-scienceInov__box">
+                        <h4 class="c-scienceInov__heading">
+                            {{ section.settings.heading }}
+                        </h4>
+                        <div class="c-scienceInov__copy">
+                            {{ section.settings.copy }}
+                        </div>
+                    </div>
+                </div>
+                <div class="c-scienceInov__image">
+                    <img data-src="{{ section.settings.image-mobile | img_url: 'master' }}" class="lazyload c-scienceInov__imageMobile" />
+                    <img data-src="{{ section.settings.image-desktop | img_url: 'master' }}" class="lazyload c-scienceInov__imageTablet" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Science Innovation",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image-desktop",
+        "label":"Image Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"image-mobile",
+        "label":"Image Mobile"
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"heading",
+        "default": "Conscious Innovation"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default": "We’re proud of our innovative skincare science, but we’re not stopping there. We will continue to improve packaging, logistics, and manufacturing processes to leave a lighter footprint. As a certified B Corporation, we’re committed to ensuring that our products are good for people and the Earth."
+      }
+    ]
+  }
+{% endschema %}

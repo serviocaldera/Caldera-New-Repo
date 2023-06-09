@@ -1,0 +1,94 @@
+<div class="wrapper{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+  <div class="c-pdpCertified__row">
+    <div class="c-pdpCertified__content">
+      <h3 class="c-pdpCertified__heading">Certifications</h3>
+
+      <p class="c-pdpCertified__copy">
+        Caldera + Lab is committed to Transparency, Sustainability, and Excellence. Our products are certified by the
+        world’s leading, independent regulatory agencies.
+      </p>
+    </div>
+
+    <div class="c-pdpCertified__logos">
+      <div class="c-pdpCertified__images c-pdpCertified__images--0">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/1percent_for_the_planet_with_member_seal.png?v=1678808374"
+          data-src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/1percent_for_the_planet_with_member_seal.png?v=1678808374"
+          alt="Certified Logos"
+          class=" ls-is-cached lazyloaded"
+        >
+      </div>
+      <!--
+        <div class="c-pdpCertified__images c-pdpCertified__images--1">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0079/7193/0170/t/76/assets/adb53af673fd--certified-icon-2-654c22.png?v=1616488457"
+            data-src="https://cdn.shopify.com/s/files/1/0079/7193/0170/t/76/assets/adb53af673fd--certified-icon-2-654c22.png?v=1616488457"
+            alt="Certified Logos"
+            class=" ls-is-cached lazyloaded"
+          >
+        </div>
+      -->
+      <div class="c-pdpCertified__images c-pdpCertified__images--2">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0079/7193/0170/t/76/assets/adb53af673fd--certified-icon-3-875287.png?v=1616488466"
+          data-src="https://cdn.shopify.com/s/files/1/0079/7193/0170/t/76/assets/adb53af673fd--certified-icon-3-875287.png?v=1616488466"
+          alt="Certified Logos"
+          class=" ls-is-cached lazyloaded"
+        >
+      </div>
+
+      <div class="c-pdpCertified__images c-pdpCertified__images--3">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/peta_logo_grey_seals_block.png?v=1680025603"
+          data-src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/peta_logo_grey_seals_block.png?v=1680025603"
+          alt="Certified Logos"
+          class=" ls-is-cached lazyloaded"
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Certification Bar",
+  "class": "c-pdpCertified",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "copy",
+      "label": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "image",
+      "type": "image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certification Bar",
+      "category": "Caldera"
+    }
+  ]
+}
+{% endschema %}

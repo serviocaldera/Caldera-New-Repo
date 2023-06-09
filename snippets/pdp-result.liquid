@@ -1,0 +1,37 @@
+{% if product.metafields.custom_fields["enable_results"] == 1 %}
+<div class="c-pdpResult">
+    <div class="wrapper">
+        {% if product.metafields.custom_fields["result_title"] != blank %}
+            <h4 class="c-pdpSection__heading c-pdpResult__title">
+                {{ product.metafields.custom_fields["result_title"] }}
+            </h4>
+        {% endif %}
+        {% if product.metafields.custom_fields["result_boxes"] != blank %}
+        <div class="c-pdpResult__main">
+            <div class="c-pdpResult__row" data-pdp-result-slider>
+                {% for item in product.metafields.custom_fields["result_boxes"] %}
+                    <div class='c-pdpResult__item {{ item["css_class"] }}'>
+                        {% if item["image"] != blank %}
+                            <img src="{{ item["image"] }}" class="c-pdpResult__image" alt="" />
+                        {% endif %}
+                        <div class="c-pdpResult__content">
+                            {% if item["icon"] != blank %}
+                                <img src="{{ item["icon"] }}" class="c-pdpResult__icon" alt="icon" />
+                            {% endif %}
+                            {% if item["heading"] != blank %}
+                            <h6 class="c-pdpResult__heading">{{item["heading"] | remove: " "}}</h6>
+                            {% endif %}
+                            {% if item["copy"] != blank %}
+                            <div class="c-pdpResult__copy">
+                                {{ item["copy"] }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>    
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

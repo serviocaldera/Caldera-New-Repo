@@ -1,0 +1,73 @@
+<div class="c-bcorpExtra">
+    <div class="c-bcorpExtra__content">
+        <div class="c-bcorpExtra__main">
+            <h3 class="c-bcorpExtra__title">{{ section.settings.title }}</h3>
+            <div class="c-bcorpExtra__row">
+                {% for block in section.blocks %}
+                    <div class="c-bcorpExtra__item">
+                        <h6 class="c-bcorpExtra__heading">{{ block.settings.heading }}</h6>
+                        <div class="c-bcorpExtra__copy">
+                            {{ block.settings.copy }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>  
+        </div>
+        
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Extra Mile",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image-desktop",
+        "label":"Desktop Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"image-mobile",
+        "label":"Mobile Image"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"TItle",
+        "default": "We Went The Extra Mile. And Then Went Further."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "extra-block",
+        "name": "block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "html",
+            "id": "copy",
+            "label": "Copy"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+<style type="text/css">
+
+    .c-bcorpExtra__content{
+        background-image: url({{ section.settings.image-mobile | img_url: 'master' }});
+    }
+
+    @media (min-width: 768px){
+        .c-bcorpExtra__content{
+            background-image: url({{ section.settings.image-desktop | img_url: 'master' }});
+        }
+  }
+</style>

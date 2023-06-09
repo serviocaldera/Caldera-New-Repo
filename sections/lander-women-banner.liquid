@@ -1,0 +1,32 @@
+<div class="c-landerBanner">
+    <div class="c-landerBanner__image c-landerBanner__image--desktop" style="background-image: url({{ section.settings.image_desktop | img_url: 'master' }});"></div>
+    <div class="c-landerBanner__image c-landerBanner__image--mobile" style="background-image: url({{ section.settings.image_mobile | img_url: 'master' }});"></div>
+    <h3 class="c-landerBanner__content">
+          {{ section.settings.copy }}
+    </h3>
+</div>
+<!--c-landerBanner-->
+
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image_desktop",
+        "label":"Image Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"image_mobile",
+        "label":"Image Mobile"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"copy",
+        "default": "Try The Good Risk-Free For 60 Days. If You Don’t Love It, Receive A Full Refund.  "
+      }
+    ]
+  }
+{% endschema %}

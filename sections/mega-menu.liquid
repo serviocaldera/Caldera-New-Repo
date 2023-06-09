@@ -1,0 +1,43 @@
+{%- assign free_sample_enabled = settings['free_sample_toggle'] -%}
+{%- assign free_sample_label = settings['free_sample_label'] | default: 'Free Sample' -%}
+
+<!-- mobile navigation -->
+{% include 'navigation--mobile' %}
+<!-- desktop navigation -->
+{% include 'navigation--desktop' %}
+
+{% schema %}
+  {
+    "name": "Mega Menu Block",
+    "blocks": [
+      {
+        "type": "megamenu-block",
+        "name": "block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "item_image",
+            "label": "item image"
+          },
+          {
+            "type": "text",
+            "id": "item_title",
+            "label": "title",
+            "default": "The Good"
+          },
+          {
+            "type": "text",
+            "id": "item_type",
+            "label": "item type",
+            "default": "Multifunctional Serum"
+          },
+          {
+            "type": "url",
+            "id": "item_url",
+            "label": "Product link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,182 @@
+.premium_iwt-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+.premium_iwt-flex {
+  display: flex;
+}
+.premium_iwt-flex .premium_iwt-half {
+  width: 50%;
+}
+/* Image styles */
+.premium_iwt-image img {
+  width: 100%;
+  margin-right: auto;
+  height: auto;
+  display: block;
+  max-height: 525px;
+  max-width: 525px;
+  object-fit: cover;
+}
+/* End image styles */
+
+/* Content styles */
+.premium_iwt-content {
+  display: flex;
+  align-items: center;
+}
+.premium_iwt-content-control {
+  margin: 0 auto;
+  width: 80%;
+  text-align: left;
+  max-width: 490px;
+}
+@media only screen and (min-width: 769px) {
+  .premium_iwt-content-control.premium_iwt-auto--left {
+    margin-left: auto;
+    margin-right: 0;
+  }
+  .premium_iwt-content-control.premium_iwt-auto--right {
+    margin-right: auto;
+    margin-left: 0;
+  }
+}
+.premium_iwt-content-control .premium_iwt-btn {
+  color: #fff;
+  background-color: #000;
+  padding: 10px 25px;
+  text-decoration: none;
+  transition: all .3s;
+}
+.premium_iwt-content-control .premium_iwt-btn:hover {
+  color: #000;
+  background-color: #fff;
+  border-bottom: 1px solid #000;
+}
+.premium_iwt-content-control .text_with_image_link{
+  color: #AF5D00;
+  font-family: "Avenir LT Pro";
+  font-size: 14px;
+  letter-spacing: 1.17px;
+  line-height: 16px;
+  text-decoration: underline;
+  font-weight: 900;
+}
+.premium_iwt-content-control .big_content{
+  color: #3D3D38;
+  font-family: "Adobe Garamond Pro", serif;
+  font-size: 40px;
+  letter-spacing: 0;
+  line-height: 54px;
+  margin-bottom: 16px;
+}
+.premium_iwt-content-control .top_content {
+  margin-bottom: 30px;
+}
+.premium_iwt-content-control .bottom_content{
+  margin-bottom: 20px;
+}
+.premium_iwt-content-control h3 {
+  color: #AF5D00;
+  font-family: "Adobe Garamond Pro", serif;
+  font-size: 48px;
+  letter-spacing: 0;
+  line-height: 58px;
+  margin-bottom: 0;
+}
+.premium_iwt-content-control .stars_number{
+  padding-bottom: 24px;
+}
+.premium_iwt-content-control .stars_number img{
+  height: 18px;
+  margin-right: 8px;
+}
+.premium_iwt-content-control .top_content, .bottom_content{
+  color: #3D3D38;
+  font-family: "Avenir LT Pro";
+  font-size: 18px;
+  letter-spacing: 0.45px;
+  line-height: 31px;
+}
+.premium_iwt-content-control.premium_iwt_video_type .top_content {
+  font-family: "Adobe Garamond Pro", serif;
+  font-size: 23px;
+  letter-spacing: 0;
+  line-height: 34px;
+  margin-bottom: 16px;
+}
+.premium_iwt-content-control .reviwer_name{
+  color: #222222;
+  font-family: "Avenir LT Pro", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.35px;
+  line-height: 24px;
+  font-weight: bold;
+}
+.hero-video-player-wrap{
+  text-align: center;
+}
+.hero-video-player-wrap .video{
+  width: 100%;
+  max-width: 605px;
+  height: 337px;
+  margin: auto;
+}
+/* End content styles */
+
+@media only screen and (max-width: 1023px) {
+  .hero3__title{
+    margin-bottom: 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .premium_iwt-container {
+    padding: 40px 20px 70px;
+  }
+  .premium_iwt-content-control{
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .premium_iwt-flex {
+    flex-wrap: wrap;
+  }
+  .premium_iwt-flex .premium_iwt-half {
+    width: 100%;
+  }
+
+  .premium_iwt-container{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .premium_iwt-content-control .big_content {
+    font-size: 32px;
+    line-height: 44px;
+  }
+  .premium_iwt-image {
+    margin-bottom: 35px;
+  }
+  .premium_iwt-flex--video .premium_iwt-image {
+    margin-bottom: 0;
+    margin-top: 35px;
+  }
+  .premium_iwt-image img {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .premium_iwt-content-control.premium_iwt_video_type .top_content,
+  .premium_iwt-content-control.premium_iwt_video_type .stars_number,
+  .premium_iwt-content-control.premium_iwt_video_type .reviwer_name {
+    text-align: center;
+  }
+  .premium_iwt-container.premium_iwt-flex.premium_iwt-flex--video .premium_iwt-image{
+    order: 2;
+  }
+  .premium_iwt-content-control h3 {
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 44px;
+  }
+}
+/* ========== End Stephen Premium Image with Text Styles ========== */

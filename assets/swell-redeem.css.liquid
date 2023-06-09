@@ -1,0 +1,308 @@
+.redeemDiscount{
+    background-color: #21211f;
+    color: white;
+    display: flex;
+    position: relative;
+    padding-top: 4.5rem;
+    padding-bottom: 3.5rem;
+}
+.redeemDiscount .show-at-mobile{
+    display: none;
+}
+.redeem-img{
+    background-image: url({{"swell-redeem-img.png" | asset_url}});
+    height: 490px;
+    width: 359px;
+    background-size: cover;
+    background-position-x: right;
+    position: absolute;
+    right: 7rem;
+    top: -3rem;
+}
+.redeemDiscount h2{
+    color: white;
+    font-size: 26px;
+    position: absolute;
+    top: 34%;
+    left: 3rem;
+}
+.redeemDiscount h3{
+    color: white;
+    font-size: 28px;
+    letter-spacing: .98px;
+    margin-bottom: 0;
+    line-height: normal;  
+}
+.redeemDiscount h4{
+    color: white;
+    font-size: 19px;
+    letter-spacing: 0.65px;
+    margin-bottom: 0rem;
+}
+.redeem-explain h4:nth-of-type(2){
+    margin-top: 9rem;
+}
+.redeemDiscount p{
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.5;
+    letter-spacing: .45px;
+}
+.redeemOption p{
+    border-bottom: 1px solid #80894f;
+    width: max-content;
+}
+.h1-to-account{
+    display: none;
+}
+.redeemDiscount hr{
+    width: 100%;
+    position: absolute;
+    border-color: rgba(225,225,225,.1);
+    top: 40%;
+}
+.redeem-explain{
+    width: inherit;
+    margin-left: 13rem;
+}
+
+.redeem-explain .btn--purchase{
+    font-size: 10px;
+    margin: 20px 0 0 0;
+    padding: 10px 10px;
+}
+.redeemDiscount .redeemOption{
+    width: 159px;
+    background-color: #383836;
+    height: 92px;
+    margin-right: 15px;
+    padding-left: 15px;
+    padding-top: 18px;
+}
+.redeemDiscount .redeemOptions{
+    display: flex;
+    margin-top: 3rem;
+}
+#text-p{
+    transform: rotate(90deg) scaleX(1);
+    position: absolute;
+    top: 38%;
+    right: -2rem;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #d1cfcc;
+}
+@media screen and (max-width: 1250px){
+    .redeem-explain{
+       margin-left: 7rem;
+    }
+}
+@media screen and (max-width: 1150px){
+    .redeem-explain{
+       margin-left: 5rem;
+    }
+    .redeemDiscount .redeemOption{
+       width: 144px;
+       height: 83px;
+    }
+    .redeem-img{
+        height: 410px;
+        width: 300px; 
+        right: 5rem;  
+        top: -2.5rem;    
+    }
+    .redeemDiscount h2{
+        font-size: 24px;
+        top: 34%;
+        left: 2rem;
+    }
+    .redeem-explain h4:nth-of-type(2) {
+        margin-top: 5rem;
+    }
+    .redeemDiscount{
+       padding-top: 3rem;
+    }
+    .redeemDiscount hr{
+       top: 36%;
+    }
+    #text-p{
+       top: 34%;
+       right: -2.5rem;
+       font-size: 8px;
+    }
+    .redeemDiscount h3{
+        font-size: 25px;
+    }
+}
+@media screen and (max-width: 950px){
+    .redeem-explain {
+        margin-left: 2rem;
+    }
+    .redeemDiscount .redeemOptions {
+        width: 93%;
+    }
+}
+@media screen and (max-width: 850px){
+    .redeem-explain {
+        margin-left: 1rem;
+    }
+    #text-p{
+        right: -4rem;
+        font-size: 7px;
+    }
+    .redeem-img{
+        right: 2.5rem;
+        height: 390px;
+        width: 275px;
+    }
+    .redeemDiscount .redeemOption {
+        width: 138px;
+        height: 77px;
+        margin-right: 10px;
+    }
+}
+@media screen and (max-width: 750px){
+    .redeem-explain{
+        margin-left: 0rem;
+        padding-top: 33rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .redeemDiscount .show-at-mobile{
+        display: flex;
+    }
+    .redeemDiscount .show-at-leptop{
+        display: none;
+    }
+    .redeem-img{
+        height: 40rem;
+        width: 500px;
+        right: 50%;
+        top: -7rem;
+        transform: translate(50%, 0);
+    }
+    .redeemDiscount h2 {
+        font-size: 35px;
+        width: max-content;
+        top: 37%;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    #text-p{
+        display: none;
+    }
+    .redeemDiscount h4{
+        font-size: 25px;
+        margin-bottom: 0.5rem;
+    }
+    .redeemDiscount p{
+        line-height: normal;
+        letter-spacing: 0.8px;
+        font-size: 20px;
+        text-align: center;
+        padding-bottom: 0.2rem;
+    }
+    .redeem-explain h4:nth-of-type(2) {
+        margin-top: 7rem;
+    }
+    .redeemDiscount hr {
+        top: 59%;
+    }
+    .redeemDiscount .redeemOptions{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .redeemDiscount .redeemOption:nth-of-type(1){
+        width: 456px;
+    }
+    .redeemDiscount .redeemOption:nth-of-type(n+2){
+        width: 223px;
+        margin-top: 10px;
+    }
+    .redeemDiscount .redeemOption{
+        height: 125px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+        padding-top: 0;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+    .redeemDiscount h3{
+        font-size: 30px;
+    }
+    .redeemOption p{
+        font-size: 16px !important;
+    }
+}
+@media screen and (max-width: 600px)
+{
+    .redeem-explain{
+        padding-top: 27rem;
+    }
+    .redeem-img{
+        height: 34rem;
+        width: 400px;
+        top: -6rem;
+    }
+    .redeemDiscount h2{
+        font-size: 29px;
+    }
+    .redeemDiscount .redeemOption:nth-of-type(1) {
+        width: 400px;
+    }
+    .redeemDiscount .redeemOption{
+        height: 115px;
+    }
+    .redeemDiscount .redeemOption:nth-of-type(n+2){
+        width: 195px;
+    }
+}
+@media screen and (max-width: 450px)
+{
+    .redeem-img{
+        height: 24rem;
+        width: 285px;
+        top: -4rem;
+    }
+    .redeemDiscount h2 {
+        font-size: 26px;
+        top: 32%;
+    }
+    .redeem-explain {
+        padding-top: 20rem;
+    }
+    .redeemDiscount h4{
+        font-size: 24px;
+    }
+    .redeemDiscount p{
+        letter-spacing: .5px;
+        font-size: 17px;
+    }
+    .redeem-explain h4:nth-of-type(2) {
+        margin-top: 6rem;
+    }
+    .redeemDiscount .redeemOptions {
+        width: 100%;
+        margin-top: 2rem;
+    }
+    .redeemDiscount .redeemOption:nth-of-type(1) {
+        width: 300px;
+    }
+    .redeemDiscount .redeemOption:nth-of-type(n+2) {
+        width: 145px;
+    }
+    .redeemDiscount .redeemOption {
+        height: 100px;
+    }
+    .redeemDiscount h3 {
+        font-size: 26px;
+    }
+    .redeemDiscount hr {
+        top: 55%;
+    }
+}

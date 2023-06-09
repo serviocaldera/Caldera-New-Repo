@@ -1,0 +1,37 @@
+<div class="c-storyClinically">
+    <div class="wrapper">
+        <div class="c-storyClinically__row">
+            <div class="c-storyClinically__col c-storyClinically__col--image">
+                <img src="{{ section.settings.image | img_url: 'master' }}" data-src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.heading }}" class="c-storyClinically__image">
+            </div>
+            <div class="c-storyClinically__col c-storyClinically__col--content">
+                <h4 class="c-storyClinically__heading">{{ section.settings.heading }}</h4>
+                <div class="c-storyClinically__copy">
+                    {{ section.settings.copy }}    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+  {
+    "name": "Clinically Proven",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy"
+      }
+    ]
+  }
+{% endschema %}

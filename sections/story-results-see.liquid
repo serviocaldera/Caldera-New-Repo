@@ -1,0 +1,88 @@
+<div class="c-skinSlider story__results">
+    <div class="c-skinSlider__row">
+        <div class="c-skinSlider__item c-skinSlider__content">
+            <div class="c-skinSlider__box">
+                <h4 class="c-skinSlider__heading">{{ section.settings.results_title }}</h4>
+                <div class="c-skinSlider__copy">
+                    {{ section.settings.results_content }}
+                </div>    
+            </div>
+            
+        </div>
+
+        <div class="c-skinSlider__item c-skinSlider__slider">
+            <div class="c-skinSlider__tabs" data-pdp-skin-slider-thumb> 
+              {% for block in section.blocks %}
+                <div class="c-skinSlider__links">{{ block.settings.result_type_title }}</div>
+              {% endfor %}
+            </div>
+            <div class="c-skinSliderImage__main" data-pdp-skin-slider>
+                {% for block in section.blocks %}
+                    <div class="c-skinSliderImage results__images{% if forloop.first %} active{% endif %}" data-handle="{{ block.settings.result_type_title | downcase | replace: ' ', '-' }}" data-result-images>
+                        <div class="c-skinSliderImage__container cd-image-container">
+                            <img src="{{ block.settings.result_after | img_url: '1200x' }}" alt="After">
+                            <div class="c-skinSliderImage__after">
+                                <span class="c-skinSliderImage__label cd-image-label" data-type="original">After</span>    
+                            </div>
+                            
+
+                            <div class="c-skinSliderImage__resizeImg cd-resize-img"> <!-- the resizable image on top -->
+                                <img src="{{ block.settings.result_before | img_url: '1200x' }}" alt="Before">
+                                <div class="c-skinSliderImage__before">
+                                    <span class="c-skinSliderImage__label cd-image-label" data-type="modified">Before</span>    
+                                </div>
+                                
+                            </div>
+
+                            <span class="c-skinSlider__bar cd-handle">
+                                
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+  {
+    "name": "See Results",
+    "settings": [
+      {
+        "type":"text",
+        "id":"results_title",
+        "label":"Results Section Title",
+        "default":"See for yourself."
+      },
+      {
+        "type":"html",
+        "id":"results_content",
+        "label":"Results Section Content"
+      }
+    ],
+    "max_blocks":3,
+    "blocks": [
+      {
+        "type": "result_type",
+        "name": "Result Type",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"result_before",
+            "label":"Result Before Image"
+          },
+          {
+            "type":"image_picker",
+            "id":"result_after",
+            "label":"Result After Image"
+          },
+          {
+            "type":"text",
+            "id":"result_type_title",
+            "label":"Result Type Title"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

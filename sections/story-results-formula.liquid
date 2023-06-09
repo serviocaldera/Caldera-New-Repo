@@ -1,0 +1,55 @@
+<div class="story__formula">
+  <div class="wrapper">
+    <div class="grid--rev">
+      <div class="grid__item small--one-half">
+        <div class="formula__image">
+          {% if section.settings.formula_video_link %}
+            <video class="story__formula-video" poster="{{ section.settings.formula_image | img_url: '1200x' }}" muted autoplay loop>
+              <source src="{{ section.settings.formula_video_link }}" type="video/mp4">
+            </video>
+          {% else %}
+            <img src="{{ section.settings.formula_image | img_url: '600x' }}" data-rjs="{{ section.settings.formula_image | img_url: '1200x' }}" alt="{{ section.settings.formula_image.alt }}">
+          {% endif %}
+        </div>
+      </div>
+      <div class="grid__item small--one-half">
+        <div class="formula__content">
+          <div class="formula__details">
+            <h4 class="text--light">{{ section.settings.formula_headline }}</h4>
+            <p class="text--light">{{ section.settings.formula_content }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Formula",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"formula_image",
+        "label":"Formula Image"
+      },
+      {
+        "type":"url",
+        "id":"formula_video_link",
+        "label":"Video Link",
+        "info":"If this field is completed, this field will override the image set above on desktop"
+      },
+      {
+        "type":"text",
+        "id":"formula_headline",
+        "label":"Formula Headline",
+        "default":"This kind of clinical trial  is an industry rarity. We did  it anyway."
+      },
+      {
+        "type":"textarea",
+        "id":"formula_content",
+        "label":"Formula Content",
+        "default":"Most skincare companies don’t conduct clinical trials on their finished product. Those that do, typically test for 30 days, with roughly 10-15 participants. We chose to study skin changes in 53 participants over 60 days. We went well above the industry benchmark because we wanted rock solid confirmation that The Good delivers high performance results for all skin types, skin tones, and ethnicities. And that’s exactly what our clinical trial showed."
+      }
+    ]
+  }
+{% endschema %}

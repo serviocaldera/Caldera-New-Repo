@@ -1,0 +1,42 @@
+<div class="story__philosophy">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--seven-twelfths small--one-half">
+        <div class="philosophy__image" data-aos="fade-in" data-aos-offset="50" data-aos-once="true" data-aos-duration="500">
+          <img src="{{ section.settings.philosophy_image | img_url: '700x' }}" data-rjs="{{ section.settings.philosophy_image | img_url: '1400x' }}" alt="{{ section.settings.philosophy_image.alt }}">
+          <div class="image--overlay" data-colour-block-parallax data-parallax-direction="down" data-parallax-speed="18"></div>
+        </div>
+      </div>
+      <div class="grid__item medium--one-third small--one-half">
+        <div class="philosophy__content">
+          <h4>{{ section.settings.philosophy_headline }}</h4>
+          <p>{{ section.settings.philosophy_content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Philosophy",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"philosophy_image",
+        "label":"Philosophy Image"
+      },
+      {
+        "type":"text",
+        "id":"philosophy_headline",
+        "label":"Philosophy Headline",
+        "default":"We began with a philosophy to simply make no compromises with respect to quality. "
+      },
+      {
+        "type":"textarea",
+        "id":"philosophy_content",
+        "label":"Philosophy Content",
+        "default":"A life well lived can wreak havoc on your skin and a harsh environment like Jackson Hole with all of the outdoor adventures that it offers wasn't doing us any favors. We got tired of borrowing quality skincare products from our wives and girlfriends and set out to create a men's skin serum fueled by high-altitude botanicals found in the region."
+      }
+    ]
+  }
+{% endschema %}

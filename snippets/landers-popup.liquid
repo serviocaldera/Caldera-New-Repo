@@ -1,0 +1,158 @@
+<div class="c-landerModal">
+    <div class="c-landerModal__container">
+        <div class="c-landerModal__row">
+            <a href="#" class="c-landerModal__close">
+                <svg width="25px" height="24px" viewBox="0 0 25 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="CL---hyman_desktop-MODAL" transform="translate(-1089.000000, -292.000000)" fill="#AF5D00" fill-rule="nonzero">
+                            <g id="MODAL" transform="translate(304.000000, 272.000000)">
+                                <path d="M796.123888,32 L785.986187,21.8622983 C785.56016,21.4362718 785.56016,20.7455464 785.986187,20.3195198 C786.412213,19.8934934 787.102938,19.8934934 787.528965,20.3195198 L797.666667,30.4572215 L807.804368,20.3195198 C808.230395,19.8934934 808.92112,19.8934934 809.347147,20.3195198 C809.773173,20.7455464 809.773173,21.4362718 809.347147,21.8622983 L799.209445,32 L809.347147,42.1377017 C809.773173,42.5637282 809.773173,43.2544536 809.347147,43.6804802 C808.92112,44.1065066 808.230395,44.1065066 807.804368,43.6804802 L797.666667,33.5427785 L787.528965,43.6804802 C787.102938,44.1065066 786.412213,44.1065066 785.986187,43.6804802 C785.56016,43.2544536 785.56016,42.5637282 785.986187,42.1377017 L796.123888,32 Z" id="Path"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+            <div class="c-landerModal__image">
+                <img src="{{ section.settings.image-desktop | img_url: 'master' }}" class="c-landerModal__image--desktop" />
+                <img src="{{ section.settings.image-mobile | img_url: 'master' }}" class="c-landerModal__image--mobile" />
+            </div>
+            <div class="c-landerModal__content">
+                <div class="c-landerModal__box">
+                    <h4 class="c-landerModal__heading">{{ section.settings.heading }}</h4>
+                    <div class="c-landerModal__subheading">{{ section.settings.subheading }}</div>
+                    <div class="c-landerModal__copy">
+                        {{ section.settings.copy }}
+                    </div>
+                    <div class="c-landerModal__form">
+                        {{ section.settings.form }}
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--c-landerTwocol-->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        function hymanModalCookie(name, value) {
+           var date = new Date();
+           date.setTime(date.getTime() + (60 * 60 * 24 * 1000 * 1));
+           var expires = "; expires="+date.toGMTString();
+           document.cookie = name+"="+value+expires+"; path=/";
+        }
+        
+        
+
+        function leaveFromTop(e){
+            if( e.clientY < 0 ) {
+                if (document.cookie.indexOf("hymanModal=") >= 0) {
+                     
+                }else{
+                    $('.c-landerModal').addClass('is-open'); 
+                    hymanModalCookie ("hymanModal", "true"); 
+                }
+               
+            }
+        }
+
+
+        if (window.location.href.indexOf("drhm") > -1) {
+            
+            $(document).on('mouseleave', leaveFromTop); 
+
+            
+            if (typeof(Storage) !== "undefined") {
+                sessionStorage.setItem("landerpage", "drhyman");
+            }
+        }else{
+            sessionStorage.clear();
+        }
+
+        $(document).on("click", '.c-landerModal__close', function() {
+           $('.c-landerModal').removeClass('is-open');
+           return false;
+        });
+
+
+        CartJS.clear();
+
+        function upscribeBuildCheckout() {
+            $.ajax('/cart.json')
+            .done(function(cart) {
+                console.log('get cart done res', cart)
+
+                var cartToken = cart.token
+
+                cart.url = window.Shopify.shop
+                cart.analytics = window.ShopifyAnalytics
+                $.ajax({
+                    url: "https://endpoint.upscribe.io/cart",
+                    type: "POST",
+                    data: JSON.stringify(cart)
+                })
+                .done(function(res) {
+                    console.log('post done: ', res)
+                })
+                .fail(function(e) {
+                    console.log('post error: ', e)
+                    return e
+                })
+            })
+            .fail(function(e) {
+                console.log('get cart error', e);
+                return e
+            })
+        }
+
+        function upscribeBuildCheckoutURL() {
+        
+            function get_cookie(name){
+                return( document.cookie.match('(^|; )'+name+'=([^;]*)')||0 )[2];
+            }
+            
+            var token = get_cookie('cart');
+            if (token === undefined) {
+                return window.setTimeout(upscribeBuildCheckoutURL, 500);
+            }
+
+            var checkoutDiscount = 'DRHYMAN'
+            
+            var myshopify_domain='{{ shop.permanent_domain }}'
+            try { var ga_linker = ga.getAll()[0].get('linkerParam') } catch(err) { var ga_linker ='' }
+            var customer_param = '{% if customer %}customer_id={{customer.id}}&customer_email={{customer.email}}{% endif %}'
+            
+            var checkout_url = 'https://checkout.calderalab.com/checkout?store=' + myshopify_domain + '&token=' + token + '&discount=' + checkoutDiscount + '&is_first_load=true'
+
+            upscribeBuildCheckout();
+
+
+            window.location.href = checkout_url;
+        }
+      $('.js-recharge-link .c-landerOffer__btn').on('click', function(){
+            {% assign cartJsProduct = all_products['the-good'] %}
+            {% assign price = cartJsProduct.price %}
+            {% assign calculated_discount = cartJsProduct.metafields.sf_upscribe.discount_amount | replace: '%', '' | divided_by: 100.0 %}
+            {% assign takeOffAmount = price | times: calculated_discount %}
+            {% assign price = price | minus: takeOffAmount %}
+
+            CartJS.addItem({{ cartJsProduct.selected_or_first_available_variant }}, 1, {
+              "Discount Amount": "{{ cartJsProduct.metafields.sf_upscribe.discount_amount }}",
+              "Interval Frequency": "{{- cartJsProduct.metafields.sf_upscribe.interval_frequency -}}",
+              "Interval Unit": "{{- cartJsProduct.metafields.sf_upscribe.interval_unit -}}",
+              "Subscription": "30 days",
+              "Subscription Amount": "{{- price | money_without_currency | remove: '.00' -}}",
+              "Subscription Product Title": "{{- cartJsProduct.metafields.sf_upscribe.subscription_product_title -}}"
+            });
+
+            setTimeout(function(){
+                upscribeBuildCheckoutURL();
+            }, 1500);
+            
+            return false;
+      });
+        
+        
+    });
+</script>

@@ -1,0 +1,166 @@
+{%- assign fields = section.settings -%}
+{%- assign free_sample = all_products[fields['free_sample_product']] -%}
+<div class="free-sample__wrapper modal" free-sample-modal {% if fields['free_sample_modal_exit_intent'] == true -%}free-sample-modal-exit{%- endif %}  data-modal="free-sample-modal" id="free-sample-sale">
+  <div class="free-sample__drop modal__backdrop"></div>
+  <div class="free-sample__content modal__content">
+    <div class="modal__content__content">
+      <div class="modal__close modal__close--{{fields['close_btn_theme']}}" data-modal-hide>
+        <span class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13">
+            <rect class="cls-1" x="5.74" y="-1.6" width="1.2" height="15.8" transform="translate(-2.6 6.32) rotate(-45)"/>
+            <rect class="cls-1" x="-1.56" y="5.7" width="15.8" height="1.2" transform="translate(-2.6 6.32) rotate(-45)"/>
+          </svg>
+        </span>
+      </div>
+      <div class="free-sample__main">
+        <div class="free-sample__image">
+          <picture class="responsiveImage">
+            <source srcset="{{ fields['product_image'] | img_url: '600x'  }}" media="(min-width:768px)">
+            <source srcset="{{ fields['product_image_mobile'] | img_url: '600x'  }}" media="(min-width:1px)">
+            <img  src="{{ fields['product_image'] | img_url: '600x'  }}"  alt="picturealyt" />
+          </picture>
+        </div>
+        <div class="free-sample__contents">
+          <div class="free-sample__contents__wrap">
+            {%- if fields['title'] != blank -%}
+              <h4 class="title">{{ fields['title'] }}</h4>
+            {%- endif -%}
+
+            {%- if fields['body'] != blank -%}
+              <p class="body">{{ fields['body'] }}</p>
+            {%- endif -%}
+
+            {%- if fields['shipping_price'] != blank -%}
+              <div class="shipping-cost">{{ fields['shipping_price'] }}</div>
+            {%- endif -%}
+
+            <div class="free-sample__contents__form">
+              {%- if fields['free_sample'] != empty -%}
+                <form method="post">
+                  <div class="email-address">
+                    {%- assign email_address = customer.email | default: '' -%}
+                    <input type="email" value="{{email_address}}" placeholder="{{ fields['email_placeholder'] }}" required>
+                  </div>
+                  <div class="button-wrap">
+                    <button class="btn btn--primary" type="submit" name="checkout">{{ fields['cta'] }}</button>
+                    <input type="text" hidden name="id" value="{{ free_sample.selected_or_first_available_variant.id }}">
+                    <input type="text" hidden name="quantity" value="1">
+                    <input type="text" hidden name="klavio_id" value="{{ fields['klavio_id'] }}">
+                    <input type="text" name="discount" hidden value="{{ fields['discount_code']}}">
+                  </div>
+                </form>
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- if fields['footer_text'] != blank -%}
+            <div class="free-sample__contents__footer">{{ fields['footer_text'] }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Free Sample Sale",
+    "class": "free-sample",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "free_sample_modal_exit_intent",
+        "label": "Enable Free Sample On Screen Exit",
+        "default": true
+      },
+      {
+        "type": "product",
+        "id": "free_sample_product",
+        "label": "Free Sample"
+      },
+      {
+        "type": "text",
+        "id": "discount_code",
+        "label": "Discount Code",
+        "info": "Discount code to auto apply"
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Can’t Commit?"
+      },
+      {
+        "type": "text",
+        "id": "body",
+        "label": "Body Content",
+        "default": "Free sample, just pay shipping. "
+      },
+      {
+        "type": "text",
+        "id": "shipping_price",
+        "label": "Shipping Line",
+        "default": "($4.95)"
+      },
+      {
+        "type": "text",
+        "id": "email_placeholder",
+        "label": "Email Placeholder",
+        "default": "Your Email Address"
+      },
+      {
+        "type": "text",
+        "id": "cta",
+        "label": "Button CTA",
+        "default": "get it now"
+      },
+      {
+        "type": "text",
+        "id": "footer_text",
+        "label": "Footer text",
+        "default": "2 ML Sample Size"
+      },
+      {
+        "type": "text",
+        "id": "klavio_id",
+        "label": "Klavio ID",
+        "default": "N6BQqw"
+      },
+      {
+        "type": "image_picker",
+        "id": "product_image",
+        "label": "Product Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "product_image_mobile",
+        "label": "Mobile Product Image"
+      },
+      {
+        "type": "select",
+        "id": "close_btn_theme",
+        "options": [
+          {
+            "value": "dark",
+            "label": "Dark"
+          },
+          {
+            "value": "light",
+            "label": "Light "
+          }
+        ],
+        "default": "light",
+        "label": "Close CTA Color"
+      }
+    ]
+  }
+{% endschema %}

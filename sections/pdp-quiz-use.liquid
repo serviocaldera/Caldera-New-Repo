@@ -1,0 +1,35 @@
+{% if product.metafields.custom_fields["enable_quiz_section"] == 1 %}
+<div class="c-quizUse">
+    <div class="wrapper">
+        <div class="c-quizUse__row">
+            <div class="c-quizUse__images">
+                {% if product.metafields.custom_fields["quiz_desktop_image"] != blank %}
+                    <img class="c-quizUse__image c-quizUse__image--desktop lazyload" src='{{product.metafields.custom_fields["quiz_desktop_image"]}}' data-src="{{product.metafields.custom_fields["quiz_desktop_image"]}}" /> 
+                {% endif %}
+                {% if product.metafields.custom_fields["quiz_mobile_image"] != blank %}
+                    <img class="c-quizUse__image c-quizUse__image--mobile lazyload" src='{{product.metafields.custom_fields["quiz_mobile_image"]}}' data-src='{{product.metafields.custom_fields["quiz_mobile_image"]}}' />
+                {% endif %}
+            </div>
+            <div class="c-quizUse__content">
+                <div class="c-quizUse__box">
+                    {% if product.metafields.custom_fields["quiz_title"] != blank %}
+                        <h4 class="c-quizUse__title">
+                          {{ product.metafields.custom_fields["quiz_title"] }}
+                        </h4>
+                    {% endif %}
+                   {% if product.metafields.custom_fields["quiz_copy"] != blank %}
+                        <div class="c-quizUse__copy">
+                          {{ product.metafields.custom_fields["quiz_copy"] }}
+                        </div>
+                    {% endif %}
+                    {% if product.metafields.custom_fields["quiz_button_text"] != blank %}
+                        <a href="#" class="btn btn--primary" data-quiz-click>
+                            {{ product.metafields.custom_fields["quiz_button_text"] }}
+                        </a>
+                    {% endif %} 
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>
+{% endif %}

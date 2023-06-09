@@ -1,0 +1,237 @@
+{% assign heading = section.settings.heading %}
+{% assign background = section.settings.background %}
+{% assign text = section.settings.text %}
+{% assign link_text = section.settings.link_text %}
+{% assign link_url = section.settings.link_url %}
+
+{% assign remoteSlides = '' %}
+{% assign bigSlides  = '' %}
+{% if section.blocks.size > 0%}
+    {% for block in section.blocks %}
+        {% assign image = block.settings.image %}
+        {% assign name = block.settings.name %}
+        {% assign profession = block.settings.profession %}
+        {% assign product = block.settings.product %}
+        {% assign manual_product = block.settings.manual_product %}
+        {% assign block_link_text = block.settings.link_text %}
+        {% assign block_link_url = block.settings.link_url %}
+
+        {% capture remoteSlide %}
+            <div class="swiper-slide{% if forloop.first %} mc-slide-active{% endif %}" data-index="{{ forloop.index0 }}">
+                <img data-src="{{ image | img_url: 'master' }}" alt="remote-button" class="remote-image lozad">
+            </div>
+        {% endcapture %}
+        {% assign remoteSlides = remoteSlides | append: remoteSlide %}
+
+        {% capture bigSlide %}
+            <div class="swiper-slide">
+                <div class="bigSlide">
+                    <div class="bigSlide-image">
+                        <img class="lozad" data-src="{{ image | img_url: 'master' }}" alt="slide">
+                    </div>
+                    <div class="bigSlide-content">
+                        <h5>{{ name }}</h5>
+                        <p><strong>Profession: </strong>{{ profession }}</p>
+                        <p><strong>Favorite Caldera + Lab Product:</strong><br>{% if manual_product != blank %}{{ manual_product }}{% else %}{% if product %}{{ product.title }}{% endif %}{% endif %}</p>
+                        {% if block_link_text and block_link_url %}
+                            <a href="{{ block_link_url }}">{{ block_link_text }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endcapture %}
+        {% assign bigSlides = bigSlides | append: bigSlide %}
+
+    {% endfor %}
+{% endif %}
+
+<style>
+    {% if background %}
+    #shopify-section-{{ section.id }} {
+        background: url("{{ background | img_url: 'master' }}") no-repeat center center;
+        background-size: cover;
+    }
+    {% endif %}
+</style>
+
+<div class="multi-carousel{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="multi-carousel-container">
+        <div class="multi-carousel-flex">
+            <div class="multi-carousel-remote">
+                <div class="multi-carousel-remote-control">
+                    <h3 class="multi-carousel-remote-headline">{{ heading }}</h3>
+                    <div class="multi-carousel-remote-text">{{ text }}</div>
+                    <div class="arrow-keeper">
+                        <div class="multi-carousel-remote-buttons">
+                            <div class="swiper remote-{{ section.id }}">
+                                <div class="swiper-wrapper">
+                                    {{ remoteSlides }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next">{% include 'StonSourceCarousel-arrow', color: '#af5d00' %}</div>
+                    </div>
+                    {% if link_text and link_url %}
+                        <a href="{{ link_url }}" class="multi-carousel-remote-link">{{ link_text }}</a>
+                    {% endif %}
+                    <a class="multi-carousel_meet_url" href="{{ section.settings.meet_url}}">MEET THE AMBASSADORS</a>
+                </div>
+            </div>
+            <div class="multi-carousel-slides">
+                <div class="swiper bigSlider-{{ section.id }}">
+                    <div class="swiper-wrapper">
+                        {{ bigSlides }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Multi Carousel",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Lorem ipsum"
+        },
+        {
+            "type": "image_picker",
+            "id": "background",
+            "label": "Background"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+        },
+        {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link text",
+            "default": "View"
+        },
+        {
+            "type": "url",
+            "id": "link_url",
+            "label": "Link url"
+        },
+        {
+            "type": "url",
+            "id": "meet_url",
+            "label": "Meet the ambass url"
+        },
+        {
+            "type": "text",
+            "id": "section_classname",
+            "label": "Section Class Name"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Slide",
+            "type": "slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "Name",
+                    "default": "Firstname Lastname "
+                },
+                {
+                    "type": "text",
+                    "id": "profession",
+                    "label": "Profession",
+                    "default": "Lorem ipsum dolor"
+                },
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Favorite Caldera + Lab Product"
+                },
+                {
+                    "type": "text",
+                    "id": "manual_product",
+                    "label": "Manual Favorite Caldera + Lab Product Text"
+                },
+                {
+                    "type": "text",
+                    "id": "link_text",
+                    "label": "Link text"
+                },
+                {
+                    "type": "url",
+                    "id": "link_url",
+                    "label": "Link url"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Multi Carousel"
+        }
+    ]
+}
+{% endschema %}
+
+<script>
+    (function (){
+        const fixRemote = () => {
+            const remoteFix = document.querySelector('.multi-carousel-remote');
+            if(window.innerWidth < 876){
+                if(remoteFix) {
+                    remoteFix.style.height = remoteFix.querySelector('.multi-carousel-remote-control')?.offsetHeight + 40 + 'px';
+                }
+            }else{
+                remoteFix.style.height = '';
+            }
+        }
+        let currentActiveRemoteIndex = '0';
+        let remote = new Swiper(".remote-{{ section.id }}", {
+            slidesPerView: 5,
+            spaceBetween: 15,
+            {% if section.blocks.size > 5 %}
+            loop: true,
+            {% endif %}
+            navigation: {
+                nextEl: "#shopify-section-{{ section.id }} .swiper-button-next"
+            },
+            breakpoints: {
+                500: {
+                    slidesPerView: 6,
+                    spaceBetween: 15,
+                }
+            }
+        });
+        let bigSlider = new Swiper(".bigSlider-{{ section.id }}", {
+            allowTouchMove: false
+        });
+        remote.on('click', function (swiper, event) {
+            if(swiper && swiper.clickedSlide && swiper.clickedSlide.dataset.index !== currentActiveRemoteIndex && !swiper.clickedSlide.classList.contains('mc-slide-active')){
+                document.querySelectorAll('[data-index="'+currentActiveRemoteIndex+'"]')?.forEach(currentSlide => {
+                    if(currentSlide.classList.contains('mc-slide-active')){
+                        currentSlide.classList.remove('mc-slide-active');
+                    }
+                })
+                currentActiveRemoteIndex = swiper.clickedSlide.dataset.index;
+                document.querySelectorAll('[data-index="'+currentActiveRemoteIndex+'"]')?.forEach(currentSlide => {
+                    if(!currentSlide.classList.contains('mc-slide-active')){
+                        currentSlide.classList.add('mc-slide-active');
+                    }
+                })
+                bigSlider.slideTo(currentActiveRemoteIndex);
+            }
+        });
+        fixRemote();
+        window.addEventListener('resize', () => fixRemote());
+    }())
+</script>

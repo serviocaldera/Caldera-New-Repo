@@ -1,0 +1,61 @@
+<div class="c-aboutUsTwocol{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="wrapper">
+        <div class="c-aboutUsTwocol__row">
+            <div class="c-aboutUsTwocol__image">
+                <div class="c-aboutUsTwocol__vtext">{{ section.settings.vtext }}</div>
+                <img src="{{ section.settings.image | img_url: 'master' }}" class="c-aboutUsTwocol__image--desktop" />
+                <img src="{{ section.settings.image-mobile | img_url: 'master' }}" class="c-aboutUsTwocol__image--mobile" />
+            </div>
+            <div class="c-aboutUsTwocol__content">
+                <div class="c-aboutUsTwocol__box">
+                    <h4 class="c-aboutUsTwocol__heading">{{ section.settings.heading }}</h4>
+                    <div class="c-aboutUsTwocol__copy">
+                        {{ section.settings.copy }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--c-aboutUsTwocol-->
+
+{% schema %}
+  {
+    "name": "About Us",
+    "settings": [
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+        },
+        {
+            "type":"image_picker",
+            "id":"image-mobile",
+            "label":"Image Mobile"
+        },
+        {
+            "type":"text",
+            "id":"vtext",
+            "label":"Vertical Text",
+            "default":"OUR WELLNESS JOURNEY"
+        },
+        {
+            "type":"text",
+            "id":"heading",
+            "label":"Heading",
+            "default":"New Chapters Are Full Of Possibilities."
+        },
+        {
+            "type":"html",
+            "id":"copy",
+            "label":"Copy",
+            "default":"Life’s turning points are often the best opportunity for a new you. Creating a family and moving to the mountains was ours. Our inner compass navigated us towards experiences, people and products that improved our health and quality of life."
+        },
+        {
+            "type": "text",
+            "id": "section_classname",
+            "label": "Section Class Name"
+        }
+    ]
+  }
+{% endschema %}

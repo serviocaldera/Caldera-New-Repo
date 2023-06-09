@@ -1,0 +1,52 @@
+<div class="value-propositions" style="margin-top:30px;">
+  <div class="wrapper">
+    <div class="grid">
+      {% for block in section.blocks %}
+        <div class="grid__item small--one-third text-center">
+          <div class="value-proposition">
+            {% if block.settings.value_proposition_icon %}
+              <picture>
+                <source
+                  srcset="{{ block.settings.value_proposition_icon | img_url: '68x'}},
+                          {{ block.settings.value_proposition_icon | img_url: '136x'}} 2x">
+                <img class="icon" src="{{ block.settings.value_proposition_icon | img_url: '136x' }}" alt="{{ block.settings.value_proposition_icon.alt }}">
+              </picture>
+            {% endif %}
+            <span class="value-proposition__title">{{ block.settings.value_proposition_title }}</span>
+            <p class="text--small">{{ block.settings.value_proposition_content }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Value Propositions",
+    "max_blocks":3,
+    "blocks": [
+      {
+        "type": "value_proposition",
+        "name": "Value Proposition",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"value_proposition_icon",
+            "label":"Value Proposition Icon",
+            "info":"Recommended dimensions: 136px x 136px"
+          },
+          {
+            "type":"text",
+            "id":"value_proposition_title",
+            "label":"Value Proposition Title"
+          },
+          {
+            "type":"textarea",
+            "id":"value_proposition_content",
+            "label":"Value Proposition Content"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,201 @@
+<div class="whats-included__container{% if section.settings.space_top %} space-top{% endif %}{% if section.settings.space_bottom %} space-bottom{% endif %}{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+  <div class="whats-included__top">
+    <h2 class="whats-included__title">{{ section.settings.title }}</h2>
+
+    <p class="whats-included__copy">{{ product.metafields.inside.what_s_inside_copy }}</p>
+  </div>
+
+  <div class="whats-included__main">
+    <sidebar class="whats-included__sidebar">
+      {% for item in product.metafields.inside.what_s_inside_reviews.value %}
+        <div class="whats-included__sidebar-item">
+          <div class="rating rating-{{ item.review_stars }}"></div>
+
+          <h3 class="whats-included__sidebar-item-title">{{ item.review_title }}</h3>
+
+          <div class="whats-included__sidebar-item-copy">{{ item.review_copy }}</div>
+
+          <p class="whats-included__sidebar-item-name">{{ item.review_name }}</p>
+        </div>
+      {% endfor %}
+    </sidebar>
+
+    <div class="whats-included__map">
+      <picture>
+        <source media="(max-width:649px)" srcset="{{ product.metafields.inside.what_s_inside_image_mobile }}">
+        <source media="(min-width:650px)" srcset="{{ product.metafields.inside.what_s_inside_image }}">
+        <img src="{{ product.metafields.inside.what_s_inside_image }}" alt="map">
+      </picture>
+
+      <div class="whats-included__pins">
+        <span class="pin pin--1">
+          <span class="pin__icon js-included"></span>
+          
+          <div class="pin-product">
+            <span class="pin__close js-pin-close">✕</span>
+        
+            <div class="pin-product__image">
+              <img src="{{ product.metafields.inside.what_s_inside_products.value[1]["product_image"] }}">
+            </div>
+        
+            <div class="pin-product__data">
+              <div class="rating rating-{{ product.metafields.inside.what_s_inside_products.value[1]["product_rating"] }}"></div>
+        
+              <h3 class="pin-product__title">{{ product.metafields.inside.what_s_inside_products.value[1]["product_title"] }}</h3>
+        
+              <h4 class="pin-product__subtitle">{{ product.metafields.inside.what_s_inside_products.value[1]["product_subtitle"] }}</h4>
+        
+              <div class="pin-product__copy">{{ product.metafields.inside.what_s_inside_products.value[1]["product_copy"] }}</div>
+        
+              <div class="pin-product__weight">{{ product.metafields.inside.what_s_inside_products.value[1]["product_weight"] }}</div>
+        
+              <a href="{{ product.metafields.inside.what_s_inside_products.value[1]["product_url"] }}" class="pin-product__link">View Full Product Details</a>
+            </div>
+          </div>
+        </span>
+
+        <span class="pin pin--2">
+          <span class="pin__icon js-included"></span>
+          
+          <div class="pin-product">
+            <span class="pin__close js-pin-close">✕</span>
+        
+            <div class="pin-product__image">
+              <img src="{{ product.metafields.inside.what_s_inside_products.value[0]["product_image"] }}">
+            </div>
+        
+            <div class="pin-product__data">
+              <div class="rating rating-{{ product.metafields.inside.what_s_inside_products.value[0]["product_rating"] }}"></div>
+        
+              <h3 class="pin-product__title">{{ product.metafields.inside.what_s_inside_products.value[0]["product_title"] }}</h3>
+        
+              <h4 class="pin-product__subtitle">{{ product.metafields.inside.what_s_inside_products.value[0]["product_subtitle"] }}</h4>
+        
+              <div class="pin-product__copy">{{ product.metafields.inside.what_s_inside_products.value[0]["product_copy"] }}</div>
+        
+              <div class="pin-product__weight">{{ product.metafields.inside.what_s_inside_products.value[0]["product_weight"] }}</div>
+        
+              <a href="{{ product.metafields.inside.what_s_inside_products.value[0]["product_url"] }}" class="pin-product__link">View Full Product Details</a>
+            </div>
+          </div>
+        </span>
+
+        <span class="pin pin--3">
+          <span class="pin__icon js-included"></span>
+          
+          <div class="pin-product">
+            <span class="pin__close js-pin-close">✕</span>
+        
+            <div class="pin-product__image">
+              <img src="{{ product.metafields.inside.what_s_inside_products.value[2]["product_image"] }}">
+            </div>
+        
+            <div class="pin-product__data">
+              <div class="rating rating-{{ product.metafields.inside.what_s_inside_products.value[2]["product_rating"] }}"></div>
+        
+              <h3 class="pin-product__title">{{ product.metafields.inside.what_s_inside_products.value[2]["product_title"] }}</h3>
+        
+              <h4 class="pin-product__subtitle">{{ product.metafields.inside.what_s_inside_products.value[2]["product_subtitle"] }}</h4>
+        
+              <div class="pin-product__copy">{{ product.metafields.inside.what_s_inside_products.value[2]["product_copy"] }}</div>
+        
+              <div class="pin-product__weight">{{ product.metafields.inside.what_s_inside_products.value[2]["product_weight"] }}</div>
+        
+              <a href="{{ product.metafields.inside.what_s_inside_products.value[2]["product_url"] }}" class="pin-product__link">View Full Product Details</a>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if section.settings.background_image != blank %}
+  <style>
+    .whats-included {
+      background: url('{{ section.settings.background_image | img_url: "1920x" }}') center/cover no-repeat;
+    }
+
+    {% if section.settings.background_image_mobile != blank %}
+    @media (max-width: 599px) {
+      .whats-included {
+        background: url('{{ section.settings.background_image_mobile | img_url: "599x" }}') center/cover no-repeat;
+      }
+    }
+    {% endif %}
+  </style>
+{% endif %}
+
+<script>
+  window.addEventListener('load', ()=> {
+    document.querySelectorAll('.js-included').forEach(item => {
+      item.addEventListener('click', function(){
+        if (document.querySelector('.pin-product--active')) {
+          document.querySelector('.pin-product--active').classList.remove('pin-product--active');
+        }
+        document.querySelector('.whats-included').classList.add('whats-included--overlay');
+        this.parentNode.querySelector('.pin-product').classList.add('pin-product--active');
+      });
+    });
+
+    
+    document.addEventListener('click', function(event) {
+      let ignoreTarget = document.querySelector('.pin-product--active');;
+      if (ignoreTarget) {
+        let isClickInsideTarget = ignoreTarget.parentNode.contains(event.target);
+        if (!isClickInsideTarget) {
+          //console.log('close me');
+          document.querySelector('.pin-product--active').classList.remove('pin-product--active');
+          document.querySelector('.whats-included').classList.remove('whats-included--overlay');
+        }
+      }
+    });
+
+    document.querySelectorAll('.js-pin-close').forEach(item => {
+      item.addEventListener('click', function(){
+        this.parentNode.classList.remove('pin-product--active');
+        document.querySelector('.whats-included').classList.remove('whats-included--overlay');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "What's Included",
+  "class": "whats-included",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "space_top",
+      "label": "Space Top"
+    },
+    {
+      "type": "checkbox",
+      "id": "space_bottom",
+      "label": "Space Bottom"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background Image Mobile"
+    },
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,63 @@
+<div class="c-homeEthos">
+    <div class="c-homeEthos__image c-homeEthos__image--desktop" style="background-image: url({{ section.settings.image_desktop | img_url: 'master' }});"></div>
+    <div class="c-homeEthos__image  c-homeEthos__image--mobile" style="background-image: url({{ section.settings.image_mobile | img_url: 'master' }});"></div>
+    <div class="wrapper">
+        <div class="c-homeEthos__main">
+            <h3 class="c-homeEthos__title">
+                {{ section.settings.title }}
+            </h3>
+            <div class="c-homeEthos__content">
+                {% for block in section.blocks %}
+                    <div class="c-homeEthos__item">
+                        <h5 class="c-homeEthos__heading">{{ block.settings.heading }}</h5>
+                        <div class="c-homeEthos__copy">
+                            {{ block.settings.copy }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!--c-homeEthos-->
+{% schema %}
+  {
+    "name": "Ethos",
+    "settings": [
+        {
+            "type":"text",
+            "id":"title",
+            "label":"title",
+            "default":"Our Commitments To You"
+        },
+        {
+            "type":"image_picker",
+            "id":"image_desktop",
+            "label":"Image Desktop"
+        },
+        {
+            "type":"image_picker",
+            "id":"image_mobile",
+            "label":"Image Mobile"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "ethos",
+            "name": "Ethos",
+            "settings": [
+              {
+                "type":"text",
+                "id":"heading",
+                "label":"Heading"
+              },
+              {
+                "type":"html",
+                "id":"copy",
+                "label":"Copy"
+              }
+            ]
+        }
+    ]
+  }
+{% endschema %}

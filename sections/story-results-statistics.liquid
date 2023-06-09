@@ -1,0 +1,87 @@
+<div class="story__statistics">
+  <div class="wrapper">
+    <div class="grid">
+      {% for block in section.blocks %}
+        <div class="grid__item small--one-quarter">
+          <div class="statistics_statistic text-center">
+            <img src="{{ block.settings.statistic_image | img_url: '133x' }}" data-rjs="{{ block.settings.statistic_image | img_url: '266x' }}" alt="Statistics Icon">
+            <p>{{ block.settings.statistic_content }}</p>
+          </div>
+        </div>
+      {% endfor %}
+      <div class="grid__item one-whole">
+        <span class="statistics__more-action" data-statistics-trigger>{{ section.settings.clinical_study_trigger }}</span>
+        <div class="statistics__more" data-statistics>
+          <div class="grid">
+            <div class="grid__item medium--five-twelfths">
+              <div class="statistics__content">
+                <h5>{{ section.settings.clinical_study_title }}</h5>
+                <p>{{ section.settings.clinical_study_content }}</p>
+              </div>
+            </div>
+            <div class="grid__item medium--seven-twelfths">
+              <div class="statistics__image">
+                <img src="{{ section.settings.clinical_study_image_1 | img_url: '650x' }}" data-rjs="{{ section.settings.clinical_study_image_1 | img_url: '1300x' }}" alt="{{ section.settings.clinical_study_image.alt }}">
+                <img src="{{ section.settings.clinical_study_image_2 | img_url: '650x' }}" data-rjs="{{ section.settings.clinical_study_image_2 | img_url: '1300x' }}" alt="{{ section.settings.clinical_study_image.alt }}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Statistics",
+    "settings": [
+      {
+        "type":"text",
+        "id":"clinical_study_trigger",
+        "label":"Clinical Study Trigger Text",
+        "default":"View More Clinical Study Data"
+      },
+      {
+        "type":"text",
+        "id":"clinical_study_title",
+        "label":"Clinical Study Title",
+        "default":"Oh you wanna see the numbers?"
+      },
+      {
+        "type":"textarea",
+        "id":"clinical_study_content",
+        "label":"Clinical Study Content",
+        "default":"An 8 week clinical evaluation of The Good across a diverse cross-ethnic group of 53 healthy male volunteers between 37 and 64 years of age was conducted by a leading US clinical research company. All skin types were represented (dry, normal, oily) and evaluation of change in facial and skin condition was conducted approxmiately 24 hours after initial use and again at 4 weeks and 8 weeks of repeated use. Three modes of assesments were used including: 1) expert clinical grading, 2) instrumental assesments and Clarity™ photographic imagery and 3) subjective questionaire completion."
+      },
+      {
+        "type":"image_picker",
+        "id":"clinical_study_image_1",
+        "label":"Clinical Study Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"clinical_study_image_2",
+        "label":"Clinical Study Image"
+      }
+    ],
+    "max_blocks":4,
+    "blocks": [
+      {
+        "type": "statistic",
+        "name": "Statistic",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"statistic_image",
+            "label":"Statistic Image"
+          },
+          {
+            "type":"textarea",
+            "id":"statistic_content",
+            "label":"Statistic Content"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

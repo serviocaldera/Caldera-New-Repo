@@ -1,0 +1,646 @@
+{% comment %} {% include 'pdp-reviews' %} {% endcomment %}
+{% unless product %}
+    {% assign product = section.settings.product %}
+{% endunless %}
+{% assign child_products_handles = product.metafields.items.handles | split: ',' %}
+{% assign child_pdts_size = child_products_handles.size | times: 1.0 %}
+{% assign nav_bar_cursor_width = 100 | divided_by: child_pdts_size %}
+{% if child_products_handles.size > 1 %}
+    {% assign checkboxes = '' %}
+    {% assign nav = '' %}
+    {% assign content = '' %}
+
+    {% for child_product_handle in child_products_handles %}
+        {% assign child_product = all_products[child_product_handle] %}
+        {% assign count = forloop.index %}
+        {% assign group_reviews_img = 'group_reviews_img_' | append: count %}
+        {% capture checkbox %}
+            <input type="radio" name="pdp-reviews-group-trigger" class="pdp-reviews-group-trigger" id="pdp-reviews-group-trigger-{{ child_product.id }}"{% if forloop.first %} checked{% endif %}>
+        {% endcapture %}
+        {% assign checkboxes = checkboxes | append: checkbox %}
+        {% capture nav_item %}
+            <label for="pdp-reviews-group-trigger-{{ child_product.id }}" class="pdp-r-nav-item">
+                <div class="pdp-rgt-img-wrap">{{product.metafields.custom_fields[group_reviews_img]}}</div>
+                <span>{{ child_product.title }}</span>
+            </label>
+        {% endcapture %}
+        {% assign nav = nav | append: nav_item %}
+
+        {% assign stars_rating = child_product.metafields.yotpo.reviews_average | times: 1.0 %}
+        {% assign reviews_count = child_product.metafields.yotpo.reviews_count %}
+        {% capture item_content %}
+            <div class="pdp-reviews-single-content">
+                {% include 'pdp-bundle-item-reviews', product: child_product %}
+            </div>
+        {% endcapture %}
+        {% assign content = content | append: item_content %}
+
+    {% endfor %}
+{% else %}
+    {% assign checkboxes = '' %}
+    {% assign content = '' %}
+
+    {% capture checkbox %}
+        <input type="radio" name="pdp-reviews-group-trigger" class="pdp-reviews-group-trigger" id="pdp-reviews-group-trigger-{{ product.id }}" checked>
+    {% endcapture %}
+    {% assign checkboxes = checkboxes | append: checkbox %}
+
+    {% assign stars_rating = product.metafields.yotpo.reviews_average | times: 1.0 %}
+    {% assign reviews_count = product.metafields.yotpo.reviews_count %}
+    {% capture item_content %}
+        <div class="pdp-reviews-single-content">
+            {% include 'pdp-bundle-item-reviews', product: product %}
+        </div>
+    {% endcapture %}
+    {% assign content = content | append: item_content %}
+{% endif %}
+
+<style>
+    .yotpo-footer  .footer-actions .yotpo-icon:before {
+        font-size: 30px;
+    }
+    .yotpo.yotpo-main-widget.yotpo-small .yotpo-review .yotpo-footer .footer-actions {
+        margin-bottom: 0;
+    }
+    .yotpo-group-review-stars {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .yotpo-group-review-stars .yotpo--gra-star-icon {
+        padding-right: 5px;
+    }
+    .pdp-reviews-group-wrap {
+        opacity: 0;
+        transition: opacity .6s;
+    }
+    .pdp-reviews-group-wrap.loaded {
+        opacity: 1;
+    }
+    .yotpo-group-review-buttons-trigger-write-review,
+    .yotpo-group-review-buttons-trigger-ask-question,
+    .yotpo-group-review-filters-trigger-tab-reviews,
+    .yotpo-group-review-filters-trigger-tab-questions,
+    .yotpo-group-review-clear-filters,
+    .yotpo-group-review-filter-buttons div {
+        cursor: pointer;
+    }
+    .yotpo-group-review-clear-filters.hidden {
+        display: none;
+    }
+    .yotpo-group-review-buttons-trigger-write-review,
+    .yotpo-group-review-buttons-trigger-ask-question {
+        max-width: 385px;
+        color: #FFFFFF;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        line-height: 16px;
+        text-align: center;
+        padding: 20px;
+        margin-left: auto;
+        border-radius: 2px;
+    }
+    .yotpo-group-review-buttons-trigger-write-review {background-color: #AF5D00;margin-bottom: 15px;}
+    .yotpo-group-review-buttons-trigger-ask-question {background-color: #80894F;}
+    .yotpo-group-review-filters-trigger-tab-reviews,
+    .yotpo-group-review-filters-trigger-tab-questions {
+        color: #3D3D38;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: 17px;
+        text-decoration: underline;
+        transition: color .5s;
+        font-weight: bold;
+    }
+    .yotpo-group-review-filters-trigger-tab-reviews.active,
+    .yotpo-group-review-filters-trigger-tab-questions.active {
+        color: #B9680C;
+    }
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful{
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        top: 48px !important;
+        position: absolute;
+        right: 0;
+        text-align: right;
+        font-family: "Avenir LT Pro", sans-serif;
+    }
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .vote-sum, 
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .vote-btn{
+        background-color: #fff;
+        border-bottom: 1px solid #D1CFCC;
+        border-top: 1px solid #D1CFCC;
+        min-width: 30px;
+        margin: 0;
+        padding: 6px;
+        text-align: center;
+        display: inline;
+    }
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .vote-sum{
+        padding: 7px 6px 6px;
+        border-right: 1px solid #D1CFCC;
+        font-weight: 600;
+    }   
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .vote-sum:before{
+        content: '(';
+    }
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .vote-sum:after{
+        content: ')';
+    }
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .vote-sum[data-type="up"]{
+        margin-right: -4px;
+    }
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .vote-btn{
+        border-left: 1px solid #D1CFCC;
+        padding-right: 0;
+    }
+    .yotpo .yotpo-icon-thumbs-up:before{
+        content: 'Yes';
+        font-family: "Avenir LT Pro", sans-serif !important;
+        font-size: 14px;
+        font-weight: 600;
+
+    }
+    .yotpo .yotpo-icon-thumbs-down:before{
+        content: 'No';
+        font-family: "Avenir LT Pro", sans-serif !important;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .label-helpful{
+        display: block !important;
+        position: relative;
+        top: -13px;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 14px;
+        width: 100%;
+        text-align: right;
+        margin-bottom: -5px;
+    }
+    .yotpo-group-review-filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .yotpo-group-review-filter-buttons div {
+        color: #3D3D38;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.8px;
+        line-height: 19px;
+        background-color: rgba(182, 171, 145, .2);
+        padding: 10px 20px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        font-weight: bold;
+        transition: all .5s;
+        border-radius: 1px;
+    }
+    .yotpo-group-review-filter-buttons div:hover {
+        background-color: rgba(182, 171, 145, .5);
+    }
+    .yotpo-group-review-filter-buttons div.yotpo-active-filter {
+        color: #FFFFFF;
+        background-color: #AF5D00;
+        cursor: not-allowed;
+        pointer-events: all !important;
+    }
+    .yotpo-group-review-rating {
+        color: #3D3D38;
+        font-family: "Adobe Garamond Pro", sans-serif;
+        font-size: 48px;
+        letter-spacing: 0;
+        line-height: 58px;
+        padding-right: 15px;
+        font-weight: 400;
+    }
+    .yotpo-group-remote-stars {
+        padding-bottom: 40px;
+    }
+    .yotpo-group-remote-stars > p {
+        opacity: 0.6;
+        color: #222222;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.35px;
+        line-height: 24px;
+        text-align: center;
+    }
+    .yotpo-group-review-filter-wrap > p {
+        color: #3D3D38;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.8px;
+        line-height: 26px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    .yotpo-group-review-clear-filters {
+        color: #3D3D38;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.7px;
+        line-height: 17px;
+        background-color: #D1CFCC;
+        padding: 3px 20px 3px 10px;
+        display: inline-block;
+        position: relative;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+    .yotpo-group-review-clear-filters:after {
+        content: "x";
+        position: absolute;
+        right: 7px;
+        top: 2px;
+    }
+    .yotpo-group-review-filters-trigger-tab-reviews {
+        margin-right: 10px;
+    }
+
+    .yotpo--gra-star-icon {
+        color: #af5d00!important;
+        margin-top: -18px;
+    }
+    .yotpo--gra-star-icon:before {
+        content: "\e60e";
+        font-family: "yotpo-widget-font" !important;
+        font-size: 18px;
+    }
+    .yotpo--gra-star-icon.yotpo--gra-star-half-icon:before {
+        content: "\e61a";
+    }
+    .yotpo--gra-star-icon.yotpo--gra-star-empty-icon:before {
+        content: "\e61b";
+    }
+    .yotpo-group-review-filters-trigger-tabs,
+    .yotpo-group-review-actions-triggers {
+        display: flex;
+    }
+    .yotpo-group-review-filters-trigger-tabs {
+        padding-bottom: 30px;
+    }
+    .yotpo-group-review-actions-triggers > div {
+        width: 50%;
+    }
+    .yotpo-group-review-actions-triggers .yotpo-group-review-filters-trigger {
+        justify-content: left;
+        text-align: left;
+    }
+    .yotpo-group-review-actions-triggers .yotpo-group-review-buttons-trigger {
+        justify-content: right;
+        text-align: right;
+    }
+    .yotpo-group-remote-actions {
+        padding-bottom: 50px;
+    }
+    /* Yotpo Reviews adjustments */
+    #productReview{
+        padding-top: 80px;
+    }
+    .pdp-reviews-group:focus-visible{
+        outline:none;
+    }
+    .pdp-reviews-group .yotpo .main-widget .yotpo-reviews .yotpo-review .yotpo-header {
+        width: 150px;
+        min-width: 150px
+    }
+    .pdp-reviews-group .yotpo .main-widget .yotpo-reviews .yotpo-review .yotpo-main .content-title {
+        color: #3D3D38;
+        font-family: "Adobe Garamond Pro", sans-serif;
+        font-size: 23px;
+        letter-spacing: 0;
+        line-height: 34px;
+        font-weight: normal;
+    }
+    .pdp-reviews-group .c-pdpReview .yotpo .main-widget .yotpo-reviews .yotpo-review .yotpo-header .yotpo-header-element .yotpo-user-name {
+        color: #222222;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.35px;
+        line-height: 17px;
+    }
+    .pdp-reviews-group .yotpo .yotpo-pager .yotpo-page-element {
+        color: #222222 !important;
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+        line-height: 17px;
+    }
+    .pdp-reviews-group .yotpo .yotpo-pager .yotpo-page-element.yotpo-active {
+        color: #000000 !important;
+    }
+    .pdp-reviews-group .main-widget.yotpo-display-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .pdp-reviews-group .main-widget.yotpo-display-wrapper > * {
+        width: 100%;
+    }
+    .pdp-reviews-group .yotpo-regular-box.yotpo-bottomline.yotpo-bottomline-2-boxes,
+    .pdp-reviews-group .yotpo-small-box.yotpo-nav.reviews,
+    .pdp-reviews-group .yotpo-main .yotpo-review-wrapper .sr-only,
+    .pdp-reviews-group .yotpo-footer .footer-actions .sr-only,
+    .pdp-reviews-group .yotpo-header-element .yotpo-review-stars .sr-only,
+    .pdp-reviews-group .yotpo-comments-box .sr-only,
+    .pdp-reviews-group #y-badges,
+    .pdp-reviews-group .questions {
+        display: none !important;
+    }
+    /*Updated CSS */
+    .pdp-reviews-group .main-widget > .yotpo-label-container,
+    .pdp-reviews-group .main-widget > .yotpo-display-wrapper,
+    .pdp-reviews-group .main-widget > .write-question-review-buttons-container,
+    .pdp-reviews-group .main-widget > .new-yotpo-small-box.reviews,
+    .pdp-reviews-group .main-widget > .yotpo-nav-content > .yotpo-reviews-filters,
+    .pdp-reviews-group .main-widget > .yotpo-nav-content > .yotpo-reviews-header {
+        display: none !important;
+    }
+    /*End Updated Css*/
+
+    .pdp-reviews-group .product-single__reviews {
+        padding-top: 50px;
+    }
+    .pdp-reviews-group .single-review-widget .product-single__reviews {
+        padding-top: 25px;
+    }
+    .pdp-reviews-group .yotpo .main-widget .yotpo-reviews .yotpo-review {
+        background-color: transparent !important;
+        border-bottom: 1px solid #38383d;
+    }
+    .pdp-reviews-group .yotpo .yotpo-comments-box {
+        border-left-color: #80894f;
+    }
+    .pdp-reviews-group .yotpo .main-widget .yotpo-reviews .yotpo-review .yotpo-footer {
+        margin-left: 0;
+        position: unset;
+    }
+    .pdp-reviews-group .yotpo .main-widget .yotpo-reviews .yotpo-review .yotpo-header .yotpo-header-element .yotpo-user-title {
+        font-style: normal !important;
+    }
+    .pdp-reviews-group .c-pdpReview .yotpo.yotpo-main-widget .yotpo-bottomline .yotpo-stars {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .pdp-reviews-group .yotpo .sr-only {
+        position: initial;
+        width: unset;
+        height: unset;
+        overflow: initial;
+        order: -1;
+    }
+    /* End Yotpo Reviews adjustments */
+    /* animation */
+    .pdp-reviews-group-trigger {
+        display: none;
+    }
+    .pdp-reviews-single-content {
+        {% if child_products_handles.size > 1 %}
+        max-width: 0;
+        max-height: 0;
+        opacity: 0;
+        {% endif %}
+        overflow: hidden;
+        transition: opacity 1s;
+        width: 100%;
+    }
+    /* end animation */
+    /* Background */
+    .pdp-reviews-bg {
+        background-color: #f7f6f3;
+    }
+    .pdp-reviews-bg-helper path {
+        fill: #f7f6f3;
+    }
+    .pdp-reviews-bg-helper {
+        display: block;
+        width: 100%;
+    }
+    /* end Background */
+    .pdp-reviews-group {
+        text-align: center;
+    }
+    .pdp-reviews-group .pdp-reviews-group-content {
+        padding: 75px 3.2rem 0;
+    }
+    .pdp-reviews-group-wrap {
+        display: flex;
+        justify-content: center;
+    }
+    /*text*/
+    .pdp-reviews-group-text h3 {
+        font-family: "Adobe Garamond Pro", sans-serif;
+        font-size: 48px;
+        letter-spacing: 0;
+        line-height: 58px;
+        color: #3D3D38;
+    }
+    .pdp-reviews-group-text p {
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.8px;
+        line-height: 26px;
+        color: #3D3D38;
+        font-weight: bold;
+    }
+    .pdp-reviews-group-nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+    .pdp-reviews-group-nav label {
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.8px;
+        line-height: 19px;
+        color: #3D3D38;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 10px;
+        width: {{ 100 | divided_by: child_pdts_size | append: '%' }};
+        cursor: pointer;
+    }
+    .pdp-r-nav-item .pdp-rgt-img-wrap {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .pdp-r-nav-item img {
+        height: 50px;
+        width: 35px;
+        margin: 0 10px;
+    }
+    .pdp-reviews-group-nav label span {
+        font-family: "Avenir LT Pro", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.8px;
+        line-height: 19px;
+        color: #3D3D38;
+        margin-top: 5px;
+    }
+    .nav-selected-bar {
+        width: 100%;
+        height: 3px;
+        background: #D1CFCC;
+        position: relative;
+    }
+    .nav-selected-cursor {
+        width: {{ nav_bar_cursor_width | append: '%' }};
+        height: 100%;
+        background: #292D43;
+        position: absolute;
+        left: 0;
+        transition: left .3s;
+    }
+    .pdp-reviews-group .c-pdpReview .product-single__reviews .grid {
+        max-width: 100%;
+        width: 100%;
+    }
+    {% if child_products_handles.size > 1 %}
+    {% for i in (1..child_products_handles.size) %}
+    {% assign left_helper = i | minus: 1 %}
+    .pdp-reviews-group-trigger:nth-of-type({{ i }}):checked ~ .pdp-reviews-group-content .pdp-reviews-group-wrap .pdp-reviews-single-content:nth-of-type({{ i }}) {
+        max-width: 100%;
+        max-height: 100%;
+        opacity: 1;
+    }
+    .pdp-reviews-group-trigger:nth-of-type({{ i }}):checked ~ .pdp-reviews-group-content .nav-selected-bar .nav-selected-cursor {
+        left: {{ nav_bar_cursor_width | times: left_helper | append: '%' }};
+    }
+    {% endfor %}
+    {% endif %}
+    .c-pdpReview .product-single__reviews {
+        padding: 100px 0 0;
+    }
+    @media only screen and (max-width: 991px) {
+        .pdp-reviews-group .yotpo .main-widget .yotpo-reviews .yotpo-review {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .pdp-reviews-group-wrap .yotpo .main-widget .yotpo-reviews .yotpo-review .yotpo-header .yotpo-header-element.yotpo-header-actions {
+            top: -1px;
+            right: -15px;
+        }
+    }
+    @media only screen and (max-width: 678px) {
+        .yotpo .yotpo-review .yotpo-footer .yotpo-helpful{
+            position: relative;
+            right: 0;
+            bottom: -15px;
+            top: auto !important;
+        }
+        .pdp-reviews-group-wrap,
+         .pdp-reviews-group-text{
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .pdp-reviews-group .wrapper {
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+        .pdp-reviews-group .product-single__reviews {
+            padding-top: 20px;
+        }
+        .yotpo-group-remote-stars {
+            padding-bottom: 20px;
+        }
+        #productReview:focus,
+        #productReview:focus-visible {
+            outline-color:transparent !important;
+        }
+        .c-pdpReview{
+            max-width: 100%;
+        }
+        .pdp-reviews-group .yotpo .main-widget .yotpo-reviews .yotpo-review .yotpo-header{
+            width: 100%;
+        }
+        .yotpo-group-review-stars{
+            justify-content: left;
+        }
+        .pdp-reviews-group-text p,
+        .yotpo-group-remote-stars > p{
+            text-align: left;
+        }
+        .yotpo-group-review-buttons-trigger-write-review, 
+        .yotpo-group-review-buttons-trigger-ask-question{
+            margin-left: 0;
+        }
+        .pdp-reviews-group-text h3 {
+            font-size: 36px;
+            letter-spacing: 0;
+            line-height: 48px;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .pdp-reviews-group .pdp-reviews-group-content {
+            padding: 40px 0 0;
+        }
+        .pdp-reviews-group-nav label {
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .pdp-reviews-group-nav label span {
+            width: 100%;
+            font-size: 14px;
+        }
+        .yotpo-group-review-actions-triggers {
+            flex-wrap: wrap;
+        }
+        .yotpo-group-review-actions-triggers > div {
+            width: 100%;
+        }
+        .yotpo-group-review-buttons-trigger {
+            order: -1;
+            padding-bottom: 30px;
+        }
+    }
+    @media (min-width: 48rem){
+        .c-pdpReview .yotpo .main-widget .yotpo-nav-content {
+            padding-bottom: 69px;
+        }
+    }
+</style>
+<div id="productReview" class="pdp-reviews-group">
+    <svg class="pdp-reviews-bg-helper" version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 86" width="1440" height="86">
+        <g><path id="Mountain-Shape-Desktop" d="m0 79.5l231-79.5 45 22.2h106l250.5 45.7 184.5-31.6 40-14.1 150 28.4h154.7l35.3 17.3 243 11.6v1294h-1440z"/></g>
+    </svg>
+    <div class="pdp-reviews-bg">
+        <div class="wrapper">
+            {{ checkboxes }}
+            <div class="pdp-reviews-group-content">
+                <div class="pdp-reviews-group-text">
+                    <h3>Customer Reviews</h3>
+                    <p>NO EDITS. NO PAID REVIEWS OR INCENTIVES</p>
+                </div>
+                {% if nav %}
+                <div class="pdp-reviews-group-nav">
+                    {{ nav }}
+                    <div class="nav-selected-bar">
+                        <div class="nav-selected-cursor"></div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="pdp-reviews-group-wrap{% if nav %} combo-reviews-widget{% else %} single-review-widget{% endif %}">{{ content }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+      const timeout = setTimeout(() => {
+          const wrapper = document.querySelector('.pdp-reviews-group-wrap');
+          if(wrapper){
+              wrapper.classList.add('loaded');
+          }
+          clearTimeout(timeout)
+      }, 1000);
+    })
+</script>

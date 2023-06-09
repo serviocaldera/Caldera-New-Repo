@@ -1,0 +1,73 @@
+<div class="c-howToResult">
+    <div class="wrapper c-howToResult__container">
+        <div class="c-howToResult__row">
+            <div class="c-howToResult__col c-howToResult__colImage">
+                <span class="c-howToResult_imageText">{{section.settings.image-text}}</span>
+                <img src="{{ section.settings.image-mobile | img_url: 'master' }}" alt="{{ section.settings.title }}" class="c-howToResult__image c-howToResult__imageMobile" />
+                <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title }}" class="c-howToResult__image c-howToResult__imageDesktop" />
+            </div>
+            <div class="c-howToResult__col c-howToResult__colContent">
+                <div class="c-howToResult__content">
+                    <h3 class="c-howToResult__title">{{section.settings.title}}</h3>
+                    {% for block in section.blocks %}
+                        <div class="c-howToResult__item">
+                            <h6>{{ block.settings.heading }}</h6>
+                            <p>
+                                {{ block.settings.copy }}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "How to Result",
+        "settings": [
+            {
+                "type":"text",
+                "id":"title",
+                "label":"Title",
+                "default":"How Can One Serum Deliver Results For All Skin Types?"
+            },
+            {
+                "type":"text",
+                "id":"image-text",
+                "label":"Image text",
+                "default":"LOREM IPUM"
+            },
+            {
+                "type":"image_picker",
+                "id":"image-mobile",
+                "label":"Image Mobile"
+            },
+            {
+                "type":"image_picker",
+                "id":"image",
+                "label":"Image Desktop"
+            }
+            
+        ],
+        "blocks": [
+            {
+                "type": "step",
+                "name": "Results",
+                "settings": [
+                    {
+                        "type":"text",
+                        "id":"heading",
+                        "label":"heading"
+                    },
+                    {
+                        "type":"html",
+                        "id":"copy",
+                        "label":"Copy"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

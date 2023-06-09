@@ -1,0 +1,56 @@
+<!-- /templates/blog.liquid (List Page) -->
+<!-- certification header and list loop -->
+
+<div class="blogs">
+    <div class="blogs__hero">
+        <div class="blogs__hero-image blogs__hero-image--desktop"></div>
+        <div class="blogs__hero-image blogs__hero-image--mobile"></div>
+        <h1 class="blogs__hero-title">Articles</h1>
+    </div>
+
+    <div class="wrapper">
+
+        <div class="blogs__list">
+            {%- for article in blog.articles -%}
+                <div class="blogs__article">
+
+                    <a href="{{ article.url }}" class="blogs__article-banner">
+                        {%- if article.image -%}
+                            <div class="blogs__article-img" style="background-image: url({{article.image | img_url: 'master'}})"></div>
+                        {%- endif -%}
+                    </a>
+
+                    <div class="blogs__article-content">
+                        <h2 class="blogs__article-title">{{ article.title }}</h2>
+                        <p class="blogs__article-summary">
+                            {%- if article.excerpt.size > 0 -%}
+                                {{ article.excerpt }}
+                            {%- else -%}
+                                {{ article.content | strip_html | truncate: 150 }}
+                            {%- endif -%}
+                        </p>
+                    </div>
+
+                    <a class="blogs__article-readMore" href="{{ article.url }}" aria-label="Read more: {{ article.title }}">Read more</a>
+
+                </div>
+            {%- endfor -%}
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<style>
+    .blogs__hero-image--desktop{ background-image: url({{'blogs-banner-desktop.jpg' | asset_url}});}
+    .blogs__hero-image--mobile{background-image: url({{'blog-banner-mobile.jpg' | asset_url}});}
+</style>
+
+{% schema %}
+{
+    "name": "Blog",
+    "settings": []
+}
+{% endschema %}

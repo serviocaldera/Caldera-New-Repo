@@ -1,0 +1,53 @@
+<!-- /templates/article.liquid (Detail Page) -->
+<div class="wrapper">
+    <div class="blogArticle">
+
+        <h2 class="blogArticle__title">{{ article.title }}</h2>
+
+        {% if article.image %}
+            <div class="blogArticle__image">
+                {%comment%} <a href="{{ article.url }}"> {%endcomment%}
+                <img src="{{ article.image.src | img_url: 'master' }}" />
+                {%comment%}</a>  {%endcomment%}
+            </div>
+        {% else %}
+            <div class="blogArticle__image">
+                {%comment%}<a href="{{ article.url }}">  {%endcomment%}
+                {% if article.content contains "<img" %}
+                    {% assign src = article.content | split: 'src="' %}
+                    {% assign src = src[1] | split: '"' %}
+                    <img src="{{src}}" >
+                {% endif %}
+                {%comment%}</a>  {%endcomment%}
+            </div>
+        {% endif %}
+
+        <div class="blogArticle__copy">
+            {{ article.content }}
+        </div>
+
+        {% if blog.next_article or blog.previous_article %}
+            <div class="blogArticle__paging">
+                <div class="blogArticle__pagingBtn article__pagingBtn--prevPost">
+                    {% if blog.previous_article %}
+                        <span>&#10094; {{ 'Previous Post' | link_to: blog.previous_article }}</span>
+                    {% endif %}
+                </div>
+                <div class="blogArticle__pagingBtn article__pagingBtn--nextPost">
+                    {% if blog.next_article %}
+                        <span>{{ 'Next Post' | link_to: blog.next_article }} &#10095;</span>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% schema %}
+{
+    "name": "Article",
+    "settings": []
+}
+{% endschema %}

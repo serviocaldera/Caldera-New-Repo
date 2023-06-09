@@ -1,0 +1,108 @@
+<div class="htuTime">
+    {% for block in section.blocks %}
+        <div class="htuTime__col">
+            <div class="htuTime__col-inner">
+                <div class="htuTime__col-header">
+                    <div class="htuTime__col-icon">{{ block.settings.htuTime_col_icon }}</div>
+                    <h4 class="htuTime__col-title">{{ block.settings.htuTime_col_title }}</h4>
+                </div>
+                <div class="htuTime__product">
+                    <span class="htuTime__product-usage">{{ block.settings.htuTime_product1_usage }}</span>
+                    <h5 class="htuTime__product-name">{{ block.settings.htuTime_product1_name }}</h5>
+                    <picture class="htuTime__product-pic"> 
+                        <source media="(max-width: 1023px)" srcset="{{ block.settings.htuTime_product1_image_mobile | img_url: 'master' }}">
+                        <source media="(min-width: 1024px)" srcset="{{ block.settings.htuTime_product1_image | img_url: 'master' }}">
+                        <img src="{{ block.settings.htuTime_product1_image_mobile | img_url: '1x' }}" alt="cl">  
+                    </picture>
+                    <div class="htuTime__product-copy">{{ block.settings.htuTime_product1_copy }}</div>
+                </div>
+                <div class="htuTime__product">
+                    <span class="htuTime__product-usage">{{ block.settings.htuTime_product2_usage }}</span>
+                    <h5 class="htuTime__product-name">{{ block.settings.htuTime_product2_name }}</h5>
+                    <picture class="htuTime__product-pic"> 
+                        <source media="(max-width: 1023px)" srcset="{{ block.settings.htuTime_product2_image_mobile | img_url: 'master' }}">
+                        <source media="(min-width: 1024px)" srcset="{{ block.settings.htuTime_product2_image | img_url: 'master' }}">
+                        <img src="{{ block.settings.htuTime_product2_image_mobile | img_url: '1x' }}" alt="cl">  
+                    </picture>
+                    <div class="htuTime__product-copy">{{ block.settings.htuTime_product2_copy }}</div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}            
+</div>
+
+{% schema %}
+{
+    "name": "How to Use Timing",   
+    "max_blocks": 2,
+    "blocks": [
+        {
+            "type": "products",
+            "name": "Product Column",
+            "settings": [
+                {
+                    "type":"html",
+                    "id":"htuTime_col_icon",
+                    "label": "Block Icon"
+                },
+                {
+                    "type":"text",
+                    "id":"htuTime_col_title",
+                    "label": "Block Title",
+                    "default":"In the Morning"
+                },
+                {
+                    "type": "text",
+                    "id": "htuTime_product1_usage",
+                    "label": "Product 1 Usage"
+                },
+                {
+                    "type": "text",
+                    "id": "htuTime_product1_name",
+                    "label": "Product 1 Name"
+                },
+                {
+                    "type": "html",
+                    "id": "htuTime_product1_copy",
+                    "label": "Product 1 copy"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "htuTime_product1_image",
+                    "label": "Product 1 Image Desk"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "htuTime_product1_image_mobile",
+                    "label": "Product 1 Image Mobile"
+                },
+                {
+                    "type": "text",
+                    "id": "htuTime_product2_usage",
+                    "label": "Product 2 Usage"
+                },
+                {
+                    "type": "text",
+                    "id": "htuTime_product2_name",
+                    "label": "Product 2 Name"
+                },
+                {
+                    "type": "html",
+                    "id": "htuTime_product2_copy",
+                    "label": "Product 2 copy"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "htuTime_product2_image",
+                    "label": "Product 2 Image Desk"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "htuTime_product2_image_mobile",
+                    "label": "Product 2 Image Mobile"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

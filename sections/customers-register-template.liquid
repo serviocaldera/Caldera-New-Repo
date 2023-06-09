@@ -1,0 +1,90 @@
+<div class="accountPage__main">
+    {% form 'create_customer' %}
+        {% for field in form.errors %}
+            {% if form.errors.messages[field] contains "This email address is already associated with an account." %}
+                <div class="accountError">
+                    <h5 class="accountError__heading">Oops. Something’s not right.</h5>
+                    <div class="accountError__content">
+                        <p>
+                            <strong>This email address is already associated with an account.</strong>
+                        </p>
+                        <p>
+                            You can <a href="/account/login">login</a> or you can change your <a href="/account/login#recover">password</a> from here.
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="accountPage accountRegister">
+            <div class="wrapper">
+                <div class="account__row">
+                    <div class="account__col account__form">
+                        <h4 class="account__heading">Create Account</h4>
+                        {{ form.errors | default_errors }}
+                        <div class="accountForm__fieldMain">
+                            <div class="accountError__message"></div>
+                            <div class="accountForm__fields">
+                                <input type="text" name="customer[first_name]" id="FirstName" class="input-full" {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+                                <label for="FirstName">First Name</label>
+
+                            </div>
+                        </div>
+                        <div class="accountForm__fieldMain">
+                            <div class="accountError__message"></div>
+                            <div class="accountForm__fields">
+                                <input type="text" name="customer[last_name]" id="LastName" class="input-full" {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+                                <label for="LastName">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="accountForm__fieldMain">
+                            <div class="accountError__message"></div>
+                            <div class="accountForm__fields">
+                                <input type="email" name="customer[email]" id="Email" class="input-full{% if form.errors contains 'email' %} error{% endif %}" {% if form.email %} value="{{ form.email }}"{% endif %}>
+                                <label for="Email">Email Address</label>
+                            </div>
+                        </div>
+                        <div class="accountForm__fieldMain">
+                            <div class="accountError__message"></div>
+                            <div class="accountForm__fields">
+                                <input type="password" name="customer[password]" id="CreatePassword" class="password input-full{% if form.errors contains 'password' %} error{% endif %}">
+                                <label for="CreatePassword">Password</label>
+                                <span class="togglePassword">
+                                    {% include 'icon-eye' %}
+                                    {% include 'icon-eye-close' %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="accountForm__copy accountForm__copy--small">
+                            {% include 'icon-account-help' %}
+                            Password must be at least 5 characters.
+                        </div>
+                        <div class="accountForm__button">
+                            <input type="submit" value="Create Account" id="signup-btn" class="btn btn--primary">
+                        </div>
+                        <div class="accountForm__copy accountForm__copy--center">
+                            Already have an account? <a href="/account/login">Sign In</a>.
+                        </div>
+                    </div>
+
+                    <div class="account__col account__content">
+                        <h4 class="account__heading">Register to Manage Your Membership</h4>
+                        <ul class="account__list">
+                            <li>Review your next shipment</li>
+                            <li>Change shipping/billing info</li>
+                            <li>Skip a shipment</li>
+                            <li>Change delivery frequency</li>
+                            <li>View order history</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endform %}
+</div>
+
+{% schema %}
+{
+    "name": "Register",
+    "settings": []
+}
+{% endschema %}

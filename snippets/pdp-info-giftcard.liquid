@@ -1,0 +1,567 @@
+
+<div class="wrapper pdp-regular-template pdp-giftcard-template">
+  {% assign current_variant = product.selected_or_first_available_variant %}
+
+  <div class="c-product__row">
+      <div class="c-product__col c-productImage__col">
+          <div class="c-productImage__gallery">
+              <div class="c-productImage__featured c-productImage__featured-regularTemplate" data-pdp-image-slider>
+                  {% for image in product.images %}
+                      <div class="c-productImages">
+                          <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                      </div>
+                  {% endfor %}
+              </div>
+              {% if product.images.size > 1 %}
+                  <div class="c-productImage__thumbs c-productImage__thumbs-regularTemplate{% if product.metafields.custom_fields["enable_combobuy_section"] == 1 %} c-productImage__thumbs--comboBuy{% endif %}" data-pdp-sliderthumb-slider>
+                      {% for image in product.images %}
+                          <div class="c-productImage__item">
+                              <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ image.alt | escape }}" class="c-productImage__img lazyload" />
+                          </div>
+                      {% endfor %}
+                  </div>
+              {% endif %}
+          </div>    
+      </div>
+      <div class="c-product__col c-productInfo__col">   
+          <div class="c-productInfo__col--wrapper{% if product.available == false %} oos-sticky--wrapper{% endif %}">             
+          <div class="c-productInfo__header">
+              <div class="c-productInfo__currentVariant">
+                  {% if product.metafields.custom_fields["product_informtion_type"] != blank %}
+                      <span class="c-productInfo__productType">{{ product.metafields.custom_fields["product_informtion_type"] }}</span>
+                  {% endif %}
+                  {% comment %} | {{ current_variant.title }} {% endcomment %} 
+              </div>
+              <h1 class="c-productInfo__title" itemprop="name">{{ product.title }}</h1>
+
+              <div class="c-productInfo__review">
+               {%- if product.metafields.custom_fields["enable_combobuy_section"] == 1 -%}    
+                      <a href="#productReview" class="animate-scroll" onclick="scrollFunction();">
+                      <span class="yotpo-overlay"></span>
+                      <div class="yotpo bottomLine yotpo-small" data-product-id="2144685883450" data-yotpo-element-id="3">
+                          <div class="yotpo-display-wrapper" style="visibility: hidden;">
+                              <div class="standalone-bottomline" data-source="default" tabindex="-1">
+                                  <div class="yotpo-bottomline pull-left  star-clickable" tabindex="0">
+                                      <span class="yotpo-stars">
+                                          <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                          <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                          <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                          <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                          <span class="yotpo-icon yotpo-icon-half-star rating-star pull-left"></span>
+                                      </span>
+                                      <span class="text-m review-stars">1,130+ Reviews</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </a>
+                   {%- else -%}      
+                      <a href="#productReview" class="animate-scroll">
+                          <span class="yotpo-overlay"></span>
+                          <div class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
+                      </a>
+                   {%- endif -%}
+              </div>
+          </div>
+
+          {% if product.metafields.custom_fields["enable_new_product_icons"] == 1 %}
+              <div class="c-productInfo__icons"> 
+                  {% for item in product.metafields.custom_fields["product_icons_new"] %}
+                      
+                      <div class="c-productInfo__icon c-productInfo__icon--regular">
+                          {% if item["icon_image"] != blank %}
+                              <div class="c-productInfo__icon-image">
+                                  <img src="{{ item["icon_image"] }}" class="c-productInfo__icon--img" 
+                                  {% if item["icon_title"] != blank %}
+                                  alt="{{ item["icon_title"] }} icon" {% else %} alt="product feature icon"
+                                  {% endif %}
+                                  >
+                              </div>                 
+                          {% endif %}                                            
+                          {% if item["icon_title"] != blank %}                          
+                              <span class="c-productInfo__icon-title">{{ item["icon_title"] }}</span>
+                          {% endif %}    
+                      </div>
+                  {% endfor %}                                        
+              </div>
+          {% endif %} 
+
+
+          {% if product.metafields.custom_fields["combobuy_products"] != blank %}
+              <div class="c-productInfo__icons combobuy__icons"> 
+                   {%- assign oos-exists = 0 -%}
+                   {%- for item in product.metafields.custom_fields["combobuy_products"] -%}
+                      {%- if item["combobuy_prodhandle"] != blank -%}
+                          {%- assign metaproduct = all_products[item["combobuy_prodhandle"]] -%}
+                      {%- endif -%}
+                      {%- if metaproduct.available == false -%} 
+                          {%- assign oos-exists = 1 -%}
+                      {%- endif -%}
+                      <div class="c-productInfo__icon{% if metaproduct.available %} c-productInfo__icon--active{% else %} c-productInfo__icon--oos{% endif %}">
+                        
+                          {% if item["combobuy_prodthumb"] != blank %}
+                              <div class="c-productInfo__icon-image combobuy_icons-image">
+                                  <img src="{{ item["combobuy_prodthumb"] }}" class="c-productInfo__icon--img" 
+                                  {% if metaproduct.title != blank %}
+                                  alt="{{ item["icon_title"] }} icon" {% else %} alt="product feature icon"
+                                  {% endif %}
+                                  >
+                              </div>                 
+                          {% endif %}   
+
+                          {% if metaproduct.title != blank %}                         
+                              <span class="c-productInfo__icon-title c-productInfo__icon-title--combo">{{ metaproduct.title }}</span>
+                          {% endif %}  
+
+                          <div class="c-productInfo__info {% if metaproduct.available %} c-productInfo__info--active{% else %} c-productInfo__info--oos{% endif %}">
+                              Sold Out
+                          </div>
+                      </div>
+                  {% endfor %}                                        
+              </div>
+          {% endif %}  
+        
+          <div class="c-productInfo__description{% if oos-exists > 0 %} oos-exists{% endif %}">
+              {% if product.metafields.custom_fields["enable_product_excerpt"] == 1 %}
+                <div class="c-productInfo__excerpt">
+                    {% if product.metafields.custom_fields["product_excerpt_title"] != blank %}
+                        <h3 class="c-productInfo__excerpt-title">{{ product.metafields.custom_fields["product_excerpt_title"] }}</h3>
+                    {% endif %} 
+                    {% if product.metafields.custom_fields["product_excerpt_content"] != blank %}
+                        <div class="c-productInfo__excerpt-cFontent">{{ product.metafields.custom_fields["product_excerpt_content"] }}</div>
+                    {% endif %}    
+                </div>  
+              {% else %}
+                {{ product.description }}
+              {% endif %}
+          </div>
+
+          <div id="add-item-form">
+          {%- if product.available -%}
+            <div class="c-productInfo__variants">
+                <label>Choose Amount:</label>
+                <select id="product-select-{{ product.id }}" name="id" class="c-productInfo__variantSelect" data-variant-select data-productid="{{product.id}}">
+                    {% for variant in product.variants %}
+                        {% if variant.available %}
+                            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" price="{{ variant.price | money | remove: '.00' | remove: ',00' }}" value="{{ variant.id }}">{{ variant.price | money | remove: '.00' | remove: ',00' }}</option>
+                        {% else %}
+                            <option disabled="disabled">
+                                {{ variant.title }} - Sold Out
+                            </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="c-productInfo__submit">
+            <div class="quantityAdjust c-quantityAdjust">
+                <spam class = "subQty">-</spam>
+                <spam class = "actualQTY">1</spam>
+                <spam class = "addQty">+</spam>
+            </div>
+
+              <button type="submit" name="add" id="AddToCart" class="js-addtocart form__addtocart btn btn--primary{% if settings.cart_limit_enable and cart.item_count > 0 %} disabled{% endif %}">
+                  <span class="c-productInfo__btnText">
+                    Add To Cart
+                    <span class="cu__total-price"></span>
+                  </span>
+              </button>
+            </div>
+          {%- else -%}
+              {%- for variant in product.variants -%}
+                  {%-assign variantID = variant.id -%}
+              {%- endfor -%}
+              <div class="oos-wrapper">
+                 {%- if section.settings.oos-title -%}
+                      <h5 class="oos-title oos-info--hide">{{section.settings.oos-title}}</h5>
+                  {%- endif -%}
+                  
+                  {%- if section.settings.oos-text -%}
+                      <p class="oos-description oos-info--hide">{{section.settings.oos-text}}</p>
+                  {%- endif -%}
+                  <form action="" id="oos-form" class="oos-info--hide">
+                      <input id="oos-form-customer_email" name="oos-form-customer_email" class="oos-form-input" value="" placeholder="Email Address" />
+                      <div class="oos-form--posting">Please wait...</div>
+                      <div class="c-productInfo__submit oos-form-submit">
+                          <button id="oos-btn" class="btn btn--primary oos-btn-klaviyo" href="#">
+                          <span class="c-productInfo__btnText">{{section.settings.oos-btn}}</span>
+                          </button>
+                      </div>
+                  </form>
+                  <div class="oos-info oos-info--success" style="display:none">{{section.settings.oos-success | escape_html}}</div>
+                  <div class="oos-info oos-info--error" style="display:none">{{section.settings.oos-error | escape_html}}</div>
+                  <script>
+                      $(document).ready(function() {
+                        var KlaviyoCheck = $('#oos-btn');
+                        if (KlaviyoCheck.lenght > 0){
+                          $("#oos-btn").click(function(event ) {
+                            event.preventDefault();
+                            $("#oos-form").addClass("active-loader");
+                            var email = $('#oos-form-customer_email').val();
+                            $.ajax({
+                              type:"POST",
+                              url: "https://a.klaviyo.com/onsite/components/back-in-stock/subscribe",
+                              data:{
+                                a:"Pckb5m",
+                                email: email,
+                                variant:"{{variantID}}",
+                                platform:"shopify"
+                              },
+                                success: function(response) {
+                                   $(".oos-form").removeClass("active-loader");
+                                   $(".oos-info--success").show();
+                                   $(".oos-info--error").hide();
+                                   $(".oos-info--hide").hide();
+                                   $(".oos-wrapper").addClass("oos-wrapper--width");
+                                },
+                                error: function(response) {
+                                   $(".oos-form").removeClass("active-loader");
+                                    $("#oos-form-customer_email").addClass("oos-form-input--error");
+                                    $(".oos-info--error").show();
+                                    $(".oos-info--success").hide();
+                                }
+                            });
+                          });
+                        }
+                      });
+                      </script>
+              </div>
+          {%- endif -%}
+          </div>
+          
+          <div class="c-productInfo__footer ">
+                      <div class="c-productInfo__footerLinks c-productInfo__footerLinks--regular-template">
+                          {%- if section.settings.risk-free-usa or section.settings.risk-free-world -%}
+                          <div class="c-productFrequency c-productFrequencyReturn">
+                              <div class="c-productFrequency__text">
+                                   <span class="c-productFrequency__icon">{% include 'icon-risk-free-new' %} </span>
+                                  <span class="c-productFrequency__link">
+                                  {%- if shop.money_with_currency_format contains 'USD' -%}
+                                      {%- if product.metafields.custom_fields["product_risk_free_usa"] != blank -%}
+                                        {{ product.metafields.custom_fields["product_risk_free_usa"] }}
+                                       {%- else -%}
+                                        {{ section.settings.risk-free-usa }}
+                                       {%- endif -%}
+                                  {%- else -%} 
+                                       {%- if product.metafields.custom_fields["product_risk_free_world"] != blank -%}
+                                        {{ product.metafields.custom_fields["product_risk_free_world"] }}
+                                       {%- else -%}
+                                        {{ section.settings.risk-free-world }}
+                                       {%- endif -%}
+                                  {%- endif -%}
+                                  </span>
+                              </div>
+                              <div class="c-productFrequency__dropdown">
+                                  <div class="c-productFrequency__heading">
+                                      {% include 'icon-return' %}
+                                      <span>
+                                      {%- if shop.money_with_currency_format contains 'USD' -%}
+                                           {%- if product.metafields.custom_fields["product_risk_free_usa"] != blank -%}
+                                            {{ product.metafields.custom_fields["product_risk_free_usa"] }}
+                                           {%- else -%}
+                                            {{ section.settings.risk-free-usa }}
+                                           {%- endif -%}
+                                      {%- else -%} 
+                                           {%- if product.metafields.custom_fields["product_risk_free_world"] != blank -%}
+                                            {{ product.metafields.custom_fields["product_risk_free_world"] }}
+                                           {%- else -%}
+                                            {{ section.settings.risk-free-world }}
+                                           {%- endif -%}
+                                      {%- endif -%}
+                                      </span>
+                                  </div>
+                                  <a href="#" class="c-productFrequency__close">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon" viewBox="0 0 20 20"><path d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"/></svg>
+                                  </a>
+                                  <div class="c-productFrequency__content">
+                                      {%- if product.metafields.custom_fields["product_return_policy"] != blank -%}
+                                      {{ product.metafields.custom_fields["product_return_policy"] }}
+                                     {%- else -%}
+                                       {{ section.settings.return-policy }}
+                                     {%- endif -%}
+                                  </div>
+                              </div>
+                          </div>
+                          {%- endif -%}
+                          {%- if section.settings.shipping-details-text -%}
+                          <div class="c-productFrequency c-productFrequencyShipping">
+                              <div class="c-productFrequency__text c-productFrequency__last">
+                                  <span class="c-productFrequency__icon">{% include 'icon-shipping-box-new' %} </span>
+                                  <span class="c-productFrequency__link">
+                                  {{ section.settings.shipping-details-text }}
+                                </span>
+                              </div>
+                              <div class="c-productFrequency__dropdown">
+                                  <div class="c-productFrequency__heading">
+                                      {% include 'icon-shipping' %}
+                                      <span>{{ section.settings.shipping-details-text }}</span>
+                                  </div>
+                                  <a href="#" class="c-productFrequency__close">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon" viewBox="0 0 20 20"><path d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"/></svg>
+                                  </a>
+                                  <div class="c-productFrequency__content"> 
+                                    {%- if product.metafields.custom_fields["product_shipping_details"] != blank -%}
+                                      {{ product.metafields.custom_fields["product_shipping_details"] }}
+                                     {%- else -%}
+                                      {{ section.settings.shipping-details }}
+                                     {%- endif -%}
+                                  </div>
+                              </div>
+                          </div>
+                          {%- endif -%}
+
+                      </div>
+                  </div>
+                  <!--c-productInfo__footer-->
+        {% if product.metafields.custom_fields["enable_full_product_descrip"] == 1 or product.metafields.custom_fields["enable_how_to_use_section"] == 1  or product.metafields.custom_fields["enable_ingredients"] == 1 %}
+          <div class="c-productAccordions">
+              {% if product.metafields.custom_fields["enable_full_product_descrip"] == 1 %}
+                  <div class="c-productInfo__content">
+                      {% if product.metafields.custom_fields["full_product_descrip_content"] != blank %}
+                      <h5 class="c-productInfo__heading" data-pdp-accordion-toggle>
+                          Full product description
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--plus">{% include 'icon-accordion-plus' %}</span>
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--minus">{% include 'icon-accordion-minus' %}</span>
+                      </h5> 
+                      <div class="c-productInfo__copy" data-pdp-accordion-content>
+                          {{ product.metafields.custom_fields["full_product_descrip_content"] }}
+                      {% endif %}
+                      </div>   
+                  </div>
+              {% endif %}
+              {% if product.metafields.custom_fields["enable_how_to_use_section"] == 1 %}
+                  <div class="c-productInfo__content">
+                      {% if product.metafields.custom_fields["how_to_use_content"] != blank %}
+                      <h5 class="c-productInfo__heading" data-pdp-accordion-toggle>
+                          How To Use
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--plus">{% include 'icon-accordion-plus' %}</span>
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--minus">{% include 'icon-accordion-minus' %}</span>
+                      </h5> 
+                      <div class="c-productInfo__copy" data-pdp-accordion-content>
+                          {{ product.metafields.custom_fields["how_to_use_content"] }}
+                      {% endif %}
+                      </div>   
+                  </div>
+              {% endif %}
+              {% if product.metafields.custom_fields["enable_ingredients"] == 1 %}
+                  <div class="c-productInfo__content">
+                      {% if product.metafields.custom_fields["ingredients_content"] != blank %}
+                      <h5 class="c-productInfo__heading" data-pdp-accordion-toggle>
+                          Ingredients
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--plus">{% include 'icon-accordion-plus' %}</span>
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--minus">{% include 'icon-accordion-minus' %}</span>
+                      </h5> 
+                      <div class="c-productInfo__copy" data-pdp-accordion-content>
+                          {{ product.metafields.custom_fields["ingredients_content"] }}
+                      {% endif %}
+                      </div>   
+                  </div>
+              {% endif %}
+          </div>
+        {% endif %}
+          </div>
+      </div>
+      <div id="height-keeper"></div>
+  </div>
+  <div id="sticky-start"></div>
+</div>
+
+<script src="{{ 'slimselect.min.js' | asset_url }}"></script>
+<link href="{{ 'slimselect.min.css' | asset_url }}" rel="stylesheet"></link>
+{%-  comment -%}
+  CARTjs
+{%-  endcomment -%}
+<script type="text/javascript">
+  function getVariantPrice() {
+    var variant_price = $('.c-productInfo__variantSelect').find('option:selected').attr('price');
+    $('#AddToCart .cu__total-price').text(variant_price);
+  }
+  $(document).ready(function() {
+    $('.c-productInfo__variantSelect').change(getVariantPrice);
+    getVariantPrice();
+  });
+  $('.form__addtocart').click(function() {
+      var variant_id = $('.c-productInfo__variantSelect').find('option:selected').attr('value');
+        $('.c-productInfo__variantSelect').on('change', function() {
+          var variant_id = $('.c-productInfo__variantSelect').find('option:selected').attr('value');
+        });
+      var items = [];
+      var quantity = $('.quantityAdjust .actualQTY').text(); 
+      var properties = [];
+
+      items.push({
+          id: variant_id,
+          quantity: quantity,
+          properties: properties[0]
+      })
+
+      CartJS.addItems(items,{
+          "success": function(data, textStatus, jqXHR) {
+              const cartCounts = document.querySelectorAll('#CartCount.u-hidden');
+              if(cartCounts && cartCounts.length) {
+                  cartCounts.forEach(cartCount => {
+                      cartCount.classList.remove('u-hidden');
+                  })
+              }
+          }
+      })
+
+  });
+
+
+  document.querySelector(".subQty").addEventListener("click", ()=>{
+      if(parseInt(document.querySelector(".actualQTY").textContent) > 1){
+          document.querySelector(".actualQTY").textContent = parseInt(document.querySelector(".actualQTY").textContent)-1;
+      }
+  });
+
+  document.querySelector(".addQty").addEventListener("click", ()=>{
+      document.querySelector(".actualQTY").textContent = parseInt(document.querySelector(".actualQTY").textContent)+1
+  });
+
+
+  setTimeout(function(){
+      $('.cu-optionsGrid .cu-option:nth-child(2)').trigger("click");
+  }, 100);
+
+
+  $(".promo-bar__close").click(function(){
+      $('.pdp-regular-template').addClass("promo-bar--removed");
+      $('body').addClass("promo-bar--removed-body");
+  });
+
+  $('.c-productFrequency__text').click(function(){
+      $('.c-productFrequency__dropdown').fadeOut();
+      $(this).parents('.c-productFrequency').find('.c-productFrequency__dropdown').fadeIn();
+  });
+
+  $('.c-productFrequency__close').click(function(){
+      $('.c-productFrequency__dropdown').fadeOut();
+      return false;
+  });
+
+  new SlimSelect({
+    select: '.c-productInfo__variantSelect',
+    showSearch: false,
+  })
+
+  const custIdJS = {{ customer.id | json}};
+  const productNameJS = {{product.title | json}};
+  const variantId = {{product.selected_or_first_available_variant.id | json}};
+  const promoLoaderImg = "";
+  const variantPrice = parseFloat({{ current_variant.price | money | remove: '.00' | json }}.slice(1));
+  const productDiscount = parseFloat({{ pdt_discount | json }});
+  const discountedPrice = Math.round(variantPrice - ((variantPrice * productDiscount)/100));
+
+
+  dlSubPurchase = (data) => {
+      if(window.ElevarGtmSuite){
+          ElevarGtmSuite.utils.pushToDataLayer(
+          {
+              'event': 'dl_subscription_purchase',
+              "user_properties":{
+                  "customer_id": "{{ customer.id }}",
+                  "customer_email": "{{ customer.email }}",
+                  "customer_first_name": "{{ customer.first_name }}",
+                  "customer_order_count": "{{ customer.orders_count }}",
+                  "customer_total_spent": "{{ customer.total_spent }}"
+              },
+              'ecommerce': {
+                  'purchase': {
+                      'actionField': {
+                          'id': data.shopify_order_id,
+                          'coupon': data.coupon_discount,
+                          'discount_amount': data.total_discount,
+                          'affiliation': 'Upscribe_upgrade',
+                          'revenue': discountedPrice,
+                          'sub_total': discountedPrice
+                      },
+                      'products': [
+                          {
+                              'name': "{{product.title }}",
+                              'product_id': "{{product.id}}",
+                              'id': "{{ product.selected_or_first_available_variant.sku }}",
+                              'variant_id': "{{ product.selected_or_first_available_variant.id }}",
+                              'price': discountedPrice
+                          }
+                      ]
+                  },
+                  'checkout': {
+                      'actionField': {
+                          'id': data.shopify_order_id,
+                          'coupon': data.coupon_discount,
+                          'discount_amount': data.total_discount,
+                          'affiliation': 'Upscribe_upgrade',
+                          'revenue': discountedPrice,
+                          'sub_total': discountedPrice
+                      },
+                      'products': [
+                          {
+                              'name': "{{product.title }}",
+                              'product_id': "{{product.id}}",
+                              'id': "{{ product.selected_or_first_available_variant.sku }}",
+                              'variant_id': "{{ product.selected_or_first_available_variant.id }}",
+                              'price': discountedPrice
+                          }
+                      ]
+                  }
+              }
+          })  
+      }         
+  }
+  
+  dlPurchase = (data) => {
+      if(window.ElevarGtmSuite){
+          ElevarGtmSuite.utils.pushToDataLayer(
+              {
+              'event': 'dl_purchase',
+              "user_properties":{
+              "customer_id": "{{ customer.id }}",
+              "customer_email": "{{ customer.email }}",
+              "customer_first_name": "{{ customer.first_name }}",
+              "customer_order_count": "{{ customer.orders_count }}",
+              "customer_total_spent": "{{ customer.total_spent }}"
+              },
+              'ecommerce': {
+                  'purchase': {
+                      'actionField': {
+                          'id': data.shopify_order_id,
+                          'coupon': data.coupon_discount,
+                          'discount_amount': data.total_discount,
+                          'affiliation': 'Shopify',
+                         'revenue': variantPrice,
+                          'sub_total': variantPrice
+                      },
+                      'products': [
+                          {
+                              'name': "{{product.title }}",
+                              'product_id': "{{product.id}}",
+                              'id': "{{ product.selected_or_first_available_variant.sku }}",
+                              'variant_id': "{{ product.selected_or_first_available_variant.id }}",
+                              'price': variantPrice
+                          }
+                      ]
+                  },
+                  'checkout': {
+                      'actionField': {
+                          'id': data.shopify_order_id,
+                          'coupon': data.coupon_discount,
+                          'discount_amount': data.total_discount,
+                          'affiliation': 'Shopify',
+                          'revenue': variantPrice,
+                          'sub_total': variantPrice
+                      },
+                      'products': [
+                          {
+                              'name': "{{product.title }}",
+                              'product_id': "{{product.id}}",
+                              'id': "{{ product.selected_or_first_available_variant.sku }}",
+                              'variant_id': "{{ product.selected_or_first_available_variant.id }}",
+                              'price': variantPrice
+                          }
+                      ]
+                  }
+              }
+          })  
+      }
+  }
+</script>

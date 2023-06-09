@@ -1,0 +1,14 @@
+<div class="story__menu">
+  {% for link in linklists['story-menu'].links %}
+    {% if link.active %}
+      <span class="menu__link menu__current" data-story-menu-trigger>{{ link.title }}{% include 'icon' with 'filled-arrow-down' %}</span>
+    {% endif %}
+  {% endfor %}
+  <ul data-story-menu>
+    {% for link in linklists['story-menu'].links %}
+      {% unless link.active %}
+        <li class="menu__link"><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endunless %}
+    {% endfor %}
+  </ul>
+</div>

@@ -1,0 +1,75 @@
+{% if section.settings.ambassador_enable %}
+<div class="ambassador-videos">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole text-center">
+        <div class="ambassador-videos__title">
+          <h3>{{ section.settings.ambassador_title }}</h3>
+          <p>{{ section.settings.ambassador_subline }}</p>
+        </div>
+      </div>
+      {% assign count = 0 %}
+      {% for block in section.blocks %}
+        <div class="grid__item small--one-third">
+          <a href="#ambassador-video-{{count}}" class="ambassador-video" style="background-image:url({{ block.settings.video_preview | img_url: '403x' }});" data-rjs="{{ block.settings.video_preview | img_url: '806x' }}" data-popup-trigger>
+            <div class="ambassador-video__overlay"></div>
+            {% include 'icon' with 'play' %}
+          </a>
+          <div id="ambassador-video-{{count}}" class="popup mfp-hide mfp-with-anim ambassador-video-popup">
+            <div class="popup__content">
+              <video class="how-to-video-popup__video" poster="{{ block.settings.video_preview | img_url: '2000x' }}" controls>
+                <source src="{{ block.settings.video_link }}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          {% assign count = count | plus: 1 %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Ambassador Videos",
+    "settings": [
+      {
+        "type":"checkbox",
+        "id":"ambassador_enable",
+        "label":"Enable Ambassador Section",
+        "default":true
+      },
+      {
+        "type":"text",
+        "id":"ambassador_title",
+        "label":"Ambassador Section Title",
+        "default":"Lorem Ipsum"
+      },
+      {
+        "type":"textarea",
+        "id":"ambassador_subline",
+        "label":"Ambassador Section Subline",
+        "default":"See how these ambassadors get down with The Good."
+      }
+    ],
+    "max_blocks": 6,
+    "blocks": [
+      {
+        "type": "ambassador-video",
+        "name": "Ambassador Video",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"video_preview",
+            "label":"Video Preview Image"
+          },
+          {
+            "type":"url",
+            "id":"video_link",
+            "label":"AWS Video Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,50 @@
+<div class="c-quizAccess{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="c-quizAccess__image c-quizAccess__image--desktop" style="background-image: url({{ section.settings.image_desktop | img_url: 'master' }});"></div>
+    <div class="c-quizAccess__image c-quizAccess__image--mobile" style="background-image: url({{ section.settings.image_mobile | img_url: 'master' }});"></div>
+    <div class="c-quizAccess__content">
+        {% include 'icon-quiz-access' %}
+        <h4 class="c-quizAccess__title">{{ section.settings.title}}</h4>
+        <div class="c-quizAccess__copy">{{ section.settings.copy}}</div>
+        <a href="#" class="btn btn--primary" data-quiz-click>{{ section.settings.btntext}}</a>
+    </div>
+</div>
+{% schema %}
+  {
+    "name": "Access Quiz",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image_desktop",
+        "label":"Image Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"image_mobile",
+        "label":"Image Mobile"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default": "3 Questions. How to Apply  The Good For Your Skin."
+      },
+      {
+        "type":"text",
+        "id":"copy",
+        "label":"Copy",
+        "default": "Quiz takes less than 60 seconds."
+      },
+      {
+        "type":"text",
+        "id":"btntext",
+        "label":"Button Copy",
+        "default": "start quiz"
+      },
+      {
+        "type": "text",
+        "id": "section_classname",
+        "label": "Section Class Name"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,66 @@
+<div class="story__tested" style="background-image: url({{ section.settings.tested_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.tested_mobile_image %}{{ section.settings.tested_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.tested_image | img_url: '2880x' }}" data-mobile-image-check>
+  {% if section.settings.tested_video_link %}
+    <video class="story__tested-video" poster="{{ section.settings.tested_image | img_url: '2880x' }}" muted autoplay loop>
+      <source src="{{ section.settings.tested_video_link }}" type="video/mp4">
+    </video>
+  {% endif %}
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--five-twelfths push--medium--seven-twelfths small--one-half push--small--one-half">
+        <div class="block__content text--light">
+          <h4 class="text--light">{{ section.settings.tested_headline }}</h4>
+          <p>{{ section.settings.tested_content }}</p>
+          {% if section.settings.tested_link %}
+            <a href="{{ section.settings.tested_link }}" class="btn btn--primary">{{ section.settings.tested_link_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Tested & Approved",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"tested_image",
+        "label":"Tested & Approved Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"tested_mobile_image",
+        "label":"Tested & Approved Mobile Image"
+      },
+      {
+        "type":"url",
+        "id":"tested_video_link",
+        "label":"Background Video Link",
+        "info":"If this field is completed, this field will override the background image set above on desktop"
+      },
+      {
+        "type":"text",
+        "id":"tested_headline",
+        "label":"Tested & Approved Headline",
+        "default":"Dermatologist tested and approved."
+      },
+      {
+        "type":"textarea",
+        "id":"tested_content",
+        "label":"Tested & Approved Content",
+        "default":"The Good has been clinically proven to work on all three skin types (dry, normal, oily).  Our lab saw noticeably younger looking results: skin appeared more energized and much smoother. We call it the brighter and tighter effect."
+      },
+      {
+        "type":"url",
+        "id":"tested_link",
+        "label":"Tested & Approved Section Link"
+      },
+      {
+        "type":"text",
+        "id":"tested_link_text",
+        "label":"Tested & Approved Section Link Text",
+        "default":"Shop Now"
+      }
+    ]
+  }
+{% endschema %}

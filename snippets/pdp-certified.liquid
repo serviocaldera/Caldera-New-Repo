@@ -1,0 +1,39 @@
+{% if product.metafields.custom_fields["enable_certifications_section"] == 1 %}
+<div class="c-pdpCertified {% if product.metafields.custom_fields["certifications_green_bg"] == 1 %}c-pdpCertified--green{% endif %}">
+    <div class="wrapper">
+        <div class="c-pdpCertified__row">
+            <div class="c-pdpCertified__content">
+                {% if product.metafields.custom_fields["certifications_heading"] != blank %}
+                    <h2 class="c-pdpCertified__heading">{{ product.metafields.custom_fields["certifications_heading"] }}</h2>
+                {% endif %}
+                {% if product.metafields.custom_fields["certifications_copy"] != blank %}
+                    <p class="c-pdpCertified__copy">
+                        {{ product.metafields.custom_fields["certifications_copy"] }}
+                    </p>
+                {% endif %}
+            </div>
+            {% if product.metafields.custom_fields["certifications_logos"] != blank %}
+                <div class="c-pdpCertified__logos">
+                    {% for item in product.metafields.custom_fields["certifications_logos"] %}
+                        <div class="c-pdpCertified__images c-pdpCertified__images--{{ forloop.index0 }}">
+                            <img src='{{ item["certifications_logos"] }}' data-src='{{ item["certifications_logos"] }}' alt="Certified Logos" class="lazyload" />
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!--c-pdpInd-->
+{% endif %}
+
+<!-- {% if product.template_suffix == 'pdp-combo' %}
+    <style>
+        .c-pdpCertified{
+            background: #657543;
+        }
+        .c-pdpCertified__heading, .c-pdpCertified__copy{
+            color: #fff;
+        }
+    </style>
+{% endif %} -->

@@ -1,0 +1,25 @@
+{% if product.metafields.custom_fields["enable_review_highlights"] == 1 %}
+  <div class="reviewHighlights" id="reviewHighlights">
+    <div class="wrapper">
+      <div class="reviewHighlights__items" data-reviewHighlightSlider>
+        {% for item in product.metafields.custom_fields["review_highlights_list"] %}
+
+            <div class="reviewHighlights__item">
+                {% if item["review_highlight_stars"] != blank %}
+                    <div class="reviewHighlights__stars">{{ item["review_highlight_stars"] }}</div>
+                {% endif %}
+
+                {% if item["review_highlight_copy"] != blank %}
+                    <div class="reviewHighlights__copy">{{ item["review_highlight_copy"] }}</div>
+                {% endif %}
+
+                {% if item["review_highlight_author"] != blank %}
+                    <div class="reviewHighlights__author">{{ item["review_highlight_author"] }}</div>
+                {% endif %}
+            </div>
+          
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

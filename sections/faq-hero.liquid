@@ -1,0 +1,29 @@
+<div class="hero" style="background-image: url({{ section.settings.hero_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.hero_mobile_image %}{{ section.settings.hero_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.hero_image | img_url: '2880x' }}" data-mobile-image-check>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid__item one-whole text-center">
+                <div class="hero__content">
+                    <h1 class="text--light">{{ page.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+    "name": "Hero",
+    "settings": [
+        {
+            "type":"image_picker",
+            "id":"hero_image",
+            "label":"Hero Image",
+            "info":"Recommended dimensions: 2880px x 908px"
+        },
+        {
+            "type":"image_picker",
+            "id":"hero_mobile_image",
+            "label":"Hero Mobile Image"
+        }
+    ]
+}
+{% endschema %}

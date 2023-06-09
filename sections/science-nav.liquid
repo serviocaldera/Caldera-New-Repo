@@ -1,0 +1,59 @@
+{% if section.settings.enable-section %}
+<div class="c-scienceNav">
+    <div class="c-scienceNav__content">
+        <a href="#" class="c-scienceNav__mobileLink">
+            {{ section.settings.nav-heading }}
+            <svg width="21px" height="12px" viewBox="0 0 21 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="CL-Science-Page-Mobile" transform="translate(-333.000000, -594.000000)" fill="#AF5D00">
+                        <g id="DROPDOWN" transform="translate(-8.000000, 577.000000)">
+                            <path d="M346.337386,23.8264706 C345.887538,23.37 345.887538,22.63 346.337386,22.1735294 L355.203503,13.1711765 C355.428137,12.9429412 355.792879,12.9429412 356.017513,13.1711765 L356.831524,13.9976471 C357.056159,14.2258824 357.056159,14.5958824 356.831524,14.8241176 L349.185845,22.5864706 C348.96121,22.8147059 348.96121,23.1852941 349.185845,23.4129412 L356.831524,31.1758824 C357.056159,31.4041176 357.056159,31.7741176 356.831524,32.0023529 L356.017513,32.8288235 C355.792879,33.0570588 355.428137,33.0570588 355.203503,32.8288235 L346.337386,23.8264706 Z" id="Icon" transform="translate(351.500000, 23.000000) rotate(270.000000) translate(-351.500000, -23.000000) "></path>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </a>
+        <div class="c-scienceNav__links">
+            {% for block in section.blocks %}
+                <a href="{{ block.settings.id }}" data-scroll>{{ block.settings.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Science Nav",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable-section",
+        "label": "Enable Section"
+      },
+      {
+        "type":"text",
+        "id":"nav-heading",
+        "label":"Nav Heading (mobile)",
+        "default":"The Science"
+      }
+    ],
+    "blocks": [
+        {
+            "type": "links",
+            "name": "Links",
+            "settings": [
+                {
+                    "type":"text",
+                    "id":"name",
+                    "label":"Name"
+                },
+                {
+                    "type":"text",
+                    "id":"id",
+                    "label":"Hash ID"
+                }
+            ]
+        }
+    ]
+  }
+{% endschema %}

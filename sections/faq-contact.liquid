@@ -1,0 +1,57 @@
+<div class="faq-contact text-center" data-sticky-content>
+  <div class="faq-contact__phone">
+    <img src="{{ 'icon-call.png' | asset_img_url: '50x' }}" data-rjs="{{ 'icon-call.png' | asset_img_url: '100x' }}" alt="phone icon">
+    <h6>Call Us</h6>
+    <div class="faq-contact__phone-content">
+      <p class="text--small">Our team is available</p>
+      <p class="text--small">{{ section.settings.support_hours }}</p>
+      <p class="text--small"><a href="tel:{{ section.settings.phone | remove: ' ' }}">{{ section.settings.phone }}</a></p>
+    </div>
+  </div>
+  <div class="faq-contact__email">
+    <img src="{{ 'icon-email.png' | asset_img_url: '50x' }}" data-rjs="{{ 'icon-email.png' | asset_img_url: '100x' }}" alt="email icon">
+    <h6>Email Us</h6>
+    <div class="faq-contact__email-content">
+      <p class="text--small"><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+    </div>
+  </div>
+</div>
+<div class="faq-contact--mobile text-center medium--hide" data-faq-mobile-contact>
+  <div class="faq-contact__block">
+    <a href="tel:{{ section.settings.phone | remove: ' ' }}">
+      <img src="{{ 'icon-call.png' | asset_img_url: '50x' }}" data-rjs="{{ 'icon-call.png' | asset_img_url: '100x' }}" alt="phone icon">
+      <h6>Call Us</h6>
+    </a>
+  </div>
+  <div class="faq-contact__block">
+    <a href="mailto:{{ section.settings.email }}">
+      <img src="{{ 'icon-email.png' | asset_img_url: '50x' }}" data-rjs="{{ 'icon-email.png' | asset_img_url: '100x' }}" alt="email icon">
+      <h6>Email Us</h6>
+    </a>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Contact",
+    "settings": [
+      {
+        "type":"textarea",
+        "id":"support_hours",
+        "label":"Support Hours",
+        "default":"Mon-Fri 7AM-7PM"
+      },
+      {
+        "type":"text",
+        "id":"phone",
+        "label":"Phone Number",
+        "default":"898 345 8745"
+      },
+      {
+        "type":"text",
+        "id":"email",
+        "label":"Email Address",
+        "default":"help@calderalab.com"
+      }
+    ]
+  }
+{% endschema %}

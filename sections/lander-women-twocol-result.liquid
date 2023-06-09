@@ -1,0 +1,64 @@
+{% include 'landers-two-column' %}
+
+{% schema %}
+  {
+    "name": "Result Two Col",
+    "settings": [
+        {
+            "type": "select",
+            "id": "col-alignment",
+            "options": [
+              {
+                "value": "c-landerTwocol--left",
+                "label": "Left"
+              },
+              {
+                "value": "c-landerTwocol--right",
+                "label": "Right "
+              }
+            ],
+            "default": "c-landerTwocol--left",
+            "label": "Left Or Right Col"
+        },
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+        },
+        {
+            "type":"image_picker",
+            "id":"image-mobile",
+            "label":"Image Mobile"
+        },
+        {
+            "type":"text",
+            "id":"vtext",
+            "label":"Vertical Text",
+            "default":"CERTIFIED SUSTAINABLE"
+        },
+        {
+            "type":"text",
+            "id":"heading",
+            "label":"Heading",
+            "default":"Clean Ingredients. Exceptional Results."
+        },
+        {
+            "type":"html",
+            "id":"copy",
+            "label":"Copy",
+            "default":"We start by hand-harvesting the most potent high-altitude mountain botanicals. Ingredients are processed in Jackson Hole, Wyoming and then infused for 4 weeks in an ECOCERT COSMOS-certified facility. Last but not least, we pour The Good into our proprietary lightproof glass bottles before shipping it to your door."
+        },
+        {
+            "type":"text",
+            "id":"btntext",
+            "label":"Button Text",
+            "default":"get 20% off"
+        },
+        {
+            "type":"url",
+            "id":"btnurl",
+            "label":"Button Url"
+        }
+    ]
+  }
+{% endschema %}

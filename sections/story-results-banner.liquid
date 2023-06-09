@@ -1,0 +1,39 @@
+<div class="c-storyBanner">
+    <div class="c-storyBanner__image c-storyBanner__image--desktop" style="background-image: url({{ section.settings.image_desktop | img_url: 'master' }});"></div>
+    <div class="c-storyBanner__image c-storyBanner__image--mobile" style="background-image: url({{ section.settings.image_mobile | img_url: 'master' }});"></div>
+    <div class="c-storyBanner__content">
+        <h3 class="c-storyBanner__heading">{{ section.settings.heading }}</h3>
+        <div class="c-storyBanner__copy">{{ section.settings.copy }}</div>
+    </div>
+</div>
+<!--c-storyBanner-->
+
+{% schema %}
+  {
+    "name": "Story Banner",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image_desktop",
+        "label":"Image Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"image_mobile",
+        "label":"Image Mobile"
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"heading",
+        "default": "3.4 Million Antioxidant Units Protecting Your Skin"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"copy",
+        "default": "We also carried out the first-of-its-kind antioxidant study, which showed that each drop of our serum generates almost 3.4 million antioxidant units. It also exhibits a rare property that protects skin from the damage caused by free radicals, and counters the effects of aging, pollution, and sun damage."
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,56 @@
+<div class="charityCommunity">
+  <div class="wrapper charityCommunity__main">
+      <div class="charityCommunity__row">
+        <div class="charityCommunity__col">
+          {% for block in section.blocks %}
+              <div class="charityCommunity__item">
+                <div class="charityCommunity__logos">
+                  <img data-src="{{ block.settings.logos | img_url: 'master' }}" class="lazyload" />
+                </div>  
+              </div>
+              
+          {% endfor %}
+          
+        </div>
+        <div class="charityCommunity__content">
+          <div class="charityCommunity__copy">
+            "{{ section.settings.copy }}” <span class="charityCommunity__name">{{ section.settings.name }}</span>
+          </div>
+        </div>  
+      </div>
+      
+  </div> 
+</div>
+
+{% schema %}
+  {
+    "name": "Charity Community",
+    "settings": [
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default":"Our mountain community relies heavily on tourism and when the COVID-19 pandemic hit, many people in our area were worried about their family's livelihood. Caldera + Lab generously contributed $25,000 to One22 Resource Center to help support the Greater Teton community during this time of crisis."
+      },
+      {
+        "type":"text",
+        "id":"name",
+        "label":"name",
+        "default":" - Sharel Lund, One22 Executive Director"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logos",
+        "name": "logos",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"logos",
+            "label":"Logos"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

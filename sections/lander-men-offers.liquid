@@ -1,0 +1,105 @@
+<div class="c-landerOffer" id="offer-section">
+    <div class="wrapper">
+        <h2 class="c-landerOffer__title">{{ section.settings.title }}</h2>
+        <div class="c-landerOffer__row">
+            {% for block in section.blocks %}
+                <div class="c-landerOffer__item c-landerOffer--{{ block.settings.cssclass }}">
+                    <div class="c-landerOffer__box">
+                        <h4 class="c-landerOffer__heading">{{ block.settings.heading }}</h4>
+                        <div class="c-landerOffer__content">
+                            <div class="c-landerOffer__usecode">{{ block.settings.usecode }}</div>
+                            <img src="{{ block.settings.image | img_url: 'master' }}" class="c-landerOffer__image" />
+                            <div class="c-landerOffer__text">{{ block.settings.text }}</div>
+                            <div class="c-landerOffer__priceBox">
+                                <span>{{ block.settings.offerprice }}</span> <strike>{{ block.settings.price }}</strike>
+                            </div>
+                            <p class="c-landerOffer__copy">
+                                {{ block.settings.copy }}
+                            </p>
+                            <a href="{{ block.settings.btnurl }}" class="btn btn--primary c-landerOffer__btn">{{ block.settings.btntext }}</a>
+                            <p class="c-landerOffer__skiptext">{{ block.settings.skiptext }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!--c-landerOffer-->
+
+{% schema %}
+  {
+    "name": "Offer",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default": "Special Offer from Dr. Mark Hyman"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "offer-block",
+        "name": "Offers",
+        "settings": [
+          {
+            "type": "text",
+            "id": "cssclass",
+            "label": "Css Class"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "usecode",
+            "label": "Use Code Text"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "offerprice",
+            "label": "Offer Price"
+          },
+          {
+            "type": "text",
+            "id": "price",
+            "label": "Price"
+          },
+          {
+            "type": "html",
+            "id": "copy",
+            "label": "Copy"
+          },
+          {
+            "type": "text",
+            "id": "btntext",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "btnurl",
+            "label": "Button Url"
+          },
+          {
+            "type": "text",
+            "id": "skiptext",
+            "label": "Skip Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

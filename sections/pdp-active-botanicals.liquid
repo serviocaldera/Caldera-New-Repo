@@ -1,0 +1,49 @@
+
+<div class="c-pdpBotanicals__row">
+    <div class="c-pdpBotanicals__content">
+        <img src="{{ section.settings.image-mobile | img_url: "2x" }}" data-src="{{ section.settings.image-mobile | img_url: "master" }}" class="lazyload c-pdpBotanicals__image--mobile" alt="{{ section.settings.title }}" style="width: 100%" />
+        <img src="{{ section.settings.image-desktop | img_url: "2x" }}" data-src="{{ section.settings.image-desktop | img_url: "master" }}" class="lazyload c-pdpBotanicals__image--desktop" alt="{{ section.settings.title }}" style="width: 100%" />
+    </div>
+    <div class="c-pdpBotanicals__whiteArea">
+        <div class="c-pdpBotanicals__text">
+          {{ section.settings.text }}
+        </div>
+    </div>
+</div>
+    
+
+
+{% schema %}
+  {
+    "name": "PDP Active Botanicals",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"The Absolute Best Ingredients From Nature"
+      },
+      {
+        "type":"richtext",
+        "id":"subtitle",
+        "label":"Sub Title"
+      },
+      {
+        "type":"image_picker",
+        "id":"image-desktop",
+        "label":"Image Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"image-mobile",
+        "label":"Image mobile"
+      },
+      {
+        "type":"text",
+        "id":"text",
+        "label":"Text",
+        "default":"performace + purity"
+      }
+    ]
+  }
+{% endschema %}

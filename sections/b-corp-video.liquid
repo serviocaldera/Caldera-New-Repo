@@ -1,0 +1,49 @@
+<div class="c-bcorpVideo">
+    <h3 class="c-bcorpVideo__title">{{ section.settings.title }}</h3>
+      <div class="c-bcorpVideo__main">
+          <div href="#" class="c-bcorpVideo__play js-play-bcorp-video">
+            <img src="{{ section.settings.image | img_url: "master" }}" alt="{{ section.settings.title }}" />
+          </div>
+          <div class="c-video">
+            <video class="c-bcorpVideo__video" controls="" id="bcorpvideo">
+              <source src="{{ section.settings.videosrc }}" type="video/mp4">
+            </video>  
+          </div>
+      </div>
+</div>
+
+<script type="text/javascript">
+    $('.js-play-bcorp-video').on('click', function() {
+        var video = document.getElementById('bcorpvideo');
+        $(this).hide();
+        $(this).find('img').addClass('is-hide');
+        $('.c-bcorpVideo__play').addClass('is-play');
+        video.play();
+        return false;
+    });
+</script>
+
+{% schema %}
+  {
+    "name": "Video",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"Press play to watch Our Story"
+      },
+      {
+        "type":"html",
+        "id":"videosrc",
+        "label":"Video Url",
+        "info":"Add video url example: https://video.mp4"
+      },
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Poster Image"
+      }
+    ]
+  }
+{% endschema %}

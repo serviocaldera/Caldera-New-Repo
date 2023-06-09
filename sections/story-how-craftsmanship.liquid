@@ -1,0 +1,72 @@
+<div class="story__craft">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item small--one-half">
+        <div class="craft__image">
+          <img data-aos="fade-in" data-aos-offset="200" data-aos-once="true" data-aos-duration="500" src="{{ section.settings.craft_main_image | img_url: '770x' }}" data-rjs="{{ section.settings.craft_main_image | img_url: '1540x' }}" alt="{{ section.settings.craft_main_image.alt }}">
+        </div>
+      </div>
+      <div class="grid__item small--one-half">
+        <div class="craft__feature-content">
+          <p>{{ section.settings.craft_feature }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid--rev craft__bottom-grid">
+      <div class="grid__item small--one-half">
+        <div class="craft__support-image">
+          <span class="pre-header" data-text-parallax-flipped>{{ section.settings.craft_image_text }}</span>
+          <img data-aos="fade-in" data-aos-offset="200" data-aos-once="true" data-aos-duration="500" src="{{ section.settings.craft_support_image | img_url: '655x' }}" data-rjs="{{ section.settings.craft_support_image | img_url: '1310x' }}" alt="{{ section.settings.craft_support_image.alt }}">
+        </div>
+      </div>
+      <div class="grid__item small--one-half">
+        <div class="craft__content">
+          <h4>{{ section.settings.craft_title }}</h4>
+          <p>{{ section.settings.craft_content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="how-ingredients-list"></div>
+</div>
+{% schema %}
+  {
+    "name": "Craftsmanship",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"craft_main_image",
+        "label":"Craftsmanship Main Image"
+      },
+      {
+        "type":"textarea",
+        "id":"craft_feature",
+        "label":"Craftsmanship Feature Text",
+        "default":"Our serum is a culmination of craftsmanship to make something powerful and pure."
+      },
+      {
+        "type":"image_picker",
+        "id":"craft_support_image",
+        "label":"Craftsmanship Supporting Image"
+      },
+      {
+        "type":"text",
+        "id":"craft_image_text",
+        "label":"Supporting Image Subline",
+        "default":"High Altitude Botanicals"
+      },
+      {
+        "type":"text",
+        "id":"craft_title",
+        "label":"Craftsmanship Title",
+        "default":"From field to bottle."
+      },
+      {
+        "type":"textarea",
+        "id":"craft_content",
+        "label":"Craftsmanship Content",
+        "default":"After harvesting, ingredients are dried, processed and stored right here in Jackson Hole in a process perfected by local experts. They are carefully vacuum packed, sealed and transported to our formulating facility where they are refined into our legendary serum. Using our proprietary glass lightproof bottles our serum remains protected to your doorstep."
+      }
+    ]
+  }
+{% endschema %}

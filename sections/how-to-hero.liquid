@@ -1,0 +1,52 @@
+<div class="story">
+    <div class="story__hero c-howTohero">
+      <div class="hero__image c-howTohero__image" style="background-image: url({{ section.settings.hero_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.hero_mobile_image %}{{ section.settings.hero_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.hero_image | img_url: '2880x' }}" data-mobile-image-check></div>
+      <div class="wrapper">
+          <div class="c-howTohero__content">
+              <div class="c-howTohero__subHeading">{{ section.settings.subheading }}</div>
+              <h2 class="c-howTohero__title">{{ section.settings.title }}</h2>
+              <p class="c-howTohero__copy">{{ section.settings.copy }}</p>
+          </div>
+      </div>
+  </div>  
+</div>
+
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"hero_image",
+        "label":"Hero Image",
+        "info":"Recommended dimensions: 2880px x 908px"
+      },
+      {
+        "type":"image_picker",
+        "id":"hero_mobile_image",
+        "label":"Hero Mobile Image",
+        "info":"Recommended dimensions: 1984px x 1396px"
+      },
+      {
+        "type":"text",
+        "id":"subheading",
+        "label":"Sub Heading",
+        "default":"Performance skincare made simple."
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"How To Use The Good"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default":"One simple step. Every night. Balancing for oily skin. Nourishing for dry skin. Proven performance for everyone."
+      }
+      
+    ]
+  }
+{% endschema %}

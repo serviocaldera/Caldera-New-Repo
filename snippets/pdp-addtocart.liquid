@@ -1,0 +1,177 @@
+{% if product.handle contains "the-deep" %}
+{% else %}
+    {% if product.metafields.sf_upscribe.enable_subscription and product.metafields.sf_upscribe.enable_subscription != 0 and product.metafields.sf_upscribe.enable_subscription != '0' %}
+        <div class="c-productInfo--mobile">
+            <div class="c-productInfo js-product-info">
+                
+                <div class="c-productInfo__subscription">
+                    <div id="rc_container-mobile" class="rc_container__main">
+                        <div class="rc_block rc_block__type rc_block__type__onetime ">
+                            <label class="rc_label rc_label__onetime">
+                                <div class="rc_label__box">
+                                    <div class="rc_label__content">
+                                        <span class="rc_labelText">One - Time <br>Purchase</span>
+                                    </div>  
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div class="rc_block rc_block__type rc_block__type__autodeliver rc_block__type--active">
+                            <label class="rc_label rc_label__autodeliver">
+                                <div class="rc_label__box">
+                                    <div class="rc_label__content">
+                                        <span class="rc_labelText">Membership<br> Savings</span>
+                                    </div>
+                                </div>
+                            </label>       
+                        </div>
+                    </div>
+
+
+                    <div class="rc_block rc_block__type__options" style="display: block;">
+                        <div for="rc_shipping_interval_frequency-svp77ru4g" class="rc_label__deliver_every">
+                            <div class="rc_label_frequency__header">
+                                <div class="rc_label__delivery">choose frequency</div>
+                                <div class="c-productFrequency c-productFrequencyNeedHelp">
+                                    <div class="c-productFrequency__text c-productFrequency__textQuiz" data-quiz-click>
+                                        <span class="c-quizText__desktop">Unsure of frequency? Take quiz.</span>
+                                        <span class="c-quizText__mobile">Take frequency quiz.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% assign interval_frequency = product.metafields.sf_upscribe.interval_frequency %}
+                            {% assign interval_unit = product.metafields.sf_upscribe.interval_unit %}
+                            {%- assign shipping_interval_frequency = product.metafields.sf_upscribe.interval_frequency | split: ',' | default: 1 -%}
+                            {%- assign suggested_frequency = "1" -%}
+                            <div class="rc_frequencySelecter" data-frequency-selecter>
+                                {% for frequency in shipping_interval_frequency %}
+                                <div data-handle="{{ frequency }}" class="rc_frequencySelecter__item {% if frequency == suggested_frequency %} is-active {% endif %}">
+                                    <div class="rc_frequencySelecter__box">
+                                        <div class="rc_frequencySelecter__content">
+                                            {{ frequency }} {{interval_unit}}  
+                                        </div>
+                                    </div>
+                                </div> 
+                                {% endfor %} 
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="c-productInfo__submit">
+
+                {% if product.available %}
+                    <button type="submit" class="js-add-to-cart-dummy btn btn--primary c-addToCartBtn">
+                        {% if product.handle contains "the-good" %}
+                        <span class="c-productInfo__btnPrice">
+                            <span class="c-productInfo__priceOneTime">$97</span>
+                            <span class="c-productInfo__priceSub">$77<strike>$97</strike></span>
+                        </span>
+                        {% elsif product.handle contains "the-base-layer" %} 
+                        <span class="c-productInfo__btnPrice">
+                            <span class="c-productInfo__priceOneTime">$55</span>
+                            <span class="c-productInfo__priceSub">$44<strike>$55</strike></span>
+                        </span>
+                        {% elsif product.handle contains "the-clean-slate" %}  
+                        <span class="c-productInfo__btnPrice">
+                            <span class="c-productInfo__priceOneTime">$37</span>
+                            <span class="c-productInfo__priceSub">$29<strike>$37</strike></span>
+                        </span>
+                        {% endif %}  
+                        <span class="c-productInfo__btnText">Add To Cart</span>
+                    </button>
+
+                {% else %}
+                    <div class="btn btn--primary btn--oos">Sold Out</div>  
+                {% endif %}  
+
+                </div>
+                <!--c-productInfo__submit-->
+
+                <div class="c-productInfo__footer">
+                    <div class="c-productInfo__freeText">
+                        {% include 'icon-risk-free' %}
+                        {% if shop.money_with_currency_format contains 'USD' %}
+                            Risk Free For 60 Days
+                        {% else %} 
+                            Ships Fast + Risk Free for 60 Days.
+                        {% endif %} 
+                    </div>
+                </div>
+                <!--c-productInfo__footer-->
+            </div>
+        </div>
+    {% endif %}
+
+<script>
+{%- comment -%}
+            This is using custom javascript for adding to cart with
+            hard coded prices
+        {%- endcomment -%}
+        $('.c-productInfo__subscription #rc_container .rc_block__type').click(function(){
+            if ($(this).parents('#rc_container').find(".rc_block__type__autodeliver").hasClass("rc_block__type--active")) {
+                $('.rc_block__type__options').show();
+                $('.c-productInfo__priceSub').show();
+                $('.c-productInfo__priceOneTime').hide();
+                $('.c-productInfo__btnText').addClass('is-autoDeliver');
+                $('.c-productInfo__btnText').removeClass('is-oneTime');
+
+                //js-pdp-sticky
+                $('.js-pdp-sticky .rc_block__type__autodeliver').addClass('rc_block__type--active');
+                $('.js-pdp-sticky .rc_block__type__onetime').removeClass('rc_block__type--active');
+                $('.js-pdp-sticky').find('.js-add-to-cart-sub').show();
+                $('.js-pdp-sticky').find('.js-add-to-cart-dummy').hide();
+                $('.js-pdp-sticky .rc_block__type__autodeliver').find("input").prop('checked',true);
+                $('.js-pdp-sticky .rc_block__type__onetime').find("input").prop('checked',false);
+
+            }else{
+                $('.rc_block__type__options').hide();
+                $('.c-productInfo__priceSub').hide();
+                $('.c-productInfo__priceOneTime').show();
+                $('.c-productInfo__btnText').removeClass('is-autoDeliver');
+                $('.c-productInfo__btnText').addClass('is-oneTime');
+
+                //js-pdp-sticky
+                $('.js-pdp-sticky .rc_block__type__onetime').addClass('rc_block__type--active');
+                $('.js-pdp-sticky .rc_block__type__autodeliver').removeClass('rc_block__type--active');
+                $('.js-pdp-sticky').find('.js-add-to-cart-sub').hide();
+                $('.js-pdp-sticky').find('.js-add-to-cart-dummy').show();
+                $('.js-pdp-sticky .rc_block__type__autodeliver').find("input").prop('checked',false);
+                $('.js-pdp-sticky .rc_block__type__onetime').find("input").prop('checked',true);
+            }
+        });
+
+        $('.js-product-info .rc_block__type__onetime').click(function(){
+            $(this).addClass('rc_block__type--active');
+            $(this).parents('.js-product-info').find('.rc_block__type__autodeliver').removeClass('rc_block__type--active');
+            $('.rc_block__type__options').hide();
+            $('.c-productInfo__priceSub').hide();
+            $('.c-productInfo__priceOneTime').show();
+            $('.c-productInfo__btnText').removeClass('is-autoDeliver');
+            $('.c-productInfo__btnText').addClass('is-oneTime');
+            $('.cu-productTypeSelect__itemOneTime label').trigger("click");
+        });
+
+        $('.js-product-info .rc_block__type__autodeliver').click(function(){
+            $(this).addClass('rc_block__type--active');
+            $(this).parents('.js-product-info').find('.rc_block__type__onetime').removeClass('rc_block__type--active');
+            $('.rc_block__type__options').show();
+            $('.c-productInfo__priceSub').show();
+            $('.c-productInfo__priceOneTime').hide();
+            $('.c-productInfo__btnText').addClass('is-autoDeliver');
+            $('.c-productInfo__btnText').removeClass('is-oneTime');
+            $('.cu-productTypeSelect__itemSub label').trigger("click");
+        });
+
+        $('.js-product-info .js-add-to-cart-dummy , .js-pdp-sticky .js-add-to-cart-dummy').click(function(){
+            $('.c-productInfo__submit .js-addtocart').trigger("click");
+        });
+        {%- comment -%}
+            End form with hard coded prices
+        {%- endcomment -%}
+
+</script>
+
+{% endif %}

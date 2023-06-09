@@ -1,0 +1,54 @@
+{% if product.metafields.custom_fields["enable_combovideo_section"] == 1 %}
+    <div class="comboVideo">
+        <div class="wrapper">
+            <div class="comboVideo__row">
+                <div class="comboVideo__content">
+                    {% if product.metafields.custom_fields["combovideo_title"] != blank %}
+                        <h3 class="comboVideo__content-title">{{ product.metafields.custom_fields["combovideo_title"] }}</h3>
+                    {% endif %}
+                    {% if product.metafields.custom_fields["combovideo_heading"] != blank %}
+                        <div class="comboVideo__content-copy">{{ product.metafields.custom_fields["combovideo_heading"] }}</div>
+                    {% endif %}
+                    {% if product.metafields.custom_fields["combovideo_icons"] != blank %}
+                        <div class="comboVideo__content-icons">
+                            {% for item in product.metafields.custom_fields["combovideo_icons"] %}
+                                <div class="comboVideo__content-icon">
+                                    {% if item["combovideo_iconsvg"] != blank %}
+                                    <div class="comboVideo__svg-wrapper">
+                                        {{ item["combovideo_iconsvg"] }}
+                                    </div>                                        
+                                    {% endif %}
+                                    {% if item["combovideo_iconcopy"] != blank %}
+                                        <div class="comboVideo__icon-copy">{{ item["combovideo_iconcopy"] }}</div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="comboVideo__media">
+                    {% if product.metafields.custom_fields["combovideo_thumb"] != blank %}
+                        <div href="#" class="comboVideo__thumb js-play-pdp-video">
+                            <img src="{{ product.metafields.custom_fields["combovideo_thumb"] }}" alt="">
+                        </div>
+                    {% endif %}
+                    {% if product.metafields.custom_fields["video_section_video"] != blank %}
+                        <div class="comboVideo__video">
+                            <video controls="" id="pdpvideo">
+                                <source src="{{ product.metafields.custom_fields["combovideo_video"] }}" type="video/mp4">
+                            </video>  
+                        </div>
+                    {% endif %}    
+                </div>
+            </div>    
+        </div>
+    </div>
+{% endif %}
+
+<script>
+    const videoThumb = document.querySelector('.comboVideo__thumb')
+    videoThumb.addEventListener('click', e => {
+      videoThumb.style.display = 'none'  
+      document.querySelector('#pdpvideo').play();
+    })
+</script>

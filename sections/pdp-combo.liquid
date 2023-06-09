@@ -1,0 +1,36 @@
+<div class="c-pdpPage">
+    {% include 'pdp-quiz-use' %}
+    {% include 'pdp-combo-ecocert' %}
+    {% include 'pdp-certified' %}
+    {% if product.metafields.custom_fields["enable_comboreview_section"] == 1 %}
+        {% include 'pdp-reviews-group' %}
+    {% endif %}
+   {% include 'instagram' %}
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.promo-bar').addClass('is-opaque');
+        $('.nav-mobile').addClass('is-opaque');
+        $('.nav-desktop').addClass('is-opaque');
+
+        $('.c-pdpInd__readmore').click(function(){
+            $(this).toggleClass('is-open');
+            $('.c-pdpInd').toggleClass('is-open');
+            return false;
+        });
+    });
+</script>
+
+{% schema %}
+{
+    "name": "Product Combo",
+    "settings": [],
+    "presets": [
+    {
+      "name": "Product Combo",
+      "category": "Caldera"
+    }
+    ]
+}
+{% endschema %}

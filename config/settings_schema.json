@@ -1,0 +1,409 @@
+[
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "facebook_url",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "instagram_url",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "twitter_url",
+        "label": "Twitter URL"
+      }
+    ]
+  },
+  {
+    "name": "Support Contact Info",
+    "settings": [
+      {
+        "type": "text",
+        "id": "support_email",
+        "label": "Customer support email address"
+      }
+    ]
+  },
+  {
+    "name": "Newsletter",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "newsletter_klaviyo_embed_snippet",
+        "label": "Newsletter form embed snippet",
+        "default": "<div class=\"klaviyo-form-Pzmuky\"><\/div>"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_confirmation_text",
+        "label": "Newsletter form confirmation text",
+        "default": "Thank you! Check your email to confirm subscription."
+      }
+    ]
+  },
+  {
+    "name": "Brand Bar",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "brand_image_1",
+        "label": "Brand Image",
+        "info": "Image Dimensions: 160px x 160px"
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_image_2",
+        "label": "Brand Image",
+        "info": "Image Dimensions: 160px x 160px"
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_image_3",
+        "label": "Brand Image",
+        "info": "Image Dimensions: 160px x 160px"
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_image_4",
+        "label": "Brand Image",
+        "info": "Image Dimensions: 160px x 160px"
+      }
+    ]
+  },
+  {
+    "name": "404 Page",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image_404",
+        "label": "404 Page Background Image"
+      },
+      {
+        "type": "text",
+        "id": "preheader_404",
+        "label": "404 Preheader",
+        "default": "404 Error"
+      },
+      {
+        "type": "text",
+        "id": "title_404",
+        "label": "404 Title",
+        "default": "Your Lost."
+      }
+    ]
+  },
+  {
+    "name": "Cart Page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Empty State"
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_message",
+        "label": "Empty Cart Message",
+        "default": "Much to your skin's dismay, your cart is empty."
+      },
+      {
+        "type": "url",
+        "id": "cart_empty_link",
+        "label": "Empty Cart Link"
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_link_text",
+        "label": "Empty Cart Link Txt",
+        "default": "Keep Shopping"
+      },
+      {
+        "type": "header",
+        "content": "Limit Order Quantity"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_limit_enable",
+        "label": "Enable Order Limit",
+        "info": "Will set a limit so only one product can be purchased per order",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "cart_limit_message",
+        "label": "Order Limit Tooltip Message",
+        "default": "Due to high demand we're currently limiting orders to one per purchase"
+      }
+    ]
+  },
+  {
+    "name": "Account Page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Empty Order History"
+      },
+      {
+        "type": "url",
+        "id": "account_page_link",
+        "label": "Product Link"
+      },
+      {
+        "type": "text",
+        "id": "account_page_link_text",
+        "label": "Product Link Text",
+        "default": "Start Shopping"
+      }
+    ]
+  },
+  {
+    "name": "Free Sample",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Free Sample"
+      },
+      {
+        "type": "checkbox",
+        "id": "free_sample_toggle",
+        "label": "Enable Free Sample In Navigation",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "free_sample_toggle_pdp",
+        "label": "Enable Free Sample In PDP",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "free_sample_label",
+        "label": "CTA Label for Freesample",
+        "default": "Free Sample"
+      },
+      {
+        "type": "text",
+        "id": "free_sample_label_pdp",
+        "label": "Product Page Label",
+        "default": "Try a Free Sample"
+      }
+    ]
+  },
+  {
+    "name": "Meta Tags",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Default Share Image"
+      }
+    ]
+  },
+  {
+    "name": "Checkout Sidebar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "checkout_sidebar_checkbox",
+        "label": "Enable Checkout Sidebar Copy",
+        "default": false
+      },
+      {
+        "type": "html",
+        "id": "checkout_sidebar_copy",
+        "label": "Checkout Sidebar Copy"
+      },
+      {
+        "type": "checkbox",
+        "id": "checkout_sidebar_checkbox_international",
+        "label": "Enable international Copy",
+        "default": false
+      },
+      {
+        "type": "html",
+        "id": "checkout_sidebar_copy_international",
+        "label": "Checkout International Copy"
+      },
+      {
+        "type": "header",
+        "content": "Features bullet list"
+      },
+      {
+        "type": "checkbox",
+        "id": "checkout_bullet_list_enable",
+        "label": "Enable Feautures List",
+        "default": true
+      },
+      {
+        "type": "paragraph",
+        "content": "Upload svg icons to Settings>Files then paste each svg name in the fields below."
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_title",
+        "label": "Main Title",
+        "default": "You’re in good hands"
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_img_1",
+        "label": "Icon 1"
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_headline_1",
+        "label": "Title 1"
+      },
+      {
+        "type": "textarea",
+        "id": "bullet_list_text_1",
+        "label": "Content 1"
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_img_2",
+        "label": "Icon 2"
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_headline_2",
+        "label": "Title 2"
+      },
+      {
+        "type": "textarea",
+        "id": "bullet_list_text_2",
+        "label": "Content 2"
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_img_3",
+        "label": "Icon 3"
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_headline_3",
+        "label": "Title 3"
+      },
+      {
+        "type": "textarea",
+        "id": "bullet_list_text_3",
+        "label": "Content 3"
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_img_4",
+        "label": "Icon 4"
+      },
+      {
+        "type": "text",
+        "id": "bullet_list_headline_4",
+        "label": "Title 4"
+      },
+      {
+        "type": "textarea",
+        "id": "bullet_list_text_4",
+        "label": "Content 4"
+      }
+    ]
+  },
+  {
+    "name": "Checkout Images Feed",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "checkout_feed_enable",
+        "label": "Enable Checkout Images Feed",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "direction",
+        "label": "Reverse scroll direction",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_1",
+        "label": "Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_2",
+        "label": "Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_3",
+        "label": "Image 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_4",
+        "label": "Image 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_5",
+        "label": "Image 5"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_6",
+        "label": "Image 6"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_7",
+        "label": "Image 7"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_8",
+        "label": "Image 8"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_9",
+        "label": "Image 9"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_10",
+        "label": "Image 10"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_11",
+        "label": "Image 11"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_12",
+        "label": "Image 12"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_13",
+        "label": "Image 13"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_14",
+        "label": "Image 14"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_feed_img_15",
+        "label": "Image 15"
+      }
+    ]
+  }
+]

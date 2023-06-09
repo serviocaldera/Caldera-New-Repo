@@ -1,0 +1,176 @@
+<div class="c-scienceMan">
+    <div class="c-scienceMan__top">
+        <div class="c-scienceMan__video">
+            <video id="man-video" 
+                   class="lazyload" 
+                   loop 
+                   autoplay 
+                   playsinline 
+                   muted="muted" 
+                   width='100%' 
+                   height='100%' 
+                   poster="{{ section.settings.poster | img_url: 'master' }}"
+                   data-src="{{ section.settings.videourl}}" 
+                   type='video/mp4'>
+            </video>
+            <div class="c-scienceMan__videoContent">
+                <h3 class="c-scienceMan__title">
+                    {{ section.settings.title }}
+                </h3>
+                <div class="c-scienceMan__mainCopy">
+                    {{ section.settings.main-copy }}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!--c-scienceRnd__main-->
+    <div class="c-scienceMan__bottom">
+        <div class="wrapper">
+            <div class="c-scienceMan__bottomHeader">
+                <h4 class="c-scienceMan__heading">
+                    {{ section.settings.heading }}
+                </h4>
+                <div class="c-scienceMan__copy">
+                    {{ section.settings.copy }}    
+                </div>
+            </div>
+            <div class="c-scienceManVcol">
+                <div class="c-scienceManVcol__top" data-science-man-slider>
+                    {% for block in section.blocks %}
+                        <div class="c-scienceManVcol__main">
+                            <div class="c-scienceManVcol__media">
+                                {% if block.settings.videourl != blank %}
+                                    <div class="c-scienceManVcol__video">
+                                        {{ block.settings.videourl }}    
+                                    </div>
+                                {%else%}
+                                    <div class="c-scienceManVcol__image">
+                                        <img data-src="{{ block.settings.image | img_url: 'master' }}" class="lazyload" />  
+                                    </div>
+                                {%endif%}
+                            </div>
+                            <div class="c-scienceManVcol__content">
+                                <div class="c-scienceManVcol__heading">
+                                    {{ block.settings.heading }}
+                                </div>
+                                <div class="c-scienceManVcol__copy">
+                                    {{ block.settings.copy }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!--c-scienceManVcol__top-->
+                <div class="c-scienceManVcol__nav" data-science-man-slide-nav>
+                    {% for block in section.blocks %}
+                        <div class="c-scienceManVcol__item">
+                            <div class="c-scienceManVcol__thumbImage">
+                                <img data-src="{{ block.settings.thumbnail | img_url: 'master' }}" class="lazyload" />
+                                {% if block.settings.videourl != blank %} 
+                                    <svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <title>player icon</title>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="CL-Science-Page-" transform="translate(-908.000000, -3896.000000)">
+                                                <g id="SEC-3" transform="translate(-51.000000, 2630.000000)">
+                                                    <g id="climate-regulated" transform="translate(891.000000, 1196.000000)">
+                                                        <g id="Screen-Shot-2020-06-01-at-3.27.26-PM">
+                                                            <g id="player-icon" transform="translate(69.000000, 71.000000)">
+                                                                <circle id="Oval" stroke="#FFFFFF" stroke-width="2" cx="25" cy="25" r="25"></circle>
+                                                                <polygon id="Triangle" fill="#FFFFFF" transform="translate(28.000000, 24.500000) rotate(90.000000) translate(-28.000000, -24.500000) " points="28 15 38 34 18 34"></polygon>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg> 
+                                {% endif%}  
+                            </div>
+                            <div class="c-scienceManVcol__name">
+                                {{ block.settings.heading }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Science Manufacturing",
+    "settings": [
+      {
+        "type":"text",
+        "id":"videourl",
+        "label":"Video CDN url"
+      },
+      {
+        "type":"image_picker",
+        "id":"poster",
+        "label":"Video Poster"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default": "Green Tech Manufacturing"
+      },
+      {
+        "type":"html",
+        "id":"main-copy",
+        "label":"Main Copy",
+        "default": "The formula is finalized through advanced processes with multiple extractions, micro emulsifications, and controlled infusions. Our state-of-the-art ECOCERT-certified manufacturing facility continually innovates to reduce footprint. The magic happens in California."
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"heading",
+        "default": "Unprecedented Nutrient Capture"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default": "Premium ingredients only become a premium product if the correct extraction method is used. Here’s how we transfer the highest possible biological footprint into every bottle:"
+      }
+    ],
+    "blocks": [
+        {
+            "type": "videos",
+            "name": "Video Section",
+            "settings": [
+                {
+                    "type":"text",
+                    "id":"heading",
+                    "label":"Heading"
+                },
+                {
+                    "type":"html",
+                    "id":"copy",
+                    "label":"Copy"
+                },
+                {
+                    "type":"image_picker",
+                    "id":"thumbnail",
+                    "label":"Video Thumbnail",
+                    "info": "Size 380x380"
+                },
+                {
+                    "type":"html",
+                    "id":"videourl",
+                    "label":"Video"
+                },
+                {
+                    "type":"image_picker",
+                    "id":"image",
+                    "label":"Image",
+                    "info": "Image will only appear if video is not added."
+                }
+            ]
+        }
+    ]
+  }
+{% endschema %}

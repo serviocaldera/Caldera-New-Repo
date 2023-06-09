@@ -1,0 +1,20 @@
+{% if product.metafields.custom_fields.blk4_icon_1 and product.metafields.custom_fields.blk4_copy_1 %}
+  <div class="product-single__statistics">
+    <div class="wrapper">
+      <div class="grid">
+        {% for i in (1..4) %}
+          {% capture icon %}blk4_icon_{{ i }}{% endcapture %}
+          {% capture copy %}blk4_copy_{{ i }}{% endcapture %}
+          {% if product.metafields.custom_fields[icon] and product.metafields.custom_fields[copy] %}
+            <div class="grid__item small--one-quarter">
+              <div class="product-single__statistic text-center">
+                <img src="{{ product.metafields.custom_fields[icon] }}" alt="Statistics Icon">
+                <p>{{ product.metafields.custom_fields[copy] }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

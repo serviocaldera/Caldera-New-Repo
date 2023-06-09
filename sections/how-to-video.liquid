@@ -1,0 +1,57 @@
+<div class="c-howToVideo">
+    <div class="wrapper">
+        <div class="how-to__video-content c-howToVideo__content">
+            <img src="{{ section.settings.video_preview_image |  img_url: '1000x' }}" data-rjs="{{ section.settings.video_preview_image | img_url: '2000x' }}" alt="How to use video" class="c-howToVideo__imageDesktop">
+            
+            <img src="{{ section.settings.video_preview_image_mobile |  img_url: '800x' }}" data-rjs="{{ section.settings.video_preview_image_mobile | img_url: '800x' }}" alt="How to use video" class="c-howToVideo__imageMobile">
+            <a href="#how-to-video-popup" data-popup-trigger>
+              
+            </a>
+            <div id="how-to-video-popup" class="popup mfp-hide mfp-with-anim product-video-popup">
+                <div class="popup__content">
+                  <video class="how-to-video-popup__video" poster="{{ section.settings.video_preview_image | img_url: '2000x' }}" controls>
+                    <source src="{{ section.settings.video_link }}" type="video/mp4">
+                  </video>
+                </div>
+            </div>
+        </div>
+        
+        {% if section.settings.buy_link_text %}
+          <div class="howToVideo__cta"><a href="{{ section.settings.buy_link }}">{{ section.settings.buy_link_text }}</a></div>
+        {% endif %}
+    </div>
+</div>
+{% schema %}
+  {
+    "name": "Video Section",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"video_preview_image",
+        "label":"Video Preview Image",
+        "info":"Recommended dimensions: 1996px x 1200px"
+      },
+      {
+        "type":"image_picker",
+        "id":"video_preview_image_mobile",
+        "label":"Video Preview Image Mobile"
+      },
+      {
+        "type":"url",
+        "id":"video_link",
+        "label":"Video Link"
+      },
+      {
+        "type":"url",
+        "id":"buy_link",
+        "label":"Button Link"
+      },
+      {
+        "type":"text",
+        "id":"buy_link_text",
+        "label":"Button Text",
+        "default":"Buy the regimen"
+      }
+    ]
+  }
+{% endschema %}

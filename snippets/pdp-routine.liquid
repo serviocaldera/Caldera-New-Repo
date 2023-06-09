@@ -1,0 +1,38 @@
+{% if product.metafields.custom_fields["enable_two_column_section"] == 1 %}
+<div class="c-pdpRoutine">
+    <div class="wrapper">
+        <div class="c-pdpRoutine__row">
+            <div class="c-pdpRoutine__col c-pdpRoutine__content">
+                <div class="c-pdpRoutine__box">
+                    {% if product.metafields.custom_fields["two_column_section_title"] != blank %}
+                    <h4 class="c-pdpSection__heading c-pdpRoutine__heading">
+                        {{ product.metafields.custom_fields["two_column_section_title"] }}
+                    </h4>
+                    {% endif %}
+                    {% if product.metafields.custom_fields["two_column_section_copy"] != blank %}
+                    <div class="c-pdpRoutine__copy">
+                        {{ product.metafields.custom_fields["two_column_section_copy"] }}
+                    </div> 
+                    {% endif %} 
+                </div>
+            </div>
+            <div class="c-pdpRoutine__col c-pdpRoutine__image">
+                {% if product.metafields.custom_fields["two_column_section_image"] != blank %}
+                    <img src='{{product.metafields.custom_fields["two_column_section_image"]}}' data-src='{{product.metafields.custom_fields["two_column_section_image"]}}' class="lazyload" alt='{{ product.metafields.custom_fields["two_column_section_title"] }}' />
+                {% endif %}
+                {% if product.metafields.custom_fields["two_column_vertical_text"] != blank %}
+                <div class='c-pdpRoutine__text
+                {% if product.metafields.custom_fields["image_block_text_css"] != blank %}
+                {{ product.metafields.custom_fields["image_block_text_css"] }}
+                {% endif %}
+                '>
+                    {{ product.metafields.custom_fields["two_column_vertical_text"] }}
+                </div>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!--c-pdpInd-->
+{% endif %}

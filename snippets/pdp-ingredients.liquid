@@ -1,0 +1,89 @@
+{% if product.metafields.custom_fields["enable_ingredients_section"] == 1 %}
+<div class="c-pdpBotanicals">
+    {% if product.metafields.custom_fields["ingredients_ttitle"] != blank %}
+    <h4 class="c-pdpSection__heading c-pdpBotanicals__heading">{{ product.metafields.custom_fields["ingredients_ttitle"] }}</h4>
+    {% endif %}
+    <div class="c-pdpFullIng__main">
+        <div class="c-storyIngredients">
+            <div class="wrapper">
+                {% if product.metafields.custom_fields["ingredients_heading"] != blank %}
+                    <h3 class="c-storyIngredients__title">
+                        {{ product.metafields.custom_fields["ingredients_heading"] }}   
+                    </h3>
+                {% endif %}
+                {% if product.metafields.custom_fields["ingredients_top_content"] != blank %}
+                    <div class="c-storyIngredients__topCopy">
+                      {{ product.metafields.custom_fields["ingredients_top_content"] }}
+                    </div>
+                {% endif %}
+                {% if product.metafields.custom_fields["ingredients_list"] != blank %}
+                <div class="c-storyIngredients__list">
+                    <div class="c-storyIngredients__row">
+                        {% for item in product.metafields.custom_fields["ingredients_list"] %}
+                            <div class="c-storyIngredients__item">
+                                {% if item["image"] != blank %}
+                                <img data-src='{{ item["image"] }}' class="c-storyIngredients__image lazyload">
+                                {% endif %}
+                                <div class="c-storyIngredients__content">
+                                    {% if item["heading"] != blank %}
+                                        <h6 class="c-storyIngredients__heading" data-accordion-toggle>{{ item["heading"] }} <span>+</span></h6>
+                                    {% endif %}
+                                    {% if item["content"] != blank %}
+                                    <div class="c-storyIngredients__copy" data-accordion-content>
+                                        {{ item["content"] }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}    
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+        </div>
+        <div class="c-storyFullList">
+            <div class="wrapper">
+                {% if product.metafields.custom_fields["ingredients_full_list_heading"] != blank %}
+                    <h3 class="c-storyFullList__title">
+                    {{ product.metafields.custom_fields["ingredients_full_list_heading"] }} 
+                    </h3>
+                {% endif %}
+                {% if product.metafields.custom_fields["ingredients_full_list"] != blank %}
+                <div class="c-storyFullList__list">
+                    {% for item in product.metafields.custom_fields["ingredients_full_list"] %}
+                        <div class="c-storyFullList__item">
+                            {% if item["heading"] != blank %}
+                                <h6 class="c-storyFullList__heading">{{ item["heading"] }}</h6>
+                            {% endif %}
+                            {% if item["sub_heading"] != blank %}
+                                <div class="c-storyFullList__subHeading">
+                                    {{ item["sub_heading"] }}    
+                                </div>
+                            {% endif %}
+                            <div class="c-storyFullList__content">
+                                {% if item["left_block"] != blank %}
+                                <div class="c-storyFullList__col">
+                                    {{ item["left_block"] }}
+                                </div>
+                                {% endif %}
+                                {% if item["right_block"] != blank %}
+                                <div class="c-storyFullList__col">
+                                    {{ item["right_block"] }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if product.metafields.custom_fields["ingredients_top_content"] != blank %}
+                <div class="c-storyFullList__bottomCopy">
+                    {{ product.metafields.custom_fields["ingredients_top_content"] }}    
+                </div>
+                {% endif %}
+            </div>
+        </div>    
+    </div>
+</div> 
+{% endif %}   

@@ -1,0 +1,30 @@
+<div class="ambListHero{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="ambListHero__row">
+        <h2 class="ambListHero__title">{{ section.settings.title }}</h2>
+        <div class="ambListHero__copy">{{ section.settings.copy }}</div>
+    </div>    
+</div>
+
+{% schema %}
+  {
+    "name": "Ambassador Hero",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Hero Title",
+        "default": "Meet Our Ambassadors"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Hero Copy"
+      },
+      {
+        "type": "text",
+        "id": "section_classname",
+        "label": "Section Class Name"
+      }
+    ]
+  }
+{% endschema %}

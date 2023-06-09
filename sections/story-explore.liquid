@@ -1,0 +1,25 @@
+<div class="story__explore">
+  <div class="wrapper">
+    <div class="grid--full">
+      <div class="grid__item one-whole">
+        <div class="explore__content text-center">
+          <span class="pre-header text--light">{{ section.settings.explore_title }}</span>
+          {% include 'story-menu' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Keep Exploring",
+    "settings": [
+      {
+        "type":"text",
+        "id":"explore_title",
+        "label":"Explore Title",
+        "default":"Keep Exploring"
+      }
+    ]
+  }
+{% endschema %}

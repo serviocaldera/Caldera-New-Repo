@@ -1,0 +1,54 @@
+<div class="c-aboutValue{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="wrapper">
+        <div class="c-aboutValue__row">
+            {% for block in section.blocks %}
+            <div class="c-aboutValue__item">
+                <div class="c-aboutValue__content">
+                    <div class="c-aboutValue__icon">{{ block.settings.svg }}</div>
+                    <h4 class="c-aboutValue__heading">
+                        {{ block.settings.heading }}
+                    </h4>
+                    <div class="c-aboutValue__copy">
+                        {{ block.settings.value }}
+                    </div>   
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "About Values",
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Values",
+        "settings": [
+          {
+            "type": "text",
+            "label": "Heading",
+            "id": "heading" 
+          },
+          {
+            "type": "html",
+            "label": "SVG html",
+            "id": "svg" 
+          },
+          {
+            "type": "html",
+            "label": "Value",
+            "id": "value" 
+          },
+          {
+            "type": "text",
+            "id": "section_classname",
+            "label": "Section Class Name"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

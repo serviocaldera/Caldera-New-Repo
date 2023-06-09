@@ -1,0 +1,229 @@
+.product-promo-cards {
+    padding: 100px 0 40px;
+    background-color: #F7F6F3;
+}
+.product-promo-cards .product-promo-cards-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.product-promo-cards h2 {
+    color: #3D3D38;
+    font-family: "Adobe Garamond Pro", sans-serif;
+    font-size: 40px;
+    letter-spacing: 0;
+    line-height: 54px;
+    text-align: center;
+    margin-bottom: 48px;
+}
+.product-promo-cards .product-promo-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.product-promo-cards .product-promo-item {
+    max-width: 400px;
+    width: calc(33% - 30px);
+    margin-right: 30px;
+    margin-bottom: 30px;
+    padding: 15px 12px;
+    background-color: #e9e6df;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+@media only screen and (min-width: 992px) {
+    .product-promo-cards .product-promo-item:nth-child(3n),
+    .product-promo-cards .product-promo-item:last-child {
+        margin-right: 0;
+    }
+}
+
+.product-promo-cards .product-promo-item .ppi-headline {
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+}
+.product-promo-cards .product-promo-item .ppi-headline p {
+    padding: 14px;
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 0.35px;
+    line-height: 16px;
+    text-align: center;
+    font-family: Avenir LT Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    font-weight: 900;
+}
+.product-promo-cards .product-promo-item .ppi-content {
+    margin: 0 23px;
+}
+.product-promo-cards .product-promo-item .ppi-content .ppi-content-image {
+    text-align: center;
+}
+.product-promo-cards .product-promo-item .ppi-content .ppi-content-image img {
+    max-height: 280px;
+    width: auto;
+    object-fit: cover;
+}
+.product-promo-cards .ppi-content h4 {
+    margin-top: 40px;
+    font-family: "Adobe Garamond Pro", sans-serif;
+    font-size: 23px;
+    letter-spacing: 0;
+    line-height: 34px;
+    text-align: center;
+    color: #3D3D38;
+    margin-bottom: 10px;
+}
+.product-promo-cards .ppi-content > p {
+    font-family: "Avenir LT Pro", sans-serif ;
+    font-size: 14px;
+    letter-spacing: 0.35px;
+    line-height: 20px;
+    color: #3D3D38;
+    text-align: center;
+}
+.ppi-content .ppi-costs {
+    text-align: center;
+    padding: 10px 0 24px;
+    border-bottom: 1px solid #D1CFCC;
+}
+.ppi-content .ppi-costs span {
+    font-family: Avenir LT Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    line-height: 26px;
+    text-align: center;
+}
+.ppi-content .ppi-costs .ppi-price {
+    color: #AF5D00;
+    padding-right: 10px;
+}
+.ppi-costs.ppi-single-cost .ppi-price {
+    padding-right: 0;
+}
+.ppi-content .ppi-costs .ppi-compare-at-price {
+    text-decoration: line-through;
+    color: #000;
+}
+.ppi-checkmarks {
+    padding-top: 23px;
+    display: flex;
+}
+.ppi-checkmarks svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+}
+.ppi-checkmarks p {
+    color: #222222;
+    font-family: Avenir LT Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.17px;
+    line-height: 17px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.ppi-comes-with {
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+.ppi-comes-with p {
+    color: #222222;
+    font-family: Avenir LT Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.35px;
+    line-height: 24px;
+}
+.ppi-f-checkout-btn {
+    background-color: #AF5D00;
+    padding: 25px 10px;
+    text-align: center;
+    border: none;
+    color: #FFFFFF;
+}
+.ppi-footer {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+.ppi-footer .ppi-f-checkout-btn {
+    width: 100%;
+    color: #FFFFFF;
+    font-family: Avenir LT Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+.ppi-content .ppi-cw-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ppi-content .ppi-cw-images .ppi-comes-with-image .ppi-comes-with-popup {
+    position: absolute;
+    width: 315px;
+    max-width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.15);
+    padding: 23px 24px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: 175px;
+    opacity: 0;
+    z-index: -1;
+    transition: all .3s;
+}
+.ppi-content .ppi-cw-images .ppi-comes-with-image > img:hover + .ppi-comes-with-popup,
+.ppi-content .ppi-cw-images .ppi-comes-with-image .ppi-comes-with-popup:hover {
+    opacity: 1;
+    z-index: 1;
+}
+
+.ppi-content .ppi-cw-images .ppi-comes-with-image .ppi-comes-with-popup h5,
+.ppi-content .ppi-cw-images .ppi-comes-with-image .ppi-comes-with-popup p {
+    color: #222222;
+    font-family: "Avenir LT Pro", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.35px;
+    line-height: 24px;
+    text-align: center;
+}
+.ppi-content .ppi-cw-images .ppi-comes-with-image .ppi-comes-with-popup h5 {
+   font-weight: 900;
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 991px) {
+    .product-promo-cards .product-promo-items {
+        display: flex;
+        flex-direction: column;
+    }
+    .product-promo-cards .product-promo-items .product-promo-item {
+        max-width: 400px;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 35px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .product-promo-cards h2 {
+        font-size: 32px;
+        line-height: 44px;
+    }
+    .ppi-checkmarks p {
+        font-size: 13px;
+    }
+    .ppi-checkmarks svg {
+        margin-right: 6px;
+    }
+}

@@ -1,0 +1,35 @@
+{% if product.metafields.custom_fields.enable_testimonial_section == 1 %}
+  <div class="product-single__testimonials headline headline--large">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item medium--five-sixths push--medium--one-twelfth">
+          <div class="testimonials__quotes" data-testimonials-slider-quotes>
+            {% for i in (1..4) %}
+              {% capture logo %}blk6_logo_{{ i }}{% endcapture %}
+              {% capture quote %}blk6_quote_{{ i }}{% endcapture %}
+              {% if product.metafields.custom_fields[logo] and product.metafields.custom_fields[quote] %}
+                <div class="testimonials__quote text-center">
+                  <p class="text--light">{{ product.metafields.custom_fields[quote] }}</p>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <hr>
+        <div class="grid__item medium--two-thirds push--medium--one-sixth">
+          <div class="testimonials__logos" data-testimonials-slider-logos>
+            {% for i in (1..4) %}
+              {% capture logo %}blk6_logo_{{ i }}{% endcapture %}
+              {% capture quote %}blk6_quote_{{ i }}{% endcapture %}
+              {% if product.metafields.custom_fields[logo] and product.metafields.custom_fields[quote] %}
+                <div class="testimonials__logo text-center">
+                  <img src="{{ product.metafields.custom_fields[logo] }}" alt="testimonial logo">
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

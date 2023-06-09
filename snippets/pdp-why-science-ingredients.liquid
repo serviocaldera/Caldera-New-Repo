@@ -1,0 +1,52 @@
+{% if product.metafields.custom_fields.why_it_works or product.metafields.custom_fields.the_science or product.metafields.custom_fields.key_ingredients %}
+  <div class="product-single__ingredients" style="background-image: url({{ 'pdp-why-bg.jpg' | asset_img_url: '1440x' }});" data-rjs="{{ 'pdp-why-bg.jpg' | asset_img_url: '2880x' }}">
+    <div class="wrapper">
+      <div class="grid">
+        {% if product.metafields.custom_fields.why_it_works %}
+          <div class="grid__item medium--one-third">
+            <div class="product-single__ingredients-block">
+              <h6 data-ingredient-toggle>Why It Works<span class="ingredient-toggle">{%- include 'icon' with 'plus' -%}</span></h6>
+              <div class="product-single__ingredients-block-content">{{ product.metafields.custom_fields.why_it_works }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% if product.metafields.custom_fields.the_science %}
+          <div class="grid__item medium--one-third">
+            <div class="product-single__ingredients-block">
+              <h6 data-ingredient-toggle>The Science<span class="ingredient-toggle">{%- include 'icon' with 'plus' -%}</span></h6>
+              <div class="product-single__ingredients-block-content">{{ product.metafields.custom_fields.the_science }}</div>
+            </div>
+          </div>
+        {% endif %}
+        {% if product.metafields.custom_fields.key_ingredients %}
+          <div class="grid__item medium--one-third">
+            <div class="product-single__ingredients-block">
+              <h6 data-ingredient-toggle>Key Ingredients<span class="ingredient-toggle">{%- include 'icon' with 'plus' -%}</span></h6>
+              <div class="product-single__ingredients-block-content">
+                {{ product.metafields.custom_fields.key_ingredients }}
+                {% if product.metafields.custom_fields.full_ingredients_modal %}
+                  <a href="#ingredients-popup" class="text--link" data-popup-trigger>+ View Full Ingredients</a>
+                {% endif %}
+              </div>
+            </div>
+            {% if product.metafields.custom_fields.full_ingredients_modal %}
+              <div id="ingredients-popup" class="popup mfp-hide mfp-with-anim ingredients-popup">
+                <div class="popup__content">
+                  <div class="ingredients-popup__image" style="background-image:url({{ 'image-ingredients-modal.jpg' | asset_img_url: '192x' }});" data-rjs="{{ 'image-ingredients-modal.jpg' | asset_img_url: '384x' }}">
+                  </div>
+                  <div class="ingredients-popup__content">
+                    <h6>Full Ingredient List</h6>
+                    <div class="text--small ingredients-popup__text">
+                      {{ product.metafields.custom_fields.full_ingredients_modal }}
+                    </div>
+                    <a href="/pages/our-story-how#key-ingredients" target="_blank" class="text--link">Learn More About Ingredients &amp; Benefits {% include 'icon' with 'orange-link-arrow' %}</a>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

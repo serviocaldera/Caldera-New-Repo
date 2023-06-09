@@ -1,0 +1,49 @@
+<div class="story__experience">
+  <div class="wrapper">
+    <div class="grid--rev">
+      <div class="grid__item small--one-half">
+        <div class="experience__image" data-aos="fade-in" data-aos-offset="50" data-aos-once="true" data-aos-duration="500">
+          <img src="{{ section.settings.experience_image | img_url: '700x' }}" data-rjs="{{ section.settings.experience_image | img_url: '1400x' }}" alt="{{ section.settings.experience_image.alt }}">
+          <div class="image--overlay" data-colour-block-parallax data-parallax-direction="up"></div>
+        </div>
+      </div>
+      <div class="grid__item small--one-half">
+        <div class="experience__content">
+          <span class="pre-header" data-text-parallax>{{ section.settings.experience_preheader }}</span>
+          <h4>{{ section.settings.experience_headline }}</h4>
+          <p>{{ section.settings.experience_content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Experience",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"experience_image",
+        "label":"Experience Image"
+      },
+      {
+        "type":"text",
+        "id":"experience_preheader",
+        "label":"Experience Preheader",
+        "default":"Leveraging Expertise"
+      },
+      {
+        "type":"text",
+        "id":"experience_headline",
+        "label":"Experience Headline",
+        "default":"The Dream Team."
+      },
+      {
+        "type":"textarea",
+        "id":"experience_content",
+        "label":"Experience Content",
+        "default":"Leveraging the knowledge of world-renowned herbologists, green chemists, formulators and scientists native to the Mountain West region we created The Good - a clinically proven multi-functional serum packed with free radical fighting antioxidants. This is living breathing resilience in a bottle."
+      }
+    ]
+  }
+{% endschema %}

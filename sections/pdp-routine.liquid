@@ -1,0 +1,55 @@
+<div class="c-pdpRoutine">
+    <div class="wrapper">
+        <div class="c-pdpRoutine__row">
+            <div class="c-pdpRoutine__col c-pdpRoutine__content">
+                <div class="c-pdpRoutine__box">
+                    <h4 class="c-pdpSection__heading c-pdpRoutine__heading">
+                        {{ section.settings.heading }}
+                    </h4>
+                    <div class="c-pdpRoutine__copy">
+                        {{ section.settings.copy }}
+                    </div>  
+                </div>
+            </div>
+            <div class="c-pdpRoutine__col c-pdpRoutine__image">
+                <img src="{{ section.settings.image | img_url: "2x" }}" data-src="{{ section.settings.image | img_url: "master" }}" class="lazyload" alt="{{ section.settings.text }}" />
+                <div class="c-pdpRoutine__text">
+                    {{ section.settings.text }}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!--c-pdpInd-->
+
+{% schema %}
+  {
+    "name": "PDP Routine",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading",
+        "default":"Skincare Made Simple"
+      },
+      {
+        "type":"text",
+        "id":"text",
+        "label":"Text",
+        "default":"One-step Routine"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"copy",
+        "default": "The Good cuts out the non-essential and provides a luxurious, one-step skincare regimen. Wash your face with your preferred cleanser and then apply The Good. That’s it. The lightweight serum applies quickly, leaving your skin moisturized and restored. This is unmatched skincare in one simple step."
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,183 @@
+<section class="press__articles" id="js-press-articles">
+  <script type="text/javascript">
+    const articles = [
+      {%- for block in section.blocks -%}
+        { "article_image": "{{ block.settings.article_image | img_url: '500x' }}", "article_press_logo": "{{ block.settings.article_press_logo | img_url: 'x50' }}", "article_title": "{{ block.settings.article_title | slice: 0, 40 | replace: '"', '\"'}}", "article_description": "{{ block.settings.article_description | slice: 0, 105 | replace: '"', '\"' }}", "article_url": "{{ block.settings.article_url }}" , "article_lightbox_id": "{% if block.settings.lightbox_enable == true %}{{ block.settings.article_title | slice: 0, 5 | replace: ' ', '' }}{% endif %}" }
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ];
+  </script>
+  <div class="wrapper">
+    <h3 class="press__articles-header">{{- section.settings.articles_header -}}</h3>
+    <div class="articles__container" id="js-article-container"></div>
+    <div class="articles__pagination" id="js-article-pagination">
+      <span class="pagination pagination--link pagination--previous" data-article-pagination id="js-pagination-previous">
+        {%- include 'pagination-left' -%}
+      </span>
+      <div class="pagination pagination--numbers" id="js-article-pagination-numbers"></div>
+      <span class="pagination pagination--link pagination--next" data-article-pagination id="js-pagination-next">
+        {%- include 'pagination-right' -%}
+      </span>
+    </div>
+  </div>
+  {% for block in section.blocks %}
+    {% if block.settings.lightbox_enable == true %}
+      <div class="c-pressModal" id="{{block.settings.article_title | slice: 0, 5 | replace: ' ', ''}}">
+        <div class="c-pressModal__inner">
+          <div class="c-pressModal__close js-press-modal-close">
+            <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="Gut-Landing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Desktop_interstitial-screen-selector" transform="translate(-1084.000000, -313.000000)" fill="#AF5D00" fill-rule="nonzero">
+                        <g id="Group-4" transform="translate(289.000000, 283.000000)">
+                            <g id="Group-2" transform="translate(53.000000, 30.000000)">
+                                <path d="M748.971481,8 L742.213013,1.2415322 C741.928996,0.957514526 741.928996,0.497030907 742.213013,0.213013231 C742.497031,-0.0710044102 742.957515,-0.0710044102 743.241532,0.213013231 L750,6.97148103 L756.758468,0.213013231 C757.042485,-0.0710044102 757.502969,-0.0710044102 757.786987,0.213013231 C758.071004,0.497030907 758.071004,0.957514526 757.786987,1.2415322 L751.028519,8 L757.786987,14.7584678 C758.071004,15.0424855 758.071004,15.5029691 757.786987,15.7869868 C757.502969,16.0710044 757.042485,16.0710044 756.758468,15.7869868 L750,9.02851897 L743.241532,15.7869868 C742.957515,16.0710044 742.497031,16.0710044 742.213013,15.7869868 C741.928996,15.5029691 741.928996,15.0424855 742.213013,14.7584678 L748.971481,8 Z" id="Path"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+         </div>
+          <h5 class="c-pressModal__title">{{ block.settings.article_title | slice: 0, 40 | replace: '"', '\"'}}</h5>
+          <div class="c-pressModal__row" data-press-popup-slider>
+                {% if block.settings.lightbox_image_one != blank %}
+                    <div class="c-pressModal__item">
+                        <img src="{{ block.settings.lightbox_image_one | img_url: 'master' }}"/>
+                    </div>
+                {% endif %}  
+                {% if block.settings.lightbox_image_two != blank %}
+                    <div class="c-pressModal__item">
+                        <img src="{{ block.settings.lightbox_image_two | img_url: 'master' }}"/>
+                    </div>
+                {% endif %}
+                {% if block.settings.lightbox_image_three != blank %}
+                    <div class="c-pressModal__item">
+                        <img src="{{ block.settings.lightbox_image_three | img_url: 'master' }}"/>
+                    </div>
+                {% endif %}
+                {% if block.settings.lightbox_image_four != blank %}
+                    <div class="c-pressModal__item">
+                        <img src="{{ block.settings.lightbox_image_four | img_url: 'master' }}"/>
+                    </div>
+                {% endif %}
+                {% if block.settings.lightbox_image_five != blank %}
+                    <div class="c-pressModal__item">
+                        <img src="{{ block.settings.lightbox_image_five | img_url: 'master' }}"/>
+                    </div>
+                {% endif %}
+                {% if block.settings.lightbox_image_six != blank %}
+                    <div class="c-pressModal__item">
+                        <img src="{{ block.settings.lightbox_image_six | img_url: 'master' }}"/>
+                    </div>
+                {% endif %}
+                {% if block.settings.lightbox_image_seven != blank %}
+                    <div class="c-pressModal__item">
+                        <img src="{{ block.settings.lightbox_image_seven | img_url: 'master' }}"/>
+                    </div>
+                {% endif %}
+                {% if block.settings.lightbox_image_eight != blank %}
+                    <div class="c-pressModal__item">
+                        <img src="{{ block.settings.lightbox_image_eight | img_url: 'master' }}"/>
+                    </div>
+                {% endif %}
+          </div>
+        </div>
+      </div> 
+    {% endif %}    
+  {% endfor %}
+</section>
+{% schema %}
+  {
+    "name": "Press Articles",
+    "settings": [
+      {
+        "type": "text",
+        "id": "articles_header",
+        "label": "Articles Header",
+        "default": "See What People Are Saying"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "press_article",
+        "name": "Article",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"article_image",
+            "label":"Article Image"
+          },
+          {
+            "type":"image_picker",
+            "id":"article_press_logo",
+            "label":"Press Logo"
+          },
+          {
+            "type":"textarea",
+            "id":"article_title",
+            "label":"Article Title"
+          },
+          {
+            "type":"textarea",
+            "id":"article_description",
+            "label":"Article Synopsis"
+          },
+          {
+            "type":"text",
+            "id":"article_url",
+            "label":"Article URL"
+          },
+          {
+            "type":"header",
+            "content":"Lightbox"
+          },
+          {
+            "type":"checkbox",
+            "id":"lightbox_enable",
+            "label":"Enable LightBox",
+            "default": false
+          },
+          {
+            "type":"image_picker",
+            "id":"lightbox_image_one",
+            "label":"Lightbox Image One"
+          },
+          {
+            "type":"image_picker",
+            "id":"lightbox_image_two",
+            "label":"Lightbox Image Two"
+          },
+          {
+            "type":"image_picker",
+            "id":"lightbox_image_three",
+            "label":"Lightbox Image Three"
+          },
+          {
+            "type":"image_picker",
+            "id":"lightbox_image_four",
+            "label":"Lightbox Image Four"
+          },
+          {
+            "type":"image_picker",
+            "id":"lightbox_image_five",
+            "label":"Lightbox Image Five"
+          },
+          {
+            "type":"image_picker",
+            "id":"lightbox_image_six",
+            "label":"Lightbox Image Six"
+          },
+          {
+            "type":"image_picker",
+            "id":"lightbox_image_seven",
+            "label":"Lightbox Image Seven"
+          },
+          {
+            "type":"image_picker",
+            "id":"lightbox_image_eight",
+            "label":"Lightbox Image Eight"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

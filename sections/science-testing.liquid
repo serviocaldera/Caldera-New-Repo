@@ -1,0 +1,59 @@
+<div class="c-scienceTest">
+    <div class="wrapper">
+        <div class="c-scienceTest__main">
+            <div class="c-scienceTest__subHead"> {{ section.settings.subheading }}</div>
+            <div class="c-scienceTest__row">
+                <div class="c-scienceTest__content">
+                    <div class="c-scienceTest__box">
+                        <h4 class="c-scienceTest__heading">
+                            {{ section.settings.heading }}
+                        </h4>
+                        <div class="c-scienceTest__copy">
+                            {{ section.settings.copy }}
+                        </div>
+                    </div>
+                </div>
+                <div class="c-scienceTest__image">
+                    <img data-src="{{ section.settings.image-mobile | img_url: 'master' }}" class="lazyload c-scienceTest__imageMobile" />
+                    <img data-src="{{ section.settings.image-desktop | img_url: 'master' }}" class="lazyload c-scienceTest__imageDesktop" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Science Testing",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image-desktop",
+        "label":"Image Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"image-mobile",
+        "label":"Image Mobile"
+      },
+      {
+        "type":"text",
+        "id":"subheading",
+        "label":"Sub Heading",
+        "default": "LOREM IPSUM"
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"heading",
+        "default": "Rigorous Clinical Testing"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default": "All formulas must pass multiple stringent tests and scientific assessments, including microbial, stability, efficacy, antioxidant studies, and dermatological testing. We also conducted an independent clinical trial of The Good - results are here."
+      }
+    ]
+  }
+{% endschema %}

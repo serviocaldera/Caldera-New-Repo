@@ -1,0 +1,80 @@
+<div class="story__ingredients">
+  <div id="key-ingredients"></div>
+  <div class="ingredients__title text-center">
+    <h4>{{ section.settings.ingredients_title }}</h4>
+  </div>
+  <div class="ingredients__items">
+    {% for block in section.blocks %}
+      <div class="ingredients__item" style="background-image: url({{ block.settings.ingredient_image | img_url: '230x' }})" data-rjs="{{ block.settings.ingredient_image | img_url: '460x' }}" data-how-ingredient>
+        <div class="ingredients__overlay"></div>
+        <div class="ingredients__item-content">
+          <h6 class="text--light">{{ block.settings.ingredient_title }}</h6>
+          <div class="ingredients__item-details">
+            <p class="text--light text--small">{{ block.settings.ingredient_content }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="ingredients__all text-center">
+    <a href="#all-ingredients-popup" class="text--link" data-popup-trigger>+ View Full Ingredients</a>
+    <div id="all-ingredients-popup" class="popup mfp-hide mfp-with-anim ingredients-popup">
+      <div class="popup__content">
+        <div class="ingredients-popup__image" style="background-image:url({{ 'image-ingredients-modal.jpg' | asset_img_url: '192x' }});" data-rjs="{{ 'image-ingredients-modal.jpg' | asset_img_url: '384x' }}">
+        </div>
+        <div class="ingredients-popup__content">
+          <h6>Full Ingredient List</h6>
+          <div class="text--small ingredients-popup__text">
+            {{ section.settings.ingredients_popup_content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Ingredients",
+    "settings": [
+      {
+        "type":"text",
+        "id":"ingredients_title",
+        "label":"Ingredients Section Title",
+        "default":"Key Ingredients"
+      },
+      {
+        "type":"header",
+        "content":"Ingredients Popup"
+      },
+      {
+        "type":"textarea",
+        "id":"ingredients_popup_content",
+        "label":"Ingredients Popup Content",
+        "default":"Aloe barbadensis Leaf Juice*, Aqua/Water, Carthamus tinctorius (safflower) Oleosomes*, Lavandula angustifolia (Lavender) Flower/leaf/stem Water*, Caprylic/Capric Triglyceride, Glycerin, Olea Europaea (Olive) Oil*, Propanediol, Mangifera Indica (Mango) Seed Butter, Cetearyl alcohol, Cetearyl Olivate, Centella asiatica (Gotu Kola) Extract*, Leuconostoc Ferment Filtrate, Cetearyl glucoside, Pheonix Dactylifera (Date) Seed Extract, Menyanthes Trifoliata Leaf Extract, Polygonum fagopyrum (Buckwheat) Seed Extract, Lavandula stoechas (Spanish Lavender) Extract, Narcissus tazetta (Daffodil) Bulb Extract*, Arnica montana (Arnica) Extract*, Borago officinalis (Borage) Leaf Extract*, Medicago sativa (Alfalfa) Extract*, Spiraea Ulmaria Flower Extract*, Calendula officinalis (Calendula) Flower Extract*, Sambucus Nigra Fruit Extract, Salix alba (Willow) Bark Extract, p-Anisic Acid, Sodium Phytate, Leuconostoc ferment filtrate, Superoxide Dismutase*, Soybean Peroxidase*, Aroma**, Sorbitan Olivate, Oryza sativa (Rice) Extract*, Sclerotium gum, Cetyl Palmitate, Sodium hyaluronate, Sorbitan Palmitate, Hydrogenated Vegetable Oil, Citral, Citronellol, Eugenol, Geraniol, Limonene, Linalool *Ingredients from Organic farming **Clinical grade essential oils blend"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "ingredient",
+        "name": "Ingredient",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"ingredient_image",
+            "label":"Ingredient Image"
+          },
+          {
+            "type":"text",
+            "id":"ingredient_title",
+            "label":"Ingredient Title"
+          },
+          {
+            "type":"textarea",
+            "id":"ingredient_content",
+            "label":"Ingredient Content"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

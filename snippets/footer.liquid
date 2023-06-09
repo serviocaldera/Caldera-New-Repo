@@ -1,0 +1,100 @@
+<footer class="footer" data-bg="url( '{{ 'footer-background-mobile.jpg' | asset_img_url: '992x', format: 'pjpg' }}'' )">
+
+	<div class="footer__main max-width-container">
+		<div class="footer--top">
+			<div class="footer__topRow">
+				<div class="footer__logo">
+					<a href="{{ shop.url }}" title="Home">{%- include 'icon' with 'badge' -%}</a>
+					<p class="footer__logo-text">Wild Resilience.</p>
+				</div>
+				<div class="footer__social footer__social--mobile">
+					{%- include 'social-links' -%}
+				</div>
+				<div class="footer__engagement">
+					<div class="footer__newsletter">
+						<p class="footer__newsletterCopy">Join our newsletter for skin tips, early access<br> to new products and exclusive discounts</p>
+						{%- include 'newsletter' -%}
+					</div>
+				</div>	
+			</div>
+			
+			<div class="footer__menuRow">
+				<ul class="footer__menu">
+					{%- for link in linklists.navigation-footer.links -%}
+						<li class="footer__menu--parent-links">
+							<a href="{{ link.url }}" class="footer__menu--parent-link" title="{{ link.title }}" {% if link.links != blank %}data-accordion-toggle {% endif %}>
+								<h6 class="footer__menu--header">{{ link.title }}</h6>
+								{%- if link.links != blank -%}
+									<span>{%- include 'icon' with 'plus' -%}</span>
+								{%- endif -%} 
+							</a>
+							{%- if link.links != blank -%}
+								<ul class="footer__menu--child-links" data-accordion-content>
+									{%- for child_link in link.links -%}  
+										<li><a class="footer__menu--link" href= "{{ child_link.url }}" title="{{ link.title }}">{{ child_link.title }}</a></li>
+									{%- endfor -%}
+								</ul> 
+							{%- endif -%} 
+						</li>
+					{%- endfor -%}
+						<li class="footer__menu--parent-links footer__social--desktop">
+							<a href="#" class="footer__menu--parent-link">
+								<h6 class="footer__menu--header">FOLLOW US</h6>
+							</a>
+							<ul class="footer__menu--child-links">
+								<li>
+									<a class="footer__menu--link" href="https://www.instagram.com/calderalab/" target="_blank">
+										{%- include 'icon' with 'instagram' -%}
+										<span>Instagram</span>
+									</a>
+								</li>
+								<li>
+									<a class="footer__menu--link" href="https://www.facebook.com/calderalabofficial/" target="_blank">
+										{%- include 'icon' with 'facebook' -%}
+										<span>Facebook</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<div class="footer__bcroplogo">
+							<a href="/pages/certifications">
+								{% comment %}
+                                  {% raw %}
+                                    {% include 'b-crop-logo' %}
+                                    {% include '1percentlogo' %}
+                                    
+                                  {% endraw %}
+                                {% endcomment %}
+                                
+                                <img width="100px" src="{{ '1percent.svg' | asset_url }}" 
+                                   alt="1 Percent For The Planet Member Logo in White"
+                                   style="max-width: 120px;">
+
+                               
+							</a>
+						<div>
+				</ul>
+			</div>
+		</div>
+		<div class="footer--bottom">
+			<p class="footer__copyright">
+				&copy; {{ 'now' | date: "%Y" }} Caldera &plus; Lab LLC, All Rights Reserved.
+				<span>
+					These statements have not been evaluated by the Food<br/> and Drug Administration. This product is not intended to<br/> diagnose, treat, cure or prevent any disease.	
+				</span>
+			</p>
+			<div class="footer__legal-links">
+				{%- for link in linklists.legal.links -%}
+					<a href="{{ link.url }}" class="footer__legal-link">{{ link.title }}</a>
+				{%- endfor -%}
+			</div>
+
+		</div>
+	</div>
+</footer>
+
+{% if shop.money_with_currency_format contains 'USD' %}
+{% else %}
+    <script src="{{ 'eupopup.js' | asset_url }}"></script>
+{% endif %}

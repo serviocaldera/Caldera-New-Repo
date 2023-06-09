@@ -1,0 +1,238 @@
+{% if product.metafields.custom_fields["pdp_link_enable_section"] == 1 %}
+
+<div class="pdp-link">
+    <div id="pdpLinkSection"></div>
+    <div class="wrapper" id="pdpLinkWrapper">
+        <div class="pdp-link__section-title">
+            {% if product.metafields.custom_fields["pdp_link_title"] != blank %}
+            <h3 class="pdp-link__section-heading"> {{ product.metafields.custom_fields["pdp_link_title"] }} </h3>
+            {% endif %}
+
+            {% if product.metafields.custom_fields["pdp_link_description"] != blank %}
+            <div class="pdp-link__section-description">{{ product.metafields.custom_fields["pdp_link_description"] }}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="pdp-link__section-content">
+            {%comment%}
+            <div class="pdp-link__content-left">
+                {% if product.metafields.custom_fields["pdp_link_image"] != blank %}
+                <img class="lazyload" src='{{product.metafields.custom_fields["pdp_link_image"]}}'
+                    data-src='{{product.metafields.custom_fields["pdp_link_image"]}}' alt="product" />
+                {% endif %}
+            </div>
+            <div class="wrapperSlider" data-pdp-image-slider>
+
+                {%endcomment%}
+
+                <script>
+                    function repeat() {
+                        let sliderView = document.querySelector('.pdp-link__section-content-with-slider');
+                        let width = sliderView.clientWidth;
+                        let currentDocument;
+                        let sliderDiv = document.querySelector(".pdp-link__section-content-with-slider")
+                        let noSliderDiv = document.querySelector(".pdp-link__section-content")
+
+                        if(width == 0){
+                            currentDocument = noSliderDiv;
+                        }else if(width > 0){
+                            currentDocument = sliderDiv
+                        }
+                        
+
+                        let currentDiv1 = currentDocument.querySelector(".pdp-link__product.fc-item.fc-index--0");
+                        let currentDiv2 = currentDocument.querySelector(".pdp-link__product.fc-item.fc-index--1");
+                
+                       
+                        let link1 = currentDiv1.querySelector(".animate-scroll")
+                        let link2 = currentDiv2.querySelector(".animate-scroll")
+                        link1.target = "_blank";
+                        link2.target = "_blank";  
+                        let link1Text = link1.href;
+                        let link2Text = link2.href;
+            
+                        currentDiv1.querySelector(".text-m").href = link1Text
+                        currentDiv2.querySelector(".text-m").href = link2Text
+                        currentDiv1.querySelector(".text-m").target = "_blank";
+                        currentDiv2.querySelector(".text-m").target = "_blank";
+                        currentDiv1.querySelector(".text-m").rel = "noopener noreferrer";
+                        currentDiv2.querySelector(".text-m").rel = "noopener noreferrer";
+
+               
+                        
+                        let reviewLink1 = currentDiv1.querySelector(".text-m");
+                        let reviewLink2 = currentDiv2.querySelector(".text-m");
+
+                        let obj = {
+                            stars1: link1,
+                            stars2: link2,
+                            reviews1: reviewLink1,
+                            reviews2: reviewLink2
+                        }
+                        return obj;
+
+                    }
+                    window.addEventListener('load', () => {
+                        repeat()                       
+                        const obj = repeat();
+                        for (const key in obj) {
+                            obj[key].addEventListener("click", () => {
+                                document.getElementById("pdpLinkSection").scrollIntoView();
+                            })
+                        }
+                    })
+                </script>
+
+                {% for item in product.metafields.custom_fields["ppd_link_product"] %}
+                {% assign link = "/products/" %}
+                {% assign extension = item["page_handle"]%}
+                {% assign link = link | append: extension %}
+                {% assign scroll = "#productReview"%}
+                {% assign link = link | append: scroll %}
+
+                {% if item["page_handle"] != blank %}
+                {% assign metaproduct = all_products[item["page_handle"]] %}
+                {% endif %}
+                <div class="pdp-link__product fc-item fc-index--{{ forloop.index0 }}">
+                    <p id="currentLink" style="visibility: hidden; width: 0; height: 0;">{{link}}</p>
+                    {% if item["image"] != blank %}
+                    <a href="{{ metaproduct.url }}">
+                        <img class="lazyload" src="{{ item['image'] }}" data-src="{{ item['image'] }}" alt="product"
+                            id="imgProducts">
+                    </a>
+                    {% endif %}
+                    <div class="titleWraper">
+                        {% if metaproduct.title != blank %}
+                        <h4 class="pdp-link__product-title">{{ metaproduct.title }}</h4>
+                        {% endif %}
+
+                        {% if item["sub_title"] != blank %}
+                        <h6 class="pdp-link__product-subtitle">{{ item["sub_title"] }}</h6>
+                        {% endif %}
+                        <div class="c-productInfo__review" id="c-productInfo__review1">
+                            <a href={{link}} target="_blank" class="animate-scroll">
+                                <span class="yotpo-overlay"></span>
+                                <div class="yotpo bottomLine" data-product-id="{{ metaproduct.id }}"></div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    {% if item["description"] != blank %}
+                    <div class="pdp-link__product-description">{{ item["description"] }}</div>
+                    {% endif %}
+
+                    <div class="pdp-link__addtocart">
+                        {% if metaproduct.available %}
+                        <button type="submit" class="js-addtocart" name="add"
+                            data-cart-add="{{metaproduct.selected_or_first_available_variant.id}}" id="AddToCart">
+                            <div class="btnWrap">
+                                <span class="pdp-link__btn-price">
+                                    {% if metaproduct.price != blank %}
+                                    {{ metaproduct.price | money | remove: '.00' }}
+                                    {% endif %}
+                                </span>
+                                <span class="pdp-link__btn-text">Add To Cart</span>
+                            </div>
+                        </button>
+                        {% else %}
+                        <button class="btn btn--primary btn--oos">Sold Out</button>
+                        {% endif %}
+                    </div>
+                    {% if metaproduct.url != blank %}
+                    <p class="pdp-link__product-link"><a href="{{ metaproduct.url }}">View Product Details</a></p>
+                    {% endif %}
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+
+        <div class="pdp-link__section-content-with-slider" id="pdpLinkSlider">
+            {%comment%}
+            <div class="pdp-link__content-left">
+                {% if product.metafields.custom_fields["pdp_link_image"] != blank %}
+                <img class="lazyload" src='{{product.metafields.custom_fields["pdp_link_image"]}}'
+                    data-src='{{product.metafields.custom_fields["pdp_link_image"]}}' alt="product" />
+                {% endif %}
+            </div>
+            <div class="wrapperSlider" data-pdp-image-slider>
+
+                {%endcomment%}
+                <div class="wrapperSlider" data-pdp-image-slider-test>
+
+                    {% for item in product.metafields.custom_fields["ppd_link_product"] %}
+
+                    {% assign link = "https://calderalab.com/products/" %}
+                    {% assign extension = item["page_handle"]%}
+                    {% assign link = link | append: extension %}
+                    {% assign scroll = "#productReview"%}
+                    {% assign link = link | append: scroll %}
+
+                    {% if item["page_handle"] != blank %}
+                    {% assign metaproduct = all_products[item["page_handle"]] %}
+                    {% endif %}
+                    <div class="pdp-link__product fc-item fc-index--{{ forloop.index0 }}">
+                        {% if item["image"] != blank %}
+                        <a href="{{ metaproduct.url }}">
+                            <img class="lazyload" src="{{ item['image'] }}" data-src="{{ item['image'] }}"
+                                alt="product">
+                        </a>
+                        {% endif %}
+                        <div class="titleWraper">
+                            {% if metaproduct.title != blank %}
+                            <h4 class="pdp-link__product-title">{{ metaproduct.title }}</h4>
+                            {% endif %}
+
+                            {% if item["sub_title"] != blank %}
+                            <h6 class="pdp-link__product-subtitle">{{ item["sub_title"] }}</h6>
+                            {% endif %}
+                            <div class="c-productInfo__review" id="c-productInfo__review1">
+                                <a href={{link}} class="animate-scroll">
+                                    <span class="yotpo-overlay"></span>
+                                    <div class="yotpo bottomLine" data-product-id="{{ metaproduct.id }}"></div>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        {% if item["description"] != blank %}
+                        <div class="pdp-link__product-description">{{ item["description"] }}</div>
+                        {% endif %}
+
+                        <div class="pdp-link__addtocart">
+                            {% if metaproduct.available %}
+                            <button type="submit" class="js-addtocart" name="add"
+                                data-cart-add="{{metaproduct.selected_or_first_available_variant.id}}" id="AddToCart">
+                                <div class="btnWrap">
+                                    <span class="pdp-link__btn-price">
+                                        {% if metaproduct.price != blank %}
+                                        {{ metaproduct.price | money | remove: '.00' }}
+                                        {% endif %}
+                                    </span>
+                                    <span class="pdp-link__btn-text">Add To Cart</span>
+                                </div>
+                            </button>
+                            {% else %}
+                            <button class="btn btn--primary btn--oos">Sold Out</button>
+                            {% endif %}
+                        </div>
+                        {% if metaproduct.url != blank %}
+                        <p class="pdp-link__product-link"><a href="{{ metaproduct.url }}">View Product Details</a></p>
+                        {% endif %}
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %}

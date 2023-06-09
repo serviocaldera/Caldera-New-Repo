@@ -1,0 +1,117 @@
+<div class="lp-sticky-ab">
+   <div class="lp-sticky-ab-wrapper">
+    <div class="lp-sticky-ab-img-wrap"><img src="{{section.settings.logo_img | img_url:'x33'}}" width="233" height="33" style="" alt="{{section.settings.logo_img.alt }}"></div>
+    <div class="lp-sticky-ab-promo-wrap">{%if section.settings.promo_text %}<p>{{section.settings.promo_text}}</p>{% endif%}</div>
+    <div class="lp-sticky-ab-btn-wrap"><a class="lp-sticky-ab-btn" href="#{{section.settings.href_id}}">{{section.settings.btn_text}}</a></div>
+   </div>
+</div>
+
+<style>
+  body{
+    padding-top: 94px;
+  }
+  .lp-sticky-ab{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 110;
+    min-height: 94px;
+    background-color: #d4cdbd;
+    display: flex;
+    align-items: center;
+  }
+  .lp-sticky-ab-wrapper{
+    width: 100%;
+    max-width: 1230px;
+    padding: 0 12px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .lp-sticky-ab-promo-wrap p{
+    font-weight: 500;
+    text-align: center;
+    top: 4px;
+    position: relative;
+  }
+  .lp-sticky-ab-btn{
+    padding: 17px 54px 13px;
+    border-radius: 2px;
+    background-color: #af5d00;
+    color: #fff;
+    font-weight: 900;
+    position: relative;
+    top: 3px;
+  }
+
+  @media screen and (max-width: 850px){
+    .lp-sticky-ab-wrapper{
+      display: block;
+    }
+    .lp-sticky-ab-img-wrap{
+      display: none;
+    }
+    .lp-sticky-ab-promo-wrap p, .lp-sticky-ab-btn{
+      top: 0;
+    }
+    .lp-sticky-ab-btn-wrap{
+      text-align: center;
+      margin-top: 14px;
+      margin-bottom: 10px;
+    }
+    .lp-sticky-ab-wrapper div{
+      width: 100%;
+    }
+  }
+  .FeaturedReviews {
+    height: 960px;
+  }
+</style>
+
+<script>
+    $(document).ready(function(){  
+      $('body').addClass('absolute-load');
+         setTimeout(function(){
+              $('body').removeClass('absolute-load');
+      }, 1000);
+    })
+</script>
+
+{% schema %}
+  {
+    "name": "LP Sticky anchor bar",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"logo_img",
+        "label":"Logo"
+      },
+      {
+        "type":"text",
+        "id":"promo_text",
+        "label":"Promo text",
+        "default":"OFFERS AVAILABLE WHILE SUPPLIES LAST"
+      },
+      {
+        "type":"text",
+        "id":"href_id",
+        "label":"Anchor url ID name",
+        "default":"buy-now"
+      },
+      {
+        "type":"text",
+        "id":"btn_text",
+        "label":"Button text",
+        "default":"SPECIAL OFFER"
+      }
+    ],
+    "presets": [
+      {
+        "name": "LP Sticky anchor bar",
+        "category": "Caldera"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,43 @@
+{% if page.metafields.custom_fields["enable_ambassador_about"] == 1 %}
+    <div class="vipStoryAbout">
+        <div class="wrapper">
+            <div class="vipStoryAbout__row">
+                <div class="vipStoryAbout__col vipStoryAbout__col--content">
+                    <div class="vipStoryAbout__excerpt">
+                        {% for item in page.metafields.custom_fields["ambassador_excerpt"] %}
+                            <div class="vipStoryAbout__excerpt-item">
+                                {% if item["ambassador_excerpt_title"] != blank %}
+                                    <div class="vipStoryAbout__excerpt-title">{{ item["ambassador_excerpt_title"] }}</div>
+                                {% endif %}   
+                                {% if item["ambassador_excerpt_copy"] != blank %}                                 
+                                    <div class="vipStoryAbout__excerpt-copy">{{ item["ambassador_excerpt_copy"] }}</div>
+                                {% endif %}                                    
+                            </div>
+                        {% endfor %}                        
+                    </div>
+                </div>
+                <div class="vipStoryAbout__col vipStoryAbout__col--image">
+                    <img src="{{ page.metafields.custom_fields["ambassador_image"] }}">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<script>
+    if ($('.vipStoryAbout__coupon-button').length > 0) {
+        const couponButton = document.querySelector('.vipStoryAbout__coupon-button');
+        couponButton.addEventListener('click', () => {
+            let couponCode = document.querySelector(".vipStoryAbout__coupon-button").dataset.couponCode;
+            navigator.clipboard.writeText(couponCode).then(function() {
+                    couponButton.textContent = "Code Copied!"
+                }, function() {
+                    alert('copy failed');
+            });
+            setTimeout(() => {
+                couponButton.textContent = "copy code " + couponCode + ""
+            }, 4000)
+        })
+    }
+
+</script>

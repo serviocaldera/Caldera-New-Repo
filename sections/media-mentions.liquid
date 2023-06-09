@@ -1,0 +1,72 @@
+<div class="home_media__mentions">
+  <div class="wrapper">
+    <div class="media__mentionsLogo">
+        <img src="{{ section.settings.heading_logo | img_url: 'master' }}" />
+    </div>
+    <div class="grid--media-mentions">
+      <div class="grid__item--media-mentions">
+        <div class="metion-quotes" data-media-mention-slider-quotes>
+          {% for block in section.blocks %}
+            <div class="mention-quote text-center">
+              <p class="text--light">{{- block.settings.media_quote_text -}}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div>
+        <div data-media-mentions-slider-logos class="media__logos">
+          {%- for block in section.blocks -%}
+            <div class="text-center">
+              <img class="mention__logo" data-media-mention-logo src="{{- block.settings.media_logo_image | img_url: 'master' -}}" alt="{{- block.settings.media_logo_image.alt -}}">
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    <div class="media__mentionsReadMore">
+        <a href="{{ section.settings.readmore_url }}">{{ section.settings.readmore_text }}</a>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Media Mentions",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "heading_logo",
+        "label": "Header logo"
+      },
+      {
+        "type": "text",
+        "id": "readmore_text",
+        "label": "Read More text"
+      },
+      {
+        "type": "url",
+        "id": "readmore_url",
+        "label": "Read More Url"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "media_mention",
+        "name": "Media Mention",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"media_logo_image",
+            "label":"Media Logo"
+          },
+          {
+            "type": "html",
+            "id": "media_quote_text",
+            "label": "Media Quote "
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,152 @@
+<div class="accountPage__main">
+    {% form 'customer_login' %}
+        {% for field in form.errors %}
+            {% if form.errors.messages[field] contains "Incorrect email or password." %}
+                <div class="accountError">
+                    <h5 class="accountError__heading">Oops. Something’s not right.</h5>
+                    <div class="accountError__content">
+                        <p>
+                            <strong>Here’s what could have happened.</strong>
+                        </p>
+                        <ol>
+                            <li>There’s a typo in your email or password. Double check and try again.</li>
+                            <li>
+                                Some people have a membership but not an online account - could that be you? The fastest answer lives on the <a href="#recover" data-recover-password-trigger>forgot password</a> page.
+                                <p>
+                                    Our system will quickly tell you if you have an account with that email address. If yes, we’ll email you a password reset. If not, <a href="/account/register">create an account</a> in under 20 seconds. Easy.
+                                </p>
+                            </li>
+                        </ol>
+                        <div class="accountError__copyBox">
+                            No time for a few clicks? No worries. Email <a href="mailto:help@calderalab.com">help@calderalab.com</a>.
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="accountPage accountLogin" id="ResetSuccess" data-customer-login>
+            <div class="wrapper">
+                <div class="account__row">
+                    <div class="account__col account__form">
+                        <h4 class="account__heading">Customer Login</h4>
+                        {% for field in form.errors %}
+                            {% if form.errors.messages[field] contains "Incorrect email or password." %}
+                                <div class="errors"><ul><li>Incorrect Email or Password.</li></ul></div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="accountForm__fieldMain">
+                            <div class="accountError__message"></div>
+                            <div class="accountForm__fields">
+                                <input type="email" name="customer[email]" id="CustomerEmail" class="input-full{% if form.errors contains 'email' %} error{% endif %}" >
+                                <label for="CustomerEmail">Email Address</label>
+                            </div>
+                        </div>
+                        {% if form.password_needed %}
+                            <div class="accountForm__fieldMain">
+                                <div class="accountError__message"></div>
+                                <div class="accountForm__fields">
+                                    <input type="password" value="" name="customer[password]" id="CustomerPassword" class="password input-full{% if form.errors contains 'password' %} error{% endif %}">
+                                    <label for="CustomerPassword">Password</label>
+                                    <span class="togglePassword">
+                                        {% include 'icon-eye' %}
+                                        {% include 'icon-eye-close' %}
+                                    </span>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if form.password_needed %}
+                            <div class="accountForm__password">
+                                <a href="#recover" data-recover-password-trigger>Forgot Password?</a>
+                            </div>
+                        {% endif %}
+                        <div class="accountForm__button">
+                            <input type="submit" id="signin-btn" class="btn btn--primary" value="Log In">
+                        </div>
+                        <div class="accountForm__copy accountForm__copy--center">
+                            New to Caldera + Lab or Never had a password? <a href="/account/register">Create an Account</a>.
+                        </div>
+
+                    </div>
+                    <div class="account__col account__content">
+                        <h4 class="account__heading">Easily Manage Your Membership</h4>
+                        <ul class="account__list">
+                            <li>Review your next shipment</li>
+                            <li>Change shipping/billing info</li>
+                            <li>Skip a shipment</li>
+                            <li>Change delivery frequency</li>
+                            <li>View order history</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endform %}
+    {% form 'recover_customer_password' %}
+        {% for field in form.errors %}
+            {% if form.errors.messages[field] contains "No account found with that email." %}
+                <div class="accountError">
+                    <h5 class="accountError__heading">Oops. Something’s not right.</h5>
+                    <div class="accountError__content">
+                        <p>
+                            <strong>Turns out that email doesn’t have an account. How is that possible?</strong>
+                        </p>
+                        <p>
+                            We upgraded our membership system in June 2020. Before that, you could’ve managed your membership via the email links we sent you, without ever creating an account.
+                        </p>
+                        <p>
+                            But we love systems tech as much as green tech, so we’ve optimized our system to make managing your orders way easier. Whether you want your next order ASAP or need to skip a couple, <a href="/account/register">create an account</a> in 20 seconds and you’re set.
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="accountPage accountForgot" data-recover-password>
+            <div class="wrapper">
+                <div class="account__row" >
+                    <div class="account__col account__form account__form--forgot">
+                        <h4 class="account__heading">Recover Your Password</h4>
+                        {% for field in form.errors %}
+                            {% if form.errors.messages[field] contains "No account found with that email." %}
+                                <div class="errors"></div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="accountForm__fieldMain">
+                            <div class="accountError__message"></div>
+                            <div class="accountForm__fields">
+                                <input type="email" value="" name="email" id="RecoverEmail" class="input-full">
+                                <label for="RecoverEmail">Email Address</label>
+                            </div>
+                        </div>
+                        <div class="accountForm__copy accountForm__copy--small">
+                            {% include 'icon-account-help' %}
+                            Multiple emails? Make sure to enter the one you created your membership with.
+                        </div>
+                        <div class="accountForm__button">
+                            <input type="submit" id="forgot-btn" class="btn btn--primary" value="Email my password">
+                        </div>
+                        <div class="accountForm__copy accountForm__copy--center">
+                            <a href="#ResetSuccess" data-recover-password-hide>Return to Log In.</a>
+                        </div>
+                    </div>
+                    <div class="account__col account__content account__content--forgot">
+                        <h4 class="account__heading">You’re Here Because</h4>
+                        <ul class="account__defaultList">
+                            <li>You have an account but can’t remember the password</li>
+                            <li>You don’t have an account/password - you’ve always managed your membership via email links</li>
+                        </ul>
+                        <div class="account__copy">
+                            Can’t remember which email you created your membership with? Or other issues? <a href="mailto:help@calderalab.com">help@calderalab.com</a> is standing by.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endform %}
+</div>
+
+{% schema %}
+{
+    "name": "Login",
+    "settings": []
+}
+{% endschema %}

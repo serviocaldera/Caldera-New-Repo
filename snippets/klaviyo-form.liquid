@@ -1,0 +1,44 @@
+{% comment %}
+Klaviyo Form
+Note: Replace LIST_ID with actual list ID.
+{% endcomment %}
+<form
+    id="email_subscribe"
+    class="klaviyo_gdpr_embed_NnYREG newsletter__form email-capture__form"
+    action="//manage.kmail-lists.com/subscriptions/subscribe" 
+    data-newsletter-form
+    data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe"
+    method="GET" 
+    target="_blank" novalidate="novalidate">
+
+    <input type="hidden" name="g" value="NnYREG">
+    <input class="newsletter__input email-capture__input" type="email" value="" name="email" id="k_id_email" placeholder="Enter email"/>
+    <button type="submit" class="newsletter__submit klaviyo_submit_button">Submit</button>
+
+    <div class="newsletter__error error_message" style="display:none;"></div>
+</form>
+
+<p class="newsletter__success" data-newsletter-success>{{ settings.newsletter_confirmation_text }}</p>
+
+{% comment %}
+Include this before running the 'KlaviyoSubscribe.attachToForms' methods
+Adding this js file before body.
+<script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+{% endcomment %}
+{% comment %}
+ Can include this in JS files
+{% endcomment %}
+<script type="text/javascript">
+  KlaviyoSubscribe.attachToForms('#email_subscribe', {
+    hide_form_on_success: true,
+    extra_properties: {
+      $source: 'Newsletter',
+      Brand: 'Klaviyo'
+    },
+    success: function ($form) {
+     // `$form` is a jQuery wrapper around the form that was submitted. This makes it easy to get the email address or form fields.
+      $('[data-newsletter-form]').hide();
+      $('[data-newsletter-success]').show();
+    }
+  });
+</script>

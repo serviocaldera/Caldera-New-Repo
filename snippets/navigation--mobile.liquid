@@ -1,0 +1,85 @@
+<div class="nav-mobile{% if template.directory == 'customers' or template.name == blank or template.name contains 'cart' or template == 'page' %} always-opaque{% endif %}" data-navigation>
+    <div class="nav-mobile__header">
+      <a href="#" class="nav-mobile__trigger" title="Menu" data-mobile-trigger><span></span></a>
+      <a href="{{ shop.url }}" class="nav-mobile__logo" title="Caldera+Lab - Home">{%- include 'icon' with 'logo' -%}</a>
+      <a href="/" data-target-element="offcanvas-right" data-offcanvas-src="#offcanvas-right" class="nav-mobile__icon-link nav-mobile__cart-trigger js-cartCanvas" title="View Bag">
+      <span class="nav-mobile__cart-trigger--icon">{%- include 'icon' with 'bag' -%}</span>
+      <span id ="CartCount" class="nav-mobile__cart-trigger--count cart-qty-hidden" rv-show="cart.item_count | gt 0" rv-html="cart.item_count"></span>
+      </a>
+    </div>
+    <div class="nav-mobile__drawer" data-mobile-drawer>
+      <nav>
+        <ul class="nav-mobile__menu nav-mobile__menu--secondary">
+          {%- for link in linklists.navigation.links -%}
+          <li class="nav-mobile__menu-item">
+            <a href="{{ link.url }}" class="nav-mobile__menu-link" title="{{ link.title }}" {% if link.links != blank %}data-mobile-subnav-link{% endif %}>
+              <span>{{ link.title }}</span>
+              {% if link.links != blank %}
+              <svg width="16" height="10" class="icon-arrow"><path d="M14.857 1.155a.473.473 0 00-.7 0l-6.15 6.583-6.163-6.583a.473.473 0 00-.7 0 .555.555 0 000 .747l6.501 6.943a.468.468 0 00.35.155c.12 0 .253-.052.35-.155l6.5-6.943a.542.542 0 00.012-.747z" fill="#AF5D00" fill-rule="nonzero" stroke="#AF5D00"/></svg>
+              {% endif %}
+            </a>	
+            {% if forloop.first == true %}
+              <div class="nav-mobileChild" {% if link.links != blank %}data-mobile-subnav{% endif %}>
+                <div class="mega-menu">
+                  <div class="mega-menu__inner">
+                    {%- for block in section.blocks -%}
+                    <div class="mega-menu__item">
+                      <a href="{{ block.settings.item_url}}" class="mega-menu__item-link is-child-active">
+                        <img class="mega-menu__item-img" src="{{ block.settings.item_image | img_url: 'master'}}" alt="{{ block.settings.item_title}}">
+                        <p class="mega-menu__item-title">{{ block.settings.item_title}}</p>
+                        <p class="mega-menu__item-type">{{ block.settings.item_type}}</p>
+                      </a>
+                    </div>
+                  {%- endfor -%}
+                  </div>
+                </div>
+              </div>
+            {% else %}	
+            {% if link.links != blank %}
+            <div class="nav-mobileChild" {% if link.links != blank %}data-mobile-subnav{% endif %}>
+              <ul class="nav-mobileChild__row">
+                {%- for child_link in link.links -%} 
+                <li class="nav-mobileChild__item">
+                  <a href="{{ child_link.url }}" class="nav-mobileChild__link {% if child_link.active %}is-child-active{% endif %}">
+                    <span>{{ child_link.title }}</span>
+                  </a>
+                </li>
+                {%- endfor -%}
+              </ul>	
+            </div>
+            {% endif %}
+            {% endif %}
+          </li>
+          {%- endfor -%}
+          {% if shop.customer_accounts_enabled %} 
+          {% assign customer_account_url = '/account/login' %}
+          {% assign customer_account_text = 'Log In' %}
+          {% if customer %}
+          {% assign customer_account_url = '/account' %}
+          {% assign customer_account_text = 'My Account' %}
+          {% endif %}
+          <li class="nav-mobile__menu-item">
+            <a href="{{ shop.url }}{{ customer_account_url }}" class="nav-mobile__menu-link nav-mobile__menu-login" title="{{ customer_account_text }}">
+              <svg width="20" height="19" class="icon-login"><path d="M10 9.913c2.71 0 4.91-2.22 4.91-4.957S12.71 0 10 0 5.09 2.22 5.09 4.957 7.29 9.913 10 9.913zm-9 8.674a.41.41 0 0 0 .409.413H18.59a.41.41 0 0 0 .409-.413v-.826c0-3.34-2.213-6.196-6.545-6.196h-4.91C3.212 11.565 1 14.42 1 17.76v.826z" fill="#3d3d38"/></svg>
+              {{ customer_account_text }}
+            </a>
+          </li>
+          {% endif %}
+          {%- if free_sample_enabled -%}
+          <li class="nav-mobile__menu-item">
+            {%- assign label = free_sample_label | default: 'Free Sample' -%}
+            <a class="nav-mobile__menu-link free-sample-toggle" data-modal-show="free-sample-modal" title="{{ label }}">{{ label }}</a>
+          </li>
+          {%- endif -%}
+        </ul>
+      </nav>
+      <div class="nav-mobile__contact">
+        <a href="tel:{{ shop.phone }}" class="nav-mobile__contact-link">{{ shop.phone }}</a>
+        {%- if settings.support_email != blank -%}
+        <a href="mailto:{{ shop.email }}" class="nav-mobile__contact-link">{{ settings.support_email }}</a>
+        {%- endif -%}
+        {%comment%}{%- include 'social-links' -%}{%endcomment%}
+      </div>
+      <p class="nav-mobile__copyright">&copy; {{ 'now' | date: "%Y" }} Caldera &plus; Lab , All Rights Reserved</p>
+    </div>
+  </div>

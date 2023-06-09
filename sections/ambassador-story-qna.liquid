@@ -1,0 +1,58 @@
+{% if page.metafields.custom_fields["enable_ambassador_qa"] == 1 %}
+    
+        <div class="vipStoryQA">
+            <div class="wrapper">
+                {% if page.metafields.custom_fields["ambassador_qa_title"] != blank %}
+                    <h1 class="vipStoryQA__title">{{ page.metafields.custom_fields["ambassador_qa_title"] }}</h1>
+                {% endif %}                    
+                
+                {% if page.metafields.custom_fields["ambassador_qa_sub_title"] != blank %}
+                    <div class="vipStoryQA__sub-title">{{ page.metafields.custom_fields["ambassador_qa_sub_title"] }}</div>
+                {% endif %}                    
+                
+                <div class="vipStoryQA__content-wrapper vipStoryQA__content-wrapper--desk">
+                    {% if page.metafields.custom_fields["ambassador_qa_content1"] != blank %}
+                        <div class="vipStoryQA__content vipStoryQA__content--1">{{ page.metafields.custom_fields["ambassador_qa_content1"] }}</div>   
+                    {% endif %}
+
+                    {% if page.metafields.custom_fields["ambassador_qa_image1"] != blank %}
+                        <div class="vipStoryQA__image">
+                            <img src="{{ page.metafields.custom_fields["ambassador_qa_image1"] }}">
+                        </div>
+                    {% endif %}
+
+                    {% if page.metafields.custom_fields["ambassador_qa_content2"] != blank %}
+                        <div class="vipStoryQA__content vipStoryQA__content--2">{{ page.metafields.custom_fields["ambassador_qa_content2"] }}</div>   
+                    {% endif %}
+
+                    {% if page.metafields.custom_fields["ambassador_qa_image2"] != blank %}
+                        <div class="vipStoryQA__image">
+                            <img src="{{ page.metafields.custom_fields["ambassador_qa_image2"] }}">
+                        </div>    
+                    {% endif %}
+
+                    {% if page.metafields.custom_fields["ambassador_qa_content3"] != blank %}
+                        <div class="vipStoryQA__content vipStoryQA__content--3">{{ page.metafields.custom_fields["ambassador_qa_content3"] }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="vipStoryQA__content-wrapper vipStoryQA__content-wrapper--mobile">
+                    {% if page.metafields.custom_fields["ambassador_qa_content1_mobile"] != blank %}
+                        <div class="vipStoryQA__content vipStoryQA__content--1">{{ page.metafields.custom_fields["ambassador_qa_content1_mobile"] }}</div>   
+                    {% endif %}
+
+                    {% if page.metafields.custom_fields["ambassador_qa_image1_mobile"] != blank %}
+                        <div class="vipStoryQA__image">
+                            <img src="{{ page.metafields.custom_fields["ambassador_qa_image1_mobile"] }}">
+                        </div>
+                    {% endif %}
+
+                    {% if page.metafields.custom_fields["ambassador_qa_content2_mobile"] != blank %}
+                        <div class="vipStoryQA__content vipStoryQA__content--2">{{ page.metafields.custom_fields["ambassador_qa_content2_mobile"] }}</div>   
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    
+{% endif %}

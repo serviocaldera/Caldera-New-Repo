@@ -1,0 +1,164 @@
+{% unless product %}
+  {% assign product = section.settings.product %}
+{% endunless %}
+  <div class="accordion__container{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="accordion__list">
+      {%- for block in section.blocks -%}
+
+        <div class="accordion__item accordion__item--1l">
+          <p class="accordion__title js-accordion {% if block.type == "ingredients" %}accordion__item--active{% endif %}">
+            <span>{{ block.settings.title }}</span>
+
+            <i class="accordion__icon"></i>
+          </p>
+      
+          <div class="accordion__body js-accordion-expand js-expand-update {% if block.type == "ingredients" %}{%- if template contains 'pdp-combo' -%}default-active-height{%- else -%}default-active-height-single{%- endif-%}{% endif %}">
+            {%- if block.type == 'how_to_use' -%}
+              {%- if template contains 'pdp-combo' -%}
+                <div class="desktop-only">
+                  {%- include 'FaqProduct-how-to-use' -%}
+                </div>
+                <div class="mobile-only">
+                  {%- include 'FaqProduct-how-to-use--MOB' -%}
+                </div>
+              {%- else -%}
+                  {%- include 'FaqProduct-how-to-use-single' -%}
+              {%- endif  -%}
+            {%- elsif block.type == 'ingredients' -%}
+              {%- if template contains 'pdp-combo' -%}
+                <div class="desktop-only">
+                  {% include 'FaqProduct-ingredients' -%}
+                </div>
+                <div class="mobile-only"> 
+                  {%- include 'FaqProduct-ingredients--MOB' -%}
+                </div>
+              {%- else -%}
+                  {% include 'FaqProduct-ingredients' -%}
+              {%- endif -%}
+            {%- elsif block.type == 'faqs' -%}
+                {%- if template contains 'pdp-combo' -%}
+                  {% render 'FaqProduct-faqs', faqs_group: product.metafields.huemor["faqs"].value[0].faqs, faq_image_combo: product.metafields.huemor.faqs.value[0].image,link_title: block.settings.link_title,link_url: block.settings.link_url %}
+                {%- else -%}
+                  {% render 'FaqProduct-faqs', faqs_group: product.metafields.custom_fields["faq_list"], faq_image: product.metafields.custom_fields["faq_image"],link_title: block.settings.link_title,link_url: block.settings.link_url %}
+                {%- endif -%}
+
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <script>
+  window.addEventListener('load', ()=> {
+    document.querySelectorAll('.js-accordion').forEach(item => {
+      item.addEventListener('click', () => {
+        //console.log('acc clicked');
+        if (item.classList.contains('accordion__item--active')) {
+          let copy = item.parentElement.querySelector('.js-accordion-expand');
+          setTimeout(() => {
+            copy.style.height = 0;
+            item.classList.remove('accordion__item--active');
+          }, 0);
+        } else {
+          let activeItems = item.closest('.accordion__list').querySelectorAll(':scope > .accordion__item > .accordion__item--active');
+          if (activeItems.length > 0) {
+            activeItems.forEach(item => {
+              let copy = item.parentElement.querySelector('.js-accordion-expand');
+              setTimeout(() => {
+                copy.style.height = 0;
+                item.classList.remove('accordion__item--active');
+              }, 0);
+            });
+          }
+          item.classList.add('accordion__item--active');
+          let copy = item.parentElement.querySelector('.js-accordion-expand');
+          copy.style.height = 'auto';
+          let height = copy.offsetHeight + 'px';
+          copy.style.height = 0;
+          setTimeout(() => {
+            copy.style.height = height;
+          }, 0);
+          if (item.classList.contains('js-update-main')) {
+            item.closest('.js-expand-update').style.height = 'auto';
+            // let innerHeight = item.closest('.js-expand-update').offsetHeight + 'px';
+            // item.closest('.js-expand-update').style.height = innerHeight;
+            // console.log(innerHeight);
+          }
+        }
+      });
+    });
+  });
+  </script>
+
+{% schema %}
+{
+  "name": "Faq Product",
+  "class": "accordion",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "How to use",
+      "type": "how_to_use",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    },
+    {
+      "name": "Ingredients",
+      "type": "ingredients",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    },
+    {
+      "name": "FAQs",
+      "type": "faqs",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Url"
+        },
+        {
+          "type": "text",
+          "id": "link_title",
+          "label": "Link title",
+          "default":"ALL FAQs"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Faq Product",
+      "category": "Caldera"
+    }
+  ]
+}
+{% endschema %}

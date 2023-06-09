@@ -1,0 +1,670 @@
+.referral{
+    display: flex;
+    background-color: #22221e;
+    height: 42rem;
+    position: relative;
+}
+.img-to-mobile{
+    display: none;
+}
+.refer-logo{
+    content: url({{"swell-referral-img2.png" | asset_url}});
+    background-size: cover;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    height: 200px;
+    width: 200px;
+    top: 18%;
+}
+.explain-refer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.refer{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    padding-top: 4rem;
+    padding-left: 4rem;
+	position: relative;    
+}
+.referral-img{
+    background-image: url({{"swell-referral-img.png" | asset_url}});
+    width: 50%;
+    background-size: cover;
+    background-position-x: right;
+    background-position-y: bottom;
+}
+.explain-refer h1{
+    font-size: 81px;
+    line-height: 0.89;
+    letter-spacing: normal;
+    color: white;
+} 
+.explain-refer p{
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    color: #fcfbf2;
+}
+.refer-form p{
+    border-top: 1px solid rgba(225, 225, 225, .2);
+    padding-top: 2rem;
+    margin-top: 2.5rem;
+    width: 372px;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+    font-size: 13px !important;
+    letter-spacing: normal;
+    color: #fcfbf2;
+}
+.refer-form-input{
+    width: 372px;
+    font-size: 13px;
+    height: 44px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.refer-form-input input[type=text]{
+    width: 76%;
+    padding-left: 1rem;
+    height: 100%;
+    background-color: #22221e;
+    border: 1px solid rgba(225,225,225,.5);
+    font-size: 10px;
+}
+.refer-form-input input[type=text]::placeholder{
+	color: #fcfbf2;
+}
+.refer-form-input input[type=submit]{
+    width: 24%;
+    background-color: #22221e;
+    border: 1px solid rgba(225,225,225,.5);
+    height: 100%;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3.41px;
+    color: #fcfbf2;  
+}
+.showForm input:focus{
+	color: #fcfbf2 !important;
+}
+.error-email{
+    margin-top: 0 !important;
+    border-top: none !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 16px !important;
+    color: red !important;	
+}
+.hiddenForm{
+	display: none;
+}
+.share-links-p{
+    border-top: none !important;
+    padding-top: 0 !important;
+    margin-top: 1.5rem !important;
+    color: rgba(225,225,225,.5) !important;
+    margin-bottom: 0rem !important;    
+}
+.shareLinks{
+    display: flex;
+    width: 315px;
+    justify-content: space-between;
+    margin-top: .5rem;
+}
+.shareLinks i{
+	color: rgba(225,225,225,.6);
+    font-size: 11px;
+}
+.shareLinks div a{
+	width: 100%;
+    display: flex;
+    align-items: center;
+}
+.shareLinks  label{
+    margin-left: .5rem;
+    text-transform: none;
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: normal;
+    color: rgba(225,225,225,.6);
+}
+.swell-share-referral-sms{
+	display: none;
+}
+.hidden-history{
+	display: none;
+}
+.show-history{
+	display: flex;
+}
+.refer-mail-send{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: 3333;
+} 
+.refer-mail-send h3{
+	font-size:-webkit-xxx-large;
+	font-weight: bolder;
+	color: white;
+}
+.refer-mail-send h6{
+	color: white;
+}
+.refer-mail-send-close{
+    position: absolute;
+    top: 25%;
+    right: 50%;
+    cursor: pointer;
+    color: white;
+    font-size: x-large;
+}
+.history{
+	width: 50%;
+    justify-content: center;
+    color: white;
+    background-color: #3d3d39;
+    padding-right: 4rem;
+    align-items: center;
+    padding-top: 4rem;
+}
+.history a{
+    text-decoration: underline;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 0.36px;
+}
+.history h2{
+    color: white;
+    font-size: 26px;
+    letter-spacing: 1.8px;
+    margin-bottom: 0;
+}
+.history th{
+    width: 50%;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: normal;
+    padding-bottom: .3rem;
+}
+.history td{
+    font-size: 14px;
+    border-top: 1px solid rgba(225,225,225,.1);
+    height: 2.5rem;
+}
+.history-refer-table::-webkit-scrollbar
+{
+    width: 7px;
+    border-radius: 100px;
+    background-color: #ad6d25;
+}
+.history-refer-table::-webkit-scrollbar-thumb
+{
+    height: 86%;
+    background-color: #8f8f8f;
+    border-radius: 100px;
+}
+.history p{
+	font-size: 14px;
+    line-height: 19px;	
+}
+.history h2:nth-of-type(2)
+{
+    border-top: 1px solid rgba(225,225,225,.5);
+    width: 385px;
+    margin-bottom: 0rem;
+}
+.history-refer-table{
+    height: 11rem;
+    overflow: auto;
+    width: 400px;
+    margin-bottom: 2rem;
+}
+.popup-background{
+	position: fixed;
+	display: flex;
+	align-items: center;
+	top:0;
+	width: 100vw;
+	height:100vh;
+    background-color: rgba(0, 0, 0, .9);
+    z-index: 10000;
+}
+.popup-body{
+	background-image: url({{"swell-popup-img.png" | aseet_url}});
+    background-size: cover;
+    width: 564px;
+    height: 392px;
+    left: 17%;
+    position: absolute;
+}
+.popup-body input{
+    color: white;
+    background-color: #ad6d25;
+    margin-top: 1rem;
+    width: 138px;
+    height: 33px;
+    border: none;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 3.64px;
+    cursor: pointer;
+}
+.popup-text{
+    position: absolute;
+    right: -24rem;
+    top: 4rem;
+}
+.popup-body h5{
+    font-weight: 500;
+    font-size: 56px;
+    letter-spacing: -2px;
+    color: white;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(225,225,225,.4);
+    padding-bottom: 1rem;
+}
+.popup-body p{
+    margin-top: 1rem;
+    font-size: 15px;
+    font-weight: normal;
+    letter-spacing: normal;
+    color: white;
+}
+.popup-close{
+	content: url({{'swell-popup-close-img.svg' | asset_url}});
+    position: absolute;
+    top: -14%;
+    right: 0%;
+    cursor: pointer;
+    width: 19px;
+}
+.show-at-mobile{
+    display: none;
+}
+@media screen and (max-width: 1200px){
+	.referral{
+		height: 35rem;
+	}
+	.popup-body{
+		left: 9%;
+	}
+}
+@media screen and (max-width: 1100px){
+	.referral{
+		height: 32rem;
+	}
+	.explain-refer h1{
+		font-size: 57px;
+	    margin-bottom: .5rem;	
+	}
+	.refer-form p:nth-of-type(1){
+		font-size: 13px !important;
+	    padding-top: 1rem !important;
+    	margin-top: 1.5rem !important;	
+	}
+	.error-email:nth-of-type(1){
+		font-size: 16px !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+	}
+	.refer{
+		padding-top: 6rem;
+		padding-left: 2rem;	
+	}
+	.history a{
+		font-size: 12px;
+	}
+	.history{
+		padding-top: 6rem;
+	    padding-right: 2rem;	
+	}
+	.history th{
+	    font-size: 12px;	
+	}
+	.history td{
+		font-size: 13px;
+	}
+	.history-refer-table{
+		width: 310px;
+		margin-bottom: 1rem;
+	}
+	.history h2{
+		font-size: 23px;
+		line-height: 50px;
+		line-height: 40px;
+	}
+	.history p{
+		font-size: 11px;
+    	line-height: 16px;
+	}
+	.history h2:nth-of-type(2){
+		line-height: 40px;
+	    width: 321px;	
+	}
+	.explain-refer p:nth-of-type(1){
+		padding-top: 0rem;
+    	margin-top: 0rem;
+    	font-size: 13px;
+	}
+	.refer-logo{
+		height: 150px;
+    	width: 150px;
+    	top: 22%;
+	}
+	.refer-form p{
+		width: 315px;
+		font-size: 12px !important;
+	}
+	.refer-form-input{
+	    width: 315px;
+    	height: 40px;	
+	}
+	.refer-form-input input[type=submit]{
+	    font-size: 9px;	
+	}
+	.shareLinks{
+		width: 270px;
+	}
+	.shareLinks i{
+	    font-size: 9px;	
+	}
+	.shareLinks label{
+	    font-size: 11px;	
+	}
+	.popup-body{
+		width: 483px;
+    	height: 336px;
+    	left: 10%;
+	}
+	.popup-body h5{
+		font-size: 47px;
+	}
+	.popup-text{
+		right: -17rem;
+	}
+}
+@media screen and (max-width: 850px)
+{
+    .history{
+        padding-right: 0;
+        padding-left: 2rem;
+    }
+    .refer{
+        padding-left: 0;
+    }
+    .popup-body{
+            width: 411px;
+    height: 286px;
+    left: 6%;
+    }
+    .popup-text {
+    right: -15rem;
+}
+.popup-body h5 {
+    font-size: 40px;
+}
+.popup-body p{
+    font-size: 14px;
+}
+}
+@media screen and (max-width: 700px)
+{
+    .showForm{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .img-to-leptop{
+        display: none;
+    }
+    .img-to-mobile{
+        display: flex;
+        width: 100%;
+        content: url({{"swell-referral-img.png" | asset_url}});
+    }
+    .show-at-leptop{
+        display: none;
+    }
+    .show-at-mobile{
+        display: flex;
+    }
+    .referral {
+        height: auto;
+        flex-direction: column;
+    }
+    .refer{
+        width: 100%;
+    }
+    .explain-refer{
+        align-items: center;
+    }
+    .refer{
+       padding-top: 3rem;
+           padding-bottom: 4rem;
+    }
+    .explain-refer p{
+        text-align: center;
+        font-size: 18px;
+    }
+    .refer-logo{
+        top: 0%;
+        transform: translate(-50%, -36%);
+    }
+    .explain-refer p:nth-of-type(1){
+        font-size: 20px;
+    }
+    .refer-form p:nth-of-type(1) {
+        font-size: 16px !important;
+        padding-top: 1.5rem !important;
+    }
+    .refer-form p{
+        width: 390px;
+    }
+    .refer-form-input input[type=text]{
+        width: 100%;
+        font-size: 14px;
+        margin-bottom: .7rem;
+        height: 50%;
+    }
+    .refer-form-input {
+        width: 400px;
+        height: 95px;
+        margin-bottom: 2rem;
+    }
+    .refer-form-input input[type=submit] {
+        font-size: 14px;
+        height: 50%;
+        width: 100%;
+    }
+    .refer-form p{
+       font-size: 16px !important;
+    }
+    .swell-share-referral-sms{
+        display: flex;
+    }
+    .shareLinks {
+        width: 390px;
+    }
+    .shareLinks div a{
+        flex-direction: column;
+    }
+    .shareLinks{
+        margin-top: 1rem;
+    }
+    .shareLinks i {
+        font-size: 17px;
+    }
+    .shareLinks label {
+        font-size: 14px;
+        margin-top: .5rem;
+    }
+    .history{
+        width: 100%;
+        position: relative;
+        padding-left: 0;
+        padding-top: 3.5rem;
+        padding-bottom: 3rem;
+    }
+    .explain-history{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .history a {
+        font-size: 19px;
+        margin-bottom: 1rem;
+    }
+    .history h2{
+        font-size: 35px;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .history h2:nth-of-type(2){
+        padding-top: 1rem;
+        width: 375px;
+    }
+    .history th {
+        font-size: 14px;
+    }
+    .history td {
+        font-size: 15px;
+    }
+    .history p{
+        font-size: 21px;
+        text-align: center;
+        line-height: normal;
+        letter-spacing: normal;
+        margin-top: .5rem;
+    }
+    .history-refer-table{
+        height: 11.5rem;
+            width: 375px;
+    }
+    .popup-background{
+    justify-content: center;
+    align-items: end;
+    padding-top: 10rem;
+    }
+    .popup-body{
+        position: relative;
+        left: unset;
+        width: 429px;
+        height: 364px;
+    }
+    .popup-close{
+        transform: none;
+        top: -3rem;
+    }
+    .popup-text{
+        right: 50%;
+        transform: translate(50%, 100%);
+        top: unset;
+        bottom: -3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .popup-body h5 {
+        font-size: 53px;
+    }
+    .popup-body input{
+        width: 221px;
+        height: 46px;
+        font-size: 15px;
+    }
+    .popup-body p {
+        font-size: 18px;
+        margin-top: 2rem;
+    }
+}
+@media screen and (max-width: 450px)
+{
+    .explain-refer h1{
+        font-size: 43px;
+    }
+    .explain-refer p:nth-of-type(1) {
+        font-size: 15px;
+    }
+    .refer-form p {
+        width: 295px;
+        font-size: 13px !important;
+        letter-spacing: -.2px;
+    }
+    .refer-form-input{
+        width: 295px;
+        margin-bottom: 0rem;
+    }
+    .shareLinks {
+        width: 295px;
+    }
+    .shareLinks i {
+        font-size: 15px;
+    }
+    .shareLinks label{
+        font-size: 12px;
+    }
+    .refer-form-input input[type=text]{
+        font-size: 12px;
+    }
+    .history a{
+        font-size: 16px;
+        margin-bottom:.5rem;
+    }
+    .history h2{
+        font-size: 30px;
+    }
+    .history-refer-table{
+        width: 300px;
+    }
+    .history th {
+        font-size: 12px;
+    }
+    .history td {
+        font-size: 13px;
+    }
+    .history h2:nth-of-type(2){
+        width: 300px;
+    }
+    .history p{
+        font-size: 18px;
+        margin-top: 0;
+    }
+    .popup-close{
+        top: -2.5rem;
+    }
+    .popup-body{
+        width: 311px;
+        height: 264px;
+    }
+    .popup-body h5 {
+        font-size: 38px;
+    }
+    .popup-text{
+        bottom: -2rem;
+        width: max-content;
+    }
+    .popup-body input {
+        width: 187px;
+        height: 39px;
+        font-size: 13px;
+    }
+    .popup-body p {
+        font-size: 16px;
+        margin-top: 1.5rem;
+    }
+}

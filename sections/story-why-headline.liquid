@@ -1,0 +1,24 @@
+<div class="headline headline--large headline--why" id="js-why-headline">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--two-thirds push--medium--one-sixth text-center">
+        <div class="headline__content">
+          <p class="text--light">{{ section.settings.headline_content | strip_html }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Large Headline Section",
+    "settings": [
+      {
+        "type":"textarea",
+        "id":"headline_content",
+        "label": "Headline Content",
+        "default":"They say good things come to those who wait. But we believe great skin comes to those who live well."
+      }
+    ]
+  }
+{% endschema %}

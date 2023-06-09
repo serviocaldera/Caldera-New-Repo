@@ -1,0 +1,36 @@
+<div class="c-shippingHero">
+    {% if section.settings.image-desktop != blank %}
+    <div class="c-shippingHero__image c-shippingHero__image--mobile" style="background-image: url('{{ section.settings.image-mobile | img_url: "master" }}');"></div>
+    <div class="c-shippingHero__image c-shippingHero__image--desktop" style="background-image: url('{{ section.settings.image-desktop | img_url: "master" }}');"></div>
+    {% endif %}
+    <h2 class="c-shippingHero__title">
+        {% if section.settings.title != blank %}
+            {{ section.settings.title }}
+        {% else %}
+            {{ page.title }}
+        {% endif %}
+    </h2>
+</div>
+
+{% schema %}
+  {
+    "name": "Shipping Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image-desktop",
+        "label":"Hero Desktop Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"image-mobile",
+        "label":"Hero Mobile Image"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title"
+      }
+    ]
+  }
+{% endschema %}

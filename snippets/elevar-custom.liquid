@@ -1,0 +1,15 @@
+{%- if customer -%}
+<script>
+    window.addEventListener('load', () => {
+	  if(window.ElevarGtmSuite){
+	    ElevarGtmSuite.utils.pushToDataLayer({
+            "event": "my_custom_event",
+            "user_properties": {
+            "CustomerEmailSha1": "{{- customer.email | sha1 -}}",
+            "CustomerTotalSpent": "{{- customer.total_spent | divided_by: 100 -}}",
+            }
+        })
+	  }
+	});
+</script>
+{%- endif -%}

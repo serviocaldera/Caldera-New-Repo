@@ -1,0 +1,187 @@
+{% for tag in customer.tags %}
+    {% if tag == 'SubscriptionActive' or tag == 'SubscriptionInactive'%}
+        {% assign isUpscribeCustomer = true %}
+    {% endif %}
+{% endfor %}
+<div class="account account-page">
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid__item medium--one-third">
+                <div class="account-page__title">
+                    <h3>Hey, {{ customer.first_name }} {{ customer.last_name }}</h3>
+                    <p class="text--accent">{{ customer.email }}</p>
+                    <a href="/account/logout" class="medium--hide">Log Out</a>
+                </div>
+                <div class="account-page__mobile-nav dropdown" data-dropdown>
+                    <span>Order History</span>
+                    <ul>
+                        <li><a href="/account/addresses">Address Book</a></li>
+                        {% if isUpscribeCustomer %}
+                            <li><a href="https://{{ shop.domain }}/account?view=subscriptions#/">Your Membership</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <ul class="account-page__nav">
+                    <li class="active">Order History</li>
+                    <li><a href="/account/addresses">Address Book</a></li>
+                    {% if isUpscribeCustomer %}
+                        <li><a href="https://{{ shop.domain }}/account?view=subscriptions#/all">Your Membership</a></li>
+                    {% endif %}
+                    <li><a href="/account/logout">Log Out</a></li>
+                </ul>
+                <ul class="account-page__contact">
+                    <li class="pre-header">Need Help?</li>
+                    <li><a href="mailto:help@calderalab.com">help@calderalab.com</a></li>
+                    <li><a href="tel:8883653159">888 365 3159</a></li>
+                </ul>
+            </div>
+            <div class="grid__item medium--two-thirds large--seven-twelfths">
+                <div class="account-page__order-title">
+                    <h1><a href="/account">{% include 'icon' with 'arrow' %}</a>Order {{ order.name }}</h1>
+                    <p>{{ order.created_at | date: "%b %d, %Y %I:%M%p" }}</p>
+                </div>
+                <div class="account-page__details">
+                    <h3><a href="/account">{% include 'icon' with 'arrow' %}</a>Order {{ order.name }}</h3>
+                    {% if order.cancelled %}
+                        <div class="errors">
+                            <p class="h5">Order Cancelled: {{ order.cancelled_at | date: "%B %d, %Y %I:%M%p" }}</p>
+                            <p>Reason: {{ order.cancel_reason }}</p>
+                        </div>
+                    {% endif %}
+                    <div class="account-page__order grid-uniform">
+                        <div class="grid__item x-small--one-half small--one-half one-half">
+                            <div class="order__details">
+                                <strong>Shipping Address</strong>
+                                <p>
+                                    {{ order.shipping_address.name }}<br>
+                                    {% if order.shipping_address.company != '' %}
+                                        {{ order.shipping_address.company }}<br>
+                                    {% endif %}
+                                    {{ order.shipping_address.street }}<br>
+                                    {{ order.shipping_address.city }},
+                                    {% if order.shipping_address.province != '' %}
+                                        {{ order.shipping_address.province }}
+                                    {% endif %}
+                                    {{ order.shipping_address.zip | upcase }}<br>
+                                    {{ order.shipping_address.country }}<br>
+                                    {{ order.shipping_address.phone }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="grid__item x-small--one-half small--one-half one-half">
+                            <div class="order__details">
+                                <strong>Billing Address</strong>
+                                <p>
+                                    {{ order.billing_address.name }}<br>
+                                    {% if order.billing_address.company != '' %}
+                                        {{ order.billing_address.company }}<br>
+                                    {% endif %}
+                                    {{ order.billing_address.street }}<br>
+                                    {{ order.billing_address.city }},
+                                    {% if order.billing_address.province != '' %}
+                                        {{ order.billing_address.province }}
+                                    {% endif %}
+                                    {{ order.billing_address.zip | upcase }}<br>
+                                    {{ order.billing_address.country }}<br>
+                                    {{ order.billing_address.phone }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="grid__item x-small--one-half small--one-half one-half">
+                            <div class="order__details">
+                                <strong>Shipping Method</strong>
+                                {% for shipping_method in order.shipping_methods %}
+                                    <p>
+                                        {{ shipping_method.price | money }}<br>
+                                        {{ shipping_method.title }}<br>
+                                        {% if line_item.fulfillment.tracking_number %}
+                                            <a href="{{ line_item.fulfillment.tracking_url }}">Track Package</a>
+                                        {% endif %}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="grid__item x-small--one-half small--one-half one-half">
+                            <div class="order__details">
+                                <strong>Payment Method</strong>
+                                <p>
+                                    {{ transaction.payment_details.credit_card_company }} - {{ transaction.payment_details.credit_card_last_four_digits }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account-page__order-items">
+                        {% for item in order.line_items %}
+                            <div class="account-page__order-item">
+                                <div class="order-item__image">
+                                    <img src="{{ item.image | img_url: '125x' }}" data-rjs="{{ item.image | img_url: '250x' }}" alt="{{ item.title }}">
+                                </div>
+                                <div class="order-item__title">
+                                    <h6>{{ item.product.title | remove: 'Auto renew' | remove: '10.00% Off' }}</h6>
+                                    <p class="text--accent">{{ item.variant.title }}</p>
+                                    {% unless item.properties == blank %}
+                                        <p class="text--accent medium--hide">
+                                            {% include 'icon' with 'repeat' %}
+                                            Delivery Every
+                                            {% for property in item.properties %}
+                                                {% if property.first == 'shipping_interval_frequency' %}
+                                                    {{ property.last }}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% for property in item.properties %}
+                                                {% if property.first == 'shipping_interval_unit_type' %}
+                                                    {{ property.last }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                    {% endunless %}
+                                </div>
+                                <div class="order-item__properties">
+                                    {% unless item.properties == blank %}
+                                        <p class="text--accent">
+                                            {% include 'icon' with 'repeat' %}
+                                            Delivery Every
+                                            {% for property in item.properties %}
+                                                {% if property.first == 'shipping_interval_frequency' %}
+                                                    {{ property.last }}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% for property in item.properties %}
+                                                {% if property.first == 'shipping_interval_unit_type' %}
+                                                    {{ property.last }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                    {% endunless %}
+                                </div>
+                                <div class="order-item__price text-right">
+                                    <p>{{ item.price | money }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="account-page__order-footer text-right">
+                        <p><span>Subtotal </span>{{ order.subtotal_price | money }}</p>
+                        <p><span>Taxes </span>{{ order.tax_price | money }}</p>
+                        <p><span>Shipping </span>{{ order.shipping_price | money }}</p>
+                        <p><span>Total </span>{{ order.total_price | money }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid__item one-whole medium-hide text-center">
+                <ul class="account-page__contact--mobile account-page__contact">
+                    <li class="pre-header">Need Help?</li>
+                    <li><a href="mailto:help@calderalab.com">help@calderalab.com</a></li>
+                    <li><a href="tel:8883653159">888 365 3159</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Order",
+    "settings": []
+}
+{% endschema %}

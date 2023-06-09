@@ -1,0 +1,56 @@
+{% if product.metafields.custom_fields["enable_organic_ingredients"] == 1%}
+<div class="c-pdpInd">
+    <div class="wrapper">
+        <div class="c-pdpInd__row">
+            <div class="c-pdpInd__col c-pdpInd__content">
+                <div class="c-pdpInd__box">
+                    {% if product.metafields.custom_fields["organic_ingredients_title"] != blank %}
+                    <h4 class="c-pdpInd__heading">
+                        {{ product.metafields.custom_fields["organic_ingredients_title"] }}
+                    </h4>
+                    {% endif %}
+                    {% if product.metafields.custom_fields["organic_ingredients_heading"] != blank %}
+                    <h6 class="c-pdpInd__subHeading">
+                        {{ product.metafields.custom_fields["organic_ingredients_heading"] }}
+                    </h6>  
+                    {% endif %}
+                    {% if product.metafields.custom_fields["organic_ingredients_copy"] != blank %}
+                        <div class="c-pdpInd__copy c-pdpInd__copy--desktop">    
+                            {{ product.metafields.custom_fields["organic_ingredients_copy"] }}
+                        </div>    
+                    {% endif %}   
+                </div>
+            </div>
+            {% if product.metafields.custom_fields["organic_ingredients_items"] != blank %}
+            <div class="c-pdpInd__col c-pdpInd__list">
+                {% for item in product.metafields.custom_fields["organic_ingredients_items"] %}
+                    <div class="c-pdpInd__item">
+                        {% if item["icon"] != blank %}
+                            <img src='{{ item["icon"] }}' data-src='{{ item["icon"] }}' class="lazyload c-pdpInd__image" alt='{{ item["name"] }}' />
+                        {% endif %}
+                        {% if item["name"] != blank %}
+                            <p class="c-pdpInd__name">{{ item["name"] }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if product.metafields.custom_fields["organic_ingredients_copy"] != blank %}
+                <div class="c-pdpInd__copy c-pdpInd__copy--mobile">
+                    {{ product.metafields.custom_fields["organic_ingredients_copy"] }}
+                </div>
+            {% endif %}   
+        </div>
+    </div>
+    <a href="#" class="c-pdpInd__readmore">
+        <svg width="28px" height="16px" viewBox="0 0 28 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="MOBILE-NEW-CALDERA" transform="translate(-174.000000, -1798.000000)" fill="#FFFFFF">
+                    <path d="M198,1792.5 L198,1808.75 C198,1809.44083 197.44,1810 196.75,1810 C196.06,1810 195.5,1809.44083 195.5,1808.75 L195.5,1792.5 L179.25,1792.5 C178.56,1792.5 178,1791.94083 178,1791.25 C178,1790.56 178.56,1790 179.25,1790 L196.736667,1790 C197.071667,1790 197.393333,1790.13333 197.63,1790.37 C197.866667,1790.6075 198,1790.92833 198,1791.26333 L198,1792.5 Z" id="Path" transform="translate(188.000000, 1800.000000) scale(-1, 1) rotate(135.000000) translate(-188.000000, -1800.000000) "></path>
+                </g>
+            </g>
+        </svg>
+    </a>
+</div>
+<!--c-pdpInd-->
+{% endif %}

@@ -1,0 +1,50 @@
+{%- if settings.checkout_bullet_list_enable -%}
+<div class="CheckoutBulletList">
+    <div class="wrap CheckoutBulletList-inner">
+   {%- if settings.bullet_list_title -%}<h3 class="sidebar__title CheckoutBulletList-item-main_title">{{settings.bullet_list_title}}</h3>{%- endif -%}
+    {%- capture bulletList -%}
+        {%- for count in (0..4) -%}
+          {%- assign checkout_bullet_img_key = 'bullet_list_img_' | append: count -%}
+          {%- assign checkout_bullet_img = settings.[checkout_bullet_img_key] -%}
+          {%- assign checkout_bullet_headline_key = 'bullet_list_headline_' | append: count -%}
+          {%- assign checkout_bullet_headline = settings.[checkout_bullet_headline_key] -%}
+          {%- assign checkout_bullet_text_key = 'bullet_list_text_' | append: count -%}
+          {%- assign checkout_bullet_text = settings.[checkout_bullet_text_key] -%}
+                {%- if checkout_bullet_headline or checkout_bullet_text -%}
+                    <div class="CheckoutBulletList-item">
+                        {%- if checkout_bullet_headline -%}
+                            <h4 class="CheckoutBulletList-item-heading">{% if checkout_bullet_img %}
+                                <img class="CheckoutBulletList-item-img" src="{{checkout_bullet_img | file_url }}" alt="{{checkout_bullet_headline}} icon" width="36" height="36" />
+                            {% endif %}
+                            {% if checkout_bullet_headline %}
+                                {{checkout_bullet_headline}}
+                            {% endif %}
+                            </h4>
+                        {% endif %}
+                        {% if checkout_bullet_text %}
+                            <p class="CheckoutBulletList-item-content">{{checkout_bullet_text}}</p>
+                        {% endif %}
+                    </div>
+                {%- endif -%}
+        {%- endfor -%}
+    {%- endcapture -%}
+
+    {{bulletList}}
+    </div>
+</div>
+{%- endif -%}
+
+<script>
+   $(window).on("load resize", function () {
+        if($('.CheckoutBulletList').length > 0){
+
+            if ($(this).width() < 1032) {
+                $( '.CheckoutBulletList' ).remove().clone().insertAfter( '.main__content' ).addClass('CheckoutBulletList-inner--mob');
+
+            } else {
+                $( '.CheckoutBulletList' ).remove().clone().insertAfter( '.sidebar__content' ).removeClass('CheckoutBulletList-inner--mob');
+            }
+
+        }
+    }).trigger('load resize');
+</script>

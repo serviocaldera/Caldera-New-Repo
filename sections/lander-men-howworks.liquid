@@ -1,0 +1,72 @@
+<div class="c-landerWorks">
+    <div class="wrapper">
+        <h2 class="c-landerWorks__title">
+             {{ section.settings.title }}
+        </h2>
+        <h3 class="c-landerWorks__heading">
+            {{ section.settings.heading }}
+        </h3>
+        <div class="c-landerWorks__row">
+            {% for block in section.blocks %}
+                <div class="c-landerWorks__item">
+                    <img src="{{ block.settings.image | img_url: 'master' }}" class="c-landerWorks__image" />
+                    <div class="c-landerWorks__count">{{ block.settings.count }}</div>
+                    <div class="c-landerWorks__copy">{{ block.settings.text }}</div>  
+                </div>
+            {% endfor %}
+        </div>
+        <div class="c-landerWorks__copy">
+            {{ section.settings.copy }}
+        </div>
+    </div>
+</div>
+<!--c-landerWorks-->
+
+{% schema %}
+  {
+    "name": "How works",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default": "Clinically proven to work on all skin types and sensitivities, The Good might be the least complicated skincare solution out there. "
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading",
+        "default": "Here’s how it works:"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default": "The Good is lightweight and fast-absorbing. Your skin will feel refreshed and hydrated - never greasy. "
+      }
+    ],
+    "blocks": [
+      {
+        "type": "work-block",
+        "name": "Items",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "count",
+            "label": "Count"
+          },
+          {
+            "type": "html",
+            "id": "text",
+            "label": "Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

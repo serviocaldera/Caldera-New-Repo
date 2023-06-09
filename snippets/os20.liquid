@@ -1,0 +1,181 @@
+{% if template contains 'story-results' %}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js'></script>
+{% endif %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        {% if template contains 'charity' %}
+        $('.promo-bar').addClass('is-opaque');
+        $('.nav-mobile').addClass('is-opaque');
+        $('.nav-desktop').addClass('is-opaque');
+        {% endif %}
+        {% if template contains 'how-to-use' %}
+        //It was in template below under all content without document ready function
+        window.addEventListener('scroll', function() {
+            var $window = $(window);
+            var $element = $('.c-howToHowMuch__main');
+            var window_height = $window.height();
+            var window_top_position = $window.scrollTop();
+            var window_bottom_position = (window_top_position + window_height);
+            var element_height = $element.outerHeight();
+            var element_top_position = $element.offset().top;
+            var element_bottom_position = (element_top_position + element_height);
+            if ((element_bottom_position >= window_top_position) && (element_top_position <= window_bottom_position)) {
+                $('.c-howToHowMuch').addClass('is-active');
+                console.log('view section');
+            }else{
+                $('.c-howToHowMuch').removeClass('is-active');
+                console.log('hide section');
+            }
+
+        });
+        {% endif %}
+        {% if request.path contains '/science' %}
+        $('.c-scienceNav__mobileLink').click(function(){
+            $(this).toggleClass('is-open');
+            $('.c-scienceNav__links').toggleClass('is-open');
+            return false;
+        });
+
+        $('.c-scienceNav__links a').click(function(){
+            $('.c-scienceNav__links').removeClass('is-open');
+            $('.c-scienceNav__mobileLink').removeClass('is-open');
+        });
+
+        $("[data-scroll]").on('click', function(e) {
+            e.preventDefault();
+            if (this.hash !== "") {
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top - 110
+                }, 100, function(){
+                });
+            }
+        });
+        {% endif %}
+        {% if template contains 'story-how' %}
+            $('.c-storyFullList__link').click(function(){
+                $(this).hide();
+                $('.c-storyFullList__col').show();
+                return false;
+            });
+        {% endif %}
+        {% if template contains 'story-results' %}
+        var labels = ["Healthier Skin", "Improved Fine Lines & Wrinkles", "Smoother Skin", "Less Dry", "Even Skin Tone", "Radiance & Luminosity"]; // Add labels to array
+// End Defining data
+        var options = {
+            responsive: true, // Instruct chart js to respond nicely.
+            maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+            scale: {
+                gridLines: {
+                    display: true,
+                    circular: true,
+                    borderDashOffset: 4
+                },
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    stepSize: 25,
+                },
+                pointLabels :{
+                    fontSize: 0,
+                }
+            },
+            legend: {
+                display: false,
+            }
+        };
+
+        var ctx = document.getElementById("myChartOne");
+
+        var myChartOne = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "All Skin Types",
+                    data: [96, 87, 91, 91, 85, 89],
+                    fill: true,
+                    backgroundColor: "rgba(185,104,12,0.3)",
+                    borderColor: "rgba(185,104,12,1)",
+                    borderWidth: 1,
+                    pointBackgroundColor: "rgba(185,104,12,1)",
+                    pointBorderColor: "rgba(185,104,12,1)",
+                    pointStyle: "rectRounded",
+                    pointBorderWidth: 4,
+                    pointHitRadius: 14
+                }]
+            },
+            options: options
+        });
+
+        var ctx = document.getElementById("myChartTwo");
+
+        var myChartTwo = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Normal",
+                    data: [100, 84, 91, 88, 75, 88],
+                    fill: true,
+                    backgroundColor: "rgba(185,104,12,0.3)",
+                    borderColor: "rgba(185,104,12,1)",
+                    borderWidth: 1,
+                    pointBackgroundColor: "rgba(185,104,12,1)",
+                    pointBorderColor: "rgba(185,104,12,1)",
+                    pointStyle: "rectRounded",
+                    pointBorderWidth: 4,
+                    pointHitRadius: 14
+                }]
+            },
+            options: options
+        });
+
+        var ctx = document.getElementById("myChartThree");
+
+        var myChartThree = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Dry - Combination",
+                    data: [88, 94, 88, 100, 94, 94],
+                    fill: true,
+                    backgroundColor: "rgba(185,104,12,0.3)",
+                    borderColor: "rgba(185,104,12,1)",
+                    borderWidth: 1,
+                    pointBackgroundColor: "rgba(185,104,12,1)",
+                    pointBorderColor: "rgba(185,104,12,1)",
+                    pointStyle: "rectRounded",
+                    pointBorderWidth: 4,
+                    pointHitRadius: 14
+                }]
+            },
+            options: options
+        });
+
+        var ctx = document.getElementById("myChartFour");
+
+        var myChartFour = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Oily-Combination",
+                    data: [87, 87, 87, 93, 93, 88],
+                    fill: true,
+                    backgroundColor: "rgba(185,104,12,0.3)",
+                    borderColor: "rgba(185,104,12,1)",
+                    borderWidth: 1,
+                    pointBackgroundColor: "rgba(185,104,12,1)",
+                    pointBorderColor: "rgba(185,104,12,1)",
+                    pointStyle: "rectRounded",
+                    pointBorderWidth: 4,
+                    pointHitRadius: 14
+                }]
+            },
+            options: options
+        });
+        {% endif %}
+    });
+</script>

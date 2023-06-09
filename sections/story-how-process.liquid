@@ -1,0 +1,42 @@
+<div class="story__process">
+  <div class="wrapper">
+    <div class="grid--rev">
+      <div class="grid__item small--one-half">
+        <div class="process__image" data-aos="fade-in" data-aos-offset="200" data-aos-once="true" data-aos-duration="500">
+          <img src="{{ section.settings.process_image | img_url: '700x' }}" data-rjs="{{ section.settings.process_image | img_url: '1400x' }}" alt="{{ section.settings.process_image.alt }}">
+          <div class="image--overlay" data-colour-block-parallax data-parallax-direction="down" data-parallax-speed="14"></div>
+        </div>
+      </div>
+      <div class="grid__item small--one-half">
+        <div class="process__content">
+          <h4>{{ section.settings.process_headline }}</h4>
+          <p>{{ section.settings.process_content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Process",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"process_image",
+        "label":"Process Image"
+      },
+      {
+        "type":"text",
+        "id":"process_headline",
+        "label":"Process Headline",
+        "default":"Our process begins with wild harvesting high-altitude botanicals from the Teton Mountain range."
+      },
+      {
+        "type":"textarea",
+        "id":"process_content",
+        "label":"process Content",
+        "default":"Plants that survive in harsh conditions such as those found at altitude are more potent. We sustainably wild-harvest while organically farming during the off-seasons to ensure we are starting with the absolute best organic material on earth. This translates into a powerful and pure serum that leaves skin energized and much smoother."
+      }
+    ]
+  }
+{% endschema %}

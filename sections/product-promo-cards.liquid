@@ -1,0 +1,567 @@
+{% if section.blocks.size > 2 %}
+    {{ 'product-promo-cards.css' | asset_url | stylesheet_tag }}
+    {% assign section_title = section.settings.title %}
+    <div {% if section.settings.section_idname %}id="{{ section.settings.section_idname }}"{% endif %}></div>
+    <section class="product-promo-cards{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+        <div class="product-promo-cards-container">
+            <h2>{{ section_title }}</h2>
+            <div class="product-promo-items">
+                {% for block in section.blocks %}
+                    {% assign products_count = 0 %}
+                    {% assign product_object_1 = block.settings.product_object_1 %}
+                    {% assign selling_plan = block.settings.selling_plan %}
+                    {% assign frequency = block.settings.frequency %}
+                    {% assign discount_code = block.settings.discount_code %}
+                    {% assign discount_type = block.settings.discount_type %}
+                    {% assign discount_value = block.settings.discount_value %}
+                    {% assign mobile_order = block.settings.mobile_order %}
+                    {% assign headline = block.settings.headline %}
+                    {% assign headline_color = block.settings.headline_color %}
+                    {% assign headline_bg_color = block.settings.headline_bg_color %}
+                    {% assign custom_pdt_img = block.settings.custom_pdt_img %}
+                    {% assign title = block.settings.title %}
+                    {% assign under_title = block.settings.under_title %}
+                    {% assign custom_price = block.settings.custom_price %}
+                    {% assign custom_compare_at_price = block.settings.custom_compare_at_price %}
+                    {% assign checkmarks = block.settings.checkmarks | newline_to_br | split: '<br />' %}
+                    {% assign checkmarks_align = block.settings.checkmarks_align %}
+
+                    {% comment %} Dynamic Values {% endcomment %}
+                    {% assign data_items = '' %}
+                    {% assign data_ids = '' %}
+
+                    {% if custom_price != blank %}
+                        {% assign price = custom_price | times: 100 %}
+                    {% else %}
+                        {% assign final_price = 0 %}
+                        {% assign final_compare_at_price = 0 %}
+                        {% assign pdt_images = '' %}
+                        {% for i in (1..5) %}
+                            {% comment %} Images {% endcomment %}
+                            {% assign image_key = 'pdt_img_' | append: i %}
+                            {% assign image = block.settings[image_key] %}
+                            {% assign headline_key = 'heading_' | append: i %}
+                            {% assign headline_img = block.settings[headline_key] %}
+                            {% assign text_key = 'text_' | append: i %}
+                            {% assign text = block.settings[text_key] %}
+
+                            {% if image != blank %}
+                                {% capture image_html %}
+                                    <div class="ppi-comes-with-image">
+                                        <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}">
+                                        {%- if headline_img != blank or text != blank -%}
+                                        <div class="ppi-comes-with-popup">
+                                            {% if headline != blank %}<h5>{{ headline_img }}</h5>{% endif %}
+                                            {% if text != blank %}{{ text }}{% endif %}
+                                        </div>
+                                        {%- endif -%}
+                                    </div>
+                                {% endcapture %}
+                                {% assign pdt_images = pdt_images | append: image_html %}
+                            {% endif %}
+                            {% comment %} End Images {% endcomment %}
+                            {% assign product_object_key = 'product_object_' | append: i %}
+                            {% assign product_object = block.settings[product_object_key] %}
+                            {% if product_object.id %}
+                                {% assign products_count = products_count | plus: 1 %}
+                                {% assign price = product_object.price %}
+                                {% if selling_plan == 'subscription' %}
+                                    {% assign calculated_discount = product_object.metafields.sf_upscribe.discount_amount | replace: '%', '' | divided_by: 100.0 %}
+                                    {% assign takeOffAmount = price | times: calculated_discount %}
+                                    {% assign price = price | minus: takeOffAmount %}
+                                    {% assign compare_at_price = product_object.price %}
+                                {% endif %}
+                                {% if discount_code != blank %}
+                                    {% assign compare_at_price = product_object.price %}
+                                {% endif %}
+                                {% assign final_price = final_price | plus: price %}
+                                {% assign final_compare_at_price = final_compare_at_price | plus: compare_at_price %}
+
+                                {% capture data_id %}{% unless forloop.first %},{% endunless %}"{{ product_object.first_available_variant.id }}"{% endcapture %}
+                                {% assign data_ids = data_ids | append: data_id %}
+                                {%- capture data_item -%}
+                                    {% unless forloop.first %},{% endunless %}{
+                                        "Discount Amount": "{{- product_object.metafields.sf_upscribe.discount_amount -}}",
+                                        "Interval Frequency": "{{- product_object.metafields.sf_upscribe.interval_frequency -}}",
+                                        "Interval Unit": "{{- product_object.metafields.sf_upscribe.interval_unit -}}",
+                                        "Subscription": "{{- frequency -}}",
+                                        "Subscription Amount": "{{- price | money_without_currency  | remove: '.00' -}}",
+                                        "Subscription Product Title": "{{- product_object.metafields.sf_upscribe.subscription_product_title -}}"
+                                    }
+                                {%- endcapture -%}
+                                {% assign data_items = data_items | append: data_item %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% assign data_ids = data_ids | prepend: '[' | append: ']' %}
+                        {% assign data_items = data_items | prepend: '[' | append: ']' %}
+
+                        {% if discount_code != blank %}
+                            {% if discount_type == 'fixed_value' %}
+                                {% assign discount_value = discount_value | times: 100 %}
+                                {% assign final_price = final_price | minus: discount_value %}
+                            {% else %}
+                                {% assign discount_value = discount_value | divided_by: 100.00 %}
+                                {% assign discTakeOffAmount = final_price | times: discount_value %}
+                                {% assign final_price = final_price | minus: discTakeOffAmount %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+                    {% if custom_compare_at_price != blank %}
+                        {% assign compare_at_price = custom_compare_at_price | times: 100 %}
+                    {% endif %}
+
+                    <style>
+                        @media only screen and (max-width: 991px) { #block-{{ block.id }}.product-promo-item { order: {{ mobile_order }} } }
+                    </style>
+                    <div id="block-{{ block.id }}" class="product-promo-item">
+                        {% if headline != blank %}
+                        <div class="ppi-headline" style="background-color: {{ headline_bg_color }}">
+                            <p style="color: {{ headline_color }}">{{ headline }}</p>
+                        </div>
+                        {% endif %}
+                        <div class="ppi-content">
+                            <div class="ppi-content-image">
+                                <img src="{% if custom_pdt_img != blank %}{{ custom_pdt_img | img_url: 'master' }}{% else %}{{ product_object_1.featured_image | img_url: 'master' }}{% endif %}" alt="">
+                            </div>
+                            <h4>{{ title }}</h4>
+                            {{ under_title }}
+                            <div class="ppi-costs{% unless final_compare_at_price > 0 %} ppi-single-cost{% endunless %}">
+                                <span class="ppi-price">{{ final_price | money_without_trailing_zeros }}</span>
+                                {% if final_compare_at_price > 0 %}
+                                    <span class="ppi-compare-at-price">{{ final_compare_at_price | money_without_trailing_zeros }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="ppi-checkmarks" style="justify-content: {{ checkmarks_align }}">
+                                <div class="ppi-checkmarks-container">
+                                    {% for checkmark in checkmarks %}
+                                        {%- assign checkmark_value = checkmark | strip_newlines | rstrip -%}
+                                        <p>{% render 'ppc-checkmark' %}<span class="checkmark-span-price">{{ checkmark_value }}</span></p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% if products_count > 1 %}
+                            <div class="ppi-comes-with">
+                                <p>Comes with:</p>
+                                <div class="ppi-cw-images">
+                                    {{ pdt_images }}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="ppi-footer">
+                            <button class="ppi-f-checkout-btn" data-sellingplan="{{ selling_plan }}" data-discount="{{ discount_code }}" data-ids="{{ data_ids | escape }}" data-items="{{ data_items | escape }}" onclick="checkoutOffer(event, this)">{% if block.settings.cta_btn_text %}{{ block.settings.cta_btn_text }}{% else %}{{ section.settings.cta_btn_text }}{% endif %}</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.direct_to_checkout = true;
+        function getCheckoutUrl(__callback_function){
+            const interval = setInterval(() => {
+                let checkout_url = document.querySelector('#offcanvas-right .cartCanvas__buttons .js-cart-checkout-recharge-btn').href;
+                if(checkout_url.includes('/checkout')){
+                    clearInterval(interval);
+                    __callback_function(checkout_url);
+                }
+            }, 100);
+        }
+        function checkoutOffer (event, element) {
+            event.preventDefault();
+            const ids = JSON.parse(element.dataset.ids);
+            const items = JSON.parse(element.dataset.items);
+            const selling_plan = element.dataset.sellingplan;
+            const discount_code = element.dataset.discount;
+            if(ids.length > 0 && items.length > 0 && ids.length === items.length){
+                if(ids.length > 1 && items.length > 1){
+                    CartJS.clear({
+                        "success": function() {
+                            let itemsArray = [];
+                            for (let i=0; i<items.length; i++){
+                               const properties = selling_plan === 'subscription' ? items[i] : {};
+                               itemsArray = [...itemsArray,
+                                   {
+                                       id: ids[i],
+                                       quantity: 1,
+                                       properties: properties
+                                   }
+                               ]
+                            }
+                            CartJS.addItems(itemsArray, {
+                                "success": function(data, textStatus, jqXHR) {
+                                    if(selling_plan === 'subscription'){
+                                        getCheckoutUrl((checkout_url) => {
+                                            //console.log(checkout_url);
+                                            if(checkout_url.includes('&discount=')){
+                                                checkout_url = checkout_url.split('&discount=')[0];
+                                            }
+                                            if(discount_code){
+                                                checkout_url += '&discount='+discount_code;
+                                            }
+
+                                            window.location.href = checkout_url;
+                                        })
+                                    }else {
+                                        if(discount_code){
+                                            window.location.href = '/discount/'+discount_code+'?redirect=/checkout';
+                                        }else{
+                                            window.location.href = '/checkout';
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    const properties = selling_plan === 'subscription' ? items[0] : {};
+                    CartJS.clear({
+                        "success": function() {
+                            CartJS.addItem( ids[0] , 1, properties, {
+                                "success": function(data, textStatus, jqXHR) {
+                                    /*console.log('success');
+                                    console.log('/////////////////////////////////////////////////');
+                                    console.log(data)*/
+                                    if(selling_plan === 'subscription'){
+                                        getCheckoutUrl((checkout_url) => {
+                                            console.log(checkout_url);
+                                            if(checkout_url.includes('&discount=')){
+                                                checkout_url = checkout_url.split('&discount=')[0];
+                                            }
+                                            if(discount_code){
+                                                checkout_url += '&discount='+discount_code;
+                                            }
+                                            window.location.href = checkout_url;
+                                        })
+                                    }else {
+                                        if(discount_code){
+                                            window.location.href = '/discount/'+discount_code+'?redirect=/checkout';
+                                        }else{
+                                            window.location.href = '/checkout';
+                                        }
+                                    }
+                                    /*console.log('/////////////////////////////////////////////////');*/
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        }
+    </script>
+{% endif %}
+
+{% schema %}
+{
+    "name": "Product Promo Cards",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Offers Available While Supplies Last"
+        },
+        {
+            "type": "text",
+            "id": "section_classname",
+            "label": "Section Class Name"
+        },
+        {
+            "type": "text",
+            "id": "section_idname",
+            "label": "Section ID Name"
+        },
+        {
+            "type": "text",
+            "id": "cta_btn_text",
+            "label": "CTA button text",
+            "default":"GET OFFER"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "promo-card",
+            "name": "Product Promo Card",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product_object_1",
+                    "label": "Product",
+                    "info": "* Required"
+                },
+                {
+                    "type": "product",
+                    "id": "product_object_2",
+                    "label": "Add Product to Bundle",
+                    "info": "Optional"
+                },
+                {
+                    "type": "product",
+                    "id": "product_object_3",
+                    "label": "Add Product to Bundle",
+                    "info": "Optional"
+                },
+                {
+                    "type": "product",
+                    "id": "product_object_4",
+                    "label": "Add Product to Bundle",
+                    "info": "Optional"
+                },
+                {
+                    "type": "product",
+                    "id": "product_object_5",
+                    "label": "Add Product to Bundle",
+                    "info": "Optional"
+                },
+                {
+                    "type": "select",
+                    "id": "selling_plan",
+                    "label": "Selling Plan",
+                    "options": [
+                        {
+                            "value": "one-time",
+                            "label": "One Time"
+                        },
+                        {
+                            "value": "subscription",
+                            "label": "Subscription"
+                        }
+                    ],
+                    "default": "one-time"
+                },
+                {
+                    "type": "select",
+                    "id": "frequency",
+                    "label": "Subscription Frequency",
+                    "info": "Only when selected Selling Plan Subscription",
+                    "options": [
+                        {
+                            "value": "45 days",
+                            "label": "45 Day"
+                        },
+                        {
+                            "value": "60 days",
+                            "label": "60 Day"
+                        },
+                        {
+                            "value": "75 days",
+                            "label": "75 Day"
+                        }
+                    ],
+                    "default": "60 days"
+                },
+                {
+                    "type": "text",
+                    "id": "discount_code",
+                    "label": "Discount Code",
+                    "info": "Optional"
+                },
+                {
+                    "type": "select",
+                    "id": "discount_type",
+                    "label": "Discount Type",
+                    "options": [
+                        {
+                            "value": "present",
+                            "label": "Percentage"
+                        },
+                        {
+                            "value": "fixed_value",
+                            "label": "Fixed Value"
+                        }
+                    ],
+                    "default": "fixed_value"
+                },
+                {
+                    "type": "number",
+                    "id": "discount_value",
+                    "label": "Discount Value"
+                },
+                {
+                    "type": "header",
+                    "content": "Card Texts & Styles"
+                },
+                {
+                    "type": "range",
+                    "id": "mobile_order",
+                    "min": 1,
+                    "max": 3,
+                    "step": 1,
+                    "label": "Mobile Card Order",
+                    "default": 1
+                },
+                {
+                    "type": "text",
+                    "id": "headline",
+                    "label": "Headline",
+                    "default": "Headline Text"
+                },
+                {
+                    "type": "color",
+                    "id": "headline_color",
+                    "label": "Headline Text Color",
+                    "default": "#3D3D38"
+                },
+                {
+                    "type": "color",
+                    "id": "headline_bg_color",
+                    "label": "Headline Background Color",
+                    "default": "#D4CEC0"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "custom_pdt_img",
+                    "label": "Custom Product Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Membership | Every 60 Days"
+                },
+                {
+                    "type": "richtext",
+                    "id": "under_title",
+                    "label": "Under Title Text",
+                    "default": "<p>Edit, pause, or cancel in your account at anytime</p>"
+                },
+                {
+                    "type": "number",
+                    "id": "custom_price",
+                    "label": "Price",
+                    "info": "Optional"
+                },
+                {
+                    "type": "number",
+                    "id": "custom_compare_at_price",
+                    "label": "Compare At Price",
+                    "info": "Optional"
+                },
+                {
+                    "type": "textarea",
+                    "id": "checkmarks",
+                    "label": "Checkmarks"
+                },
+                {
+                    "type": "select",
+                    "id": "checkmarks_align",
+                    "label": "Checkmarks Align",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "Center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ],
+                    "default": "left"
+                },
+                {
+                    "type": "paragraph",
+                    "content": "\"Comes with\" Images"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "pdt_img_1",
+                    "label": "Product Image"
+                },
+                {
+                    "type": "text",
+                    "id": "heading_1",
+                    "label": "Heading",
+                    "default": "Headline"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_1",
+                    "label": "Text"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "pdt_img_2",
+                    "label": "Product Image"
+                },
+                {
+                    "type": "text",
+                    "id": "heading_2",
+                    "label": "Heading",
+                    "default": "Headline"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_2",
+                    "label": "Text"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "pdt_img_3",
+                    "label": "Product Image"
+                },
+                {
+                    "type": "text",
+                    "id": "heading_3",
+                    "label": "Heading",
+                    "default": "Headline"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_3",
+                    "label": "Text"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "pdt_img_4",
+                    "label": "Product Image"
+                },
+                {
+                    "type": "text",
+                    "id": "heading_4",
+                    "label": "Heading",
+                    "default": "Headline"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_4",
+                    "label": "Text"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "pdt_img_5",
+                    "label": "Product Image"
+                },
+                {
+                    "type": "text",
+                    "id": "heading_5",
+                    "label": "Heading",
+                    "default": "Headline"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text_5",
+                    "label": "Text"
+                },
+                {
+                    "type": "text",
+                    "id": "cta_btn_text",
+                    "label": "CTA button text",
+                    "default":"GET OFFER"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Product Promo Cards"
+        }
+    ]
+}
+{% endschema %}

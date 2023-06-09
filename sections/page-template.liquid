@@ -1,0 +1,35 @@
+<!-- /templates/page.json -->
+<div class="basic-page">
+    {% if page.metafields.custom_fields.hero_banner %}
+        <div class="hero" style="background-image: url({{ page.metafields.custom_fields.hero_banner }});">
+            <div class="wrapper">
+                <div class="grid">
+                    <div class="grid__item one-whole text-center">
+                        <h1 class="text--light">{{ page.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid__item large--two-thirds push--large--one-sixth medium--five-sixths push--medium--one-twelfth">
+                <div class="basic-page__content">
+                    {% unless page.metafields.custom_fields.hero_banner %}
+                        <h1>{{ page.title }}</h1>
+                    {% endunless %}
+                    <div class="rte">
+                        {{ page.content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Page",
+    "settings": []
+}
+{% endschema %}

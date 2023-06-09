@@ -1,0 +1,123 @@
+<div class="featured-product__container">
+  {% if section.settings.title != blank %}
+    <div class="featured-product__row featured-product__row--first desktop-only">
+      <h2 class="featured-product__main-title">{{ section.settings.title }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="featured-product__row featured-product__row--second">
+    <div class="featured-product__text-col">
+      <p class="featured-product__subtitle">{{ section.settings.product_collection }}</p>
+
+      <h3 class="featured-product__title">{{ section.settings.product_title }}</h3>
+
+      <p class="featured-product__copy">{{ section.settings.copy }}</p>
+
+      <a class="hero3__button btn btn--primary" href="{{ section.settings.button_url }}">{{ section.settings.button }}</a>
+    </div>
+
+    <div class="featured-product__images">
+      <img class="featured-product__texture" src="{{ section.settings.product_background | img_url: '767x'}}" alt="Texture">
+
+      <img class="featured-product__image" src="{{ section.settings.product_image | img_url: '767x'}}" alt="Product">
+    </div>
+
+    {% if section.settings.title != blank %}
+      <div class="featured-product__row featured-product__row--first mobile-only">
+        <h2 class="featured-product__main-title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="featured-product__features">
+      <div class="features-list">
+        {% for block in section.blocks %}
+          <div class="features-list__item">
+            <img src="{{ block.settings.feature_image | img_url: '100x' }}">
+
+            <p>{{ block.settings.feature_title }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <a class="featured-product__link" href="{{ section.settings.link_url }}">{{ section.settings.link }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Product",
+  "tag": "section",
+  "class": "featured-product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "product_collection",
+      "label": "Collection Name"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product Title"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Product Copy"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_background",
+      "label": "Product Background"
+    },
+    {
+      "type": "text",
+      "id": "link",
+      "label": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Feature",
+      "type": "feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "feature_image",
+          "label": "Feature Image"
+        },
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Feature Title"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

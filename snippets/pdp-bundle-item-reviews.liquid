@@ -1,0 +1,189 @@
+  <div class='c-pdpReview{% comment %}{% if product.metafields.custom_fields["no_review_content"] != blank %} c-pdpReview--noReview{% endif %}{% endcomment %}'>
+    <div id="productReview-{{ product.id }}" class="product-single__reviews">
+      <div class="yotpo-group-remote-actions">
+        <div class="yotpo-group-remote-stars">
+          <div class="yotpo-group-review-stars">
+            <span class="yotpo-group-review-rating">{{ stars_rating }}</span>
+            {% include 'group-review-stars', stars_rating %}
+          </div>
+          <p>Average customer rating from {{ reviews_count }} reviews</p>
+        </div>
+        <div class="yotpo-group-review-actions-triggers">
+          <div class="yotpo-group-review-filters-trigger">
+            <div class="yotpo-group-review-filters-trigger-tabs">
+              <div class="yotpo-group-review-filters-trigger-tab-reviews active">REVIEWS(<span>{{ reviews_count }}</span>)</div>
+              <div class="yotpo-group-review-filters-trigger-tab-questions">QUESTIONS(<span>0</span>)</div>
+            </div>
+            <div class="yotpo-group-review-filter-wrap">
+              <p>FILTERS:</p>
+              <span class="yotpo-group-review-clear-filters hidden">Clear</span>
+              <div class="yotpo-group-review-filter-buttons">
+
+              </div>
+            </div>
+          </div>
+          <div class="yotpo-group-review-buttons-trigger">
+            <div class="yotpo-group-review-buttons-trigger-write-review">WRITE A REVIEW</div>
+            <div class="yotpo-group-review-buttons-trigger-ask-question">ASK A QUESTION</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="grid__item">
+          <div class="product-single__reviews-title text-center">
+          <div id="y-badges" class="yotpo yotpo-badge badge-init" data-product-id="{{ product.id }}">&nbsp;</div>
+            <div class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
+          </div>
+          <div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+      @media only screen and (max-width: 767px){
+        #the-deep .yotpo .main-widget .yotpo-regular-box.yotpo-bottomline.yotpo-bottomline-2-boxes .yotpo-default-button.write-question-button{
+          margin: 60px auto 30px;
+        }
+      }
+  </style>
+  <script>
+      window.addEventListener('load', () => {
+        const root = document.querySelector('#productReview-{{ product.id }}');
+        /* QUESTIONS & REVIEWS */
+        const questions = root.querySelector('.yotpo-nav-tab[data-type="questions"]');
+        const questionsNav = root.querySelector('.yotpo-questions > nav .yotpo-pager');
+        const visibleQuestions = root.querySelector('.yotpo-group-review-filters-trigger-tab-questions');
+        const reviews = root.querySelector('.yotpo-nav-tab[data-type="reviews"]');
+        const visibleReviews = root.querySelector('.yotpo-group-review-filters-trigger-tab-reviews');
+        if(questions){
+          //deprecated version
+          //const questionsCount = parseInt(questions.querySelector('.yotpo-nav-tab-sum').textContent.replace('(', '').replace(')', ''));
+          const questionsCount = questionsNav ? questionsNav.dataset.total : '0';
+          if(visibleQuestions){
+            visibleQuestions.addEventListener('click', () => {
+              if(visibleReviews.classList.contains('active')){
+                visibleReviews.classList.remove('active');
+                visibleQuestions.classList.add('active');
+              }
+              questions.click();
+            })
+            visibleQuestions.querySelector('span').textContent = questionsCount;
+          }
+        }
+        if(reviews){
+          if(visibleReviews){
+            visibleReviews.addEventListener('click', () => {
+              if(visibleQuestions.classList.contains('active')){
+                visibleQuestions.classList.remove('active');
+                visibleReviews.classList.add('active');
+              }
+              reviews.click();
+            })
+          }
+        }
+
+        /* FILTERS */
+        //real
+
+        const clickableFilters = root.querySelectorAll('.main-widget .yotpo-regular-box.bottom-line-items-container-desktop .yotpo-star-distribution-wrapper .yotpo-distribution-rows .yotpo-distribution-row');
+        const showAllFiltersBtn = root.querySelector('.yotpo-reviews-filters .filters-container .yotpo-icon-btn.desktop-clear-all-btn');
+        /* deprecated version
+        const clickableFilters = root.querySelectorAll('.yotpo-distibutions-stars .review-stars.yotpo-distribution-clickable');
+        const showAllFiltersBtn = root.querySelector('.yotpo-star-distribution-show-all');
+        */
+        //fake
+        const fakeFiltersWrap = root.querySelector('.yotpo-group-review-filter-buttons');
+        const fakeShowAllFiltersBtn = root.querySelector('.yotpo-group-review-clear-filters');
+        fakeShowAllFiltersBtn.addEventListener('click', () => {
+          const currentPageY = window.pageYOffset;
+          if(!fakeShowAllFiltersBtn.classList.contains('hidden')){
+            fakeShowAllFiltersBtn.classList.add('hidden')
+          }
+          const current = root.querySelector('.yotpo-active-filter');
+          if(current){
+            current.classList.remove('yotpo-active-filter');
+          }
+          if(visibleQuestions.classList.contains('active')){
+            visibleQuestions.classList.remove('active');
+            visibleReviews.classList.add('active');
+          }
+          showAllFiltersBtn.click()
+          window.scrollTo(0, currentPageY);
+        });
+        if(clickableFilters.length > 0){
+          clickableFilters.forEach(filter => {
+            const fakeFilter = document.createElement('div');
+            //deprecated
+            //fakeFilter.textContent = filter.dataset.scoreDistribution + ' Stars';
+            fakeFilter.textContent = filter.querySelector('.yotpo-star-distribution-score-value').textContent + ' Stars';
+            fakeFiltersWrap.append(fakeFilter);
+            fakeFilter.addEventListener('click', () => {
+              if(!fakeFilter.classList.contains('yotpo-active-filter')){
+                const currentPageY = window.pageYOffset;
+                if(fakeShowAllFiltersBtn.classList.contains('hidden')){
+                  fakeShowAllFiltersBtn.classList.remove('hidden')
+                }
+                if(!fakeFilter.classList.contains('yotpo-active-filter')){
+                  const current = root.querySelector('.yotpo-active-filter');
+                  if(current){
+                    current.classList.remove('yotpo-active-filter');
+                  }
+                  fakeFilter.classList.add('yotpo-active-filter');
+                }
+                if(visibleQuestions.classList.contains('active')){
+                  visibleQuestions.classList.remove('active');
+                  visibleReviews.classList.add('active');
+                }
+                filter.click()
+                window.scrollTo(0, currentPageY);
+              }
+            });
+          })
+        }
+        /* BUTTONS */
+        //real
+        const writeReviewBtn = root.querySelector('.write-review-button');
+        const askQuestionBtn = root.querySelector('.write-question-button');
+        //fake
+        const visibleWriteReviewBtn = root.querySelector('.yotpo-group-review-buttons-trigger-write-review');
+        const visibleAskQuestionBtn = root.querySelector('.yotpo-group-review-buttons-trigger-ask-question');
+        visibleWriteReviewBtn.addEventListener('click', () => {
+          if(visibleQuestions.classList.contains('active')){
+            visibleQuestions.classList.remove('active');
+            visibleReviews.classList.add('active');
+          }
+          writeReviewBtn.click();
+        });
+        visibleAskQuestionBtn.addEventListener('click', () => {
+          if(visibleReviews.classList.contains('active')){
+            visibleReviews.classList.remove('active');
+            visibleQuestions.classList.add('active');
+          }
+          askQuestionBtn.click();
+        });
+        /* pager */
+        const initPager = () => {
+          const pagerLinks = root.querySelectorAll('nav .yotpo-pager > a');
+          const scrollTo = root.querySelector('.c-pdpReview .product-single__reviews > .grid')
+          pagerLinks.forEach(pagerLink => {
+            pagerLink.addEventListener('click', () => {
+              const interval = setInterval(() => {
+                window.scrollTo(0, window.pageYOffset);
+              }, 10);
+              const timeout = setTimeout(() => {
+                clearInterval(interval);
+                window.scrollTo({
+                  top: scrollTo.offsetTop - 120,
+                  left: 0,
+                  behavior: 'smooth'
+                });
+                clearTimeout(timeout);
+                initPager();
+              }, 2000);
+            })
+          })
+        }
+        initPager();
+      })
+  </script>

@@ -1,0 +1,91 @@
+.swell-cart-container{
+    width: max-content;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    background: #fff;
+}
+.swell-cart-point{
+	font-size: 14px;
+    color: black;
+    font-weight: 500;
+}
+.swell-cart-element{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-end;
+    position: relative;
+}
+.cart-fixed-amount{
+    width: 360px;
+    height: 38px;
+    font-size: 13px;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+.swell-apply{
+    color: white;
+    background-color: #AF5D00;
+    width: 108px;
+    min-width: 90px;
+    position: absolute;
+    right:0;
+    top:0;
+    height:38px;
+    line-height:38px;
+    font-size: 10px;
+    padding: 0;
+}
+.cart{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.swell-mini-cart .swell-cart-container{
+    width: 100%;
+    padding: 20px;
+}
+.swell-mini-cart .swell-apply{
+    font-size: 10px;
+   width: 90px;
+}
+.swell-mini-cart .cart-fixed-amount{
+    background-color: unset;
+    width: 100%;
+}
+.swell-mini-cart .swell-cart-point{
+    margin-bottom: 1rem;
+}
+@media screen and (max-width: 990px){
+    .swell-cart-container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .swell-cart-element{
+        width: max-content;
+        align-items: center;
+    }
+    .cart{
+        display: block;
+    }
+    .swell-mini-cart .swell-cart-element{
+        width: 100%;
+        align-items: flex-end;
+    }
+    .swell-mini-cart .swell-cart-container{
+        align-items: flex-start;
+    }
+}
+@media screen and (max-width: 425px){
+    .swell-cart-point{
+        font-size: 15px;
+    }
+    .cart-fixed-amount{
+        width: 285px;
+    }
+    .swell-apply{
+        width: 200px;
+    }
+}

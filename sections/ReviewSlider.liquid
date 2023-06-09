@@ -1,0 +1,110 @@
+
+
+{% if product.metafields.reviews.slider.value != blank %}
+  <div class="review-slider__container{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="review-slider__slider js-review-slider">
+      <div class="review-slider__track">
+          {% for item in product.metafields.reviews.slider.value %}
+            <div class="review-slider__item">
+              <div class="review-slider__image">
+                {%- liquid
+                     assign review_image = item.review_image
+                     assign reverse_split = review_image | split:'' | reverse | join:'' | replace_first: '.', '#'  | split:'' | reverse | join:'' 
+                     assign real_split = reverse_split | split: '#' 
+                     assign real_split_crop = real_split.first | append:'_555x555_crop_center.'
+                     assign real_split_final = real_split_crop | append:real_split.last 
+                  -%}
+                <img src="{{ real_split_final }}" alt="{{ item.review_name }}">
+              </div>
+
+              <div class="review-slider__text">
+                <div class="rating rating-{{ item.review_stars }}"></div>
+
+                <div class="review-slider__copy">{{ item.review_copy }}</div>
+
+                <p class="review-slider__name">{{ item.review_name }}</p>
+
+
+              </div>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+
+    <div class="review-slider--pagination">
+     <a href="#productReview" class="review-slider__link mobile-only">See all reviews</a>
+        <div class="review-slider__pagination">
+          {% for item in product.metafields.reviews.slider.value %}
+            <div class="review-slider__dot {% if forloop.index == 1 %}review-slider__dot--active{% endif %}" data-index="{{- forloop.index -}}">
+              <img src="{{ item.review_image }}" alt="{{ item.review_name }}">
+            </div>
+          {% endfor %}
+        </div>
+      <a href="#productReview" class="review-slider__link desktop-only">See all reviews</a>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', ()=> {
+      let reviewSlider = new Swiper(".js-review-slider", {
+        wrapperClass: 'review-slider__track',
+        slideClass: 'review-slider__item',
+        slidesPerView: 1,
+        speed: 500,
+        // effect: 'fade',
+        spaceBetween: 35
+      });
+
+      document.querySelectorAll('.review-slider__dot').forEach(item => {
+        item.addEventListener('click', function(){
+          document.querySelectorAll('.review-slider__dot--active').forEach(item => {
+            item.classList.remove('review-slider__dot--active');
+          });
+
+          document.querySelectorAll(`.review-slider__dot[data-index="${this.dataset.index}"]`).forEach(item => {
+            item.classList.add('review-slider__dot--active');
+          });
+
+          let goTo = this.dataset.index - 1;
+          //console.log(goTo);
+          reviewSlider.slideTo(goTo);
+        });
+      });
+
+      reviewSlider.on('slideChange', function () {
+        let index = reviewSlider.activeIndex + 1;
+        console.log(index);
+
+        document.querySelectorAll('.review-slider__dot--active').forEach(item => {
+          item.classList.remove('review-slider__dot--active');
+        });
+
+        document.querySelectorAll(`.review-slider__dot[data-index="${index}"]`).forEach(item => {
+          item.classList.add('review-slider__dot--active');
+        });
+        
+      });
+    })
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Review Slider",
+  "class": "review-slider",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review Slider",
+      "category": "Caldera"
+    }
+  ]
+}
+{% endschema %}

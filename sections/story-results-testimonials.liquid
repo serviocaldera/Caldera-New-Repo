@@ -1,0 +1,58 @@
+{% if section.settings.testimonial_enable %}
+<div class="story__testimonials headline headline--large">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <div class="testimonials__title text-center">
+          <span class="pre-header text--light">{{ section.settings.testimonial_title }}</span>
+        </div>
+        <div class="testimonial__slider" data-story-testimonial-slider>
+          {% for block in section.blocks %}
+            <div class="testimonial__slide text-center">
+              <p class="text--light">{{ block.settings.testimonial }}</p>
+              <span class="testimonial__author text--light">{{ block.settings.testimonial_author }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Testimonials",
+    "settings": [
+      {
+        "type":"checkbox",
+        "id":"testimonial_enable",
+        "label":"Testimonial Section Enable"
+      },
+      {
+        "type":"text",
+        "id":"testimonial_title",
+        "label":"Testimonial Section Title",
+        "default":"Testimonials"
+      }
+    ],
+    "max_blocks":4,
+    "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type":"textarea",
+            "id":"testimonial",
+            "label":"Testimonial Content"
+          },
+          {
+            "type":"text",
+            "id":"testimonial_author",
+            "label":"Testimonial Author"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

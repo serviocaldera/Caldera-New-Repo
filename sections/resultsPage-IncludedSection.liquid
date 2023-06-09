@@ -1,0 +1,322 @@
+<div class="ResultsPage_is-wrapper-scroll">
+  
+</div>
+{% assign product = all_products.the-regimen %}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+<div class="ResultsPage_is-wrapper">
+    <div class="ResultsPage_is-subwrapper">
+        <div class="c-productImage__featured ResultsPage-slider2" >
+            <div class="swiper-wrapper">
+                {% for image in product.images limit: 3 %}
+                    <div class="c-productImages swiper-slide swiper-slide-{{ forloop.index }}">
+                        <img class="is_image-slide" src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                    </div>
+                {% endfor %}
+            </div>
+        <div class="swiper-pagination2"></div>
+        </div>
+        <div class="ResultsPage_is-included-wrapper">
+            <h2 class="ResultsPage_is-included-heading">What’s Included</h2>
+            <div class="ResultsPage_is-included-options">
+                    <div class="ResultsPage_is-included-option ResultsPage_is-included-option-active">
+                        <div class="ResultsPage_is-included-option-image-wrap">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/thumbnail-clean-slate.png?v=1641309385" class="ResultsPage_is-included-option-image">
+                        </div>
+                        <h3 class="ResultsPage_is-included-option-heading">The Clean Slate</h3>
+                        <p class="ResultsPage_is-included-option-text">Balancing Cleanser</p>
+                    </div>
+
+                    <div class="ResultsPage_is-included-option">
+                        <div class="ResultsPage_is-included-option-image-wrap">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/thumbnail-the-base-layer.png?v=1641309385" class="ResultsPage_is-included-option-image">
+                        </div>
+                        <h3 class="ResultsPage_is-included-option-heading">The Base Layer</h3>
+                        <p class="ResultsPage_is-included-option-text">Fortifying Moisturizer</p>
+                    </div>
+
+                    <div class="ResultsPage_is-included-option">
+                        <div class="ResultsPage_is-included-option-image-wrap">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/thumbnail-the-good.png?v=1641309384" class="ResultsPage_is-included-option-image">
+                        </div>
+                        <h3 class="ResultsPage_is-included-option-heading">The Good</h3>
+                        <p class="ResultsPage_is-included-option-text">Multifunctional Serum</p>
+                    </div>
+            </div>
+            <div class="ResultsPage_is-included-option-results">
+                <div class="ResultsPage_is-included-option-result ResultsPage_is-included-option-result-active">
+                    <h3 class="ResultsPage_is-included-option-result-heading">The Clean Slate</h3>
+                    <div class="ResultsPage_is-included-option-result-rating">
+                        <div class="ResultsPage_is-included-option-result-rating-image">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/stars.png?v=1640710190">
+                        </div>
+                       <p class="ResultsPage_is-included-option-result-rating-text">115 Reviews</p>
+                    </div>
+                    <div class="ResultsPage_is-included-option-icons">
+                            <div class="ResultsPage_is-included-option-icon">
+                                <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/smooth-icon.png?v=1641309385">
+                                <h4 class="ResultsPage_is-included-option-subheading">Soothe & Strenghten</h4>
+                            </div>
+                            <div class="ResultsPage_is-included-option-icon">
+                                <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/cleanse-icon.png?v=1641309384">
+                                <h4 class="ResultsPage_is-included-option-subheading">Cleanse & Clarify</h4>
+                            </div>
+                            <div class="ResultsPage_is-included-option-icon">
+                                <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/balance-icon.png?v=1641309385">
+                                <h4 class="ResultsPage_is-included-option-subheading">Smoothe & Balance</h4>
+                            </div>
+                    </div>
+                    <p class="ResultsPage_is-included-text">A breakthrough pH-balanced cleanser that uses gentle plant-based cleansing instead of harsh surfactants.
+                        </p>
+                        <p class="ResultsPage_is-included-text-span">How to Use</span>
+                        <p class="ResultsPage_is-included-text">Work one pump of cleanser into a lather with wet hands and massage onto face in the morning and evening. Rinse and pat dry.</p>
+                </div>
+                <div class="ResultsPage_is-included-option-result">
+                    <h3 class="ResultsPage_is-included-option-result-heading">The Base Layer</h3>
+                    <div class="ResultsPage_is-included-option-result-rating">
+                        <div class="ResultsPage_is-included-option-result-rating-image">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/stars.png?v=1640710190">
+                        </div>
+                       <p class="ResultsPage_is-included-option-result-rating-text">134 Reviews</p>
+                    </div>
+                    <div class="ResultsPage_is-included-option-icons">
+                            <div class="ResultsPage_is-included-option-icon">
+                                <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/Protect.png?v=1646221373">
+                                <h4 class="ResultsPage_is-included-option-subheading">Protects</h4>
+                            </div>
+                            <div class="ResultsPage_is-included-option-icon">
+                                <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/Nourish.png?v=1646221373">
+                                <h4 class="ResultsPage_is-included-option-subheading">Nourishes & Heals</h4>
+                            </div>
+                            <div class="ResultsPage_is-included-option-icon">
+                                <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/Hydrate.png?v=1646221317">
+                                <h4 class="ResultsPage_is-included-option-subheading">Hydrates</h4>
+                            </div>
+                    </div>
+                    <p class="ResultsPage_is-included-text">A nutrient-dense nourishing day moisturizer that delivers intense hydration and absorbs fast, leaving you with a matte finish, so you can start your day confidently.</p>
+                        <p class="ResultsPage_is-included-text-span">How to Use</span>
+                        <p class="ResultsPage_is-included-text">Use a dime size amount to massage into the face & neck.
+                        </p>
+                </div>
+                <div class="ResultsPage_is-included-option-result">
+                    <h3 class="ResultsPage_is-included-option-result-heading">The Good</h3>
+                    <div class="ResultsPage_is-included-option-result-rating">
+                        <div class="ResultsPage_is-included-option-result-rating-image">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/stars.png?v=1640710190">
+                        </div>
+                       <p class="ResultsPage_is-included-option-result-rating-text">1141 Reviews</p>
+                    </div>
+                    <div class="ResultsPage_is-included-option-icons">
+                        <div class="ResultsPage_is-included-option-icon">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/Moisturize.png?v=1646221317">
+                            <h4 class="ResultsPage_is-included-option-subheading">Moisturizes</h4>
+                        </div>
+                        <div class="ResultsPage_is-included-option-icon">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/EvensTone.png?v=1646221317">
+                            <h4 class="ResultsPage_is-included-option-subheading">Evens Skin Tone</h4>
+                        </div>
+                        <div class="ResultsPage_is-included-option-icon">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/ReducesLines.png?v=1646221317">
+                            <h4 class="ResultsPage_is-included-option-subheading">Reduces Lines</h4>
+                        </div>
+                    </div>
+                    <p class="ResultsPage_is-included-text">A clinically-proven, multi-functional, non-toxic serum designed to replace everything you need except a cleanser for smoother, healthier skin.</p>
+                        <p class="ResultsPage_is-included-text-span">How to Use</span>
+                        <p class="ResultsPage_is-included-text">Use the dropper to release several drops onto hand and rub into face and neck.
+                        </p>
+                </div>
+            </div>
+        </div>
+
+        <!--FAQ Accordion Mobile-->
+        <div class="FaqAccordion">
+            <h2 class="ResultsPage_is-included-heading">What’s Included</h2>
+           
+                <div class="FaqAccordion__question">
+                    <button class="FaqAccordion__button FaqAccordion--vertical-align">
+                        <div class="ResultsPage_is-included-option-image-wrap">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/thumbnail-clean-slate.png?v=1641309385" class="ResultsPage_is-included-option-image">
+                        </div>
+                        <div class="ResultsPage_is-acc-text">
+                            <h3 class="ResultsPage_is-included-option-heading">The Clean Slate</h3>
+                            <p class="ResultsPage_is-included-option-text">Balancing Cleanser</p>
+                        </div>
+                    </button>
+                    <div class="FaqAccordion__content">
+                        <div class="ResultsPage_is-included-option-results">
+                            <div class="ResultsPage_is-included-option-result1">
+                                <h3 class="ResultsPage_is-included-option-result-heading">The Clean Slate</h3>
+                                <div class="ResultsPage_is-included-option-result-rating">
+                                    <div class="ResultsPage_is-included-option-result-rating-image">
+                                        <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/stars.png?v=1640710190">
+                                    </div>
+                                   <p class="ResultsPage_is-included-option-result-rating-text">115 Reviews</p>
+                                </div>
+                                <div class="ResultsPage_is-included-option-icons">
+                                        <div class="ResultsPage_is-included-option-icon">
+                                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/smooth-icon.png?v=1641309385">
+                                            <h4 class="ResultsPage_is-included-option-heading">Soothe & Strenghten</h4>
+                                        </div>
+                                        <div class="ResultsPage_is-included-option-icon">
+                                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/cleanse-icon.png?v=1641309384">
+                                            <h4 class="ResultsPage_is-included-option-heading">Cleanse & Clarify</h4>
+                                        </div>
+                                        <div class="ResultsPage_is-included-option-icon">
+                                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/balance-icon.png?v=1641309385">
+                                            <h4 class="ResultsPage_is-included-option-heading">Smoothe & Balance</h4>
+                                        </div>
+                                </div>
+                                <p class="ResultsPage_is-included-text">A breakthrough pH-balanced cleanser that uses gentle plant-based cleansing instead of harsh surfactants.
+                                    </p>
+                                    <p class="ResultsPage_is-included-text-span">How to Use</span>
+                                    <p class="ResultsPage_is-included-text">Work one pump of cleanser into a lather with wet hands and massage onto face in the morning and evening. Rinse and pat dry.</p>
+                                    {% for image in product.images %}
+                                    {%if forloop.index0 == 0%}
+                                    <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                                {%else%}
+                                {% continue %}
+                                    {%endif%}
+                                {% endfor %}
+                                    {%comment%}<div class="c-productImage__featured ResultsPage-slider3" >
+                                    <div class="swiper-wrapper">
+                                        {% for image in product.images limit: 3 %}
+                                            <div class="c-productImages swiper-slide">
+                                                <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                <div class="swiper-pagination2"></div>
+                                </div>
+                                 {%endcomment%}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="FaqAccordion__question">
+                    <button class="FaqAccordion__button FaqAccordion--vertical-align">
+                        <div class="ResultsPage_is-included-option-image-wrap">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/thumbnail-the-base-layer.png?v=1641309385" class="ResultsPage_is-included-option-image">
+                        </div>
+                        <div class="ResultsPage_is-acc-text">
+                            <h3 class="ResultsPage_is-included-option-heading">The Base Layer</h3>
+                            <p class="ResultsPage_is-included-option-text">Fortifying Moisturizer</p>
+                        </div>
+                    </button>
+                    <div class="FaqAccordion__content">
+                        <div class="ResultsPage_is-included-option-results">
+                            <div class="ResultsPage_is-included-option-result1">
+                                <h3 class="ResultsPage_is-included-option-result-heading">The Base Layer</h3>
+                                <div class="ResultsPage_is-included-option-result-rating">
+                                    <div class="ResultsPage_is-included-option-result-rating-image">
+                                        <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/stars.png?v=1640710190">
+                                    </div>
+                                   <p class="ResultsPage_is-included-option-result-rating-text">134 Reviews</p>
+                                </div>
+                                <div class="ResultsPage_is-included-option-icons">
+                                    <div class="ResultsPage_is-included-option-icon">
+                                        <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/Protect.png?v=1646221373">
+                                        <h4 class="ResultsPage_is-included-option-subheading">Protects</h4>
+                                    </div>
+                                    <div class="ResultsPage_is-included-option-icon">
+                                        <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/Nourish.png?v=1646221373">
+                                        <h4 class="ResultsPage_is-included-option-subheading">Nourishes & Heals</h4>
+                                    </div>
+                                    <div class="ResultsPage_is-included-option-icon">
+                                        <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/Hydrate.png?v=1646221317">
+                                        <h4 class="ResultsPage_is-included-option-subheading">Hydrates</h4>
+                                    </div>
+                                </div>
+                                <p class="ResultsPage_is-included-text">A nutrient-dense nourishing day moisturizer that delivers intense hydration and absorbs fast, leaving you with a matte finish, so you can start your day confidently.
+                                    </p>
+                                    <p class="ResultsPage_is-included-text-span">How to Use</span>
+                                    <p class="ResultsPage_is-included-text">Use a dime size amount to massage into the face & neck.
+                                    </p>
+                            </div> {% for image in product.images %}
+                            {%if forloop.index0 == 1%}
+                                        <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                                    {%else%}
+                                    {% continue %}
+                                        {%endif%}
+                                    {% endfor %}
+                           {%comment%}   <div class="c-productImage__featured ResultsPage-slider4" >
+                                <div class="swiper-wrapper">
+                                    {% for image in product.images limit: 3 %}
+                                        <div class="c-productImages swiper-slide">
+                                            <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            <div class="swiper-pagination2"></div>
+                        </div>   {%endcomment%}  
+                        </div>
+                       
+                </div>
+                </div>
+                <div class="FaqAccordion__question">
+                    <button class="FaqAccordion__button FaqAccordion--vertical-align">
+                        <div class="ResultsPage_is-included-option-image-wrap">
+                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/thumbnail-the-good.png?v=1641309384">
+                          
+                        </div>
+                        <div class="ResultsPage_is-acc-text">
+                            <h3 class="ResultsPage_is-included-option-heading">The Good</h3>
+                            <p class="ResultsPage_is-included-option-text">Multifunctional Serum</p>
+                        </div>
+                    </button>
+                    <div class="FaqAccordion__content">
+                        <div class="ResultsPage_is-included-option-results">
+                            <div class="ResultsPage_is-included-option-result1">
+                                <h3 class="ResultsPage_is-included-option-result-heading">The Good</h3>
+                                <div class="ResultsPage_is-included-option-result-rating">
+                                    <div class="ResultsPage_is-included-option-result-rating-image">
+                                        <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/stars.png?v=1640710190">
+                                    </div>
+                                   <p class="ResultsPage_is-included-option-result-rating-text">1141 Reviews</p>
+                                </div>
+                                <div class="ResultsPage_is-included-option-icons">
+                                        <div class="ResultsPage_is-included-option-icon">
+                                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/Moisturize.png?v=1646221317">
+                                            <h4 class="ResultsPage_is-included-option-subheading">Moisturizes</h4>
+                                        </div>
+                                        <div class="ResultsPage_is-included-option-icon">
+                                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/EvensTone.png?v=1646221317">
+                                            <h4 class="ResultsPage_is-included-option-subheading">Evens Skin Tone</h4>
+                                        </div>
+                                        <div class="ResultsPage_is-included-option-icon">
+                                            <img src="https://cdn.shopify.com/s/files/1/0079/7193/0170/files/ReducesLines.png?v=1646221317">
+                                            <h4 class="ResultsPage_is-included-option-subheading">Reduces Lines</h4>
+                                        </div>
+                                </div>
+                                <p class="ResultsPage_is-included-text">A clinically-proven, multi-functional, non-toxic serum designed to replace everything you need except a cleanser for smoother, healthier skin. </p>
+                                    <p class="ResultsPage_is-included-text-span">How to Use</span>
+                                    <p class="ResultsPage_is-included-text">Use the dropper to release several drops onto hand and rub into face and neck.
+                                    </p>
+                                    {% for image in product.images %}
+                                    {%if forloop.index0 == 2%}
+                                        <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                                    {%else%}
+                                    {% continue %}
+                                        {%endif%}
+                                    {% endfor %}
+                                  
+                                     {%comment%} <div class="c-productImage__featured ResultsPage-slider5" >
+                                    <div class="swiper-wrapper">
+                                        {% for image in product.images limit: 3 %}
+                                            <div class="c-productImages swiper-slide">
+                                                <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                <div class="swiper-pagination2"></div>
+                            
+                            </div>  {%endcomment%}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+          
+        </div>
+        
+    </div>
+    
+</div>

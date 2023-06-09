@@ -1,0 +1,30 @@
+<div class="popup-modal popup-modal--hidden">
+  <div class="popup-modal__content popup-modal__content--hidden">
+      <div class="popup-modal__header">
+        <span class="popup-modal__close">&times;</span>
+      </div>
+      <div class="popup-modal__loader">
+        {%- include 'icon' with 'badge' -%}
+      </div>
+      <div class="popup-modal__body">
+        <h5 class="popup-modal__title">Already have a membership?</h5>
+        <p class="popup-modal__description">Log in now to add new products to your already existing subscription. Receive all of your products in one easy shipment.</p>
+        
+        <div class="cu-form">
+            {% form 'customer_login' %}
+              <input type="hidden" name="checkout_url" value="/products/{{product.handle}}" />
+              {{ form.errors | default_errors }}
+              <input class="cu-form__input" type="email" name="customer[email]" placeholder="Email Address"/>
+              <input class="cu-form__input" type="password" name="customer[password]" placeholder="Password" />
+              <a href="https://calderalab.com/account/login" class="cu-form__resetPass-link">Forgot Password?</a>
+              <input class="cu-form__input cu-form__input--submit btn btn--primary" type="submit" value="Log In" />
+            {% endform %}
+            <div class="cu-form__footer">
+              <h5 class="cu-form__footer-title">Don't have a membership?</h5>
+              <p class="cu-form__footer-description">If you’ve never had a subscription with us, continue to shop on this page and checkout as normal.</p>
+              <span class="cu-form__footer-cta">Continue Shopping</span>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>

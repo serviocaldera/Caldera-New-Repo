@@ -1,0 +1,87 @@
+<div class="banner__container swiper{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+  <div class="banner__track swiper-wrapper">
+    {% for block in section.blocks %}
+      <div class="banner__item swiper-slide">
+        {% render 'lozad-image', image: block.settings.item_image , class: 'banner__item-img' %}
+        {% comment %}<img  class="lozad banner__item-img" data-src="{{ block.settings.item_image | img_url: 'master' }}">{% endcomment %}
+        <p class="banner__item-title">{{ block.settings.item_title }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .banner {
+    --cols: {{ cols }};
+  } 
+</style>
+<script>
+  var swiperBanner = new Swiper(".banner__container", {
+        loop: true,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+          300: {
+            slidesPerView: 1,
+              spaceBetween: 36,
+          },
+          768: {
+            slidesPerView: 5,
+            spaceBetween: 0,
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          },
+        },
+  });
+</script>
+{% schema %}
+{
+  "name": "Banner",
+  "tag": "section",
+  "class": "banner",
+  "settings":[
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "label": "Animation Speed",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Item",
+      "type": "banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "item_image",
+          "label": "Item Image"
+        },
+        {
+          "type": "text",
+          "id": "item_title",
+          "label": "Item Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner",
+      "category": "Caldera"
+    }
+  ]
+}
+{% endschema %}

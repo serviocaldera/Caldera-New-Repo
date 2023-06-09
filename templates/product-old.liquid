@@ -1,0 +1,138 @@
+<div class="c-pdpPage">
+  <!-- /templates/product.liquid -->
+  <div itemscope itemtype="http://schema.org/Product">
+    <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+    <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+
+    {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+    {% assign current_variant = product.selected_or_first_available_variant %}
+    {% for image in product.images %}
+      {% if image.alt contains 'desktop' or image.alt contains 'Desktop' %}
+        {% assign featured_image = image %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    <div class="product-single" style="background-image: url({{ featured_image | img_url: '1440x' }});" data-rjs="{{ featured_image | img_url: '2880x' }}" data-product-hero-image>
+      <div class="wrapper">
+        <div class="grid">
+          <div class="grid__item medium--seven-twelfths small--one-half">
+            <div class="product-single__mobile-images" data-mobile-product-slider>
+              {% for image in product.images %}
+                {% if image.alt contains 'mobile' or image.alt contains 'Mobile' %}
+                  <div class="product-single__mobile-image">
+                    <img src="{{ image | img_url: '992x' }}" data-rjs="{{ image | img_url: '1984x' }}" alt="{{ product.title }}">
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <ul class="product-single__photos" data-product-images>
+              {% for image in product.images %}
+                {% if image.alt contains 'thumb' or image.alt contains 'Thumb' %}
+                  {% unless image.alt contains 'desktop' or image.alt contains 'Desktop' %}
+                    {% assign desktop_full_image = image %}
+                    {% for desktop_image in product.images %}
+                      {% if desktop_image.alt contains 'desktop' or desktop_image.alt contains 'Desktop' %}
+                        {% if desktop_image.alt contains image.alt %}
+                          {% assign desktop_full_image = desktop_image %}
+                          {% break %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                    <li data-image-src="{{ desktop_full_image | img_url: '2880x' }}"{% if desktop_image == featured_image %} class="active"{% endif %}><span style="background-image: url({{ image | img_url: '60x' }});" data-rjs="{{ image | img_url: '120x' }}"></span></li>
+                  {% endunless %}
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="grid__item medium--five-twelfths small--one-half">
+            <div class="product-single__content text-center">
+              <div class="product-single__title-section">
+                {% if product.metafields.custom_fields.enable_reviews_section == 1 %}
+                  <div class="product-single__review-rating">
+                    <a href="#productReviews" class="animate-scroll">
+                      <span class="yotpo-overlay"></span>
+                      <div class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
+                    </a>
+                  </div>
+                {% endif %}
+                <h1 itemprop="name">{{ product.title }}</h1>
+                {% if product.compare_at_price_max > product.price %}
+                  <s class="product-single__sale">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</s>
+                  <span class="product-single__price" itemprop="price" content="{{ current_variant.price | money_without_currency }}">{{ current_variant.price | money_without_trailing_zeros }}</span>
+                {% else %}
+                  <span class="product-single__price" itemprop="price" content="{{ current_variant.price | money_without_currency }}">{{ current_variant.price | money_without_trailing_zeros }}</span>
+                {% endif %}
+              </div>
+              <div class="product-single__description rte text--small" itemprop="description">
+                {{ product.description }}
+                <div class="product-single__current-variant">
+                  <p class="text--accent">{{ current_variant.title }}</p>
+                </div>
+              </div>
+              <form action="/cart/add" method="post" enctype="multipart/form-data" id="add-item-form" data-cart-submit="data-cart-submit" data-productid="{{product.id}}" class="product-single__form text-left">
+                {% if product.available %}{% include 'subscription-product-custom' %}{% endif %}
+                <select id="product-select-{{ product.id }}" name="id" class="product-single__variant-select" data-variant-select data-productid="{{product.id}}">
+                  {% for variant in product.variants %}
+                    {% if variant.available %}
+                      <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                    {% else %}
+                      <option disabled="disabled">
+                        {{ variant.title }} - Sold Out
+                      </option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+                <div class="product-single__form-submit">
+                  <button type="submit" name="add" data-add-to-cart id="AddToCart" class="c-addToCartBtn js-addtocart btn btn--primary{% if settings.cart_limit_enable and cart.item_count > 0 %} disabled{% endif %}"{% if settings.cart_limit_enable and cart.item_count > 0 %} disabled{% endif %}>Add to Cart</button>
+                  {% if settings.cart_limit_enable and cart.item_count > 0 %}
+                    <div class="product-single__submit-tooltip">
+                      <p>{{ settings.cart_limit_message }}</p>
+                    </div>
+                  {% endif %}
+                  {% if settings.free_sample_toggle_pdp %}
+                    <button class="product-single__free-sample" data-modal-show="free-sample-modal">{{ settings.free_sample_label_pdp }}</button>
+                  {% endif %}
+                </div>
+              </form>
+            </div>
+            {% include 'brand-bar' %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include 'pdp-why-science-ingredients' %}
+    {% include 'pdp-one-step-routine' %}
+    {% include 'pdp-clinically-proven-results' %}
+    {% include 'pdp-statistics' %}
+    {% include 'pdp-natural-resilience-bottled' %}
+    {% include 'pdp-testimonials' %}
+    {% section 'pdp-reviews' %}
+    {% include 'brand-bar' %}
+    {% section 'instagram' %}
+    {% section 'interstitial-modal' %}
+  </div>
+
+  <!-- Start Afterpay code -->  
+</div>
+
+<script type="application/javascript" src="https://static-us.afterpay.com/javascript/present-afterpay.js"></script>
+
+
+<script>
+  const apConfig = {
+    'priceSelector': "label.rc_label.rc_label__onetime",   // REQUIRED: set to the div
+    'locale': 'en_US',            // REQUIRED: set to the locale for your site
+    'afterpayLogoColor': 'color', // optional: set to use black or white logo
+    'amount': {{ product.price | json }},              // optional: set to item price or order total
+    'minMaxThreshold': {          // optional: set to min and max order value
+    'min': 3500, 
+    'max': 100000 
+  },
+        'modalContent': 'us_black',
+          'replaceModalOpenIcon': 'questionMarkCircle'
+  };
+
+  new presentAfterpay(apConfig).init();
+</script>
+
+<!-- End Afterpay code -->

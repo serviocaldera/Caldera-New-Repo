@@ -1,0 +1,23 @@
+<div class="c-landerTwocol {{ section.settings.col-alignment }}">
+    <div class="wrapper">
+        <div class="c-landerTwocol__row">
+            <div class="c-landerTwocol__image">
+                <div class="c-landerTwocol__vtext">{{ section.settings.vtext }}</div>
+                <img src="{{ section.settings.image | img_url: 'master' }}" class="c-landerTwocol__image--desktop" />
+                <img src="{{ section.settings.image-mobile | img_url: 'master' }}" class="c-landerTwocol__image--mobile" />
+            </div>
+            <div class="c-landerTwocol__content">
+                <div class="c-landerTwocol__box">
+                    <h4 class="c-landerTwocol__heading">{{ section.settings.heading }}</h4>
+                    <div class="c-landerTwocol__copy">
+                        {{ section.settings.copy }}
+                    </div>
+                    {% if section.settings.btnurl != blank %}
+                        <a href="{{ section.settings.btnurl }}" data-animate-scroll class="btn btn--primary c-landerTwocol__btn"> {{ section.settings.btntext }}</a>
+                    {% endif %}    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--c-landerTwocol-->

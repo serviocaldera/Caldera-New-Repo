@@ -1,0 +1,21 @@
+<h4 class="c-pdpSection__heading c-pdpBotanicals__heading">{{ section.settings.title }}</h4>
+<!--div class="c-pdpBotanicals__subheading">{{ section.settings.subtitle }}</div-->
+
+{% schema %}
+  {
+    "name": "PDP Botanicals Header",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"The Absolute Best Ingredients From Nature"
+      },
+      {
+        "type":"html",
+        "id":"subtitle",
+        "label":"Sub Title"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,24 @@
+<div class="headline headline--large">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--five-sixths push--medium--one-twelfth text-center">
+        <div class="headline__content">
+          <p class="text--light">{{ section.settings.headline_content | strip_html }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Large Headline Section",
+    "settings": [
+      {
+        "type":"textarea",
+        "id":"headline_content",
+        "label": "Headline Content",
+        "default":"We designed The Good to be simple to incorporate into your daily routine, whether or not you have a skincare regimen or you've never bought skincare before."
+      }
+    ]
+  }
+{% endschema %}

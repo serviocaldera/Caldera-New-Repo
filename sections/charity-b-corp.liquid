@@ -1,0 +1,56 @@
+<div class="charityBcorp">
+  <div class="wrapper charityBcorp__main">
+        <div class="charityBcorp__row">
+          <div class="charityBcorp__image">
+            <img data-src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.heading }}" class="lazyload" />
+          </div>
+          <div class="charityBcorp__content">
+            <h3 class="charityBcorp__heading">
+              {{ section.settings.heading }}
+            </h3>
+            <div class="charityBcorp__copy">
+              {{ section.settings.copy }}
+            </div>
+            <a href="{{ section.settings.link }}" class="btn btn--primary charityBcorp__btn">{{ section.settings.linktext }}</a>
+          </div>  
+        </div>
+    </div> 
+</div>
+
+
+{% schema %}
+  {
+    "name": "Charity B Corp",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image"
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading",
+        "default":"B Corporations believe in more than profit."
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default":"Instead of promises that are tough to fact check, we opted for accountability. The B Corp designation confirms that from wild harvesting to packaging to distribution, every stage of our production and labor practices meet the highest standards of social and environmental responsibility. "
+      },
+      {
+        "type":"url",
+        "id":"link",
+        "label":"Link"
+      },
+      {
+        "type":"text",
+        "id":"linktext",
+        "label":"Link Text",
+        "default":"LEARN MORE"
+      }
+
+    ]
+  }
+{% endschema %}

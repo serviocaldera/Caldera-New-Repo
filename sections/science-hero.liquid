@@ -1,0 +1,52 @@
+<div class="story">
+    <div class="story__hero c-scienceHero">
+      <div class="hero__image c-scienceHero__image" style="background-image: url({{ section.settings.hero_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.hero_mobile_image %}{{ section.settings.hero_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.hero_image | img_url: '2880x' }}" data-mobile-image-check></div>
+      <div class="wrapper">
+          <div class="c-scienceHero__content">
+              <div class="c-scienceHero__subHeading">{{ section.settings.subheading }}</div>
+              <h2 class="c-scienceHero__title">{{ section.settings.title }}</h2>
+              <p class="c-scienceHero__copy">{{ section.settings.copy }}</p>
+          </div>
+      </div>
+  </div>  
+</div>
+
+
+{% schema %}
+  {
+    "name": "Science Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"hero_image",
+        "label":"Hero Image",
+        "info":"Recommended dimensions: 2880px x 908px"
+      },
+      {
+        "type":"image_picker",
+        "id":"hero_mobile_image",
+        "label":"Hero Mobile Image",
+        "info":"Recommended dimensions: 1984px x 1396px"
+      },
+      {
+        "type":"text",
+        "id":"subheading",
+        "label":"Sub Heading",
+        "default":"This is nature - engineered.   "
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"Innovative Scientifically-Crafted Skincare "
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default":"We create Greentek Self/Care that delivers clinically-verified results."
+      }
+      
+    ]
+  }
+{% endschema %}

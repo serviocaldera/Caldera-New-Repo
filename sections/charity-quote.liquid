@@ -1,0 +1,49 @@
+<div class="charityQuote">
+    <div class="charityQuote__main">
+      <img data-src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title }}" class="lazyload charityQuote__desktop" />
+      <img data-src="{{ section.settings.mobile_image | img_url: 'master' }}" alt="{{ section.settings.title }}" class="lazyload charityQuote__mobile" />
+      <div class="wrapper">
+          <div class="charityQuote__content">
+              <p class="charityQuote__quoteCopy">{{ section.settings.quote }}</p>
+              <p class="charityQuote__quoteAuthor">{{ section.settings.author }}</p>
+              <p class="charityQuote__copy">{{ section.settings.text }}</p>
+          </div>
+      </div>
+  </div>  
+</div>
+
+{% schema %}
+  {
+    "name": "Charity Quote",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Desktop Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"mobile_image",
+        "label":"Mobile Image"
+      },
+      {
+        "type":"html",
+        "id":"quote",
+        "label":"Quote",
+        "default":"The true measure of a society can be found in how it treats its most vulnerable members."
+      },
+      {
+        "type":"text",
+        "id":"author",
+        "label":"Author",
+        "default":"- Mahatma Gandhi"
+      },
+      {
+        "type":"html",
+        "id":"text",
+        "label":"Copy",
+        "default":"Wellness is more than great skincare. It’s also how we treat each other and the Earth. That’s why we’ve invested in humanity-driven charities from day one. Giving isn’t a public relations game to us - it’s central to our families and this business. No matter how you give or how much, we hope you’ll join us."
+      }
+    ]
+  }
+{% endschema %}

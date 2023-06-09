@@ -1,0 +1,312 @@
+{%if template contains "phase-one-landing"%}
+  <style>
+    #shopify-section-promo-bar, #shopify-section-mega-menu{
+      display: none;
+    }
+  </style>
+{%endif%}
+<div class="hero3__track{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}" data-autoplay="{{ section.settings.enable_autorotate }}" data-delay="{{ section.settings.delay }}" >
+  {% for block  in section.blocks %}
+  <div class="hero3__slide" style="{% if block.settings.background_color %}background-color:{{block.settings.background_color}}{% endif %};" {% if section.settings.delay != blank %}data-swiper-autoplay="{{section.settings.delay}}"{% endif %}>
+    {% if block.settings.image != blank or block.settings.image_mob != blank %}
+    <!-- Full Image/Video Slide -->
+      <picture>
+        <source media="(min-width: 1024px)" srcset="{{block.settings.image | img_url: '1920x'}}">
+        <source media="(max-width: 1023px)" srcset="{{block.settings.image_mob | img_url: '767x'}}">
+     {%if forloop.index0 == 0%}
+     <img class="hero3__image" src="{{block.settings.image_mob | img_url: '767x'}}" alt="Hero">
+     {%else%}
+     <img class="hero3__image lozad" data-src="{{block.settings.image_mob | img_url: '767x'}}" alt="Hero">
+     {%endif%}
+      
+      </picture>
+    {% endif %}
+    {%- if block.settings.vimeo != blank -%}
+      <div class="vimeo-wrapper{% if block.settings.vimeo_mob != blank %} vimeo-desktop{% else %} video-responsive-mob{% endif %}">
+        <iframe id="desktop-video" src="https://player.vimeo.com/video/{{block.settings.vimeo}}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0" frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+      {%- if block.settings.vimeo_mob != blank -%}
+      <div class="vimeo-wrapper vimeo-mob{% if block.settings.vimeo_mob_square %} vimeo-mob-square{% else %} video-responsive{% endif %}">
+        <iframe id="mobile-video" src="https://player.vimeo.com/video/{{block.settings.vimeo_mob}}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+      {%- endif -%}
+      <!-- End -->
+
+      <script src="https://player.vimeo.com/api/player.js"></script>
+      <script>
+          var playerDesktop = new Vimeo.Player('desktop-video');
+          var playerMobile = new Vimeo.Player('mobile-video');
+          
+          function vimeoPlayPause(){
+            var win = $(this); //this = window
+            if (win.width() <= 480) {
+              playerMobile.play();
+              playerDesktop.pause();
+            }else{
+              playerDesktop.play();
+              playerMobile.pause();
+
+            }
+        }
+
+        $(window).on('load', function(){
+            vimeoPlayPause();
+        });
+        $(window).on('resize', function(){
+            vimeoPlayPause();
+        });
+
+      </script>
+
+    {%- endif -%}
+
+    <div class="hero3__row">
+      {% if block.settings.image_secondary != blank %}
+        <div class="hero3__text {% if block.settings.text_size == 'big' %}hero3__text--big{% endif %}" style="{% if block.settings.text_color %}color:{{block.settings.text_color}}{% endif %};">
+          
+          <picture>
+            <source media="(min-width: 1024px)" srcset="{{block.settings.image | img_url: '1920x'}}">
+            <source media="(max-width: 1023px)" srcset="{{block.settings.image_mob | img_url: '767x'}}">
+          
+            <img class="hero3__image lozad" data-src="{{block.settings.image_mob | img_url: '767x'}}" alt="Hero">
+          </picture>
+
+          <p class="hero3__subtitle">{{ block.settings.subtitle }}</p>
+
+          <h2 class="hero3__title">{{ block.settings.title }}</h2>
+
+          {% if block.settings.copy != blank %}
+            <div class="hero3__copy">{{ block.settings.copy }}</div>
+          {% endif %}
+
+          <div class="hero3__button-wrapper">
+            {% if block.settings.button_text != blank %}
+              <a class="hero3__button btn btn--primary" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+            {% endif %}
+
+            {% if block.settings.link_text != blank %}
+              <a class="hero3__link" href="{{ block.settings.link_url }}">{{ block.settings.link_text }}</a>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="hero3__image-container">
+          {% if block.settings.image_secondary != blank %}
+            <img class="hero3__image hero3__image--secondary lozad" data-src="{{block.settings.image_secondary | img_url: '1600x'}}" alt="Hero">
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="hero3__text" style="{% if block.settings.text_color %}color:{{block.settings.text_color}}{% endif %};">
+          <p class="hero3__subtitle">{{ block.settings.subtitle }}</p>
+          {%if forloop.index0 == 0%}
+          <h1 class="hero3__title">{{ block.settings.title }}</h1>
+          {%else%}
+          <h2 class="hero3__title">{{ block.settings.title }}</h2>
+          {%endif%}
+         
+
+          {% if block.settings.copy != blank %}
+            <div class="hero3__copy">{{ block.settings.copy }}</div>
+          {% endif %}
+
+          <div class="hero3__button-wrapper">
+            {% if block.settings.button_text != blank %}
+              <a class="hero3__button btn btn--primary" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+            {% endif %}
+
+            {% if block.settings.link_text != blank %}
+              <a class="hero3__link" href="{{ block.settings.link_url }}">{{ block.settings.link_text }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <style>
+    @media (min-width:1024px){
+      .hero3__link:after{
+      background: {{block.settings.text_color}};
+    }
+    }
+   
+  </style>
+  {% endfor %}
+</div>
+
+<div class="swiper-pagination hero3_swiper-pagination-mob"></div>
+
+<script>
+window.addEventListener("DOMContentLoaded", function(){
+  let autoplay = document.querySelector('.hero3__track').dataset.autoplay;
+  //let delay = document.querySelector('.hero3__track').dataset.delay;
+  console.log(autoplay);
+
+  const heroSlider = new Swiper('.hero3__slider', {
+    wrapperClass: 'hero3__track',
+    slideClass: 'hero3__slide',
+    speed: 500,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return '<span class="' + className + '">' + (index + 1) + "</span>";
+      },
+    },
+    pauseOnMouseEnter: true,
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        autoHeight: true
+      },
+      // when window width is >= 1025px
+      1025: {
+        autoHeight: false
+      }
+    }
+  });
+
+  if (autoplay != 'false') {
+    heroSlider.autoplay.start();
+  }
+  var xMedia = window.matchMedia("(max-width: 1024px)");
+  if (xMedia.matches) { // If media query matches
+    (document.querySelector(".hero3_swiper-pagination-mob")).style.top=(document.querySelector(".hero3__slide.swiper-slide-active img").offsetHeight) + 10 +"px";
+    heroSlider.on('transitionStart', function () {
+      let img = heroSlider.slides[heroSlider.realIndex];
+      img.querySelector(".hero3__image").offsetHeight;
+      let mob = document.querySelector(".hero3_swiper-pagination-mob");
+      mob.style.top=(img.querySelector(".hero3__image").offsetHeight) + 10 +"px";
+    });
+  } 
+
+});
+
+</script>
+
+
+{% schema %}
+{
+  "name": "Hero 3",
+  "tag": "section",
+  "class": "hero3__slider",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_autorotate",
+      "label": "Enable AutoPlay"
+    },
+    {
+      "type": "number",
+      "id": "delay",
+      "label": "Delay (ms)"
+    },
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Hero Slider",
+      "type": "hero-slider",
+      "settings": [
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "First Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mob",
+          "label": "First Image Mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_secondary",
+          "label": "Secondary Image"
+        },
+        {
+          "type": "radio",
+          "id": "text_size",
+          "label": "Text Size",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "big",
+              "label": "Big"
+            }
+          ],
+          "default": "small"
+        },
+        {
+          "type": "text",
+          "id": "vimeo",
+          "label": "Vimeo ID"
+        },
+        {
+          "type": "text",
+          "id": "vimeo_mob",
+          "label": "Vimeo ID for mobile",
+          "info": "Add mobile only video."
+        },
+        {
+          "type": "checkbox",
+          "id": "vimeo_mob_square",
+          "label": "Square mobile video",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Sub-title"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "copy",
+          "label": "Copy"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button url"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "link Text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "link url"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,44 @@
+<div class="c-pdpCertified">
+    <div class="wrapper">
+        <div class="c-pdpCertified__row">
+            <div class="c-pdpCertified__copy">
+                {{ section.settings.copy }}
+            </div>
+            <div class="c-pdpCertified__logos">
+                {% for block in section.blocks %}
+                    <div class="c-pdpCertified__images">
+                         <img src="{{ block.settings.image | img_url: "2x" }}" data-src="{{ block.settings.image | img_url: "master" }}" alt="Certified Logos" class="lazyload" />
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!--c-pdpInd-->
+
+{% schema %}
+  {
+    "name": "PDP Certified",
+    "settings": [
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"copy",
+        "default": "The first men’s skincare in the US to be certified by both ECOCERT and MADE SAFE®"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "contentcolumn",
+        "name": "Certified Logos",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,37 @@
+{% if product.metafields.custom_fields["enable_routine_video_section"] == 1 %}
+<div class="c-pdpVideo">
+    <div class="c-pdpVideo__content">
+        <div class="c-pdpVideo__mainArea">
+            {% if product.metafields.custom_fields["routine_video_poster"] != blank %}
+            <div href="#" class="c-pdpVideo__play js-play-pdp-video">
+              <img src='{{ product.metafields.custom_fields["routine_video_poster"] }}' data-src='{{ product.metafields.custom_fields["routine_video_poster"] }}' alt='{{ product.metafields.custom_fields["routine_video_vertical_text"] }}' class="lazyload" />
+            </div>
+            {% endif %}
+
+            {% if product.metafields.custom_fields["routine_video_emebed"] != blank %}
+            <div class="c-video">
+              <video class="c-pdpVideo__video" controls="" id="pdpvideo">
+                <source src="{{ product.metafields.custom_fields["routine_video_emebed"] }}" type="video/mp4">
+              </video>  
+            </div>
+            {% endif %}
+            {% if product.metafields.custom_fields["routine_video_vertical_text"] != blank %}
+            <div class="c-pdpVideo__text">
+                {{ product.metafields.custom_fields["routine_video_vertical_text"] }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!--c-pdpInd-->
+{% endif %}
+<script type="text/javascript">
+    $('.js-play-pdp-video').on('click', function() {
+        var video = document.getElementById('pdpvideo');
+        $(this).hide();
+        $(this).find('img').addClass('is-hide');
+        $('.c-pdpVideo__video').addClass('is-play');
+        video.play();
+        return false;
+    });
+</script>

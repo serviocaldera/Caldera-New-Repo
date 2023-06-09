@@ -1,0 +1,158 @@
+{% if product.metafields.custom_fields["enable_quiz_recommend"] == 1 %}
+	<div class="c-quizResult">
+		<div class="c-quizResult__container">	
+
+			<div class="c-quizResult__heading-row">
+				{% if product.metafields.custom_fields["quiz_recommend_title"] != blank %}
+					<h5 class="c-quizResult__heading">{{ product.metafields.custom_fields["quiz_recommend_title"] }}</h5>
+				{% endif %}		
+				<h4 class="c-quizResult__title">Ships Every 45 Days</h4>
+				{% if product.metafields.custom_fields["quiz_recommend_copy"] != blank %}
+					<div class="c-quizResult__para">{{ product.metafields.custom_fields["quiz_recommend_copy"] }}</div>
+				{% endif %}		
+			</div>
+
+			<div class="c-quizResult__main-row">
+
+				{% if product.metafields.custom_fields["quiz_recommend_products"] != blank %}
+					<div class="c-quizResult__products-col">
+						{% for item in product.metafields.custom_fields["quiz_recommend_products"] %}
+							{% assign metaproduct = all_products[item["quiz_recommend_product_handle"]] %}
+							{% assign pdt_discount = metaproduct.metafields.sf_upscribe.discount_amount %}
+							{% unless pdt_discount contains '.' %}
+								{% assign pdt_discount = pdt_discount | replace: '%', '.0%' %}
+							{% endunless %}
+							{% if forloop.last == true %}
+								<div class="c-quizResult__product {% if metaproduct.available %}{% else %} c-quizResult__product--oos {% endif %} "
+								data-varient-id="{{ metaproduct.selected_or_first_available_variant.id }}"
+								data-discount-percentage="{{ pdt_discount }}"
+								data-subscription-title="{{ metaproduct.metafields.sf_upscribe.subscription_product_title | format_money }}" 
+								data-regular-price="{{ metaproduct.price }}"
+								>
+									<div class="c-quizResult__product-thumb">
+										<img src="{{ item["quiz_recommend_product_thumb"] }}" alt="{{ metaproduct.title }}">
+									</div>
+									<div class="c-quizResult__product-content">
+										<div class="c-quizResult__product-title">{{ metaproduct.title }}<span class="c-quizResult__product-badge">Sold Out</span></div>
+										<p class="c-quizResult__product-descrip c-quizResult__copy"></p>
+									</div>
+								</div>
+							{% else %}
+								<div class="c-quizResult__product {% if metaproduct.available %}{% else %} c-quizResult__product--oos {% endif %} "
+								data-varient-id="{{ metaproduct.selected_or_first_available_variant.id }}"
+								data-discount-percentage="{{ pdt_discount }}"
+								data-subscription-title="{{ metaproduct.metafields.sf_upscribe.subscription_product_title | format_money }}" 
+								data-regular-price="{{ metaproduct.price }}"
+								>
+									<div class="c-quizResult__product-thumb">
+										<img src="{{ item["quiz_recommend_product_thumb"] }}" alt="{{ metaproduct.title }}">
+									</div>
+									<div class="c-quizResult__product-content">
+										<div class="c-quizResult__product-title">{{ metaproduct.title }}<span class="c-quizResult__product-badge">Sold Out</span></div>
+										<p class="c-quizResult__product-descrip">{{ item["quiz_recommend_product_descrip"] }}</p>
+									</div>
+								</div>
+							{% endif %}
+						{% endfor %}							
+					</div>
+				{% endif %}	
+
+				<div class="c-quizResult__buy-col">
+
+					<div class="c-quizResult__result">
+						<div class="c-quizResult__result-thumb">
+							<img src="{{ 'regimen-thumb.jpg' | asset_img_url: 'master' }}">
+						</div>
+						<div class="c-quizResult__result-icons">
+							<div class="c-quizResult__resultHeading">Because You Selected...</div>
+							<div class="c-quizResult__row"></div>	
+						</div>
+					</div>
+			
+					<div class="c-quizResult__btn">
+						<div class="c-productInfo__submit">
+							<button type="submit" class="c-addToCartBtn js-quiz-result-atc">
+								<div class="c-productInfo__btnPrice">
+									<span class="c-productInfo__priceSub">$150</span>
+									<span class="c-productInfo__priceOneTime">$189</span>
+								</div>
+								<span class="c-productInfo__btnText">Add To Cart</span>
+							</button>
+						</div>
+			
+						<div class="c-quizResult__retake">
+							<a href="#" data-quiz-click>
+								{% include 'icon-retake' %}
+								Retake Quiz
+							</a>
+							<span>
+								20% Membership Discount Included	
+							</span>
+						</div>
+					</div>
+					<p class="c-quizResult__text">
+						<a href="/pages/our-story-results" target="_blank">Learn more</a> about how The Regimen helps with: 
+						<span class="c-quizResult__answerTwo">Wrinkles & Fine Lines, Dullness, and Aging</span>.
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="c-quizResult__bar">
+		<?xml version="1.0" encoding="UTF-8"?>
+		<svg width="24px" height="13px" viewBox="0 0 24 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+			<title>arrow down</title>
+			<desc>Created with Sketch.</desc>
+			<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+				<g id="Desktop-Results-Closed" transform="translate(-553.000000, -119.000000)" fill="#FFFFFF" fill-rule="nonzero">
+					<g id="recommendation-bar-collapsed" transform="translate(553.000000, 116.000000)">
+						<g id="arrow-down" transform="translate(0.000000, 3.000000)">
+							<path d="M23.651282,0.32820512 C23.3230769,0 22.7897436,0 22.4615385,0.32820512 L12,10.8102564 L1.5179487,0.32820512 C1.18974358,0 0.656410272,0 0.32820512,0.32820512 C5.82867088e-16,0.656410272 5.82867088e-16,1.18974358 0.32820512,1.5179487 L11.3846154,12.574359 C11.548718,12.7384615 11.7538461,12.8205128 11.9794872,12.8205128 C12.1846154,12.8205128 12.4102564,12.7384615 12.574359,12.574359 L23.6307692,1.5179487 C23.9794872,1.18974358 23.9794872,0.656410272 23.651282,0.32820512 Z" id="Path"></path>
+						</g>
+					</g>
+				</g>
+			</g>
+		</svg>
+		<span>Click to view results</span>
+		<?xml version="1.0" encoding="UTF-8"?>
+			<svg width="24px" height="13px" viewBox="0 0 24 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+				<title>arrow down</title>
+				<desc>Created with Sketch.</desc>
+				<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+					<g id="Desktop-Results-Closed" transform="translate(-553.000000, -119.000000)" fill="#FFFFFF" fill-rule="nonzero">
+						<g id="recommendation-bar-collapsed" transform="translate(553.000000, 116.000000)">
+							<g id="arrow-down" transform="translate(0.000000, 3.000000)">
+								<path d="M23.651282,0.32820512 C23.3230769,0 22.7897436,0 22.4615385,0.32820512 L12,10.8102564 L1.5179487,0.32820512 C1.18974358,0 0.656410272,0 0.32820512,0.32820512 C5.82867088e-16,0.656410272 5.82867088e-16,1.18974358 0.32820512,1.5179487 L11.3846154,12.574359 C11.548718,12.7384615 11.7538461,12.8205128 11.9794872,12.8205128 C12.1846154,12.8205128 12.4102564,12.7384615 12.574359,12.574359 L23.6307692,1.5179487 C23.9794872,1.18974358 23.9794872,0.656410272 23.651282,0.32820512 Z" id="Path"></path>
+							</g>
+						</g>
+					</g>
+				</g>
+			</svg>
+	</div>
+
+<style>
+.promo-bar--removed-body .c-quizResult__bar{
+    top: 59px !important;
+}
+.promo-bar--removed-body .c-quizResult {
+	margin-top: 58px;
+}
+@media (min-width: 48rem){
+	.promo-bar--removed-body .c-quizResult__bar{
+	    top: 72px !important;
+	}
+	.promo-bar--removed-body .c-quizResult {
+    	margin-top: 82px;
+	}
+}
+@media (min-width: 64rem){
+	.promo-bar--removed-body .c-quizResult {
+    	margin-top: 71px;
+	}
+}
+</style>	
+{% endif %}	

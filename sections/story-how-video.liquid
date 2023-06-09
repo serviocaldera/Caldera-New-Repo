@@ -1,0 +1,27 @@
+<div class="story__video" style="background-image: url({{ section.settings.video_preview_image |  img_url: '1440x' }});" data-rjs="{{ section.settings.video_preview_image | img_url: '2880x' }}">
+  <a href="#how-video-popup" data-popup-trigger>{% include 'icon' with 'play' %}</a>
+  <div id="how-video-popup" class="popup mfp-hide mfp-with-anim product-video-popup">
+    <div class="popup__content">
+      <video class="video-popup__video" poster="{{ section.settings.video_preview_image | img_url: '2000x' }}" controls>
+        <source src="{{ section.settings.video_link }}" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Video Section",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"video_preview_image",
+        "label":"Video Preview Image"
+      },
+      {
+        "type":"url",
+        "id":"video_link",
+        "label":"Video Link"
+      }
+    ]
+  }
+{% endschema %}

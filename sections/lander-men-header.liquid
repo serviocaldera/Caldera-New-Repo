@@ -1,0 +1,34 @@
+<div class="c-landerHeader">
+    <div class="wrapper">
+        <div class="c-landerHeader__content">
+            <a href="{{ shop.url }}" class="c-landerHeader__logo" title="Caldera&plus;Lab">{%- include 'icon' with 'logo' -%}</a>
+            <span class="c-landerHeader__text">{{ section.settings.text }}</span>
+            <a href="{{ section.settings.btnurl }}" data-animate-scroll class="btn btn--primary c-landerHeader__btn">{{ section.settings.btntext }}</a>
+        </div>
+    </div>
+</div>
+<!--c-landerHeader-->
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+        {
+            "type":"text",
+            "id":"text",
+            "label":"Text",
+            "default":"Dr Mark Hyman Special: 20% off"
+        },
+        {
+            "type":"text",
+            "id":"btntext",
+            "label":"Button Text",
+            "default":"Redeem Offer"
+        },
+        {
+            "type":"url",
+            "id":"btnurl",
+            "label":"Button Url"
+        }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,62 @@
+{% if section.settings.enable-section %}
+<div class="c-howToQuote">
+    <div class="wrapper c-howToQuote__container">
+        <div class="c-howToQuote__row" data-how-to-quote-slider>
+            {% for block in section.blocks %}
+                <div class="c-howToQuote__item">
+                    <div class="c-howToQuote__content">
+                        {% if block.settings.image != blank %}
+                            <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.heading }}" />
+                        {% endif %}
+                        {% if block.settings.copy != blank %}
+                        <div class="c-howToQuote__copy">
+                            {{ block.settings.copy }}
+                        </div>
+                        {% endif %}
+                        {% if block.settings.address != blank %}
+                            <div class="c-howToQuote__address">
+                                {{ block.settings.address }}
+                            </div>
+                        {% endif %}
+                    </div>  
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% schema %}
+    {
+        "name": "How to Quote",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "enable-section",
+                "label": "Enable Section"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "step",
+                "name": "Quote",
+                "settings": [
+                    {
+                        "type":"image_picker",
+                        "id":"image",
+                        "label":"Image"
+                    },
+                    {
+                        "type":"html",
+                        "id":"copy",
+                        "label":"Copy"
+                    },
+                    {
+                        "type":"text",
+                        "id":"address",
+                        "label":"Address"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

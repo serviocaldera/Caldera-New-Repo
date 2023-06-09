@@ -1,0 +1,45 @@
+<div class="story__hero">
+  <div class="hero__image" style="background-image: url({{ section.settings.hero_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.hero_mobile_image %}{{ section.settings.hero_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.hero_image | img_url: '2880x' }}" data-mobile-image-check></div>
+  <div class="wrapper">
+    <div class="grid--full">
+      <div class="grid__item large--one-half medium--one-half one-whole">
+        <div class="hero__content">
+          <div class="about-hero-heading">ABOUT US</div>
+            <h2 class="about-hero-title">Our Story</h2>
+          {% if section.settings.hero_content %}
+            <p class="text--light text--large-accent">{{ section.settings.hero_content }}</p>
+          {% endif %}
+          {% comment %}
+          <a href="#second-section-start" class="story__heroArrow">{% include 'icon' with 'arrow-down' %}</a>
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="second-section-start"></div>
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"hero_image",
+        "label":"Hero Image",
+        "info":"Recommended dimensions: 1440px x 1500px"
+      },
+      {
+        "type":"image_picker",
+        "id":"hero_mobile_image",
+        "label":"Hero Mobile Image",
+        "info":"Recommended dimensions: 750px x 592px"
+      },
+      {
+        "type":"textarea",
+        "id":"hero_content",
+        "label":"Hero Content",
+        "default":"Premium natural skincare for men didn't exist, so we spent more than two years creating it."
+      }
+    ]
+  }
+{% endschema %}

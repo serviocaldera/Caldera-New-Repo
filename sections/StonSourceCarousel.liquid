@@ -1,0 +1,161 @@
+<style>
+    {% if section.settings.background_image or section.settings.background_color %}
+    #shopify-section-{{ section.id }} {
+        {% if section.settings.background_image %}
+        background: url("{{ section.settings.background_image | img_url: 'master'}}") no-repeat center center;
+        background-size: cover;
+        {% else %}
+        {% if section.settings.background_color %}
+        background-color: {{ section.settings.background_color }};
+        {% endif %}
+        {% endif %}
+    }
+    {% endif %}
+    #shopify-section-{{ section.id }} .swiper-text p {
+        color: {{ section.settings.body_text }};
+    }
+</style>
+
+<div class="stone-source-carousel{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="stone-source-carousel-container">
+        <div class="swiper stone-{{ section.id }}">
+            <div class="swiper-wrapper">
+                {% if section.blocks.size > 0 %}
+                    {% for block in section.blocks %}               
+                        <div class="swiper-slide">
+                            <div class="stone-source-carousel_swiper-container-wrapper">       
+                                {% assign text = block.settings.paragraph %}
+                                {% assign image = block.settings.logo_image %}
+                                <a {% if block.settings.button_link%}href="{{block.settings.button_link}}"{%endif%} target="_blank">
+                                    <div class="swiper-container stone-source-carousel_swiper-container">
+                                        <div class="swiper-text">
+                                            <p>{{ text }}</p>
+                                        </div>
+                                        <div>
+                                            {% if image %}
+                                                {% render 'lozad-image', image: image %}
+                                                {% comment %}<img class="lozad" data-src="{{ image | img_url: 'master' }}" alt="placeholder_image">{% endcomment %}
+                                            {% else %}
+                                                {{ 'image' | placeholder_svg_tag }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="swiper_btn_flex">
+                <div class="swiper-button-next">{% include 'StonSourceCarousel-arrow', color: section.settings.body_text %}</div>
+                <div class="swiper-button-prev">{% include 'StonSourceCarousel-arrow', color: section.settings.body_text %}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Stone source carousel",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "autoplay",
+            "label": "Autoplay",
+            "default": true
+        },
+        {
+            "type": "range",
+            "id": "autoplay_value",
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "unit": "s",
+            "label": "Autoplay Speed",
+            "default": 0.5
+        },
+        {
+            "type": "color",
+            "id": "body_text",
+            "label": "Body text",
+            "default": "#000000"
+        },
+        {
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Background image"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color"
+        },
+        {
+            "type": "text",
+            "id": "section_classname",
+            "label": "Section Class Name"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "slide",
+            "name": "slide",
+            "settings": [
+                {
+                    "type": "richtext",
+                    "id": "paragraph",
+                    "label": "Paragraph",
+                    "default": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "logo_image",
+                    "label": "Logo image"
+                },
+                {
+                    "type": "url",
+                    "id": "button_link",
+                    "label": " Block link"
+                  }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Stone source carousel"
+        }
+    ]
+}
+{% endschema %}
+
+<script>
+    new Swiper(".stone-{{ section.id }}", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        {% if section.settings.autoplay %}
+        autoplay: {
+            delay: {{ section.settings.autoplay_value | times: 1000 | round }},
+            disableOnInteraction: false,
+        },
+        {% endif %}
+        loop: true,
+        navigation: {
+            nextEl: ".stone-{{ section.id }} .swiper-button-next",
+            prevEl: ".stone-{{ section.id }} .swiper-button-prev",
+        },
+        breakpoints: {
+            600: {
+                slidesPerView: 2,
+                spaceBetween: 40,
+            },
+            876: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+            },
+            1240: {
+                slidesPerView: 4,
+                spaceBetween: 40,
+            }
+        }
+    });
+</script>

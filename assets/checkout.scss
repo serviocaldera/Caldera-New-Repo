@@ -1,0 +1,625 @@
+@font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-HeavyOblique.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-HeavyOblique.woff') format('woff');
+     font-weight: bold;
+     font-style: italic;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Medium.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Medium.woff') format('woff');
+     font-weight: 500;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Oblique.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Oblique.woff') format('woff');
+     font-weight: normal;
+     font-style: italic;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-BookOblique.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-BookOblique.woff') format('woff');
+     font-weight: normal;
+     font-style: italic;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-BlackOblique.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-BlackOblique.woff') format('woff');
+     font-weight: 800;
+     font-style: italic;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-MediumOblique.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-MediumOblique.woff') format('woff');
+     font-weight: 500;
+     font-style: italic;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Book.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Book.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Heavy.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Heavy.woff') format('woff');
+     font-weight: bold;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Black.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Black.woff') format('woff');
+     font-weight: 800;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Light.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Light.woff') format('woff');
+     font-weight: 300;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Roman.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-Roman.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Avenir LT Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-LightOblique.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AvenirLTPro-LightOblique.woff') format('woff');
+     font-weight: 300;
+     font-style: italic;
+ }
+
+ @font-face {
+     font-family: 'Adobe Garamond Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-Regular.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-Regular.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Adobe Garamond Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-Italic.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-Italic.woff') format('woff');
+     font-weight: normal;
+     font-style: italic;
+ }
+
+ @font-face {
+     font-family: 'Adobe Garamond Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-Semibold.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-Semibold.woff') format('woff');
+     font-weight: 500;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Adobe Garamond Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-SemiboldItalic.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-SemiboldItalic.woff') format('woff');
+     font-weight: 500;
+     font-style: italic;
+ }
+
+ @font-face {
+     font-family: 'Adobe Garamond Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-Bold.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-Bold.woff') format('woff');
+     font-weight: bold;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'Adobe Garamond Pro';
+     src: url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-BoldItalic.woff2') format('woff2'),
+         url('https://cdn.shopify.com/s/files/1/0079/7193/0170/files/AGaramondPro-BoldItalic.woff') format('woff');
+     font-weight: bold;
+     font-style: italic;
+ }
+
+
+body {
+    font-family:  'Avenir LT Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+    color: #3D3D38;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+}
+
+.main .field__input,
+.field__input,
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"]{
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 26px;
+    color:#3D3D38;
+    letter-spacing: 0.5px;
+    padding:0.5em 0.78571em 0.4em;
+}
+
+.main .input-checkbox, .main .input-radio{
+    border-color:#21211E;
+}
+
+.fieldset-description .input-checkbox,
+[type='checkbox']{
+  height: 18px;
+  width: 18px;
+  position: relative;
+}
+
+.fieldset-description .input-checkbox,
+[type='checkbox']{
+    border-radius: 0;
+}
+
+.fieldset-description .input-checkbox:after,
+[type='checkbox']:after{
+  content: '\00D7';
+  display: block;
+  background: white;
+  pointer-events: none;
+  font-size: 15px;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  height: 18px;
+  width: 18px;
+  color: transparent;
+  transition: .25s all ease-in-out;
+  line-height: 15px;
+  background-position:center;
+  background-repeat: no-repeat;
+  margin:0;
+}
+
+.main .input-checkbox, .main .input-radio{
+    border-color: #AF5D00;
+}
+
+.main .input-checkbox:focus, .main .input-radio:focus{
+    outline: none;
+}
+
+.content-box .input-checkbox:checked,
+.input-checkbox:checked {
+    border:none;
+}
+
+.fieldset-description .input-checkbox:after,
+[type='checkbox']:after{
+    background-image: url('icon-checkmark.svg');
+    background-size: 12px 12px;
+}
+.fieldset-description .input-checkbox:checked:after,
+[type='checkbox']:checked:after{
+  background-color: #AF5D00;
+  background-position: center;
+}
+
+
+.content-box .input-checkbox,
+.fieldset-description .input-checkbox:hover:after,
+[type='checkbox']:hover:after{
+  border-color: #21211E;
+}
+
+.input-checkbox:focus{
+    border: 1px solid #C9BE9E;
+}
+
+.floating-labels .field--show-floating-label .field__label{
+    display: none;
+}
+
+.floating-labels .field--show-floating-label .field__input{
+    padding-top: 0.5em;
+    color:#3D3D38;
+}
+
+.main .field__input::placeholder,
+input::placeholder,
+textarea::placeholder{
+  color: #3D3D38;
+  opacity: 1;
+}
+
+.btn{
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 2.71px;
+    color:#fff;
+    background: #AF5D00;
+    border-radius: 2px;
+    padding:1.1em 1.7em 0.9em;
+    text-transform: uppercase;
+}
+
+
+[data-shopify-pay-email-flow="true"] .field__input-wrapper,
+[data-address-field="company"] .field__input-wrapper,
+[data-address-field="address1"] .field__input-wrapper,
+[data-address-field="address2"] .field__input-wrapper,
+[data-address-field="phone"] .field__input-wrapper{
+    max-width:430px;
+}
+
+[data-address-field="city"] .field__input-wrapper{
+    max-width:210px;
+}
+
+.main__header .logo__image{
+    max-width:350px;
+}
+
+.breadcrumb__item--current{
+    font-weight: normal;
+}
+
+.section__header {
+    margin-bottom: 0.8em;
+}
+
+.section__title{
+    font-size: 22px;
+    line-height: 32px;
+    color:#000;
+    font-family: "Adobe Garamond Pro",serif;
+}
+
+.section__header .layout-flex__item span,
+.section__header .layout-flex__item a{
+    font-size: 14px;
+}
+
+.section__content .checkbox__label{
+    font-size: 14px;
+    color:#3D3D38;
+}
+
+.sidebar__title{
+    font-size: 28px;
+    line-height: 24px;
+    color:#000;
+    letter-spacing: 0.3px;
+    font-family: "Adobe Garamond Pro",serif;
+    font-weight: normal;
+}
+
+.sidebar .payment-due-label__total,
+.total-line__name{
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 2.71px;
+    text-transform: uppercase;
+    color:#AF5D00;
+}
+
+.sidebar .order-summary__emphasis.product__description__name{
+    color:#21211E;
+    font-size: 16px;
+}
+
+.product__price .order-summary__emphasis,
+.total-line__price .order-summary__emphasis{
+    font-size: 16px;
+    line-height: 19px;
+    font-family:"Adobe Garamond Pro",serif;
+    font-weight: normal;
+}
+
+.payment-due__price{
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    line-height: 26px;
+    position: relative;
+    top:-3px;
+    color:#AF5D00;
+}
+
+.payment-due__currency{
+    font-size: 14px;
+    line-height: 22px;
+    color:#AF5D00;
+}
+
+.content-box{
+    border-radius:0;
+}
+
+.content-box__emphasis{
+    font-weight: normal;
+    color:#3D3D38;
+}
+
+.couponCode{
+    padding:15px 0;
+    text-decoration: underline;
+    font-size: 14px;
+    line-height: 26px;
+    letter-spacing: 1px;
+}
+
+.phone-label-info{
+    padding:5px 0 0 15px;
+    font-size: 12px;
+    line-height: 22px;
+}
+
+.sidebar::after {
+    background-color: #f7f6f3;
+    box-shadow: none;
+}
+
+.sidebar__content{
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar .field__input{
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.anyflexbox .field__input-btn{
+    padding-top:3px;
+}
+
+.total-line-table__tbody+.total-line-table__footer .total-line th::before, 
+.total-line-table__tbody+.total-line-table__footer .total-line td::before{
+    top:17px;
+}
+
+.content-box__row--secondary{
+    background:#f7f6f3;
+}
+
+.main .card-fields-container  .field__input{
+    padding:0;
+}
+
+.field--error .field__message--error{
+    font-size: 13px;
+}
+
+.anyflexbox .step__footer__previous-link{
+    font-size: 14px;
+}
+
+.order-summary__sections {
+    height: auto;
+}
+
+.sidebar__bottom{
+    font-size: 14px;
+    line-height: 26px;
+    color:#3D3D38;
+    margin:20px 0;
+}
+
+.sidebar__bottom ul{
+    list-style: initial;
+    margin: 0 0 10px 13px;
+}
+    
+.sidebar__bottom li{
+    margin-bottom: 2px;
+}
+
+
+.sidebar__drhyman{
+    align-items: center;
+    margin:20px 0;
+    display: none;
+}
+
+.sidebar__drhyman.is-open{
+    display: flex;
+}
+
+.sidebar__drhyman img{
+    width:93px;
+    height:93px;
+}
+
+.sidebar__drhyman h4{
+    font-family: "Adobe Garamond Pro",serif;
+    font-size:22px;
+    line-height: 32px;
+    color:#3D3D38;
+    margin:0 0 0 20px;
+}
+
+.order-summary__section.order-summary__section--total-lines{
+    border-bottom: 1px solid rgba(175,175,175,0.34);
+}
+
+
+.sidebar .product__description__property{
+    display: none;
+}
+
+
+
+
+.sidebar [data-variant-id="39270955221079"] .product__description__property,
+.sidebar [data-variant-id="39270958661719"] .product__description__property{
+    display: none;
+}
+
+.page--thank-you .sidebar__bottom{
+    display: none;
+}
+
+
+.total-line__name.payment-due-label:before{
+    
+}
+
+.total-line-table__tbody+.total-line-table__footer .total-line:first-child th::before,
+.total-line-table__tbody+.total-line-table__footer .total-line:first-child td::before{
+    top:18px;
+}
+
+.order-summary-toggle:hover .order-summary-toggle__text, 
+.order-summary-toggle:focus .order-summary-toggle__text{
+    font-size: 14px;
+}
+
+@media (min-width: 750px){
+    .section{
+        padding-top: 2em;
+    }   
+}
+
+@media (min-width: 1000px){
+    .page--no-banner .main, .page--no-banner .sidebar{
+        padding-top: 6em;
+    }
+
+    #order-summary{
+        height:auto !important;
+        flex-direction:initial !important;
+        flex:initial !important;
+    }
+    
+    .sidebar__content{
+        padding-top:0;
+    } 
+}
+
+
+/* UGC Feed */
+.ImagesFeed-inner {
+  overflow: hidden;
+  width: 100%;
+  max-height: 125px;
+}
+
+.ImagesFeed-slider_thumbs {
+  display: inline-block;
+  padding: 0 7px;
+  vertical-align: middle;
+}
+
+.ImagesFeed-slider_thumbs img {
+    width: 125px;
+    height: auto;
+    display: block;
+}
+
+.ImagesFeed-inner .slick-dots{
+  display: none !important;
+}
+#ImagesFeed{
+    margin-bottom: 15px;
+}
+@media screen and (max-width: 1031px){
+    .checkout-slide-wrap{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+
+/* Sidebar bullet list features */
+@media screen and (max-width: 1031px){
+    .CheckoutBulletList{
+        background: #f7f6f3;
+        padding: 50px 0 35px;
+        margin-bottom: 5px;
+        display: none;
+    }
+    .CheckoutBulletList-inner--mob{
+        padding-left: 1em;
+        padding-right: 1em;
+        position: relative;
+        display: block;
+    }
+    .CheckoutBulletList-inner--mob:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100vw;
+        display: block;
+        height: 100%;
+        width: 100vw;
+        background: #f7f6f3;
+    }
+    .CheckoutBulletList-inner--mob:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -100vw;
+        display: block;
+        height: 100%;
+        width: 100vw;
+        background: #f7f6f3;
+    }
+}
+.CheckoutBulletList-inner{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    -webkit-box-direction: initial !important;
+    -webkit-flex-direction: column !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+
+}
+.CheckoutBulletList-inner--mob .CheckoutBulletList-inner{
+    margin: 0 auto;
+}
+.CheckoutBulletList-item-main_title{
+    margin-bottom: 30px;
+    color: #000;
+    font-size: 23px;
+    line-height: 34px;
+}
+.CheckoutBulletList-item-heading{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 26px;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 900;
+}
+.CheckoutBulletList-item-img{
+    margin-right: 10px;
+    position: relative;
+    top: -3px;
+}
+.CheckoutBulletList-item-content{
+    font-size: 14px;
+    line-height: 24px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    color: #000;
+    font-weight: 500;
+}

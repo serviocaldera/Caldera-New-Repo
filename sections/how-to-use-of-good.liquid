@@ -1,0 +1,66 @@
+<div class="c-howToGood">
+    <div class="c-howToGood__container">
+        <div class="c-howToGood__row">
+            <div class="c-howToGood__content">
+                <div class="c-howToGood__box">
+                    <h3 class="c-howToGood__title">{{section.settings.title}}</h3>
+                    <p class="c-howToGood__copy">
+                        {{ section.settings.copy }}
+                    </p>
+                </div>  
+            </div>
+            <div class="c-howToGood__steps">
+                <div class="c-howToGood__stepsContent">
+                    {% for block in section.blocks %}
+                        <div class="c-howToGood__item">
+                            <div class="c-howToGood__icon">
+                                {{ block.settings.icon }}
+                            </div>
+                            <p class="c-howToGood__text">
+                                {{ block.settings.copy }}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "Use of Good",
+        "settings": [
+            {
+                "type":"text",
+                "id":"title",
+                "label":"Title",
+                "default":"When To Use The Good"
+            },
+            {
+                "type":"html",
+                "id":"copy",
+                "label":"Copy",
+                "default":"The Good works best at night, when your body’s circadian rhythm makes your skin more receptive to macro, micro, and meso nutrients. But many customers also love using it in the morning, under SPF. The Good should always absorb quickly, so depending on your climate, you might need to adjust the number of drops you’re using."
+            }
+        ],
+        "blocks": [
+            {
+                "type": "step",
+                "name": "Results",
+                "settings": [
+                    {
+                        "type":"html",
+                        "id":"icon",
+                        "label":"Icon Svg code"
+                    },
+                    {
+                        "type":"text",
+                        "id":"copy",
+                        "label":"Copy"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

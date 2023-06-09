@@ -1,0 +1,578 @@
+
+    .hero-home__cta a{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #how-to-video-popup{
+        overflow: hidden !important;
+    }
+    
+    .hero-home .hero-home__cta a {
+        text-align: center;
+    }
+    
+    .instagram .fs-slider-next-button, .instagram .fs-slider-prev-button {
+        z-index: 1;
+    }
+    
+    
+    @media only screen and (max-width: 992px){
+        .product-details .content-block--2 .pre-header {
+            color: #d1cfcc!important;
+            position: absolute !important;
+            top: 160px!important;
+            right: -2.5%!important;
+            white-space: nowrap!important;
+            transform-origin: left!important;
+            transform: rotate(90deg);
+            left: unset !important;
+        }
+    }
+    
+    @media only screen and (min-width: 992px){
+        .product-details .content-block--2 .pre-header {
+          color: #d1cfcc !important;
+          position: absolute !important;
+          top: 10px !important;
+          left: -25px !important;
+          white-space: nowrap !important;
+          transform-origin: left !important;
+          transform: rotate(90deg) !important;
+        }
+    }
+    
+    
+    
+    @media only screen and (max-width: 450px){
+        .c-pdpBotanicals__content{
+            padding-left: 25px;
+        }
+    }
+    
+    
+    @media only screen and (max-width: 450px){
+       #js-article-pagination-numbers span {
+            padding: 13px 5px !important;
+        }
+        #js-pagination-previous{
+            padding: 13px 5px !important;
+        }
+        #js-pagination-next{
+            padding: 13px 5px !important;
+        }
+    }
+    
+    
+    
+    @media only screen and (max-width: 380px){
+        #js-article-pagination-numbers span {
+             padding: 13px 2px !important;
+         }
+         #js-pagination-previous{
+             padding: 13px 5px !important;
+         }
+         #js-pagination-next{
+             padding: 13px 5px !important;
+         }
+     }
+     
+    
+    .blogArticle__copy iframe{
+        max-width: 560px;
+        width:100%;
+    }
+    
+    
+    @media only screen and (max-width: 450px){
+        #offcanvas-right{
+            max-width:100% !important;
+        }
+    }
+    
+    
+    .hero-home .hero-home__cta a {
+        padding-top: 5px;
+        text-align: center;
+    }
+    
+    .canvas-helper{
+        position: relative;
+    }
+    
+    
+    @media only screen and (max-width: 1180px){
+        .canvas-helper:after {
+            content: "" !important;
+            position: absolute !important;
+            height: 101% !important;
+            width: 101% !important;
+            left: 2px !important;
+            top: -4px !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+        }
+    }
+    
+    @media only screen and (max-width: 768px){
+        .canvas-helper:after {
+            content: ""!important;
+            position: absolute!important;
+            height: 101%!important;
+            width: 103%!important;
+            left: -3px!important;
+            top: -5px!important;
+            background-position: center!important;
+            background-repeat: no-repeat!important;
+            background-size: cover!important;
+        }
+    
+    }
+  
+   .grid__item.medium--two-thirds.push--medium--one-sixth.press__mentions-logos > div > div > div{
+      transform: unset !important;
+    }
+    
+    /* pdp combo buy */ 
+  
+  
+  
+  .buyProductClass {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+  }
+  
+  .comboBuy__addtocart {
+      width: 70%;
+      justify-content: center;
+      margin-bottom: 0px;
+  }
+  
+  .subQty {
+      cursor: pointer;
+  }
+  
+  .addQty {
+      cursor: pointer;
+  }
+  
+  /* pdp link */ 
+  
+  .c-productInfo__description.c-productInfo__description--desktop p span {
+    text-align: center !important;
+    display: flex !important;
+  }
+  
+  .c-productInfo__submit .btn {
+    display: flex;
+    justify-content: center !important;
+    width: 70%
+  }
+  
+  .quantityAdjust {
+    box-sizing: border-box;
+    /* height: 70px;
+  width: 129px; */
+    border: 1px solid #D1CFCC;
+    border-radius: 2px;
+    background-color: #FFFFFF;
+    width: 20%;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .c-productInfo__submit {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .subQty {
+    cursor: pointer;
+  }
+  
+  .addQty {
+    cursor: pointer;
+  }
+  
+  .c-productFrequency__textQuiz {
+    display: none;
+  }
+  
+  #pdpLinkWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .pdp-link__section-content {
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+  
+  .pdp-link__product {
+    width: 300px;
+  }
+  
+  .pdp-link__product-description {
+    display: none;
+  }
+  
+  .yotpo div.yotpo-bottomline .text-m {
+    display: unset !important;
+  }
+  
+  #c-productInfo__review1 {
+    margin: unset;
+    padding-top: 11px;
+  }
+  
+  
+  
+  .pdp-link__section-title {
+    padding-top: 50px;
+    max-width: 482px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .pdp-link__section-description p {
+    font-size: 15px;
+    font-family: Avenir LT Pro;
+    color: #3D3D38;
+    font-family: "Avenir LT Pro";
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    line-height: 26px;
+  }
+  
+  
+  .pdp-link__section-heading {
+    color: #3D3D38;
+    font-family: "Adobe Garamond Pro";
+    font-size: 40px;
+    letter-spacing: 0;
+    line-height: 54px;
+  
+  }
+  
+  .pdp-link__product-title {
+    font-size: 36px;
+    color: #3D3D38;
+    font-family: "Adobe Garamond Pro";
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 42px;
+  }
+  
+  
+  
+  .pdp-link__product-subtitle {
+    font-size: 13px;
+    color: #222222;
+    font-family: "Avenir LT Pro";
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 14px;
+  }
+  
+  
+  
+  .pdp-link .pdp-link__btn-price {
+    font-size: 23px;
+    color: #FFFFFF;
+    font-family: "Avenir LT Pro";
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    line-height: 18px;
+    text-align: center;
+    padding-right: 5px;
+  }
+  
+  .pdp-link .pdp-link__btn-text {
+    font-size: 23px;
+    color: #FFFFFF;
+    font-family: "Avenir LT Pro";
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    line-height: 18px;
+    text-align: center;
+    width: 50%;
+  
+  }
+  
+  .btnWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 100%;
+  }
+  
+  .titleWraper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .pdp-link__product-link a{
+    color: #B9680C;
+    font-family: "Avenir LT Pro" !important;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 22px;
+    margin-top: 10px;
+  }
+  
+  @media only screen and (max-width: 400px) {
+    .cu-productTypeSelect {
+        flex-direction: column-reverse !important;
+    }
+  
+    .cu-productTypeSelect__itemWrap {
+        width: 100% !important;
+    }
+  }
+  
+  .pdp-link__addtocart {
+    padding-top: 11px;
+  }
+  
+  @media only screen and (max-width: 1150px) {
+    #pdpLinkWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+  
+    .pdp-link__section-title {
+        padding-top: 0px;
+        padding-bottom: 26px;
+        margin-bottom: 0rem;
+    }
+  
+    .pdp-link .pdp-link__btn-text {
+        font-size: 23px;
+        color: #FFFFFF;
+        font-family: "Avenir LT Pro";
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        line-height: 18px;
+        text-align: center;
+        width: 50%;
+    }
+  
+    .pdp-link .pdp-link__btn-price {
+        font-size: 23px;
+        color: #FFFFFF;
+        font-family: "Avenir LT Pro";
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        line-height: 18px;
+        text-align: center;
+        padding-right: 0px;
+        width: 40%;
+    }
+  
+    .pdp-link__product.fc-item.fc-index--1 {
+        margin-left: 5%;
+    }
+  }
+  
+  @media only screen and (max-width: 400px) {
+    .pdp-link__section-heading {
+        color: #3D3D38;
+        font-family: "Adobe Garamond Pro";
+        font-size: 32px;
+        letter-spacing: 0;
+        line-height: 44px;
+    }
+  
+    .pdp-link__section-description {
+        color: #222222;
+        font-family: "Avenir LT Pro";
+        font-size: 14px;
+        letter-spacing: 0.35px;
+        line-height: 24px;
+    }
+  
+  }
+  
+  @media only screen and (max-width: 730px) {
+    .pdp-link__product.fc-item.fc-index--1 {
+      margin-left: 2% !important;
+  }
+  
+  }
+  
+  @media only screen and (max-width: 485px) {
+    .pdp-link__section-content-with-slider {
+        display: block !important;
+    }
+   /* .pdp-link__section-content-with-slider > div > div{
+     margin-left:-12% !important;
+   } */
+  
+   .pdp-link__section-title {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+    .pdp-link__section-content {
+        display: none;
+    }
+  
+    .pdp-link__product.fc-item.fc-index--1 {
+        margin-left: 15px !important;
+    }
+
+
+    .pdp-link__section-description p {
+      color: #222222 !important;
+      font-family: "Avenir LT Pro";
+      font-size: 14px;
+      letter-spacing: 0.35px;
+      line-height: 24px;
+  }
+  
+    
+  
+  .pdp-link__section-heading {
+    color: #3d3d38;
+    font-family: "Adobe Garamond Pro";
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 54px;
+  }
+  
+  .pdp-link__section-title {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  }
+  
+  .pdp-link__section-content-with-slider {
+    display: none;
+  }
+  
+  .cu-productTypeSelect__itemText {
+    color: #3D3D38;
+    font-family: "Avenir LT Pro";
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    line-height: 26px;
+  }
+  
+  .cu-productTypeSelect__itemText-price {
+    color: #3D3D38;
+    font-family: "Avenir LT Pro";
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    line-height: 26px;
+    text-align: right;
+  }
+  
+  .quantityAdjust {
+    width: 25%
+  }
+  
+  .cu-productTypeSelect__itemWrap {
+    height: 75px;
+  }
+  
+  @media (min-width: 768px) {
+    .cu-productTypeSelect__itemBox {
+        min-height: 65px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cu-productTypeSelect__itemBox {
+        min-height: 65px !important;
+    }
+  }
+  
+  #imgProducts {
+    height: 311px;
+    min-width: 300px;
+  
+  
+  }
+  
+  .pdp-link__product.fc-item {
+    padding: 0px;
+  }
+  
+  .pdp-link__product.fc-item.fc-index--1 {
+    margin-left: 60px;
+  }
+  
+  .pdp-link__section-description{
+    padding-right: 10px;
+  }
+  
+  .pdp-link__section-content-with-slider > div > div{
+    padding-left:0px !important;
+  
+  }
+
+  .priceDisplay{
+    display:flex;
+  }
+
+  .pdp-link{
+    position:relative;
+  }
+
+  #pdpLinkSection{
+    visibility: hidden;
+    position:absolute;
+    top:-20%;
+  }
+
+  @media only screen and (max-width: 690px) {
+    #pdpLinkSection{
+      top:-5%;
+    }
+  }
+
+  @media only screen and (max-width: 675px) {
+    .pdp-link__product {
+      width: 225px;
+    }
+    .pdp-link__product #imgProducts {
+      height: 250px;
+      min-width: 180px;
+    }
+    .pdp-link__section-content {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  @media only screen and (max-width: 485px) {
+    .pdp-link__product {
+      width: 300px !important;
+    }
+    .pdp-link__product #imgProducts {
+      height: 311px;
+      min-width: 300px;
+    }
+    .pdp-link__section-content {
+      width: unset;
+      justify-content: right;
+    }
+   
+  }
+
+  .pdp-link__addtocart {
+    margin-bottom: 10px;
+  }

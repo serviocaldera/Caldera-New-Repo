@@ -1,0 +1,26 @@
+{%- if faqs_group != blank -%}
+  <div class="accordion-faqs">
+    <div class="accordion-faqs__list">
+      {% for item in faqs_group %}
+        <div class="accordion-faqs__list-item">
+          <p class="accordion-faqs__list-item-title">{{ item.title }}</p>
+
+          <p class="accordion-faqs__list-item-copy">{{ item.copy }}</p>
+        </div>
+      {% endfor %}
+
+      {% if link_url and link_title %}
+        <a href="{{link_url}}" class="accordion-faqs__url" target="_blank">{{link_title}}</a>
+      {% endif %}
+
+    </div>
+
+    <div class="accordion-faqs__image">
+      {% if faq_image_combo %}
+       <img src="{{ faq_image_combo }}" alt="nature">
+      {% else %}
+        {{faq_image}}
+      {% endif %}
+    </div>
+  </div>
+{%- endif -%}

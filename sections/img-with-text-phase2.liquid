@@ -1,0 +1,162 @@
+{% assign full_width = section.settings.full_width %}
+{% assign container_value = section.settings.container_value %}
+{% assign image = section.settings.image %}
+{% assign headline = section.settings.headline %}
+{% assign content = section.settings.content %}
+{% assign link = section.settings.link %}
+{% assign link_text = section.settings.link_text %}
+{% assign content_bottom = section.settings.content_bottom %}
+{% assign background_color = section.settings.background_color %}
+{% assign stars_number = section.settings.stars_number %}
+{% assign img_position = section.settings.img_position %}
+{% assign reviwer_name = section.settings.reviwer_name %}
+{% assign video = section.settings.video %}
+{% assign big_content = section.settings.big_content %}
+
+{% if img_position %}
+    <style>
+        @media only screen and (min-width: 769px) {
+            #shopify-section-{{ section.id }} .premium_iwt-flex .premium_iwt-image {
+                order: 2;
+            }
+            #shopify-section-{{ section.id }} .premium_iwt-image img {
+                margin-right: 0;
+                margin-left: auto;
+            }
+        }
+    </style>
+{% endif %}
+<div class="premium_iwt{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}" style="background-color: {{ background_color }}">
+    <div class="premium_iwt-container premium_iwt-flex{% if video != blank %} premium_iwt-flex--video{% endif %}">
+            <div class="premium_iwt-half premium_iwt-image">
+                {% if video != blank %}
+                    <div class="hero-video-player-wrap hero-wrap-iframe">
+                        {%- if video.type == 'youtube' -%}
+                            <iframe id="player-{{ block.id }}"{% if mute_and_autoplay %} muted="muted"{% endif %} src="https://www.youtube.com/embed/{{ video.id }}?enablejsapi=1&controls=0" allow="autoplay; encrypted-media" allowfullscreen title="{{ description | escape }}" class="video"></iframe>
+                        {%- else -%}
+                            <iframe src="https://player.vimeo.com/video/{{ video.id }}" class="js-vimeo video" allow="autoplay; encrypted-media" allowfullscreen title="{{ description | escape }}"></iframe>
+                        {%- endif -%}
+                    </div>
+                {% else %}
+                    <img src="{% if image %}{{ image | img_url: 'master' }}{% else %}{{ 'iwt-placeholder.png' | asset_url }}{% endif %}" alt="placeholder_image">
+                {% endif %}
+            </div>
+            <div class="premium_iwt-half premium_iwt-content">
+                <div class="premium_iwt-content-control{% if video != blank %} premium_iwt_video_type{% if img_position %} premium_iwt-auto--right{% else %} premium_iwt-auto--left{% endif %}{% endif %}">
+                    <h3>{{ headline }}</h3>
+                    {% assign forlimit = stars_number | round %}
+                    {% if forlimit > 0 %}
+                    <div class="stars_number">
+                        {% for i in (1..forlimit) %}
+                            {% if stars_number >= i %}
+                                <img src="{{ 'stars.png' |  asset_url }}" alt="stars" class="star">
+                            {% else %}
+                                <img src="{{ 'half_star.png' |  asset_url }}" alt="stars" class="half_star">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="big_content">{{ big_content }}</div>
+                    <div class="top_content">{{ content }}</div>
+                    <div class="bottom_content">{{ content_bottom }}</div>
+                    <a href="{% if link %}{{ link }}{% else %}#{% endif %}" class="text_with_image_link">{{ link_text }}</a>
+                    <p class="reviwer_name">{{ reviwer_name }}</p>
+                </div>
+            </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Image with Text P2",
+    "settings": [
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background color",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "checkbox",
+            "id": "img_position",
+            "label": "Image on right side",
+            "default": false
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "video_url",
+            "id": "video",
+            "label": "Video",
+            "accept": [
+                "youtube",
+                "vimeo"
+            ]
+        },
+        {
+            "type": "text",
+            "id": "headline",
+            "label": "Headline",
+            "default": "Headline"
+        },
+        {
+            "type": "range",
+            "id": "stars_number",
+            "min": 0,
+            "max": 5,
+            "step": 0.5,
+
+            "label": "Stars number",
+            "default": 5
+        },
+        {
+            "type": "richtext",
+            "id": "big_content",
+            "label": "Large text"
+        },
+        {
+            "type": "richtext",
+            "id": "content",
+            "label": "Top content",
+            "default": "<p>The Good contains 27 active botanicals infused over 4 weeks in an ECOCERT COSMOS-certified facility.</p>"
+        },
+        {
+            "type": "richtext",
+            "id": "content_bottom",
+            "label": "Bottom content",
+            "default": "<p>Sourced with wild-harvested, non-GMO and organic ingredients, this lightweight serum is dermatologist-vetted and proven to give you your best skin ever.</p>"
+        },
+        {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link Text",
+            "default": "GET OFFER"
+        },
+        {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+        },
+        {
+            "type": "text",
+            "id": "reviwer_name",
+            "label": "Reviwer_name",
+            "default": "David H"
+        },
+        {
+            "type": "text",
+            "id": "section_classname",
+            "label": "Section Class Name"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Image with Text P2",
+            "settings": {}
+        }
+    ]
+}
+{% endschema %}

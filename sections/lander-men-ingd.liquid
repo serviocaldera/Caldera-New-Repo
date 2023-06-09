@@ -1,0 +1,38 @@
+<div class="c-landerIngd">
+    <div class="wrapper">
+        <div class="c-landerIngd__content">
+            {% for block in section.blocks %}
+                <div class="c-landerIngd__item">
+                    <img src="{{ block.settings.image | img_url: 'master' }}" class="c-landerIngd__image" />
+                    <p class="c-landerIngd__name">{{ block.settings.name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!--c-landerIngd-->
+
+{% schema %}
+  {
+    "name": "Ingredient",
+    "blocks": [
+      {
+        "type": "ing-block",
+        "name": "ingredient",
+        "settings": [
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

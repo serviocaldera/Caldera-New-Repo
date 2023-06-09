@@ -1,0 +1,55 @@
+<div class="c-pdpVideo">
+    <div class="c-pdpVideo__content">
+        <div class="c-pdpVideo__mainArea">
+            <div href="#" class="c-pdpVideo__play js-play-pdp-video">
+              <img src="{{ section.settings.image | img_url: "2x" }}" data-src="{{ section.settings.image | img_url: "master" }}" alt="{{ section.settings.text }}" class="lazyload" />
+            </div>
+            <div class="c-video">
+              <video class="c-pdpVideo__video" controls="" id="pdpvideo">
+                <source src="{{ section.settings.videosrc }}" type="video/mp4">
+              </video>  
+            </div>
+            
+            <div class="c-pdpVideo__text">
+                {{ section.settings.text }}
+            </div>
+        </div>
+    </div>
+</div>
+<!--c-pdpInd-->
+
+<script type="text/javascript">
+    $('.js-play-pdp-video').on('click', function() {
+        var video = document.getElementById('pdpvideo');
+        $(this).hide();
+        $(this).find('img').addClass('is-hide');
+        $('.c-pdpVideo__video').addClass('is-play');
+        video.play();
+        return false;
+    });
+</script>
+
+{% schema %}
+  {
+    "name": "PDP Video",
+    "settings": [
+      {
+        "type":"html",
+        "id":"videosrc",
+        "label":"Video Url",
+        "info":"Add video url example: https://video.mp4"
+      },
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Poster Image"
+      },
+      {
+        "type":"text",
+        "id":"text",
+        "label":"Text",
+        "default":"One-Step Routine"
+      }
+    ]
+  }
+{% endschema %}

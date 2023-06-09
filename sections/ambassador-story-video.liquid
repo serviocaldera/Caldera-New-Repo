@@ -1,0 +1,73 @@
+{% if page.metafields.custom_fields["enable_ambassador_video"] and page.metafields.custom_fields["ambassador_video_url"] and page.metafields.custom_fields["ambassador_video_url"] contains 'youtube' %}
+
+  <style>
+    .embed-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .embed-container iframe, .embed-container object, .embed-container embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <div class="vipStoryVideo">
+    <div class="wrapper">
+      <div class="vipStoryVideo__row">
+
+          <div class="vipStoryVideo__video">
+            <div class='embed-container'>
+              <div id="ambassadorVideo" style="width: 100%"></div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    //https://developers.google.com/youtube/iframe_api_reference
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+              results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('ambassadorVideo', {
+        height: '580',
+        videoId: getParameterByName('v', '{{ page.metafields.custom_fields["ambassador_video_url"] }}'),
+        playerVars: {
+          'playsinline': 1,
+          'rel': 0,
+          'showinfo': 0,
+          'ecver': 2
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+      player.h.attributes.sandbox.value = "allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation";
+
+    }
+
+    function onPlayerReady(event) {
+      event.target.playVideo();
+    }
+  </script>
+{% endif %}

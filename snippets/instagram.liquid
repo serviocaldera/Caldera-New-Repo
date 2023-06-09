@@ -1,0 +1,14 @@
+{% if product.metafields.custom_fields["enable_instagram_section"] == 1 %}
+<div class="instagram c-pdpInstagram">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole text-center">
+        {% if product.metafields.custom_fields["instagram_title"] != blank %}
+          <h3>{{ product.metafields.custom_fields["instagram_title"] }}</h3>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="CalderaLab" data-theme="slider_v2_5" data-cell-size="16.666%"></script>
+</div>
+{% endif %}

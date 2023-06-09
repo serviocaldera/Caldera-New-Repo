@@ -1,0 +1,31 @@
+{% assign stars_helper = 5.0 | minus: stars_rating %}
+{% assign first_time = false %}
+{% if stars_helper == 0 %}
+    <span class="yotpo--gra-star-icon"></span>
+    <span class="yotpo--gra-star-icon"></span>
+    <span class="yotpo--gra-star-icon"></span>
+    <span class="yotpo--gra-star-icon"></span>
+    <span class="yotpo--gra-star-icon"></span>
+{% else %}
+    {% for i in (1..5) %}
+        {% if i <= stars_rating %}
+            <span class="yotpo--gra-star-icon"></span>
+        {% else %}
+            {% unless first_time %}
+                {% assign first_time = true %}
+                {% if stars_rating >= 4.8 %}
+                    <span class="yotpo--gra-star-icon"></span>
+                {% else %}
+                    {% assign is_decimal = i | minus: stars_rating | replace: '.0', '' | split: '.' %}
+                    {% if is_decimal[1] %}
+                        <span class="yotpo--gra-star-icon yotpo--gra-star-half-icon"></span>
+                    {% else %}
+                        <span class="yotpo--gra-star-icon yotpo--gra-star-empty-icon"></span>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                <span class="yotpo--gra-star-icon yotpo--gra-star-empty-icon"></span>
+            {% endunless %}
+        {% endif %}
+    {% endfor %}
+{% endif %}

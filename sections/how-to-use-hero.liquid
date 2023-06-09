@@ -1,0 +1,64 @@
+<div class="htuHero">
+
+    <picture class="htuHero__picture"> 
+        <source media="(max-width: 767px)" srcset="{{ section.settings.htuHero_mobile_image | img_url: 'master' }}">
+        <source media="(min-width: 768px)" srcset="{{ section.settings.htuHero_image | img_url: 'master' }}">
+        <img src="{{ section.settings.htuHero_mobile_image | img_url: '1x' }}" alt="cl">  
+    </picture>
+
+    <div class="htuHero__gradient"></div>
+
+    <div class="htuHero__content">
+        {% if section.settings.htuHero_title %}
+        <h1 class="htuHero__title">{{ section.settings.htuHero_title }}</h1>
+        {% endif %}
+        {% if section.settings.htuHero_sub_title %}
+        <div class="htuHero__sub-title">{{ section.settings.htuHero_sub_title }}</div>
+        {% endif %}
+        {% if section.settings.htuHero_link %}
+            <div class="htuHero__cta"><a href="{{ section.settings.htuHero_link }}">{{ section.settings.htuHero_link_text }}</a></div>
+        {% endif %}
+    </div>
+
+</div>
+  
+  {% schema %}
+    {
+      "name": "How to Use Hero",
+      "settings": [
+        {
+          "type":"image_picker",
+          "id":"htuHero_image",
+          "label":"Hero Image"
+        },
+        {
+          "type":"image_picker",
+          "id":"htuHero_mobile_image",
+          "label":"Hero Mobile Image"
+        },
+        {
+          "type":"html",
+          "id":"htuHero_title",
+          "label": "Hero Title",
+          "default":"How to Use the Regimen"
+        },
+        {
+            "type":"html",
+            "id":"htuHero_sub_title",
+            "label":"Hero Sub Title",
+            "default":"Three simple products. Morning & night. Balancing for oily skin. Nourishing for dry skin. Proven performance for everyone."
+        },
+        {
+          "type":"url",
+          "id":"htuHero_link",
+          "label":"Hero Button Link"
+        },
+        {
+          "type":"text",
+          "id":"htuHero_link_text",
+          "label":"Hero Button Text",
+          "default":"Shop Now"
+        }
+      ]
+    }
+  {% endschema %}

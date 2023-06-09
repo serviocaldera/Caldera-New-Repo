@@ -1,0 +1,16 @@
+{% if product.metafields.custom_fields.blk5_desktop_image and product.metafields.custom_fields["blk5_headline+paragraph"] %}
+  <div class="product-single__full-feature" style="background-image: url({{ product.metafields.custom_fields.blk5_desktop_image }});" data-mobile-image="{% if product.metafields.custom_fields.blk5_mobile_image %}{{ product.metafields.custom_fields.blk5_mobile_image }}{% endif %}" data-desktop-image="{{ product.metafields.custom_fields.blk5_desktop_image }}" data-mobile-image-check>
+    <div class="wrapper">
+      <div class="grid">
+        <div class="grid__item large--one-third push--large--one-twelfth">
+          <div class="full-feature__content text--light">
+            {{ product.metafields.custom_fields["blk5_headline+paragraph"] }}
+            {% if product.metafields.custom_fields.blk5_cta and product.metafields.custom_fields.blk5_link %}
+              <a href="{{ product.metafields.custom_fields.blk5_link }}" class="btn btn--primary">{{ product.metafields.custom_fields.blk5_cta }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

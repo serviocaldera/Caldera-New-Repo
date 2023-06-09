@@ -1,0 +1,29 @@
+<div class="c-certHero c-bcorpHero">
+    <div class="c-certHero__image c-certHero__image--desktop" style="background-image: url({{ section.settings.hero_image | img_url: 'master' }});"></div>
+    <div class="c-certHero__image c-certHero__image--mobile" style="background-image: url({{ section.settings.hero_mobile_image | img_url: 'master' }});"></div>
+    <h1 class="c-certHero__title c-bcorpHero__title">{{ section.settings.title }}</h1>
+</div>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"hero_image",
+        "label":"Hero Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"hero_mobile_image",
+        "label":"Hero Mobile"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default": "Honored To Be A Certified B Corp."
+      }
+    ]
+  }
+{% endschema %}

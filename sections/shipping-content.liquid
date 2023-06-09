@@ -1,0 +1,60 @@
+<div class="c-shippingContent">
+    <div class="wrapper">
+        <div class="c-shippingContent__backLink">
+            <a href="{{ section.settings.faq-url }}">
+                <svg width="7px" height="12px" viewBox="0 0 7 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Caldera-Shipping-&amp;-Returns" transform="translate(-90.000000, -514.000000)" fill="#3D3D38">
+                            <polygon id="Triangle" transform="translate(93.176471, 520.000000) rotate(270.000000) translate(-93.176471, -520.000000) " points="93.1764706 516.823529 99.1764706 523.176471 87.1764706 523.176471"></polygon>
+                        </g>
+                    </g>
+                </svg>
+                <span>{{ section.settings.faq-text }} </span>  
+            </a>
+        </div>
+        <div class="c-shippingContent__main">
+            {% for block in section.blocks %}
+                <div class="c-shippingContent__item">
+                    <h6 class="c-shippingContent__heading">{{ block.settings.heading }}</h6>
+                    <div class="c-shippingContent__copy">{{ block.settings.copy }}</div>
+                </div>
+            {% endfor %}
+        </div>    
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Shipping Content",
+    "settings": [
+        {
+            "type": "text",
+            "id": "faq-text",
+            "label": "Faq Text"
+        },
+        {
+            "type": "url",
+            "id": "faq-url",
+            "label": "Faq Link"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "contentcolumn",
+            "name": "Block",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "heading",
+                    "label": "Heading"
+                },
+                {
+                    "type": "html",
+                    "id": "copy",
+                    "label": "Copy"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

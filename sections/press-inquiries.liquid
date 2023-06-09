@@ -1,0 +1,71 @@
+<section class="press__inquiries">
+  <div class="inquiry__main">
+    <h3 class="inquiry__heading">{{- section.settings.contact_heading -}}</h3>
+    <div class="inquiry__content">{{- section.settings.contact_content -}}</div>
+  </div>
+  <div class="inquiry__info">
+    <div class="inquiry__cta">
+      <img class="inquiry__icon" src="{{- section.settings.contact_call_icon | img_url-}}">
+      {%- if section.settings.contact_call_content -%}
+        <div class="inquiry__contact-content">{{- section.settings.contact_call_content -}}</div>
+      {%- endif -%}
+      <a class="inquiry__link" href="tel:{{- section.settings.contact_call_number | remove: ' ' | remove: '-' -}}">{{- section.settings.contact_call_number -}}</a>
+    </div>
+    <hr class="inquiry__divider"/>
+    <div class="inquiry__cta">
+      <img class="inquiry__icon" src="{{- section.settings.contact_email_icon | img_url-}}">
+      {%- if section.settings.contact_email_content -%}
+        <div class="inquiry__contact-content">{{- section.settings.contact_email_content -}}</div>
+      {%- endif -%}
+      <a class="inquiry__link" href="mailto:{{- section.settings.contact_email_address | remove: ' ' | remove: '-' -}}">{{- section.settings.contact_email_address -}}</a>
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Press Inquiries",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_heading",
+        "label": "Section Header",
+        "default": "Press Inquiries?"
+      },
+      {
+        "type": "richtext",
+        "id": "contact_content",
+        "label": "Main Header"
+      },
+      {
+        "type": "image_picker",
+        "id": "contact_call_icon",
+        "label": "Call Us - Icon"
+      },
+      {
+        "type": "richtext",
+        "id": "contact_call_content",
+        "label": "Call Us - Content"
+      },
+      {
+        "type": "text",
+        "id": "contact_call_number",
+        "label": "Call Us - Phone Number"
+      },
+      {
+        "type": "image_picker",
+        "id": "contact_email_icon",
+        "label": "Email Icon"
+      },
+      {
+        "type": "richtext",
+        "id": "contact_email_content",
+        "label": "Email Us - Content"
+      },
+      {
+        "type": "text",
+        "id": "contact_email_address",
+        "label": "Email Us - Email Address"
+      }
+    ]
+  }
+{% endschema %}

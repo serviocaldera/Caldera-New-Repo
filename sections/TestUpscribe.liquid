@@ -1,0 +1,47 @@
+<style>
+    .products {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+    }
+    .product {
+        width: 300px;
+        padding: 20px;
+    }
+</style>
+{% if section.blocks.size > 0 %}
+    <div class="products">
+        {% for block in section.blocks %}
+            {% assign product = block.settings.product %}
+            <div class="product">
+
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% schema %}
+{
+    "name": "Test Upscribe",
+    "settings": [],
+    "max_blocks": 3,
+    "blocks": [
+        {
+            "name": "Tab",
+            "type": "tab",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Test Upscribe"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,74 @@
+<div class="headline headline--large">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--five-sixths push--medium--one-twelfth text-center">
+        <div class="headline__content">
+          {% if section.settings.headline_image_enable  %}
+            {% if section.settings.headline_image %}
+              <picture>
+                <source
+                  media="(min-width:962px)"
+                  srcset="{{ section.settings.headline_image | img_url: '43x'}},
+                          {{ section.settings.headline_image | img_url: '86x'}} 2x">
+                <source
+                  srcset="{{ section.settings.headline_image | img_url: '37x'}},
+                          {{ section.settings.headline_image | img_url: '74x'}} 2x">
+
+                <img class="icon" src="{{ section.settings.headline_image | img_url: '86x' }}" alt="{{ section.settings.headline_image.alt }}">
+              </picture>
+            {% endif %}
+          {% endif %}
+          <p class="text--light">{{ section.settings.headline_content | strip_html }}</p>
+
+          {% if section.settings.headline_content_logo %}
+            <picture>
+              <source
+                media="(min-width:962px)"
+                srcset="{{ section.settings.headline_content_logo | img_url: '200x'}},
+                        {{ section.settings.headline_content_logo | img_url: '400x'}} 2x">
+              <source
+                srcset="{{ section.settings.headline_content_logo | img_url: '150x'}},
+                        {{ section.settings.headline_content_logo | img_url: '300x'}} 2x">
+
+              <img style="padding-top: 20px;" class="" src="{{ section.settings.headline_content_logo | img_url: '300x' }}" alt="{{ section.settings.headline_image.alt }}">
+            </picture>
+          {% endif %}
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="home-headline"></div>
+</div>
+{% schema %}
+  {
+    "name": "Large Headline Section",
+    "settings": [
+	  {
+        "type":"checkbox",
+        "id":"headline_image_enable",
+        "label":"Enable Icon"
+      },
+      {
+        "type":"image_picker",
+        "id":"headline_image",
+        "label":"Headline Icon",
+        "info":"Recommended dimensions: 86px x 86px"
+      },
+      {
+        "type":"textarea",
+        "id":"headline_content",
+        "label": "Headline Content",
+        "default":"This is where the good life and great skincare meet. We set out to surpass conventional methods and ingredients to create a product specifically tailored to the busy lives of discerning men."
+      },
+      {
+        "type":"image_picker",
+        "id":"headline_content_logo",
+        "label": "Headline Logo - Use For Quotes",
+        "info":"Recommended dimensions: 300px x 70px"
+      }
+	  
+    ]
+  }
+{% endschema %}

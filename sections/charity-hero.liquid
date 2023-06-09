@@ -1,0 +1,37 @@
+<div class="charityHero">
+    <div class="charityHero__main">
+      <img data-src="{{ section.settings.hero_image | img_url: 'master' }}" alt="{{ section.settings.title }}" class="lazyload charityHero__desktop" />
+      <img data-src="{{ section.settings.hero_mobile_image | img_url: 'master' }}" alt="{{ section.settings.title }}" class="lazyload charityHero__mobile" />
+
+      <div class="wrapper">
+          <div class="charityHero__content">
+              <h2 class="charity__title">{{ section.settings.title }}</h2>
+          </div>
+      </div>
+  </div>  
+</div>
+
+
+{% schema %}
+  {
+    "name": "Charity Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"hero_image",
+        "label":"Hero Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"hero_mobile_image",
+        "label":"Hero Mobile Image"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"Charitable giving.  An investment in us all."
+      }
+    ]
+  }
+{% endschema %}

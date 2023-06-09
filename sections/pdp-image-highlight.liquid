@@ -1,0 +1,149 @@
+{%- if template contains 'product' -%}
+  {%- assign main_title = product.metafields.custom_fields["image_highlight_main_title"] -%}
+  {%- assign main_text = product.metafields.custom_fields["image_highlight_main_descr"] -%}
+  {%- assign image_highlight_block = product.metafields.custom_fields["image_highlight_block"] -%}
+  {%- assign highlight_img = product.metafields.custom_fields["highlight_img"] -%}
+  {%- assign highlight_title = product.metafields.custom_fields["highlight_title"] -%}
+  {%- assign highlight_text = product.metafields.custom_fields["highlight_text"] -%}
+  {%- if image_highlight_block != blank -%}
+    <div class="pdpImageHighlight {{section.settings.section_padding}}">
+      {% if main_title or main_text  %}
+        <div class="pdpImageHighlight-top">
+        {% if main_title %}<h2 class="pdpImageHighlight-heading">{{main_title}}</h2>{% endif %}
+        {% if main_text %}<p class="pdpImageHighlight-description">{{main_text}}</p>{% endif %}
+         </div>
+        {% endif %}
+        <div class="pdpImageHighlight-wrapper">
+            {% for item in image_highlight_block %}
+              <div class="pdpImageHighlight-block">
+                <div class="pdpImageHighlight-block-inner">
+                   <img  class="pdpImageHighlight-image" src="{{ item.highlight_img }}" data-src="{{ item.highlight_img }}" class="lazyload" alt="{{ item.highlight_title }}" />
+                  <div class="pdpImageHighlight-block-inner_content"> 
+                     {% if item.highlight_title %}<h4 class="pdpImageHighlight-heading-small">{{item.highlight_title}}</h4>{% endif %}
+                     {% if item.highlight_text %}<p class="pdpImageHighlight-description-small">{{item.highlight_text}}</p>{% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+  {%- endif -%}
+
+{%- else -%}
+  {% if section.blocks.size > 0 %}
+    <div class="pdpImageHighlight {{section.settings.section_padding}}">
+    {% if section.settings.main_title or section.settings.main_text  %}
+      <div class="pdpImageHighlight-top">
+      {% if section.settings.main_title %}<h2 class="pdpImageHighlight-heading">{{section.settings.main_title}}</h2>{% endif %}
+      {% if section.settings.main_text %}<p class="pdpImageHighlight-description">{{section.settings.main_text}}</p>{% endif %}
+       </div>
+      {% endif %}
+      <div class="pdpImageHighlight-wrapper">
+          {% for block in section.blocks %}
+            <div class="pdpImageHighlight-block">
+              <div class="pdpImageHighlight-block-inner">
+                 <img  class="pdpImageHighlight-image" src="{{ block.settings.image | img_url: "351x351" }}" data-src="{{ block.settings.image | img_url: "master" }}" class="lazyload" alt="{{ block.settings.image.alt }}" />
+                <div class="pdpImageHighlight-block-inner_content"> 
+                   {% if block.settings.title %}<h4 class="pdpImageHighlight-heading-small">{{block.settings.title}}</h4>{% endif %}
+                   {% if block.settings.text %}<p class="pdpImageHighlight-description-small">{{block.settings.text}}</p>{% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{%- endif -%}
+
+
+{% schema %}
+  {
+    "name": "PDP Image Highlight",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type":"paragraph",
+        "content":"If you are making changes for product page, please go to Product Metafields and add images and text to show this section. Blocks used here are for static pages, not products."
+      },
+      {
+      "id": "section_padding",
+      "type": "select",
+      "label": "Section padding",
+      "info":"Use this to adjust space between other sections on a page.",
+      "options": [
+         {
+           "value": "no-padding",
+           "label": "No padding"
+         },
+         {
+           "value": "space-both",
+           "label": "Top and bottom padding"
+         },
+         {
+           "value": "space-both-small",
+           "label": "Small top and bottom padding"
+         },
+         {
+           "value": "space-top",
+           "label": "Top padding"
+         },
+         {
+           "value": "space-top-small",
+           "label": "Top padding small"
+         },
+         {
+           "value": "space-bottom",
+           "label": "Bottom padding small"
+         },
+         {
+           "value": "space-bottom-small",
+           "label": "Bottom padding small"
+         }
+       ],
+       "default": "space-top"
+    },
+    {
+      "type":"text",
+      "id":"main_title",
+      "label":"Main title",
+      "default":"How It Works"
+    },
+    {
+      "type":"textarea",
+      "id":"main_text",
+      "label":"Main description",
+      "default":"Ultricies nibh auctor convallis dictumst commodo sed dignissim aliquet."
+    }
+    ],
+    "blocks": [
+        {
+          "type": "highlight",
+          "name": "Highlight",
+          "settings": [
+              {
+                "type":"image_picker",
+                "id":"image",
+                "label":"Image"
+              },
+              {
+                "type":"text",
+                "id":"title",
+                "label":"Text",
+                "default":"Title"
+              },
+              {
+                "type":"textarea",
+                "id":"text",
+                "label":"Text"
+              }
+          ]
+        }
+    ],
+    "presets": [
+      {
+        "name": "PDP Image Highlight",
+        "category": "Caldera"
+      }
+    ]
+  }
+{% endschema %}

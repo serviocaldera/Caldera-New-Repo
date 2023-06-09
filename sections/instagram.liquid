@@ -1,0 +1,23 @@
+<div class="instagram c-pdpInstagram">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item one-whole text-center">
+        <h3>{{ section.settings.instagram_title }}</h3>
+      </div>
+    </div>
+  </div>
+  <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="CalderaLab" data-theme="slider_v2_5" data-cell-size="16.666%"></script>
+</div>
+{% schema %}
+  {
+    "name": "Instagram",
+    "settings": [
+      {
+        "type":"text",
+        "id":"instagram_title",
+        "label":"Instagram Section Title",
+        "default":"Good Story. Great Skin."
+      }
+    ]
+  }
+{% endschema %}

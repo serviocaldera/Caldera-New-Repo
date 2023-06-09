@@ -1,0 +1,251 @@
+<div class="ingredients">
+
+  {%- if template contains 'pdp-combo' -%}
+    <div class="ingredients-header">
+      <div class="ingredients-tabs">
+        <div class="ingredients-tabs__item ingredients-tabs__item--active js-ingredient-tab" data-tab="1">
+          <img src="{{ product.metafields.huemor.ingredients.value[0]['icon'] }}" 
+          alt="product.metafields.huemor.ingredients.value[0]['name']">
+          
+          {{- product.metafields.huemor.ingredients.value[0]['name'] -}}
+        </div>
+    
+        <div class="ingredients-tabs__item js-ingredient-tab" data-tab="2">
+          <img src="{{ product.metafields.huemor.ingredients.value[1]['icon'] }}" 
+          alt="product.metafields.huemor.ingredients.value[1]['name']">
+
+          {{- product.metafields.huemor.ingredients.value[1]['name'] -}}
+        </div>
+    
+        <div class="ingredients-tabs__item js-ingredient-tab" data-tab="3">
+          <img src="{{ product.metafields.huemor.ingredients.value[2]['icon'] }}" 
+          alt="product.metafields.huemor.ingredients.value[2]['name']">
+
+          {{- product.metafields.huemor.ingredients.value[2]['name'] -}}
+        </div>
+      </div>
+    
+      <div class="ingredients-all">
+        <span class="ingredients-all__item ingredients-all__item--active js-all-ingredients" data-tab="1">See All Ingredients for {{ product.metafields.huemor.ingredients.value[0]['name'] }}</span>
+    
+        <span class="ingredients-all__item js-all-ingredients" data-tab="2">See All Ingredients for {{ product.metafields.huemor.ingredients.value[1]['name'] }}</span>
+    
+        <span class="ingredients-all__item js-all-ingredients" data-tab="3">See All Ingredients for {{ product.metafields.huemor.ingredients.value[2]['name'] }}</span>
+      </div>
+    </div>
+  {%- endif -%}
+
+
+  <div class="ingredients-slider__wrapper">
+    {%- if template contains 'pdp-combo' -%}
+      {% for item in product.metafields.huemor.ingredients.value %}
+        <div class="ingredients-slider {% if forloop.index == 1 %}ingredients-slider--active{% endif %}" id="ingredients-slider{{- forloop.index -}}" data-tab="{{ forloop.index }}">
+          <div class="ingredients-slider__track">
+    
+            {% for item_c in item.ingredients %}
+              <div class="ingredients-slider__item">
+                <div class="ingredients-slider__item-image">
+                  <img src="{{ item_c.image }}" alt="{{ item_c.title }}">
+    
+                  <p class="description">{{ item_c.body }}</p>
+                </div>
+        
+                <p class="ingredients-slider__item-title">{{ item_c.title }}</p>
+        
+                <p class="ingredients-slider__item-subtitle">{{ item_c.subtitle }}</p>
+              </div>
+            {% endfor %}
+
+          </div>
+          <div class="swiper-control">
+            <img class="ingr-prev-{{- forloop.index -}}" src="{{ 'ingr-left.svg' | asset_url }}" alt="slide prev">
+    
+            <img class="ingr-next-{{- forloop.index -}}" src="{{ 'ingr-right.svg' | asset_url }}" alt="slide next">
+          </div>
+        </div>
+      {% endfor %}
+   {%- else -%}
+      <div class="ingredients-slider ingredients-slider-regular-pdp ingredients-slider--active" id="ingredients-slider">
+        <div class="ingredients-slider__track">
+  
+          {% for item_c in product.metafields.custom_fields["faq_ingredients"] %}
+            <div class="ingredients-slider__item">
+              <div class="ingredients-slider__item-image">
+                {{ item_c.image }}
+                <p class="description">{{ item_c.body }}</p>
+              </div>
+      
+              <p class="ingredients-slider__item-title">{{ item_c.title }}</p>
+      
+              <p class="ingredients-slider__item-subtitle">{{ item_c.subtitle }}</p>
+            
+              <p class="ingredients-slider__item-description mobile-only">{{ item_c.body }}</p>
+            </div>
+          {% endfor %}
+
+        </div>
+        <div class="swiper-control">
+          <img class="ingr-prev" src="{{ 'ingr-left.svg' | asset_url }}" alt="slide prev">
+  
+          <img class="ingr-next" src="{{ 'ingr-right.svg' | asset_url }}" alt="slide next">
+        </div>
+
+      </div>
+   {%- endif -%}
+  </div>
+
+  {%- if template contains 'pdp-combo' -%}
+    {% for item in product.metafields.huemor.ingredients.value %}
+      <div class="all-ingredients-data" data-tab="{{ forloop.index }}">
+        <span class="all-ingredients-data-close js-all-ingredients-close">✕</span>
+        <div class="all-ingredients-data--body">
+          <p>{{ item.all-ingredients }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  {%- else -%}
+     {% if product.metafields.custom_fields.all-ingredients != blank %}
+      <div class="ingredients-all ingredients-all--bottom">
+        <span class="ingredients-all__item ingredients-all__item--active js-all-ingredients all-ingredients-data--active">See All Ingredients for {{ product.title }}</span>
+      </div>
+
+        <div class="all-ingredients-data all-ingredients-data--bottom" data-tab="0">
+          <span class="all-ingredients-data-close js-all-ingredients-close">✕</span>
+          <div class="all-ingredients-data--body">
+            <p>{{ product.metafields.custom_fields.all-ingredients }}</p>
+          </div>
+        </div>
+    {% endif %}
+  {% endif %}
+
+</div>
+
+<script>
+  window.addEventListener('load', ()=> {
+
+  {%- if template contains 'pdp-combo' -%}
+    document.querySelectorAll('.js-ingredient-tab').forEach(item => {
+      item.addEventListener('click', function(){
+        var tab = this.dataset.tab;
+
+        document.querySelector('.ingredients-tabs__item--active').classList.remove('ingredients-tabs__item--active');
+        this.classList.add('ingredients-tabs__item--active');
+
+        document.querySelector('.ingredients-all__item--active').classList.remove('ingredients-all__item--active');
+        document.querySelector(`.ingredients-all__item[data-tab="${tab}"]`).classList.add('ingredients-all__item--active');
+
+        document.querySelector('.ingredients-slider--active').classList.remove('ingredients-slider--active');
+        document.querySelector(`.ingredients-slider[data-tab="${tab}"]`).classList.add('ingredients-slider--active');
+      })
+    });
+
+    document.querySelectorAll('.js-all-ingredients').forEach(item => {
+      item.addEventListener('click', function(){
+        var tab = this.dataset.tab;
+        if (item.closest('.js-accordion-expand').querySelector('.all-ingredients-data--active')) {
+          item.closest('.js-accordion-expand').querySelector('.all-ingredients-data--active').classList.remove('all-ingredients-data--active');
+        }
+        item.closest('.accordion').classList.add('accordion--overlay');
+        item.closest('.accordion__item--1l').querySelector(`.all-ingredients-data[data-tab="${tab}"]`).classList.add('all-ingredients-data--active');
+      });
+    });
+
+    document.addEventListener('click', function(event) {
+        var ignoreTarget1 = document.querySelector('.all-ingredients-data--active');
+        var ignoreTarget2 = document.querySelector('.ingredients-all');
+        
+        if (ignoreTarget1) {
+          var isClickInsideTarget1 = ignoreTarget1.contains(event.target);
+          var isClickInsideTarget2 = ignoreTarget2.contains(event.target);
+
+          if (!isClickInsideTarget1 && !isClickInsideTarget2) {
+            //console.log('close me');
+            document.querySelector('.all-ingredients-data--active').classList.remove('all-ingredients-data--active');
+            document.querySelector('.accordion').classList.remove('accordion--overlay');
+          }
+        }
+      });
+
+      document.querySelectorAll('.js-all-ingredients-close').forEach(item => {
+        item.addEventListener('click', function(){
+          document.querySelector('.all-ingredients-data--active').classList.remove('all-ingredients-data--active');
+          document.querySelector('.accordion').classList.remove('accordion--overlay');
+        });
+      });
+
+    var ingredients_slider1 = new Swiper("#ingredients-slider1", {
+      slidesPerView: 'auto',
+      slidesPerGroup: 1,
+      spaceBetween: 25,
+      wrapperClass: 'ingredients-slider__track',
+      slideClass: 'ingredients-slider__item',
+      speed: 500,
+      navigation: {
+        nextEl: ".ingr-next-1",
+        prevEl: ".ingr-prev-1",
+      }
+    });
+
+    var ingredients_slider2 = new Swiper("#ingredients-slider2", {
+      slidesPerView: 'auto',
+      slidesPerGroup: 1,
+      spaceBetween: 25,
+      wrapperClass: 'ingredients-slider__track',
+      slideClass: 'ingredients-slider__item',
+      speed: 500,
+      navigation: {
+        nextEl: ".ingr-next-2",
+        prevEl: ".ingr-prev-2",
+      }
+    });
+
+    var ingredients_slider3 = new Swiper("#ingredients-slider3", {
+      slidesPerView: 'auto',
+      slidesPerGroup: 1,
+      spaceBetween: 25,
+      wrapperClass: 'ingredients-slider__track',
+      slideClass: 'ingredients-slider__item',
+      speed: 500,
+      navigation: {
+        nextEl: ".ingr-next-3",
+        prevEl: ".ingr-prev-3",
+      }
+    });
+  {%- else -%}
+
+    $(".ingredients-all--bottom .js-all-ingredients").click(function(){
+      $(".all-ingredients-data--bottom").addClass("all-ingredients-data--active");
+      $(".accordion").addClass("accordion--overlay");
+    });
+
+
+    $(".all-ingredients-data--bottom .js-all-ingredients-close").click(function(){
+      $(".all-ingredients-data--bottom").removeClass("all-ingredients-data--active");
+      $(".accordion").removeClass("accordion--overlay");
+    });
+
+    $(document).mouseup(function (e){
+        var container = $(".all-ingredients-data--active");
+        var overlay = $(".accordion");
+        if (!container.is(e.target) && container.has(e.target).length === 0){
+          container.removeClass('all-ingredients-data--active');
+          overlay.removeClass("accordion--overlay");
+        }
+      });
+
+    var ingredients_slider1 = new Swiper("#ingredients-slider", {
+      slidesPerView: 'auto',
+      slidesPerGroup: 1,
+      spaceBetween: 25,
+      wrapperClass: 'ingredients-slider__track',
+      slideClass: 'ingredients-slider__item',
+      speed: 500,
+      navigation: {
+        nextEl: ".ingr-next",
+        prevEl: ".ingr-prev",
+      }
+    });
+  {%- endif -%}
+
+  });
+</script>

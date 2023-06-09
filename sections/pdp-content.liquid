@@ -1,0 +1,238 @@
+<div class="c-pdpPage">
+    {% include 'pdp-result' %}
+    {% include 'pdp-organic-ingredients' %}
+    {% include 'pdp-review-highlights' %}
+    {% include 'pdp-link' %}
+    {% include 'pdp-ingredients' %}
+    {% include 'pdp-image-block' %}
+    {% include 'pdp-quiz-use' %}
+    {% include 'pdp-video' %}
+    {% include 'pdp-routine' %}
+    {% include 'pdp-certified' %}
+    {% if shop.money_with_currency_format contains 'USD' %}
+        {% include 'pdp-addtocart' %}
+    {% endif %}
+    {% include 'pdp-reviews' %}
+    {% include 'instagram' %}
+</div>
+
+<!-- New PDP scripts-->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        {% if product.handle contains "the-deep" %}
+        $('.cu-productTypeSelect__itemOneTime label').trigger("click");
+        {% else %}
+        $('.cu-productTypeSelect__itemSub label').trigger("click");
+        {% endif %}
+
+        $('.promo-bar').addClass('is-opaque');
+        $('.nav-mobile').addClass('is-opaque');
+        $('.nav-desktop').addClass('is-opaque');
+
+        $('.js-product-thumbs .slick-slide:first-child img').addClass('is-active');
+
+        $('.rc_frequencySelecter .rc_frequencySelecter__item:first-child').addClass('is-active');
+
+        $('.c-productInfo__subscription #rc_container .rc_block__type').click(function(){
+            if ($(this).parents('#rc_container').find(".rc_block__type__autodeliver").hasClass("rc_block__type--active")) {
+                $('.rc_block__type__options').show();
+                $('.c-productInfo__priceSub').show();
+                $('.c-productInfo__priceOneTime').hide();
+                $('.c-productInfo__btnText').addClass('is-autoDeliver');
+                $('.c-productInfo__btnText').removeClass('is-oneTime');
+
+                //js-pdp-sticky
+                $('.js-pdp-sticky .rc_block__type__autodeliver').addClass('rc_block__type--active');
+                $('.js-pdp-sticky .rc_block__type__onetime').removeClass('rc_block__type--active');
+                $('.js-pdp-sticky').find('.js-add-to-cart-sub').show();
+                $('.js-pdp-sticky').find('.js-add-to-cart-dummy').hide();
+                $('.js-pdp-sticky .rc_block__type__autodeliver').find("input").prop('checked',true);
+                $('.js-pdp-sticky .rc_block__type__onetime').find("input").prop('checked',false);
+
+            }else{
+                $('.rc_block__type__options').hide();
+                $('.c-productInfo__priceSub').hide();
+                $('.c-productInfo__priceOneTime').show();
+                $('.c-productInfo__btnText').removeClass('is-autoDeliver');
+                $('.c-productInfo__btnText').addClass('is-oneTime');
+
+                //js-pdp-sticky
+                $('.js-pdp-sticky .rc_block__type__onetime').addClass('rc_block__type--active');
+                $('.js-pdp-sticky .rc_block__type__autodeliver').removeClass('rc_block__type--active');
+                $('.js-pdp-sticky').find('.js-add-to-cart-sub').hide();
+                $('.js-pdp-sticky').find('.js-add-to-cart-dummy').show();
+                $('.js-pdp-sticky .rc_block__type__autodeliver').find("input").prop('checked',false);
+                $('.js-pdp-sticky .rc_block__type__onetime').find("input").prop('checked',true);
+            }
+        });
+
+        $('.js-product-info .rc_block__type__onetime').click(function(){
+            $(this).addClass('rc_block__type--active');
+            $(this).parents('.js-product-info').find('.rc_block__type__autodeliver').removeClass('rc_block__type--active');
+            $('.rc_block__type__options').hide();
+            $('.c-productInfo__priceSub').hide();
+            $('.c-productInfo__priceOneTime').show();
+            $('.c-productInfo__btnText').removeClass('is-autoDeliver');
+            $('.c-productInfo__btnText').addClass('is-oneTime');
+            $('.cu-productTypeSelect__itemOneTime label').trigger("click");
+        });
+
+        $('.js-product-info .rc_block__type__autodeliver').click(function(){
+            $(this).addClass('rc_block__type--active');
+            $(this).parents('.js-product-info').find('.rc_block__type__onetime').removeClass('rc_block__type--active');
+            $('.rc_block__type__options').show();
+            $('.c-productInfo__priceSub').show();
+            $('.c-productInfo__priceOneTime').hide();
+            $('.c-productInfo__btnText').addClass('is-autoDeliver');
+            $('.c-productInfo__btnText').removeClass('is-oneTime');
+            $('.cu-productTypeSelect__itemSub label').trigger("click");
+        });
+
+        $('.js-product-info .js-add-to-cart-dummy , .js-pdp-sticky .js-add-to-cart-dummy').click(function(){
+            $('.c-productInfo__submit .js-addtocart').trigger("click");
+        });
+
+        $('.c-productFrequency__text').click(function(){
+            $('.c-productFrequency__dropdown').fadeOut();
+            $(this).parents('.c-productFrequency').find('.c-productFrequency__dropdown').fadeIn();
+        });
+
+        $('.c-productFrequency__close').click(function(){
+            $('.c-productFrequency__dropdown').fadeOut();
+            return false;
+        });
+
+        $('.c-pdpInd__readmore').click(function(){
+            $(this).toggleClass('is-open');
+            $('.c-pdpInd').toggleClass('is-open');
+            return false;
+        });
+
+        /* Sticky JS*/
+        $('.js-pdp-sticky .rc_block__type__onetime').click(function(){
+            $('#rc_container').find('.rc_label__onetime').trigger("click");
+        });
+
+        $('.js-pdp-sticky .rc_block__type__autodeliver').click(function(){
+            $('#rc_container').find('.rc_label__autodeliver').trigger("click");
+        });
+
+        $('.js-add-to-cart-sub').click(function(){
+            $('.c-pdpSticky__modal').addClass('is-open');
+            return false;
+        });
+
+        $('.js-pdpsticky-close').click(function(){
+            $('.c-pdpSticky__modal').removeClass('is-open');
+            return false;
+        });
+
+        $('.js-sticky-addtocart-btn').click(function(){
+            $('#rc_container').find('.rc_label__autodeliver').trigger("click");
+            $('.js-addtocart').trigger("click");
+            $('.c-pdpSticky__modal').removeClass('is-open');
+            return false;
+        });
+
+        $('[data-see-full-ing]').click(function(){
+            $('.c-pdpFullIng__main').slideToggle();
+            return false;
+        });
+
+
+
+        $(document).scroll(function() {
+            var scrollTop = $(this).scrollTop();
+            //var scrollElement = $('.c-pdpInd').offset().top;
+            if (scrollTop > 1150) {
+                $('.c-pdpSticky').addClass('is-scroll');
+            } else {
+                $('.c-pdpSticky').removeClass('is-scroll');
+            }
+        });
+
+        // Drhyman js
+
+        if (window.location.href.indexOf("drhm") > -1) {
+            sessionStorage.setItem("pdppage", "drhyman");
+            $('body').addClass('drhymanpdp');
+            $('.c-hymanBanner').addClass('is-open');
+
+
+        }
+
+        if (sessionStorage.getItem("pdppage") !== null) {
+            $('body').addClass('drhymanpdp');
+            $('.c-hymanBanner').addClass('is-open');
+        }
+
+        setTimeout(function(){
+            $('.cu-optionsGrid .cu-option:nth-child(2)').trigger("click");
+        }, 100);
+    });
+
+
+</script>
+{% if product.metafields.custom_fields["enable_quiz_description"] == 1 %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if (localStorage.getItem("quizAnswerOneText") == 'Dry') {
+                $('.c-productInfo__quizDes .c-productInfo__text').hide();
+                $('.c-productInfo__quizDes [data-dry]').show();
+            }else if(localStorage.getItem("quizAnswerOneText") == 'Oily') {
+                $('.c-productInfo__quizDes .c-productInfo__text').hide();
+                $('.c-productInfo__quizDes [data-oily]').show();
+            }else if(localStorage.getItem("quizAnswerOneText") == 'Normal') {
+                $('.c-productInfo__quizDes .c-productInfo__text').hide();
+                $('.c-productInfo__quizDes [data-normal]').show();
+            }else{
+                $('.c-productInfo__quizDes .c-productInfo__text').hide();
+                $('.c-productInfo__quizDes [data-original]').show();
+            }
+        });
+    </script>
+{% endif %}
+
+<!-- Klaviyo view product snippet -->
+<script type="text/javascript">
+    var _learnq = _learnq || [];
+    var item = {
+        Name: {{ product.title|json }},
+        ProductID: {{ product.id|json }},
+        Categories: {{ product.collections|map:'title'|json }},
+        ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+        URL: "{{ shop.secure_url }}{{ product.url }}",
+        Brand: {{ product.vendor|json }},
+        Price: {{ product.price|money|json }},
+        CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+    };
+    _learnq.push(['track', 'Viewed Product', item]);
+    geq.event('Viewed Product Reclaim', item);
+    _learnq.push(['trackViewedItem', {
+        Title: item.Name,
+        ItemId: item.ProductID,
+        Categories: item.Categories,
+        ImageUrl: item.ImageURL,
+        Url: item.URL,
+        Metadata: {
+            Brand: item.Brand,
+            Price: item.Price,
+            CompareAtPrice: item.CompareAtPrice
+        }
+    }]);
+</script>
+<!-- End Klaviyo view product snippet -->{%include 'preorder-me-widget'%}
+
+{% schema %}
+{
+    "name": "Product Content",
+    "settings": [],
+    "presets": [
+    {
+      "name": "Product Content",
+      "category": "Caldera"
+    }
+    ]
+}
+{% endschema %}

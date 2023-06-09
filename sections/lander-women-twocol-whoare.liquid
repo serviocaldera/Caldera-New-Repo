@@ -1,0 +1,63 @@
+{% include 'landers-two-column' %}
+
+{% schema %}
+  {
+    "name": "Who Are Two Col",
+    "settings": [
+        {
+            "type": "select",
+            "id": "col-alignment",
+            "options": [
+              {
+                "value": "c-landerTwocol--left",
+                "label": "Left"
+              },
+              {
+                "value": "c-landerTwocol--right",
+                "label": "Right "
+              }
+            ],
+            "default": "c-landerTwocol--left",
+            "label": "Left Or Right Col"
+        },
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+        },
+        {
+            "type":"image_picker",
+            "id":"image-mobile",
+            "label":"Image Mobile"
+        },
+        {
+            "type":"text",
+            "id":"vtext",
+            "label":"Vertical Text",
+            "default":"RADICAL ACCOUNTABILITY"
+        },
+        {
+            "type":"text",
+            "id":"heading",
+            "label":"Heading",
+            "default":"Who is Caldera + Lab?"
+        },
+        {
+            "type":"html",
+            "id":"copy",
+            "label":"Copy"
+        },
+        {
+            "type":"text",
+            "id":"btntext",
+            "label":"Button Text",
+            "default":"get 20% off"
+        },
+        {
+            "type":"url",
+            "id":"btnurl",
+            "label":"Button Url"
+        }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,56 @@
+{% if product.metafields.custom_fields["enable_combolink_section"] == 1 %}    
+    <div class="comboLinks">
+        <div class="wrapper">
+            {% if product.metafields.custom_fields["combolink_items"] != blank %} 
+                {% for item in product.metafields.custom_fields["combolink_items"] %}
+                    {% capture thecycle %}{% cycle 'odd', 'even' %}{% endcapture %}
+                    {% if thecycle == 'odd' %}
+                        <div class="comboLinks__row comboLinks__row--odd">
+                            {% if item["combolink_image"] != blank %}
+                                <div class="comboLinks__image">
+                                    <img src="{{ item["combolink_image"] }}" alt="{{ item["combo_pdp_link_title"] }}">
+                                </div>  
+                            {% endif %}
+                            <div class="comboLinks__content">
+                                <div class="comboLinks__content-inner">
+                                    {% if item["combolink_title"] != blank %}
+                                        <h4 class="comboLinks__content-title">{{ item["combolink_title"] }}</h4>
+                                    {% endif %}
+                                    {% if item["combolink_copy"] != blank %}
+                                        <div class="copy">{{ item["combolink_copy"] }}</div>
+                                    {% endif %}
+                                    {% if item["combolink_anchor"] != blank %}
+                                        <a href="{{ item["combolink_url"] }}" class="comboLinks__content-link">{{ item["combolink_anchor"] }}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}    
+                        <div class="comboLinks__row comboLinks__row--even">
+                            <div class="comboLinks__content">
+                                <div class="comboLinks__content-inner">
+                                    {% if item["combolink_title"] != blank %}
+                                        <h4 class="comboLinks__content-title">{{ item["combolink_title"] }}</h4>
+                                    {% endif %}
+                                    {% if item["combolink_copy"] != blank %}
+                                        <div class="copy">{{ item["combolink_copy"] }}</div>
+                                    {% endif %}
+                                    {% if item["combolink_anchor"] != blank %}
+                                        <div class="comboLinks__content-linkWrapper">
+                                            <a href="{{ item["combolink_url"] }}" class="comboLinks__content-link">{{ item["combolink_anchor"] }}</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if item["combolink_image"] != blank %}
+                            <div class="comboLinks__image">
+                                <img src="{{ item["combolink_image"] }}" alt="{{ item["combo_pdp_link_title"] }}">
+                            </div>  
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

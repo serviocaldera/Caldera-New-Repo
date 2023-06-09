@@ -1,0 +1,19 @@
+{% if product.metafields.custom_fields["enable_image_block_section"] == 1 %}
+<div class='c-pdpBotanicals__row {% if product.metafields.custom_fields["image_block_full_width"] == 1 %}c-pdpBotanicals--fullWidth{% endif %}'>
+    <div class="c-pdpBotanicals__content">
+        {% if product.metafields.custom_fields["image_block_section_mobile"] != blank %}
+            <img src='{{ product.metafields.custom_fields["image_block_section_mobile"] }}' data-src='{{ product.metafields.custom_fields["image_block_section_mobile"] }}' class="lazyload c-pdpBotanicals__image--mobile" alt='{{ product.metafields.custom_fields["image_block_section_text"] }}' style="width: 100%" />
+        {% endif %}
+        {% if product.metafields.custom_fields["image_block_section_desktop"] != blank %}
+            <img src='{{ product.metafields.custom_fields["image_block_section_desktop"] }}' data-src='{{ product.metafields.custom_fields["image_block_section_desktop"] }}' class="lazyload c-pdpBotanicals__image--desktop" alt='{{ product.metafields.custom_fields["image_block_section_text"] }}' style="width: 100%" />
+        {% endif %}
+    </div>
+    <div class="c-pdpBotanicals__whiteArea">
+        {% if product.metafields.custom_fields["image_block_section_text"] != blank %}
+        <div class="c-pdpBotanicals__text">
+          {{ product.metafields.custom_fields["image_block_section_text"] }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

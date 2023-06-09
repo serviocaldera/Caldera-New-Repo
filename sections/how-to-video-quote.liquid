@@ -1,0 +1,62 @@
+<div class="c-howToVideoQuote">
+    <div class="wrapper c-howToVideoQuote__container">
+        <div class="c-howToVideoQuote__row">
+            <div class="c-howToVideoQuote__content">
+                <div class="c-howToVideoQuote__box">
+                    <h3 class="c-howToVideoQuote__title">{{ section.settings.title }}</h3>
+                    <div class="c-howToVideoQuote__copy">
+                        {{ section.settings.copy }}
+                    </div>
+                    <div class="c-howToVideoQuote__link">
+                        <a href="{{ section.settings.podcast-url }}">
+                            {{ section.settings.podcast-copy }}
+                        </a>
+                    </div>
+                </div>
+            </div> 
+            <div class="c-howToVideoQuote__video">
+                <div class="c-howToVideoQuote__videoEmebed">
+                    {{ section.settings.video-url }}    
+                </div>
+            </div>  
+        </div>
+        
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "How to Video Quote",
+        "settings": [
+            {
+                "type":"html",
+                "id":"title",
+                "label":"Title",
+                "default":"I Battled Psoriasis For Most Of My Life…"
+            },
+            {
+                "type":"html",
+                "id":"copy",
+                "label":"Copy",
+                "default": "[The Good has] completely replaced my steroid cream. My skin looks and feels way better."
+            },
+            {
+                "type":"text",
+                "id":"podcast-copy",
+                "label":"Podcast Copy",
+                "default": "Adam Schafer,  Host of Mind Pump Podcast"
+            },
+            {
+                "type":"url",
+                "id":"podcast-url",
+                "label":"Podcast Url"
+            },
+            {
+                "type":"html",
+                "id":"video-url",
+                "label":"Video Embed Code"
+            }
+        ]
+        
+    }
+{% endschema %}

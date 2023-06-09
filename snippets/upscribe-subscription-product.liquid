@@ -1,0 +1,259 @@
+<!-- Upscribe -->
+{%- comment -%}
+{%- if product.metafields.sf_upscribe.enable_subscription and product.metafields.sf_upscribe.enable_subscription != 0 and product.metafields.sf_upscribe.enable_subscription != '0' -%}
+    this was in use before
+{%- endif -%}
+{%- if product.handle contains "the-good" -%}
+<div class="c-quizProperties">
+    <input type="hidden" value="Quiz not taken by user" id="QuizAnswerOne" name="properties[QuizAnswerOne]">
+    <input type="hidden" value="Quiz not taken by user" id="QuizAnswerTwo" name="properties[QuizAnswerTwo]">
+    <input type="hidden" value="Quiz not taken by user" id="QuizAnswerThree" name="properties[QuizAnswerThree]">
+    <input type="hidden" value="Quiz not taken by user" id="QuizAnswerFour" name="properties[QuizAnswerFour]">
+</div>
+{%- endif -%}
+{%- endcomment -%}
+<div class="c-productInfo__subscription">
+    {% assign subEnable = product.metafields.sf_upscribe.enable_subscription %}
+        <section id="upscribe-subscription-product" class="cu-upscribe">
+            {% if product.metafields.custom_fields["combobuy_products"] != blank %}
+
+            <div class="comboBuy__products">
+            {%- assign comboOnetimePrice = 0 -%}
+            {%- assign comboSubscriptionPrice = 0 -%}
+            {%- for item in product.metafields.custom_fields["combobuy_products"] -%}
+                {%- if item["combobuy_prodhandle"] != blank -%}
+                    {%- assign metaproduct = all_products[item["combobuy_prodhandle"]] -%}
+                {%- endif -%}
+                {%- liquid
+                    assign discount_amount_original = metaproduct.metafields.sf_upscribe.discount_amount | remove:"%"
+                    assign discount_amount = discount_amount_original | divided_by: 100.0
+                    assign price = metaproduct.price | amount 
+                    assign discount_price = price | times: discount_amount
+                    assign discountTotal = price | minus: discount_price
+                -%}
+
+                <div class="comboBuy__prod added {% if metaproduct.available %}comboBuy__prod--active{% else %} comboBuy__prod--oos{% endif %}"
+                    data-varient-id="{{ metaproduct.selected_or_first_available_variant.id }}"
+                    data-product-handle="{{ metaproduct.title }}" 
+                    data-regular-price="{{ metaproduct.price }}"
+                    data-discount-percentage="{{ metaproduct.metafields.sf_upscribe.discount_amount }}"
+                    data-discounted-price=""
+                    data-subscription-enable="{{ metaproduct.metafields.sf_upscribe.enable_subscription }}"
+                    data-interval-frequency="{{ metaproduct.metafields.sf_upscribe.interval_frequency }}"
+                    data-subscription-title="{{ metaproduct.metafields.sf_upscribe.subscription_product_title | format_money }}"
+                    data-interval-unit="{{ metaproduct.metafields.sf_upscribe.interval_unit }}">
+
+                    {% if item["combobuy_prodthumb"] != blank %}
+                    <div class="comboBuy__prodThumb">
+                        <img src="{{ item["combobuy_prodthumb"] }}" alt="{{ metaproduct.title }}">
+                    </div>
+                    {% else %}
+                    <div class="comboBuy__prodThumb">
+                        <img src="{{ metaproduct.selected_or_first_available_variant.featured_image | img_url: 'master' }}"
+                            alt="{{ metaproduct.title }}">
+                    </div>
+                    {%- endif -%}
+
+
+                    <div class="comboBuy__prodDetails">
+                        {% if metaproduct.title != blank %}<span
+                            class="comboBuy__prodTitle">{{ metaproduct.title }}</span>{% endif %}
+                        {% if item["combobuy_prodtype"] != blank %}<span
+                            class="comboBuy__prodType">{{ item["combobuy_prodtype"] }}</span>{% endif %}
+                    </div>
+
+                    <div class="comboBuy__prodValue comboBuy__prodValue--discounted">
+                        {% if metaproduct.price != blank %}
+                        <span
+                            class="comboBuy__prodPrice comboBuy__prodPrice--regular">{{ metaproduct.price | money | remove: '.00'}}</span>
+                        {% endif %}
+                        <span class="comboBuy__prodPrice comboBuy__prodPrice--discounted">$00</span>
+                        <div class="comboBuy__prodCheck">{% render 'icon-check-orange' %}</div>
+                    </div>
+                </div>
+                {%- if metaproduct.available -%}
+                    {%- assign comboOnetimePrice = metaproduct.price | plus: comboOnetimePrice -%}
+                    {%- assign comboSubscriptionPrice = discountTotal | plus: comboSubscriptionPrice -%}
+                {%- else -%}
+                    {%- if soldOutProducts -%}
+                        {% comment %}Line causing problems{% endcomment %}
+                        {%- assign soldOutProducts = soldOutProducts | append:"<i> and </i>"  | append: metaproduct.title  -%}          
+                    {%- else-%}
+                        {%- assign soldOutProducts = metaproduct.title  -%}
+                    {%- endif-%}   
+                {%- endif -%}
+            {% endfor %}
+            </div>
+
+            {% else %}
+                {%- liquid
+                    assign discount_amount_original = product.metafields.sf_upscribe.discount_amount | remove:"%"
+                    assign discount_amount = discount_amount_original | divided_by: 100.0
+                    assign price = product.price
+                    assign discount_price = price | times: discount_amount
+                    assign discountTotal = price | minus: discount_price
+                -%}
+                <div class="cu-subscription-inputs" 
+                    data-varient-id="{{ product.variants[0].id }}"
+                    data-regular-price="{{ price }}"
+                    data-product-title="{{ product.title }}"
+                    data-discount-percentage="{{ discount_amount }}"
+                    data-subscription-enable="{{subEnable}}"
+                    data-interval-frequency="{{product.metafields.sf_upscribe.interval_frequency}}"
+                    data-subscription-title="{{ product.metafields.sf_upscribe.subscription_product_title | format_money }}"
+                    data-interval-unit="{{product.metafields.sf_upscribe.interval_unit}}">
+
+
+
+                    <!--input v-if="chargeLimit" type="hidden" :value="chargeLimit" name="properties[Charge Limit]"-->
+                    {% if product.metafields.sf_upscribe.recurring_discount_amount %}
+                    <input type="hidden" name="properties[Recurring Discount Amount]" class="js-sub-input-recurring-discount" value="{{ product.metafields.sf_upscribe.recurring_discount_amount }}">
+                    {% endif %}
+                    {% if product.metafields.sf_upscribe.recurring_discount_after_order %}
+                    <input type="hidden" name="properties[Recurring Discount After Order]" class="js-sub-input-recurring-after-discount" value="{{product.metafields.sf_upscribe.recurring_discount_after_order}}">
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+      
+            <div class="cu-productTypeSelect">
+                <div class="cu-productTypeSelect__itemWrap cu-productTypeSelect__itemOneTime">
+                    <label class="cu-productTypeSelect__itemLabel" for="onetime">
+                        <div class="cu-productTypeSelect__itemBox">
+                            <div class="cu-productTypeSelect__itemContent">
+                                <span class="cu-productTypeSelect__itemContent-check">{% render 'icon-check-orange' %}</span>
+                                <input type="radio" id="onetime" value="onetime">
+                                <span class="cu-productTypeSelect-selectorInner">
+                                    <span class="cu-productTypeSelect__itemText">One-Time Purchase</span>
+                                    <span class="cu-productTypeSelect__itemText-price" id="getOriginalPrice">
+                                    {% if product.metafields.custom_fields["combobuy_products"] != blank %}
+                                     {{ comboOnetimePrice | money | remove: '.00' | remove: ',00' }}
+                                    {% else %}
+                                      {{price | money | remove: '.00' | remove: ',00'}}
+                                    {% endif %}
+                                </span>
+                                </span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="cu-productTypeSelect__itemWrap cu-productTypeSelect__itemSub is-active">
+                    <label class="cu-productTypeSelect__itemLabel" for="subscription">
+                        <div class="cu-productTypeSelect__itemBox">
+                            <div class="cu-productTypeSelect__itemContent">
+                                 <span class="cu-productTypeSelect__itemContent-check">{% render 'icon-check-orange' %}</span>
+                                <input type="radio" id="subscription" value="subscription">
+                                <span class="cu-productTypeSelect-selectorInner">
+                                    <span class="cu-productTypeSelect__itemText">Membership<span class="cu-productTypeSelect__itemText--save"> • Save 20%</span></span>
+                                    <div>
+                                     {% if product.metafields.custom_fields["combobuy_products"] != blank %}
+                                     {% comment %}{%- liquid
+                                        assign  comboSubscriptionPriceConvert = comboSubscriptionPrice | divided_by: 100
+                                        assign  comboSubscriptionPricePreFinal = comboSubscriptionPriceConvert | round
+                                        assign  comboSubscriptionPriceFinal = comboSubscriptionPricePreFinal | times: 100
+                                     -%}{% endcomment %}
+
+                                        <span class="cu-productTypeSelect__itemText-price">
+                                            {{ comboSubscriptionPrice | money | remove: '.00' | remove: ',00' | remove: ',00' }}
+                                        </span>
+                                        <span id="getDiscountPrice" class="cu-productTypeSelect__itemText2-price">
+                                            <strike data-discounted="{{ comboSubscriptionPrice | money | remove: '.00' }}">{{ comboOnetimePrice | money | remove: '.00' | remove: ',00'}}</strike>
+                                        </span>
+                                    {% else %}
+                                        {% comment %}{%- liquid
+                                            assign  discountTotalConvert = discountTotal | divided_by: 100
+                                            assign  discountTotalPreFinal = discountTotalConvert | round
+                                            assign  discountTotalFinal = discountTotalPreFinal | times: 100
+                                         -%}{% endcomment %}
+                                        <span class="cu-productTypeSelect__itemText-price">
+                                            {{ discountTotal | money | remove: '.00' | remove: ',00' }}
+                                        </span>
+                                        <span  id="getDiscountPrice" class="cu-productTypeSelect__itemText2-price">
+                                            <strike data-discounted="{{ discountTotal | money | remove: '.00' | remove: ',00' }}">{{ price | money | remove: '.00' | remove: ',00'}}</strike>
+                                        </span>
+                                    {% endif %}
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            {%- if section.settings.upscribe_info -%} 
+                <div class="cu-description{% if soldOutProducts %} cu-description--hide{% endif %}">
+                    {{ section.settings.upscribe_info}}
+                </div>
+            {%- endif -%} 
+
+            {%- if soldOutProducts -%} 
+                <div class="cu-description">
+                    <strong>{{ section.settings.upscribe_info_oos}} {{ soldOutProducts }}.</strong>
+                    {{ section.settings.upscribe_info_soldOut}}
+                </div>
+            {%- endif -%} 
+
+            <div class="cu-options cu-options--frequency">
+                <div class="rc_label_frequency__header">
+                    <div class="cu-optionsTitle">choose frequency</div>
+                    {% if product.metafields.custom_fields["disable_take_quiz_link"] == 1 %}
+                    {% else %}
+                        <div class="c-productFrequency c-productFrequencyNeedHelp">
+                            <div class="c-productFrequency__text c-productFrequency__textQuiz" data-quiz-click>
+                                <span class="c-quizText__desktop">Unsure of frequency? Take quiz.</span>
+                                <span class="c-quizText__mobile">Take frequency quiz.</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="cu-optionsGrid">
+                    {% assign intervalFrequncyMetafield = product.metafields.sf_upscribe.interval_frequency | split: "," %}
+                    {% assign intervalUnitMetafield = product.metafields.sf_upscribe.interval_unit %}
+                    {% for interval in intervalFrequncyMetafield %}
+                        <div class="cu-option__option cu-option">
+                            <span class="cu-option__mainText">
+                                <span class="days-{{interval}} day-to-select">{{interval}} {{intervalUnitMetafield}}</span>
+                            </span> 
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+        <div class="c-productInfo__variants">
+            <select id="product-select-{{ product.id }}" name="id" class="c-productInfo__variantSelect" data-variant-select data-productid="{{product.id}}">
+                {% for variant in product.variants %}
+                    {% if variant.available %}
+                        <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                    {% else %}
+                        <option disabled="disabled">
+                            {{ variant.title }} - Sold Out
+                        </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+        </div>
+        <div class="c-productInfo__submit">
+            <div class="quantityAdjust c-quantityAdjust">
+                <spam class = "subQty">-</spam>
+                <spam class = "actualQTY">1</spam>
+                <spam class = "addQty">+</spam>
+            </div>
+
+            <button type="submit" name="add" id="AddToCart" class="js-addtocart form__addtocart btn btn--primary{% if settings.cart_limit_enable and cart.item_count > 0 %} disabled{% endif %}">
+
+                <span class="c-productInfo__btnText">
+                    {% if product.metafields.custom_fields["enable_pre_order_product"] == 1 %}
+                        Pre-Order
+                    {% else %}
+                        Add To Cart
+                    {% endif %}
+                    <span class="cu__total-price"></span>
+                </span>
+            </button>
+            {% comment %}
+                <div class="btn btn--primary btn--oos">Sold Out</div>
+            {% endcomment %}
+        </div>

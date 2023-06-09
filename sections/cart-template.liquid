@@ -1,0 +1,446 @@
+<!-- /templates/cart.liquid -->
+{% include 'upscribe-cart-logic' %}
+<div class="cart-page">
+    <div class="wrapper">
+        <div class="grid">
+            {% if cart.item_count > 0 %}
+                <div class="grid__item medium--two-thirds push--medium--one-sixth" >
+                    <h1>Your Cart</h1>
+                    <form action="/cart" method="post" novalidate class="cart table-wrap" data-cart-form item-count="{{cart.item_count}}">
+                        <table class="cart__table table--responsive">
+                            <thead>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            </thead>
+                            <tbody>
+                            {% assign upscribe_total = 0 %}
+                            {% assign subscription_in_cart = false %}
+                            {% for item in cart.items %}
+                                <!-- Upscribe hidden properties assign -->
+                                {%- assign property_size = item.properties | size -%}
+
+                                {% if property_size > 0 %}
+                                    {% for p in item.properties %}
+                                        {% if p.first == 'Subscription Product Title' %}
+                                            {%- assign subscription_product_title = p.last -%}
+                                        {% endif %}
+
+                                        {% if p.first == 'Subscription Amount' %}
+                                            {%- assign subscription_product_amount = p.last -%}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if subscription_product_amount %}
+                                    {% assign subscription_in_cart = true %}
+                                    {% assign line_price_total = subscription_product_amount | times: item.quantity %}
+                                {% else %}
+                                    {% assign line_price_total = item.discounted_price | times: item.quantity %}
+                                {% endif %}
+
+                                {% comment %} Add total to Upscribe {% endcomment %}
+
+                                {% assign upscribe_total = upscribe_total | plus: line_price_total %}
+                                <tr class="cart__row js-cart-item" data-variant-id="{{ item.variant_id }}">
+                                    <td>
+                                        <div class="cart__row-content">
+                                            <div class="cart__row-image">
+                                                <img src="{{ item.image | img_url: '125x' }}" data-rjs="{{ item.image | img_url: '250x' }}" alt="{{ item.title }}">
+                                            </div>
+                                            <div class="cart__row-title">
+                                                <h6>
+                                                    {% if subscription_product_title %}
+                                                        {{ subscription_product_title }}
+                                                    {% else %}
+                                                        {{ item.product.title | remove: 'Auto renew' | remove: '10.00% Off' }}
+                                                    {% endif %}
+                                                </h6>
+                                                {% if item.product.metafields.custom_fields.cart_copy %}
+                                                    <p class="text--accent">{{ item.product.metafields.custom_fields.cart_copy }},</p>
+                                                {% endif %}
+                                                {% if item.variant.title != "Default Title" %}
+                                                    <p class="text--accent">{{ item.variant.title }}</p>
+                                                {% endif %}
+                                            </div>
+                                            {% unless item.properties == blank %}
+                                                <div class="cart__row-subscription">
+                                                    {% comment %}
+                                                    <p class="text--accent">
+                                                      {% include 'icon' with 'repeat' %}
+                                                      Delivery Every
+                                                      {% for property in item.properties %}
+                                                        {% if property.first == 'Subscription' %}
+                                                          {{ property.last }}
+                                                        {% endif %}
+                                                      {% endfor %}
+                                                    </p>
+                                                    {% endcomment %}
+                                                    <p class="text--accent">
+                                                        {% for property in item.properties %}
+                                                            {% if property.first == 'Pre Order Item' %}
+                                                                Pre-Order Item
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </p>
+                                                </div>
+                                            {% endunless %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="cart__row-content">
+                                            {% if item.price != 0 %}
+                                                <div class="cart__row-qty quantity--{{ item.id }}">
+                                                    <button type="button" class="cart__qty-adjust cart__qty--minus icon-fallback-text" data-item-quantity-minus data-item-quantity-change{% if settings.cart_limit_enable and cart.item_count > 0 %} disabled{% endif %}>&minus;</button>
+                                                    <input type="text" id="Quantity-{{ item.variant_id }}" name="updates[]" value="{{ item.quantity }}" min="0" class="cart__qty-num quantity-selector" aria-label="quantity" pattern="[0-9]*" data-variant-id="{{ item.variant_id }}" data-item-quantity{% if settings.cart_limit_enable and cart.item_count > 0 %} readonly{% endif %}>
+                                                    <button type="button" class="cart__qty-adjust cart__qty--plus icon-fallback-text" data-item-quantity-plus data-item-quantity-change{% if settings.cart_limit_enable and cart.item_count > 0 %} disabled{% endif %}>+</button>
+                                                    {% if settings.cart_limit_enable and cart.item_count > 0 %}
+                                                        <div class="cart__row-qty-tooltip">
+                                                            <p>{{ settings.cart_limit_message }}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="cart__row-content">
+                                            <div class="cart__row-price">
+                                                {% if property_size > 0 %}
+                                                    {% for p in item.properties %}
+                                                        {% if p.first == 'Subscription Product Title' %}
+                                                            {%- assign subscription_product_title = p.last -%}
+                                                        {% endif %}
+
+                                                        {% if p.first == 'Subscription Amount' %}
+                                                            {%- assign subscription_product_amount = p.last -%}
+                                                        {% endif %}
+
+                                                        {% if p.first == 'Discount Amount' %}
+                                                            {%- assign discount_amount = p.last -%}
+                                                        {% endif %}
+
+                                                        {% if p.first == 'Subscription Amount' %}
+                                                            {%- assign subscription_amount = p.last -%}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% if subscription_product_title and
+                                                subscription_product_amount and
+                                                discount_amount and
+                                                subscription_amount
+                                                %}
+                                                    <p class="c-cart-singleprice js-calculate-subscription-price"
+                                                       data-original-price="{{item.price}}"
+                                                       data-discount-amount="{{ discount_amount }}"
+                                                       data-subscription-amount="{{ subscription_amount | remove: '$' | remove: '.00' }}"
+                                                       data-currency-symbol="{{ currency.symbol }}"
+                                                    >{{ item.price | money }}</p>
+                                                {% else %}
+                                                    <p class="c-cart-singleprice">{{ item.line_price | money }}</p>
+                                                {% endif %}
+
+                                                {% if subscription_product_title and
+                                                subscription_product_amount and
+                                                discount_amount and
+                                                subscription_amount
+                                                %}
+                                                    <span class="js-line-price js-calculate-subscription-line-price"
+                                                          data-original-price="{{item.line_price}}"
+                                                          data-discount-amount="{{ discount_amount }}"
+                                                          data-line-quantity="{{ item.quantity }}"
+                                                          data-subscription-amount="{{ subscription_amount | remove: '$' | remove: '.00' }}"
+                                                          data-currency-symbol="{{ currency.symbol }}"
+                                                          data-final-price
+                                                    >{{ item.line_price | money }}</span>
+                                                {% else %}
+                                                    <span class="js-line-price"
+                                                          data-final-price="{{ item.line_price | divided_by: 100 }}"
+                                                    >{{ item.line_price | money_with_currency }}</span>
+                                                {% endif %}
+
+                                            </div>
+                                            {% if item.price != 0 %}
+                                                <div class="cart__row-remove">
+                                                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">{% include 'icon' with 'close' %}</a>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% comment %} Reset Upscribe Values {% endcomment %}
+                                {%- assign subscription_product_amount = false -%}
+                                {%- assign subscription_product_title = false -%}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="cart__footer">
+                            <div class="grid--rev">
+                                <div class="grid__item medium--one-half">
+                                    <div class="cart__checkout text-right">
+                                        <p>
+                                            <span class="cart__subtotal-title">Subtotal</span>
+                                            {% if subscription_in_cart %}
+                                                <span class="cart__subtotal js-calculate-subscription-subtotal"
+                                                      data-upscribe-total="{{ upscribe_total }}"
+                                                >{{ upscribe_total | money_with_currency }}</span>
+                                            {% else %}
+                                                <span class="cart__subtotal">{{ cart.total_price | money_with_currency }}</span>
+                                            {% endif %}
+                                        </p>
+                                        {% assign is_subscription = false %}
+                                        {% for item in cart.items %}
+                                            {% for property in item.properties %}
+                                                {% if property.first == 'shipping_interval_frequency' %}
+                                                    {% assign is_subscription = true %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {% if is_subscription %}
+                                            <p>{% include 'icon' with 'check' %} Clinically Proven Performance</p>
+                                            <p>{% include 'icon' with 'check' %} Easily Cancel Anytime</p>
+                                        {% else %}
+                                            <p>{% include 'icon' with 'check' %} 60 Day Satisfaction Guarantee</p>
+                                            <p>{% include 'icon' with 'check' %} Clinically Proven Performance</p>
+                                        {% endif %}
+                                        <input type="submit" name="checkout" class="btn btn--primary" value="Continue to Checkout">
+                                    </div>
+                                </div>
+                                <div class="grid__item medium--one-half">
+                                    {% if section.settings.cart_guarantee_enable %}
+                                        <div class="cart__guarantee text-center">
+                                            <h4>{{ section.settings.cart_guarantee_title }}</h4>
+                                            <p class="text--small">{{ section.settings.cart_guarantee_content }}</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            {% else %}
+                <div class="grid__item one-whole">
+                    <div class="cart-page__empty text-center">
+                        <div class="cart-page__empty-content">
+                            <h1>{{ settings.cart_empty_message }}</h1>
+                            {% if settings.cart_empty_link %}
+                                <a href="{{ settings.cart_empty_link }}" class="btn btn--primary">{{ settings.cart_empty_link_text }}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // function discountCalculatedValue(total, discountType, discountAmount) {
+    //   var discountAmount = discountAmount.replace(/\D/g,'');
+    //   var calcDiscountAmount = 0
+    //
+    //   if (discountType === 'fixed') { // fixed
+    //       calcDiscountAmount = discountAmount
+    //   } else if (discountType === 'percent') { //percentage
+    //       calcDiscountAmount = (total * discountAmount) / 100
+    //   } else {
+    //       console.log('discount_amount should include % for "percentage" or $ for "fixed"')
+    //   }
+    //   console.log('calcDiscountAmount', calcDiscountAmount)
+    //   console.log('total', total)
+    //   console.log('lak;dsf', total - calcDiscountAmount)
+    //   return (total - calcDiscountAmount)
+    // }
+    $(document).ready(function () {
+        window.currencySymbolMap = {
+            AUD: '$',
+            CAD: '$',
+            DKK: 'kr',
+            EUR: '€',
+            HKD: '$',
+            JPY: '¥',
+            NZD: '$',
+            GBP: '£',
+            SGD: '$',
+            USD: '$',
+        }
+
+        function translateToUSDAmount(val) {
+            var activeCurrencyRate = parseFloat(window.Shopify.currency.rate)
+            return value = ((val / activeCurrencyRate)).toFixed(2)
+        }
+
+        function translateToCurrentCurrencyAmount(val) {
+            var activeCurrencyRate = parseFloat(window.Shopify.currency.rate)
+            return value = ((val * activeCurrencyRate) / 100).toFixed(2)
+        }
+
+        function formatPriceWithCurrency(value) {
+            var activeCurrencyString = window.Shopify.currency.active
+            return window.currencySymbolMap[activeCurrencyString] + value + ' ' + activeCurrencyString
+        }
+
+        function updateCartItemDisplay(item) {
+            var replacePriceElement = $(item).find('.js-calculate-subscription-price')
+
+
+            var subscriptionAmount = replacePriceElement.data('subscription-amount')
+            var newPrice = subscriptionAmount
+            var formattedNewPrice = formatPriceWithCurrency(newPrice)
+            replacePriceElement.text(formattedNewPrice)
+
+            var replaceLinePriceElement = $(item).find('.js-calculate-subscription-line-price')
+            var subscriptionLinePriceElementAmount = replaceLinePriceElement.attr('data-subscription-amount')
+
+
+            var quantity = replaceLinePriceElement.attr('data-line-quantity')
+            var replaceLinePriceElementNewPrice = subscriptionAmount * quantity
+
+            var formattedLinePriceNewPrice = formatPriceWithCurrency(replaceLinePriceElementNewPrice)
+
+            replaceLinePriceElement.text(formattedLinePriceNewPrice)
+            replaceLinePriceElement.attr('data-final-price', replaceLinePriceElementNewPrice)
+
+        }
+
+        $('.js-cart-item').each(function (index, item) {
+            setTimeout(function () {
+                updateCartItemDisplay(item)
+            }, 100);
+        })
+
+        function checkIfRemoable() {
+            return $('tr[data-variant-id=32449235681367], tr[data-variant-id=21540829003834]').length === 2
+        }
+
+        $('.cart__row-remove a').click(function (e) {
+            e.preventDefault()
+            //const url = new URL(this.href)
+            const variantId = $(this).parents('tr').data('variantId')
+            removeTravel(variantId, this.href)
+        })
+
+        function removeTravel(variantId, url) {
+            const config = {
+                21540829003834: [32421986074711, 32449235681367],
+            }
+            const toDeleteItems = { updates: {} }
+            if (checkIfRemoable()) {
+                const Obj = config[variantId]
+                if (Obj) {
+                    Obj.forEach(function (vid) {
+                        if ($(`tr[data-variant-id=${vid}]`).length) {
+                            toDeleteItems.updates[vid] = 0
+                        }
+                    })
+                    toDeleteItems.updates[variantId] = 0
+                    $.post('/cart/update.js', toDeleteItems).then(function () {
+                        window.location.reload()
+                    });
+                }
+            }else {
+                toDeleteItems.updates[variantId] = 0
+                $.post('/cart/update.js', toDeleteItems).then(function () {
+                    window.location.reload()
+                });
+            }
+        }
+        // removeTravel();
+
+        //      if (itemCount == 1 ){
+        //           if (lineItemVariantID == travelItemID ){
+        //             $.ajax({
+        //               type: 'POST',
+        //               url: '/cart/clear.js',
+        //               dataType: 'json',
+        //               success: function (cart) {
+        //                 location.reload();
+        //               },
+        //               error: function (response) {
+        //                 alert(response);
+        //               }
+        //             });
+        //           }else if (lineItemVariantID == giftItemID ){
+        //               $.ajax({
+        //                 type: 'POST',
+        //                 url: '/cart/clear.js',
+        //                 dataType: 'json',
+        //                 success: function (cart) {
+        //                   location.reload();
+        //                 },
+        //                 error: function (response) {
+        //                   alert(response);
+        //                 }
+        //               });
+        //           }
+        //         }
+
+        //         if (itemCount == 2 ){
+
+        //           console.log(lineItemVariantID , '2 items in cart ');
+        //             if (lineItemVariantID == giftItemID && travelItemID){
+        //               console.log(lineItemVariantID , '2 remove item ');
+        //               $.ajax({
+        //                 type: 'POST',
+        //                 url: '/cart/clear.js',
+        //                 dataType: 'json',
+        //                 success: function (cart) {
+        //                   location.reload();
+        //                 },
+        //                 error: function (response) {
+        //                   alert(response);
+        //                 }
+        //               });
+        // }
+        //         }
+
+        setTimeout(function () {
+            // totals
+            var replaceSubtotalElement = $('.js-calculate-subscription-subtotal')
+            var getTotalCurrentCurrencyLineItemsPrice = 0
+            $('.cart__table .js-cart-item').each(function () {
+                getTotalCurrentCurrencyLineItemsPrice += parseInt($(this).find('.js-line-price').attr('data-final-price'))
+                console.log(getTotalCurrentCurrencyLineItemsPrice, 'ddddddd');
+            })
+            console.log(getTotalCurrentCurrencyLineItemsPrice, 'ewfewrwgwefewwegeww')
+
+            var formattedSubtotalNewPrice = formatPriceWithCurrency(getTotalCurrentCurrencyLineItemsPrice)
+            replaceSubtotalElement.text(formattedSubtotalNewPrice)
+
+
+
+
+        }, 1000);
+
+
+    })
+</script>{%include 'preorder-me-cart'%}
+
+{% schema %}
+{
+    "name": "Cart",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Guarantee"
+        },
+        {
+            "type":"checkbox",
+            "id":"cart_guarantee_enable",
+            "label":"Enable Guarantee Box",
+            "default": true
+        },
+        {
+            "type":"text",
+            "id":"cart_guarantee_title",
+            "label":"Guarantee Title",
+            "default":"Our Guarantee"
+        },
+        {
+            "type":"textarea",
+            "id":"cart_guarantee_content",
+            "label":"Guarantee Content",
+            "default":"Your happiness is our number one priority. If for any reason you don’t find our product satisfactory, we will be happy to issue you a full refund within 60 days of receiving your order."
+        }
+    ]
+}
+{% endschema %}

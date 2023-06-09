@@ -1,0 +1,95 @@
+{% if section.settings.zoom-call == true %}
+<div class="zoomCall">
+    <div class="zoomCall__main">
+        <div class="zoomCall__row" data-zoom-call>
+            <a href="#" class="zoomCall__close">
+                <svg width="11px" height="11px" viewBox="0 0 11 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="skincare-consultation-upscribe" transform="translate(-1117.000000, -155.000000)" fill="#000000" fill-rule="nonzero">
+                            <g id="booking-block" transform="translate(355.750000, 155.000000)">
+                                <g id="content-right" transform="translate(322.000000, 0.000000)">
+                                    <path d="M445.722827,5.50011466 L450.048441,1.17432092 C450.317186,0.905793325 450.317186,0.47009527 450.048441,0.201567679 C449.779695,-0.0671892264 449.344474,-0.0671892264 449.075728,0.201567679 L444.750115,4.52736142 L440.424272,0.201567679 C440.155526,-0.0671892264 439.720305,-0.0671892264 439.451559,0.201567679 C439.182814,0.47009527 439.182814,0.905793325 439.451559,1.17432092 L443.777402,5.50011466 L439.451559,9.8259084 C439.182814,10.094436 439.182814,10.530134 439.451559,10.7986616 C439.585932,10.9328108 439.762039,11 439.937916,11 C440.113793,11 440.289899,10.9328108 440.424272,10.7984323 L444.750115,6.47263858 L449.075728,10.7984323 C449.210101,10.9328108 449.386207,11 449.562084,11 C449.737961,11 449.914068,10.9328108 450.048441,10.7984323 C450.317186,10.5299047 450.317186,10.0942067 450.048441,9.82567908 L445.722827,5.50011466 Z" id="Path"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+            <div class="zoomCall__image">
+                <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.heading }}" />
+            </div>
+            <div class="zoomCall__content">
+                <h3 class="zoomCall__heading">
+                    {{ section.settings.heading }}
+                </h3>
+                <div class="zoomCall__copy">
+                    {{ section.settings.copy }}
+                </div>
+                <a href="{{ section.settings.book-call-btn }}" class="btn btn--primary zoomCall__btn" target="_blank">
+                    {{ section.settings.book-call-text }}
+                </a>
+                <div class="zoomCall__bottonCopy">
+                    {{ section.settings.bottom-copy }}
+                </div>
+            </div>  
+        </div>    
+        <div class="zoomCallBook" data-book-call>
+            <div class="zoomCallBook__content">
+                <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.heading }}" class="zoomCallBook__image" />
+                <a href="{{ section.settings.book-call-btn }}" class="btn btn--primary zoomCallBook__btn">
+                    <span class="zoomCallBookBtnText--mobile">BOOK A SKIN CONSULT</span>
+                    <span class="zoomCallBookBtnText--desktop">BOOK A PERSONALIZED SKINCARE CONSULTATION</span>
+                </a>  
+            </div>    
+        </div>
+         
+    </div>
+</div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Book Zoom Call",
+    "settings": [
+        {
+            "type":"checkbox",
+            "id":"zoom-call",
+            "label":"Enable Zoom section",
+            "default": false
+        },
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+        },
+        {
+            "type":"text",
+            "id":"heading",
+            "label":"Heading",
+            "default":"Book Your Personalized Skincare Consultation"
+        },
+        {
+            "type":"html",
+            "id":"copy",
+            "label":"Copy",
+            "default":"Get all your skincare questions answered with a complimentary 15 minute consultation with our resident esthetician, Kristin. "
+        },
+        {
+            "type":"url",
+            "id":"book-call-btn",
+            "label":"Book A Call Link"
+        },
+        {
+            "type":"text",
+            "id":"book-call-text",
+            "label":"Book A Call Text",
+            "default":"Book Now"
+        },
+        {
+            "type":"richtext",
+            "id":"bottom-copy",
+            "label":"Bottom Copy"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,88 @@
+<div class="c-explore c-exploreAbout{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="wrapper">
+        <h4 class="c-explore__title">{{ section.settings.title }}</h4>
+        <div class="c-explore__row">
+            {% for block in section.blocks %}
+            <div class="c-explore__item">
+                <div class="c-explore__box">
+                    <a href="{{ block.settings.url }}">
+                        <img src="{{ block.settings.image | img_url: 'master' }}" class="c-explore__image">
+                        <div class="c-explore__content">
+                            <span class="c-explore__svg">{{ block.settings.svg }}</span>
+                            <span class="c-explore__svgHover">{{ block.settings.svghover }}</span>
+                            <h4 class="c-explore__heading">
+                                {{ block.settings.heading }}
+                                <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="CL---ABOUT-US-BOTTOM-NAV---OPT-1---LIGHT" transform="translate(-270.000000, -4404.000000)" fill="#AF5D00">
+                                            <g id="Certifications-" transform="translate(20.000000, 4229.000000)">
+                                                <g id="title/arrow" transform="translate(73.000000, 159.000000)">
+                                                    <g id="arrow" transform="translate(177.000000, 16.000000)">
+                                                        <path d="M7.5,0 L6.42375,1.04475 L12.129,6.75 L0,6.75 L0,8.25 L12.129,8.25 L6.4395,13.9395 L7.5,15 C10.24575,12.25425 12.372,10.128 15,7.5 L7.5,0" id="arrow_right-[#349]"></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </h4>
+                        </div>
+                    </a>    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Keep Exploring New",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Explore Title",
+        "default":"Keep Exploring"
+      },
+      {
+        "type": "text",
+        "id": "section_classname",
+        "label": "Section Class Name"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Blocks",
+        "settings": [
+          {
+            "type": "text",
+            "label": "Heading",
+            "id": "heading" 
+          },
+          {
+            "type": "image_picker",
+            "label": "Image",
+            "id": "image" 
+          },
+          {
+            "type": "html",
+            "label": "SVG html",
+            "id": "svg" 
+          },
+          {
+            "type": "html",
+            "label": "SVG html Hover",
+            "id": "svghover" 
+          },
+          {
+            "type": "url",
+            "label": "Url",
+            "id": "url" 
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

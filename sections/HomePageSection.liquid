@@ -1,0 +1,181 @@
+<div class="c-quizUse c-quizUse-alt{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    {% if section.settings.title != blank %}
+        <h4 class="c-quizUse__title c-quizUse__title-alt c-quizUse__title-alt-mob">{{ section.settings.title}}</h4>
+    {% endif %}
+    <div class="wrapper wrapper-alt">
+
+        <div class="c-quizUse__row c-quizUse__row-alt">
+            <div class="c-quizUse__images c-quizUse__images-alt">
+                <img class="c-quizUse__image c-quizUse__image--desktop lazyload" src="{{ section.settings.image_desktop | img_url: '2x' }}" data-src="{{ section.settings.image_desktop | img_url: 'master' }}" />
+                <img class="c-quizUse__image c-quizUse__image--mobile lazyload" src="{{ section.settings.image_mobile | img_url: '2x' }}" data-src="{{ section.settings.image_mobile | img_url: 'master' }}" />
+            </div>
+
+            <div class="c-quizUse__content c-quizUse__content-alt">
+
+                <div class="c-quizUse__box c-quizUse__box-alt">
+                    {% if section.settings.icon != blank %}
+                        <div class="c-quizUse__icon">{{ section.settings.icon}}</div>
+                    {% endif %}
+                    {% if section.settings.title != blank %}
+                        <h4 class="c-quizUse__title c-quizUse__title-alt">{{ section.settings.title}}</h4>
+                    {% endif %}
+                    {% if section.settings.copy != blank %}
+                        <div class="c-quizUse__copy c-quizUse__copy-alt">{{ section.settings.copy}}</div>
+                    {% endif %}
+                    {% if section.settings.copy != btntext %}
+                        <a href="https://calderalab.com/pages/tony-gonzalez" class="btn btn--primary c-quizUse__btn c-quizUse__btn-alt"><span>{{ section.settings.icon_mobile}}</span>{{ section.settings.btntext}}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .c-quizUse__title-alt-mob{
+        display: none;
+    }
+    @media (min-width: 64rem){
+        .c-quizUse__title-alt{
+            font-size: 50px !important;
+            line-height: 50px !important;
+            color:#3D3D38 !important;
+        }
+
+        .c-quizUse{
+            padding: 100px 0 !important;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 1180px){
+        .c-quizUse__title-alt{
+            display: none;
+        }
+        .c-quizUse__title-alt-mob{
+            display: block !important;
+            padding: 0 15px 55px 15px;
+            text-align: center;
+        }
+    }
+    @media (min-width: 48rem){
+        .c-quizUse__row-alt {
+
+            flex-direction: row-reverse !important;
+        }
+            .c-quizUse__images-alt {
+                background-color: #F7F6F3 !important;
+                padding: 0 !important;
+            }
+
+            .c-quizUse__copy-alt{
+                padding: 25px 0 !important;
+                max-width: 529px;
+                color:#3D3D38 !important;
+            }
+            .c-quizUse__content-alt{
+                background-color: #F7F6F3 !important;
+            }
+        .c-quizUse__btn-alt{
+            font-size: 16px !important;
+            line-height: 18px !important;
+            letter-spacing: 1.5px;
+            padding: 25px 70px !important;
+        }
+    }
+    .c-quizUse-alt{
+         background-color: #F7F6F3 !important;
+    }
+    @media (min-width: 30rem){
+            .c-quizUse__box-alt{
+                padding: 0 15px;
+            }
+        }
+    @media (max-width: 767px){
+        .c-quizUse__title-alt-mob{
+            display: none;
+        }
+        .c-quizUse-alt{
+            padding: 0 !important;
+            margin-bottom: 0 !important;
+            margin-top: 55px !important;
+        }
+        .c-quizUse__title-alt{
+            font-size: 28px;
+            line-height: 32px;
+            padding-top: 54px;
+            color:#3D3D38 !important;
+        }
+        .c-quizUse__row-alt{
+            max-width: none !important;
+        }
+        .c-quizUse__box-alt{
+            padding: 0 22px;
+        }
+        .wrapper-alt{
+            padding: 0 !important;
+        }
+        .c-quizUse__copy-alt{
+            color:#3D3D38 !important;
+            padding: 31px 0 25px 0 !important;
+            max-width: 370px;
+            line-height: 26px !important;
+            font-size: 16px !important;
+        }
+        .c-quizUse__btn-alt{
+            max-width: 295px !important;
+            font-size: 16px !important;
+            line-height: 18px !important;
+            letter-spacing: 1.5px;
+            padding: 25px 70px !important;
+            margin-bottom: 55px;
+        }
+    }
+
+</style>
+{% schema %}
+{
+"name": "Featured section",
+"settings": [
+{
+"type":"html",
+"id":"icon",
+"label":"Icon"
+},
+{
+"type":"image_picker",
+"id":"image_desktop",
+"label":"Image Desktop"
+},
+{
+"type":"image_picker",
+"id":"image_mobile",
+"label":"Image Mobile"
+},
+{
+"type":"text",
+"id":"title",
+"label":"Title",
+"default": "Your Skin is One-Of-A-Kind."
+},
+{
+"type":"html",
+"id":"copy",
+"label":"Copy"
+},
+{
+"type":"html",
+"id":"icon_mobile",
+"label":"Icon Mobile"
+},
+{
+"type":"text",
+"id":"btntext",
+"label":"Button Copy",
+"default": "start now"
+},
+{
+"type": "text",
+"id": "section_classname",
+"label": "Section Class Name"
+}
+]
+}
+{% endschema %}

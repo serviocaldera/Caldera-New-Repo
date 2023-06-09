@@ -1,0 +1,69 @@
+<div{% if section.settings.section_classname %} class="{{ section.settings.section_classname }}"{% endif %}>
+  <picture>
+    <source media="(max-width:649px)" srcset="{{ section.settings.background_image_mobile | img_url: '650x' }}">
+    <source media="(min-width:650px)" srcset="{{ section.settings.background_image | img_url: '1920x' }}">
+    <img src="{{ section.settings.background_image | img_url: '1920x' }}" alt="{{ section.settings.title }}">
+  </picture>
+
+  <div class="quiz-banner__container">
+    <div class="quiz-banner__text">
+      <h2 class="quiz-banner__title">{{ section.settings.title }}</h2>
+
+      <p class="quiz-banner__copy">{{ section.settings.copy }}</p>
+
+      {% if section.settings.button_url != blank %}
+        <a class="btn btn--primary" href="{{ section.settings.button_url }}" data-quiz-click>{{ section.settings.button_text }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Quiz Banner",
+  "class": "quiz-banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button TEXT"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background Image Mobile"
+    },
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz Banner",
+      "category": "Caldera"
+    }
+  ]
+}
+{% endschema %}

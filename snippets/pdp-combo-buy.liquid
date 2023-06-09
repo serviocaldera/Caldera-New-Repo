@@ -1,0 +1,748 @@
+<div class="wrapper c-pdpProduct">
+    {% assign current_variant = product.selected_or_first_available_variant %}
+    <div class="c-productInfo__header c-productInfo__header--mobile">
+        <h1 class="c-productInfo__title c-productInfo__title--comboPDP" itemprop="name">The Regimen</h1>
+        <div class="c-productInfo__review">
+            <a href="#pdpComboReviews1" class="animate-scroll" {%if product.title == "The Regimen"%}
+                onclick="scrollFunction();" {%endif%}>
+                <span class="yotpo-overlay"></span>
+                <div class="yotpo bottomLine yotpo-small" data-product-id="2144685883450" data-yotpo-element-id="3">
+                    <div class="yotpo-display-wrapper" style="visibility: hidden;">
+                        <div class="standalone-bottomline" data-source="default" tabindex="-1">
+                            <div class="yotpo-bottomline pull-left  star-clickable" tabindex="0">
+                                <span class="yotpo-stars">
+                                    <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                    <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                    <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                    <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                    <span class="yotpo-icon yotpo-icon-half-star rating-star pull-left"></span>
+                                </span>
+                                <span class="text-m review-stars">1,721+ Reviews</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="c-product__row">
+
+        <div class="c-product__col c-productImage__col">
+            <div class="c-productImage__gallery">
+                <div class="c-productImage__featured" data-pdp-image-slider>
+                    {% for image in product.images %}
+                    <div class="c-productImages">
+                        <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}"
+                            alt="{{ product.title | escape }}" class="lazyload" />
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if product.images.size > 1 %}
+                <div class="c-productImage__thumbs" data-pdp-sliderthumb-slider>
+                    {% for image in product.images %}
+                    <div class="c-productImage__item">
+                        <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}"
+                            alt="{{ image.alt | escape }}" class="c-productImage__img lazyload" />
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="c-product__col c-productInfo__col">
+
+            <div class="c-productInfo__header c-productInfo__header--desktop">
+                <h1 class="c-productInfo__title c-productInfo__title--comboPDP" itemprop="name">The Full Regimen</h1>
+                <div class="c-productInfo__review">
+                    <a href="#pdpComboReviews1" class="animate-scroll" onclick="scrollFunction();">
+                        <span class="yotpo-overlay"></span>
+                        <div class="yotpo bottomLine yotpo-small" data-product-id="2144685883450"
+                            data-yotpo-element-id="3">
+                            <div class="yotpo-display-wrapper" style="visibility: hidden;">
+                                <div class="standalone-bottomline" data-source="default" tabindex="-1">
+                                    <div class="yotpo-bottomline pull-left  star-clickable" tabindex="0">
+                                        <span class="yotpo-stars">
+                                            <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                            <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                            <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                            <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                            <span class="yotpo-icon yotpo-icon-half-star rating-star pull-left"></span>
+                                        </span>
+                                        <span class="text-m review-stars">1,720+ Reviews</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="comboText-wrapper">
+                <p class="comboText-wrapper-phrase">Introducing our clinically proven three step routine to transform your skin from aging to ageless.</p>
+                <div style="display: inline-block;  text-align: left;">
+                    <p class="comboText-wrapper-phrase-text"><span class="comboText-wrapper-phrase-text-bold">The Good :</span> Multifunctional Serum</p>
+                    <p class="comboText-wrapper-phrase-text"><span class="comboText-wrapper-phrase-text-bold">The Base Layer :</span> Fortifying Moisturizer</p>
+                    <p class="comboText-wrapper-phrase-text"><span class="comboText-wrapper-phrase-text-bold">The Clean Slate :</span> Balancing Cleanser</p>
+                </div>  
+            </div>
+            {% if product.metafields.custom_fields["combo_out_of_stock"] != blank %}
+            <div class="comboText-wrapper2">
+                <h3 class="comboText-wrapper2-phrase">
+                    {{ product.metafields.custom_fields["combo_out_of_stock_heading"] }}
+                </h3>
+                <p class="comboText-wrapper2-phrase-message">
+                    {{ product.metafields.custom_fields["combo_out_of_stock_text"] }}
+                </p>
+            </div>
+            {%endif%}
+            {% if product.metafields.custom_fields["enable_combobuy_section"] == 1 %}
+            <div class="comboBuy comboBuy_wrapper">
+
+                {% if product.metafields.custom_fields["combobuy_title"] != blank %}
+                <div class="comboBuy__title">{{product.metafields.custom_fields["combobuy_title"]}}</div>
+                {% endif %}
+
+                {% if product.metafields.custom_fields["combobuy_products"] != blank %}
+                <div class="comboBuy__products">
+                    {% for item in product.metafields.custom_fields["combobuy_products"] %}
+                    {% if item["combobuy_prodhandle"] != blank %}
+                    {% assign metaproduct = all_products[item["combobuy_prodhandle"]] %}
+                    {% endif %}
+
+
+                    {% assign pdt_discount = metaproduct.metafields.sf_upscribe.discount_amount %}
+                    {% unless pdt_discount contains '.' %}
+                        {% assign pdt_discount = pdt_discount | replace: '%', '.0%' %}
+                    {% endunless %}
+                    <div class="comboBuy__prod added {% if metaproduct.available %}comboBuy__prod--active{% else %} comboBuy__prod--oos{% endif %}"
+                        data-varient-id="{{ metaproduct.selected_or_first_available_variant.id }}"
+                        data-product-handle="{{ metaproduct.title }}" data-regular-price="{{ metaproduct.price }}"
+                        data-discount-percentage="{{ pdt_discount }}"
+                        data-subscription-enable="{{ metaproduct.metafields.sf_upscribe.enable_subscription }}"
+                        data-interval-frequency="{{ metaproduct.metafields.sf_upscribe.interval_frequency }}"
+                        data-subscription-title="{{ metaproduct.metafields.sf_upscribe.subscription_product_title | format_money }}"
+                        data-interval-unit="{{ metaproduct.metafields.sf_upscribe.interval_unit }}">
+
+                        {% if item["combobuy_prodthumb"] != blank %}
+                        <div class="comboBuy__prodThumb">
+                            <img src="{{ item["combobuy_prodthumb"] }}" alt="{{ metaproduct.title }}">
+                        </div>
+                        {% else %}
+                        <div class="comboBuy__prodThumb">
+                            <img src="{{ metaproduct.selected_or_first_available_variant.featured_image | img_url: 'master' }}"
+                                alt="{{ metaproduct.title }}">
+                        </div>
+                        {% endif %}
+
+                        <div class="comboBuy__prodDetails">
+                            {% if metaproduct.title != blank %}<span
+                                class="comboBuy__prodTitle">{{ metaproduct.title }}</span>{% endif %}
+                            {% if item["combobuy_prodtype"] != blank %}<span
+                                class="comboBuy__prodType">{{ item["combobuy_prodtype"] }}</span>{% endif %}
+                        </div>
+
+                        <div class="comboBuy__prodValue comboBuy__prodValue--discounted">
+                            {% if metaproduct.price != blank %}
+                            <span
+                                class="comboBuy__prodPrice comboBuy__prodPrice--regular">{{ metaproduct.price | money | remove: '.00'}}</span>
+                            {% endif %}
+                            <span class="comboBuy__prodPrice comboBuy__prodPrice--discounted">$00</span>
+                            <div class="comboBuy__prodCheck">{% render 'icon-check-orange' %}</div>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="comboBuy__purchaseType">
+                    <div class="comboBuy__purchaseType-selector comboBuy__purchaseSelector--otp">
+                        <div class="comboBuy__purchaseType-selectorInner">
+                            <span class="comboBuy__purchaseType-check">{% render 'icon-check-orange' %}</span>
+                            <p class="comboBuy__purchaseType-title">One Time Purchase <span class="oneTimePrice"></span></p>
+                        </div>
+                    </div>
+                    <div
+                        class="comboBuy__purchaseType-selector comboBuy__purchaseSelector--subs comboBuy__purchaseSelector--active">
+                        <div class="comboBuy__purchaseType-selectorInner">
+                            <span class="comboBuy__purchaseType-check">{% render 'icon-check-orange' %}</span>
+                            <div class="comboBuy__purchaseType-details">
+                                <div class="priceDisplay">
+                                    <p class="comboBuy__purchaseType-title">Subscription • Save 20%<span><span class="membershipDiscount"></span><span class="discountedPrice"></span></span></p>
+                                </div>
+                                <div class="comboBuy__purchaseType-badge">Save 20%</div>
+                                <p class="comboBuy__purchaseType-line">Receive membership discounts</p>
+                                <p class="comboBuy__purchaseType-line">Edit, Pause or Cancel within your account at any
+                                    time</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="comboBuy__frequency">
+                    <div class="comboBuy__frequency-heading">
+                        <span class="comboBuy__frequency-title">choose frequency</span>
+                        <div class="c-productFrequency c-productFrequencyNeedHelp">
+                            <div class="c-productFrequency__text c-productFrequency__textQuiz" data-quiz-click>
+                                <span class="c-quizText__desktop">Unsure of frequency? Take quiz.</span>
+                                <span class="c-quizText__mobile">Take frequency quiz.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comboBuy__frequency-selector">
+                        <div class="comboBuy__frequency-item">{% render 'icon-check-orange' %}<span>45 days</span></div>
+                        <div class="comboBuy__frequency-item comboBuy__frequency-item--active">
+                            {% render 'icon-check-orange' %}<span>60 days</span></div>
+                        <div class="comboBuy__frequency-item">{% render 'icon-check-orange' %}<span>75 days</span></div>
+                    </div>
+                </div>
+                <div class="buyProductClass">
+                    <div class="quantityAdjust">
+                        <spam class="subQty">-</spam>
+                        <spam class="actualQTY">1</spam>
+                        <spam class="addQty">+</spam>
+                    </div>
+                    <div class="comboBuy__addtocart comboBuy__addtocart--active">
+                        <div class="comboBuy__addtocart-value comboBuy__addtocart-value--discounted" style="display: none !important;">
+                            <span class="comboBuy__addtocart-price comboBuy__addtocart-price--discounted"></span>
+                            <span class="comboBuy__addtocart-price comboBuy__addtocart-price--regular"></span>
+                        </div>
+                        <span class="comboBuy__addtocart-text">Add To Cart</span>
+                    </div>
+                </div>
+                <div class="c-productInfo__footer">
+                    <div class="c-productInfo__freeText">
+                        {% include 'icon-risk-free' %}
+                        {% if shop.money_with_currency_format contains 'USD' %}
+                        {% if product.metafields.custom_fields["product_risk_free_usa"] != blank %}
+                        <span
+                            class="riskFree-message">{{ product.metafields.custom_fields["product_risk_free_usa"] }}</span>
+                        {% endif %}
+                        {% else %}
+                        {% if product.metafields.custom_fields["product_risk_free_world"] != blank %}
+                        <span
+                            class="riskFree-message">{{ product.metafields.custom_fields["product_risk_free_world"] }}</span>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="c-productInfo__footerLinks">
+                        <div class="c-productFrequency c-productFrequencyReturn">
+                            <div class="c-productFrequency__text">
+                                <span>Return Policy</span>
+                            </div>
+                            <div class="c-productFrequency__dropdown">
+                                <div class="c-productFrequency__heading">
+                                    {% include 'icon-return' %}
+                                    <span>Return Policy</span>
+                                </div>
+                                <a href="#" class="c-productFrequency__close">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z" />
+                                    </svg>
+                                </a>
+                                {% if product.metafields.custom_fields["product_return_policy"] != blank %}
+                                <div class="c-productFrequency__content">
+                                    {{ product.metafields.custom_fields["product_return_policy"] }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="c-productFrequency c-productFrequencyShipping">
+                            <div class="c-productFrequency__text">
+                                <span>Shipping Details</span>
+                            </div>
+                            <div class="c-productFrequency__dropdown">
+                                <div class="c-productFrequency__heading">
+                                    {% include 'icon-shipping' %}
+                                    <span>Shipping Details</span>
+                                </div>
+                                <a href="#" class="c-productFrequency__close">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z" />
+                                    </svg>
+                                </a>
+                                {% if product.metafields.custom_fields["product_shipping_details"] != blank %}
+                                <div class="c-productFrequency__content">
+                                    {{ product.metafields.custom_fields["product_shipping_details"] }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .comboBuy_wrapper .comboBuy__purchaseSelector--otp{
+       margin-bottom: 10px;
+    }
+   
+    .comboBuy_wrapper .comboBuy__purchaseType-selectorInner{
+        background-color: rgba(182,171,145,0.4);
+    }
+   
+    .comboBuy_wrapper .comboBuy__purchaseType-line{
+        display: none;
+    }
+    
+    .comboBuy_wrapper .comboBuy_wrapper .comboBuy__purchaseSelector--active .comboBuy__purchaseType-selectorInner{
+        border: 0;
+    border-radius: 2px;
+    background-color: #80894f;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseSelector--active .comboBuy__purchaseType-selectorInner{
+        background-color: transparent;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseType-badge{
+        display: none;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseSelector--active .comboBuy__purchaseType-check{
+        background-color: white;
+        padding: 4px;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseType-details{
+        display: flex;
+        flex: 1;
+    align-items: flex-end;
+    }
+    .comboBuy_wrapper .priceDisplay{
+        display: flex;
+        flex: 1;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseType-title{
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        color: #3D3D38;
+        font-family: "Avenir LT Pro";
+        font-size: 14px;
+        letter-spacing: 0.7px;
+        line-height: 26px;
+        font-weight: 800;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseSelector .comboBuy__purchaseType-check{
+        background-color: #b6ab9166;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseSelector--active g#Group-20{
+        fill: #80894f;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseType-check{
+        background-color: #b6ab9166;
+        border: 0;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseType-selector{
+        border: 0;
+        padding: 0;
+    }
+    .comboBuy_wrapper  .comboBuy__purchaseType-selector.comboBuy__purchaseSelector--subs.comboBuy__purchaseSelector--active .comboBuy__purchaseType-selectorInner{
+        background-color: #80894f;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseType-selector.comboBuy__purchaseSelector--otp.comboBuy__purchaseSelector--active .comboBuy__purchaseType-selectorInner{
+        border: 0;
+    border-radius: 2px;
+    background-color: #80894f;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseType-selector p.comboBuy__purchaseType-title{
+     color: #3D3D38;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseSelector--active p.comboBuy__purchaseType-title{
+     color: white;
+    }
+    .comboBuy_wrapper .membershipDiscount:before, .oneTimePrice:before, #getDiscountPrice:before, #getOriginalPrice:before{
+        display: none;
+    }
+    .discountedPrice{
+        text-decoration: line-through;
+        margin-left: 5px;
+    }
+    .comboBuy_wrapper .comboBuy__products, .comboBuy_wrapper .comboBuy__title{
+        display: none;
+    }
+    p.comboText-wrapper-phrase-text{
+        color: #3D3D38;
+        font-family: "Avenir LT Pro";
+        font-size: 16px;
+        letter-spacing: 0.4px;
+        line-height: 26px;
+        font-weight: 600;
+    }
+    .comboText-wrapper{
+        padding-bottom: 23px;
+    border-bottom: 1px solid #3D3D38;
+        text-align: center;
+    }
+    h3.comboText-wrapper2-phrase{
+        color: #AF5D00;
+        font-family: "Avenir LT Pro";
+        font-size: 16px;
+        letter-spacing: 0.4px;
+        line-height: 26px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        margin-top: 23px;
+    }
+    p.comboText-wrapper2-phrase-message{
+        color: #222222;
+        font-family: "Avenir LT Pro";
+        font-size: 14px;
+        letter-spacing: 0.35px;
+        line-height: 24px;
+        font-weight: 600;
+    }
+    .comboText-wrapper-phrase{
+        color: #3D3D38;
+        font-family: "Avenir LT Pro";
+        font-size: 16px;
+        letter-spacing: 0.4px;
+        line-height: 26px;
+        text-align: center;
+        font-weight: 600;
+    }
+    .comboBuy_wrapper .comboBuy__purchaseType-selectorInner{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .comboText-wrapper-phrase-text-bold{
+         font-weight: 800;
+    }
+    .sticky .comboText-wrapper2{
+        display: none;
+    }
+    .sticky .comboText-wrapper{
+        display: none;
+    }
+    .sticky .comboBuy_wrapper .comboBuy__purchaseType-selectorInner{
+        background-color: #e9e6df;
+    }
+    .sticky .comboBuy_wrapper .comboBuy__purchaseSelector--otp{
+       margin-bottom: 0px;
+    }
+    .sticky .comboBuy__purchaseType-selectorInner{
+        height: 70px !important;
+    }
+    @media only screen and (min-width: 992px){
+.c-productInfo__col.sticky .comboBuy__frequency-selector:after, .c-productInfo__col.sticky .comboBuy__purchaseType:after {
+    bottom: 47px;
+}
+
+
+}
+    @media only screen and (max-width: 991px){
+    .comboBuy_wrapper .comboBuy__purchaseSelector--subs .comboBuy__purchaseType-check {
+        width: 20px;
+    }
+    .c-productInfo__col.sticky .comboBuy__frequency-item span, .c-productInfo__col.sticky .comboBuy__purchaseType-title{
+        font-size: 12px;
+    }
+    .c-productInfo__col.sticky .comboBuy__purchaseType-check{
+        display: none;
+    }
+    .sticky .c-productInfo__col.sticky .comboBuy__purchaseType-selectorInner{
+        height: 55px;
+    }
+   
+
+        .c-productInfo__col.sticky .submit-message .membershipDiscount{
+            margin-left: 5px;
+        }
+}
+    
+</style>
+<script>
+    document.querySelector(".subQty").addEventListener("click", () => {
+        if (parseInt(document.querySelector(".actualQTY").textContent) > 1) {
+            document.querySelector(".actualQTY").textContent = parseInt(document.querySelector(".actualQTY")
+                .textContent) - 1
+        }
+        //console.log(document.querySelector(".actualQTY"));
+    });
+    document.querySelector(".addQty").addEventListener("click", () => {
+        document.querySelector(".actualQTY").textContent = parseInt(document.querySelector(".actualQTY")
+            .textContent) + 1
+    });
+
+
+    function scrollFunction() {
+        if(window.pageYOffset > 1200){
+            const id = 'pdpComboReviews';
+            const yOffset = -105;
+            const element = document.getElementById(id);
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
+        }else {
+            var element = document.getElementById('pdpComboReviews');
+            var headerOffset = 105;
+            var elementPosition = element.getBoundingClientRect().top;
+            var offsetPosition = elementPosition - headerOffset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    }
+
+    const productElts = Array.from(document.querySelectorAll('.comboBuy__prod'));
+    const productValues = Array.from(document.querySelectorAll('.comboBuy__prodValue'))
+    const dPriceElts = Array.from(document.querySelectorAll('.comboBuy__prodPrice--discounted'));
+    const rPriceElts = Array.from(document.querySelectorAll('.comboBuy__prodPrice--regular'));
+    const purchaseTypeSelector = Array.from(document.querySelectorAll('.comboBuy__purchaseType-selector'));
+    const frequencyItems = Array.from(document.querySelectorAll('.comboBuy__frequency-item'));
+    const purchaseSelectorOTP = document.querySelector('.comboBuy__purchaseSelector--otp');
+    const frequencySelector = document.querySelector('.comboBuy__frequency');
+    const addToCartButton = document.querySelector('.comboBuy__addtocart');
+    const addToCartText = document.querySelector('.comboBuy__addtocart-text');
+    const addToCartValue = document.querySelector('.comboBuy__addtocart-value');
+    const addToCartPriceDiscounted = document.querySelector('.comboBuy__addtocart-price--discounted');
+    const addToCartPriceRegular = document.querySelector('.comboBuy__addtocart-price--regular');
+
+    // quiz recommendations dom
+    const quizSubPrice = document.querySelector('.c-productInfo__priceSub');
+    const quizRegPrice = document.querySelector('.c-productInfo__priceOneTime');
+
+    let totalDiscountedAmount = 0;
+    let totalRegularAmount = 0;
+    let selectedFrequency = '60 days';
+    let purchaseType = 'subscription'
+
+    calcProdSubPrice = elt => {
+        const regPrice = parseFloat(elt.dataset.regularPrice) / 100;
+        const discountPercentage = parseFloat(elt.dataset.discountPercentage);
+        const discountedPrice = Math.round(regPrice - ((regPrice * discountPercentage) / 100))
+        elt.dataset.discountedPriceUpscribe = `${discountedPrice}.00`;
+        elt.dataset.discountedPrice = discountedPrice;
+    }
+
+    calculateTotalAmount = () => {
+        totalDiscountedAmount = 0
+        totalRegularAmount = 0;
+        productElts.map(elt => {
+            if (elt.classList.contains('comboBuy__prod--active')) {
+                totalDiscountedAmount += parseFloat(elt.dataset.discountedPrice)
+                //totalRegularAmount += parseFloat(elt.dataset.regularPrice / 100)
+                totalRegularAmount += Math.round(parseFloat(elt.dataset.regularPrice / 100))
+            }
+        })
+    }
+
+
+    calculateTotalPrice = () => {
+        const membershipDiscount = document.querySelector('.comboBuy__addtocart-price--discounted')?.textContent;
+        const oneTimePrice = document.querySelector('.comboBuy__addtocart-price--regular')?.textContent;
+        let discountPrice = document.querySelector(".discountedPrice");
+       
+        if(membershipDiscount && oneTimePrice){
+            document.querySelector(".membershipDiscount").textContent = membershipDiscount;
+            document.querySelector(".oneTimePrice").textContent = oneTimePrice;
+            discountPrice.innerHTML = oneTimePrice;
+        }else{
+            const interval = setInterval(() => {
+                const membershipDiscount = document.querySelector('.comboBuy__addtocart-price--discounted')?.textContent;
+                const oneTimePrice = document.querySelector('.comboBuy__addtocart-price--regular')?.textContent;
+                if(membershipDiscount && oneTimePrice){
+                    clearInterval(interval)
+                    document.querySelector(".membershipDiscount").textContent = membershipDiscount;
+                    document.querySelector(".oneTimePrice").textContent = oneTimePrice;
+                }
+                discountPrice.innerHTML = oneTimePrice;
+            }, 100);
+        }
+    }
+    recalculatePrices = () => {
+        const productElts1 = Array.from(document.querySelectorAll('.comboBuy__prod'));
+        productElts1.forEach(elt => {
+            elt.addEventListener("click", ()=>{
+                setTimeout(() => {
+                    calculateTotalPrice();
+                }, 500)
+            })
+        })
+    }
+    calculateTotalPrice();
+    recalculatePrices();
+
+
+    mainuplateTotalPrice = () => {
+        addToCartPriceDiscounted.textContent = `{{cart.currency.symbol}}${totalDiscountedAmount}`
+        addToCartPriceRegular.textContent = `{{cart.currency.symbol}}${totalRegularAmount}`
+    }
+
+    removeDiscountedPrice = () => {
+        addToCartValue.classList.remove('comboBuy__addtocart-value--discounted')
+        productValues.map(elt => elt.classList.remove('comboBuy__prodValue--discounted'))
+    }
+
+    applyDiscountedPrice = () => {
+        addToCartValue.classList.add('comboBuy__addtocart-value--discounted')
+        productValues.map(elt => elt.classList.add('comboBuy__prodValue--discounted'))
+    }
+
+    // itteration over product elements
+    productElts.map(elt => {
+        calcProdSubPrice(elt)
+        if (elt.classList.contains('comboBuy__prod--oos')) {
+            elt.querySelector('.comboBuy__prodType').textContent = "Sold Out"
+            elt.querySelector('.comboBuy__prodTitle').style.color = "#a1a1a1"
+        }
+        elt.addEventListener('click', e => {
+            let selectedProduct = e.target.closest('.comboBuy__prod');
+            if (!selectedProduct.classList.contains('comboBuy__prod--oos')) {
+                selectedProduct.classList.toggle('comboBuy__prod--active')
+                calculateTotalAmount();
+                mainuplateTotalPrice();
+            }
+            if (totalRegularAmount === 0 && purchaseType === "subscription") addToCartPriceRegular.style
+                .display = 'none'
+            else addToCartPriceRegular.style.display = 'block'
+            if (totalRegularAmount === 0) addToCartButton.classList.remove(
+                'comboBuy__addtocart--active')
+            else addToCartButton.classList.add('comboBuy__addtocart--active')
+
+        })
+    })
+
+    // itteration over Product discount price span
+    dPriceElts.map(elt => {
+        const discountedPrice = elt.closest('.comboBuy__prod').dataset.discountedPrice
+        elt.textContent = `{{cart.currency.symbol}}${parseFloat(discountedPrice)}`
+    })
+
+    // itterate over purchase type selector elts
+    purchaseTypeSelector.map(elt => {
+        elt.addEventListener('click', e => {
+            purchaseTypeSelector.map(elt => {
+                elt.classList.remove('comboBuy__purchaseSelector--active')
+            })
+            e.target.closest('.comboBuy__purchaseType-selector').classList.add(
+                'comboBuy__purchaseSelector--active')
+
+            if (purchaseSelectorOTP.classList.contains('comboBuy__purchaseSelector--active')) {
+                console.log("OTP CONTAINS ACTIVE SELECTOR")
+                removeDiscountedPrice()
+                document.querySelector(".comboBuy__frequency").style.display = "none";
+                purchaseType = "otp";
+                addToCartPriceRegular.style.display = 'block';
+            } else {
+                console.log("DISCOUNT IS AVAILABLE")
+                applyDiscountedPrice()
+                document.querySelector(".comboBuy__frequency").style.display = "block"
+                purchaseType = "subscription"
+            }
+            if (totalRegularAmount === 0 && purchaseType === "subscription") addToCartPriceRegular.style
+                .display = 'none'
+        })
+    })
+
+    // itterate over frequency items
+    frequencyItems.map(elt => {
+        elt.addEventListener('click', e => {
+            frequencyItems.map(elt => {
+                elt.classList.remove('comboBuy__frequency-item--active')
+            })
+            e.target.closest('.comboBuy__frequency-item').classList.add(
+                'comboBuy__frequency-item--active')
+
+            if (elt.classList.contains('comboBuy__frequency-item--active')) {
+                selectedFrequency = elt.querySelector('span').textContent;
+            }
+        })
+    })
+
+    addSelectedToCartSub = () => {
+        let qty = parseInt(document.querySelector(".actualQTY").textContent);
+        if (qty > 2) {
+            qty = 2;
+        }
+        console.log("QUANTITY SUB");
+        console.log(qty);
+
+        addToCartText.textContent = "Adding to cart.."
+        let addItemsArray = [];
+        productElts.map(elt => {
+            if (elt.classList.contains('comboBuy__prod--active')) {
+                addItemsArray.push({
+                    id: elt.dataset.varientId,
+                    quantity: qty,
+                    properties: {
+                        "SubscriptionEnable": `${elt.dataset.subscriptionEnable}`,
+                        "Interval Frequency": `${elt.dataset.intervalFrequency}`,
+                        "Subscription Product Title": `${elt.dataset.subscriptionTitle}`,
+                        "Discount Amount": `${elt.dataset.discountPercentage}`,
+                        "Subscription Amount": `${elt.dataset.discountedPriceUpscribe}`,
+                        "Subscription": `${selectedFrequency}`,
+                        "Interval Unit": `${elt.dataset.intervalUnit}`
+                    }
+                })
+            }
+        })
+        addToCartSub(addItemsArray)
+        addToCartText.textContent = "Add to cart"
+
+    }
+
+    addToCartSub = (addItemsArray) => {
+        CartJS.addItems(addItemsArray)
+    }
+
+
+    addSelectedToCartOTP = () => {
+        let qty = parseInt(document.querySelector(".actualQTY").textContent);
+        console.log("QUANTITY OTP");
+        console.log(qty);
+        addToCartText.textContent = "Adding to cart.."
+        let addItemsArray = [];
+        productElts.map(elt => {
+            if (elt.classList.contains('comboBuy__prod--active')) {
+                addItemsArray.push({
+                    id: elt.dataset.varientId,
+                    quantity: qty
+                })
+            }
+        })
+        addToCartOTP(addItemsArray)
+        addToCartText.textContent = "Add to cart"
+
+    }
+
+    addToCartOTP = (addItemsArray) => {
+        CartJS.addItems(addItemsArray)
+    }
+
+    addToCartButton.addEventListener('click', () => {
+        if (purchaseSelectorOTP.classList.contains('comboBuy__purchaseSelector--active'))
+            addSelectedToCartOTP();
+        else addSelectedToCartSub();
+    });
+
+    calculateTotalAmount();
+    mainuplateTotalPrice()
+
+    $(document).ready(function () {
+        $('.c-productFrequency__text').click(function () {
+            $('.c-productFrequency__dropdown').fadeOut();
+            $(this).parents('.c-productFrequency').find('.c-productFrequency__dropdown').fadeIn();
+        });
+
+        $('.c-productFrequency__close').click(function () {
+            $('.c-productFrequency__dropdown').fadeOut();
+            return false;
+        });
+
+        $(document).on('cart.requestComplete', function () {
+            addToCartText.textContent = "Add To Cart"
+        });
+    });
+
+    quizRegPrice.textContent = `{{cart.currency.symbol}}${totalRegularAmount}`;
+    quizSubPrice.textContent = `{{cart.currency.symbol}}${totalDiscountedAmount}`;
+</script>

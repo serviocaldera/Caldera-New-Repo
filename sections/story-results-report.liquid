@@ -1,0 +1,361 @@
+<div class="c-storyReport">
+    <div class="wrapper">
+        <h3 class="c-storyReport__title">{{ section.settings.title }}</h3>
+        <div class="c-storyReportTab">
+            <div class="c-storyReportTab__mobile">
+                <span>All Skin Types</span>
+                <svg width="20px" height="11px" viewBox="0 0 20 11" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="MOBILE-CL-REAL-RESULTS-v3-" transform="translate(-258.000000, -2343.000000)"
+                            fill="#AF5D00" fill-rule="nonzero">
+                            <g id="SECTION-4" transform="translate(29.000000, 2189.000000)">
+                                <g id="dropdown" transform="translate(48.000000, 137.000000)">
+                                    <path
+                                        d="M200.795364,17.2125604 C200.519711,16.9291465 200.071774,16.9291465 199.796121,17.2125604 L191.009666,26.2640902 L182.205984,17.2125604 C181.93033,16.9291465 181.482394,16.9291465 181.20674,17.2125604 C180.931087,17.4959742 180.931087,17.9565217 181.20674,18.2399356 L190.492816,27.7874396 C190.630643,27.9291465 190.802926,28 190.992438,28 C191.164722,28 191.354233,27.9291465 191.49206,27.7874396 L200.778136,18.2399356 C201.071018,17.9565217 201.071018,17.4959742 200.795364,17.2125604 Z"
+                                        id="Path"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="c-storyReportTab__row" data-result-tab>
+                {% for block in section.blocks %}
+                {% assign tabname = block.settings.tab | replace: ' ', '' | replace: '-', '' | downcase %}
+                <div class="c-storyReportTab__item" data-tab="{{tabname}}">
+                    {{ block.settings.tab }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="c-storyReportContent">
+            {% for block in section.blocks %}
+            {% assign tabname = block.settings.tab | replace: ' ', '' | replace: '-', '' | downcase %}
+            <div class="c-storyReportContent__box" id="{{tabname}}">
+                <div class="c-storyReport__row">
+                    <div class="c-storyReport__col c-storyReport__colChart">
+                        <div class="c-storyReport__chart">
+                            {% if block.settings.chart != blank %}
+                            <div class="canvas-helper">
+                                <canvas width="400" height="400" id="{{ block.settings.chart }}"></canvas>
+                            </div>
+                            <span class="c-storyReport__label c-storyReport__labelOne">Healthier<br />Skin</span>
+                            <span class="c-storyReport__label c-storyReport__labelTwo">Improved<br />Fine Lines
+                                &<br />Wrinkles</span>
+                            <span class="c-storyReport__label c-storyReport__labelThree">Smoother<br />Skin</span>
+                            <span class="c-storyReport__label c-storyReport__labelFour">Less Dry</span>
+                            <span class="c-storyReport__label c-storyReport__labelFive">Even Skin<br />Tone</span>
+                            <span class="c-storyReport__label c-storyReport__labelSix">Radiance &<br />Luminosity</span>
+                            {% endif %}
+                        </div>
+                        <div class="c-storyReport__improvement">
+                            <span></span>
+                            % of men who saw improvement
+                        </div>
+                    </div>
+                    <div class="c-storyReport__col c-storyReport__colContent">
+                        <div class="c-storyReport__box c-storyReport__boxMobile" data-result-report-slider>
+                            {% if block.settings.number-one != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-one }}</h4>
+                                    <p>{{ block.settings.copy-one }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-two != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-two }}</h4>
+                                    <p>{{ block.settings.copy-two }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-three != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-three }}</h4>
+                                    <p>{{ block.settings.copy-three }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-four != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-four }}</h4>
+                                    <p>{{ block.settings.copy-four }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-five != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-five }}</h4>
+                                    <p>{{ block.settings.copy-five }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-six != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-six }}</h4>
+                                    <p>{{ block.settings.copy-six }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="c-storyReport__box c-storyReport__boxDesktop">
+                            {% if block.settings.number-one != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-one }}</h4>
+                                    <p>{{ block.settings.copy-one }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-two != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-two }}</h4>
+                                    <p>{{ block.settings.copy-two }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-three != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-three }}</h4>
+                                    <p>{{ block.settings.copy-three }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-four != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-four }}</h4>
+                                    <p>{{ block.settings.copy-four }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-five != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-five }}</h4>
+                                    <p>{{ block.settings.copy-five }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if block.settings.number-six != blank %}
+                            <div class="c-storyCol__item">
+                                <div class="c-storyCol__itemContent">
+                                    <h4>{{ block.settings.number-six }}</h4>
+                                    <p>{{ block.settings.copy-six }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    function getBrowser() {
+        if (navigator.userAgent.indexOf("Chrome") != -1) {
+            return "Chrome";
+        } else if (navigator.userAgent.indexOf("Opera") != -1) {
+            return "Opera";
+        } else if (navigator.userAgent.indexOf("MSIE") != -1) {
+            return "IE";
+        } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+            return "Firefox";
+        } else if (navigator.userAgent.indexOf("Safari") != -1) {
+            return "Safari";
+        } else {
+            return "unknown";
+        }
+    }
+
+    function changeDiagram() {
+        chartStyles = document.getElementById("chartStyles")
+        if(chartStyles){
+            chartStyles.remove()
+        }
+        let browser = getBrowser();
+        let diagramID = "allskintypes";
+        if (browser == "Safari") {
+            var css =
+                '@media(min-width: 73.75rem) {.c-storyReport__chart canvas {height: 400px !important;}}@media(max-width: 73.75rem) {.c-storyReport__chart canvas {height: 300px !important;}}@media(max-width: 48rem) {.c-storyReport__chart canvas {height: 220px !important;}}.canvas-helper:after { content: ""; background-image: url({{ "allskintypes.jpg" | asset_url }}); position: absolute; height: 101%; width: 94%; left: 14px; top: -5px; padding-left: 20px; padding-right: 20px; background-position: center; background-repeat: no-repeat; background-size: cover;} .c-storyReport__chart canvas {visibility: hidden;}'
+            head = document.head || document.getElementsByTagName('head')[0],
+                style = document.createElement('style');
+            head.appendChild(style);
+            style.id = "chartStyles"
+            style.type = 'text/css';
+            if (style.styleSheet) {
+                style.styleSheet.cssText = css;
+            } else {
+                style.appendChild(document.createTextNode(css));
+            }
+
+
+            var diagramDiv = document.querySelectorAll('.c-storyReportTab__item');
+            diagramDiv.forEach(element => {
+                element.addEventListener("click", () => {
+                    let diagramID = element.getAttribute("data-tab");
+                    console.log(diagramID);
+                    //let photoName = diagramID;
+                    //console.log(photoName);
+                    if (diagramID == "normal") {
+                        var css =
+                            '.canvas-helper:after { content: ""; background-image: url({{ "normalDiagram.jpg" | asset_url }}); position: absolute; height: 101%; width: 94%; left: 14px; top: -5px; padding-left: 20px; padding-right: 20px; background-position: center; background-repeat: no-repeat; background-size: cover;} .c-storyReport__chart canvas {visibility: hidden;}'
+                        head = document.head || document.getElementsByTagName('head')[0],
+                            style = document.createElement('style');
+                        head.appendChild(style);
+                        style.type = 'text/css';
+                        if (style.styleSheet) {
+                            style.styleSheet.cssText = css;
+                        } else {
+                            style.appendChild(document.createTextNode(css));
+                        }
+                    } else if (diagramID == "drycombination") {
+                        var css =
+                            '.canvas-helper:after { content: ""; background-image: url({{ "drycombination.jpg" | asset_url }}); position: absolute; height: 101%; width: 94%; left: 14px; top: -5px; padding-left: 20px; padding-right: 20px; background-position: center; background-repeat: no-repeat; background-size: cover;} .c-storyReport__chart canvas {visibility: hidden;}'
+                        head = document.head || document.getElementsByTagName('head')[0],
+                            style = document.createElement('style');
+                        head.appendChild(style);
+                        style.type = 'text/css';
+                        if (style.styleSheet) {
+                            style.styleSheet.cssText = css;
+                        } else {
+                            style.appendChild(document.createTextNode(css));
+                        }
+                    } else if (diagramID == "oilycombination") {
+                        var css =
+                            '.canvas-helper:after { content: ""; background-image: url({{ "oilycombination.jpg" | asset_url }}); position: absolute; height: 101%; width: 94%; left: 14px; top: -5px; padding-left: 20px; padding-right: 20px; background-position: center; background-repeat: no-repeat; background-size: cover;} .c-storyReport__chart canvas {visibility: hidden;}'
+                        head = document.head || document.getElementsByTagName('head')[0],
+                            style = document.createElement('style');
+                        head.appendChild(style);
+                        style.type = 'text/css';
+                        if (style.styleSheet) {
+                            style.styleSheet.cssText = css;
+                        } else {
+                            style.appendChild(document.createTextNode(css));
+                        }
+                    } 
+                    else if (diagramID == "allskintypes") {
+                        var css =
+                            '.canvas-helper:after { content: ""; background-image: url({{ "allskintypes.jpg" | asset_url }}); position: absolute; height: 101%; width: 94%; left: 14px; top: -5px; padding-left: 20px; padding-right: 20px; background-position: center; background-repeat: no-repeat; background-size: cover;} .c-storyReport__chart canvas {visibility: hidden;}'
+                        head = document.head || document.getElementsByTagName('head')[0],
+                            style = document.createElement('style');
+                        head.appendChild(style);
+                        style.type = 'text/css';
+                        if (style.styleSheet) {
+                            style.styleSheet.cssText = css;
+                        } else {
+                            style.appendChild(document.createTextNode(css));
+                        }
+                    }
+
+                })
+            });
+        }
+    }
+    changeDiagram();
+</script>
+
+{% schema %}
+{
+"name": "Result Report",
+"settings": [
+
+{
+"type":"text",
+"id":"title",
+"label":"Title",
+"default":"9 out of 10 Men Experienced Healthier & Visibly Improved Skin"
+}
+],
+"blocks": [
+{
+"type": "block",
+"name": "Blocks",
+"settings": [
+{
+"type": "text",
+"id": "tab",
+"label": "Tab Name"
+},
+{
+"type": "text",
+"id": "chart",
+"label": "Chart"
+},
+{
+"type": "text",
+"id": "number-one",
+"label": "Number One"
+},
+{
+"type": "text",
+"id": "copy-one",
+"label": "Copy One"
+},
+{
+"type": "text",
+"id": "number-two",
+"label": "Number two"
+},
+{
+"type": "text",
+"id": "copy-two",
+"label": "Copy two"
+},
+{
+"type": "text",
+"id": "number-three",
+"label": "Number Three"
+},
+{
+"type": "text",
+"id": "copy-three",
+"label": "Copy three"
+},
+{
+"type": "text",
+"id": "number-four",
+"label": "Number Four"
+},
+{
+"type": "text",
+"id": "copy-four",
+"label": "Copy four"
+},
+{
+"type": "text",
+"id": "number-five",
+"label": "Number five"
+},
+{
+"type": "text",
+"id": "copy-five",
+"label": "Copy five"
+},
+{
+"type": "text",
+"id": "number-six",
+"label": "Number six"
+},
+{
+"type": "text",
+"id": "copy-six",
+"label": "Copy six"
+}
+]
+}
+]
+}
+{% endschema %}

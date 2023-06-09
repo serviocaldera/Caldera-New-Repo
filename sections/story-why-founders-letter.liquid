@@ -1,0 +1,81 @@
+<div class="story__founders" id="js-founders-wrapper" data-base-color="B5A98F" data-base-padding="50">
+  <div class="wrapper wrapper--small founders__wrapper" id="js-founders-letter">
+    <div class="founder__quotation-mark">{% include 'quotation' %}</div>
+    <h5 class="founders__intro header--accent">{{- section.settings.founder_letter_header -}}</h5>
+    <div class="founders__content mobile-collapsed" id="js-founder-letter-content" data-lines-visible="{{- section.settings.number_lines -}}">
+      {{- section.settings.founder_letter_content -}}
+    </div>
+    <div class="mobile-expand" id="js-mobile-expander">read more</div>
+    <div class="founders__signatures">
+      {%- if section.settings.founder_letter_signature_one -%}
+        <img class="founders__signature" src="{{- section.settings.founder_letter_signature_one | img_url: 'master' -}}" style="height: {{- section.settings.founder_letter_signature_one_height -}}px"/>
+      {%- endif -%}
+      {%- if section.settings.founder_letter_signature_two -%}
+        <img class="founders__signature" src="{{- section.settings.founder_letter_signature_two | img_url: 'master' -}}" style="height: {{- section.settings.founder_letter_signature_two_height -}}px"/>
+      {%- endif -%}
+    </div>
+    <div class="founders__digital-signatures">
+      {{- section.settings.founder_letter_digital_signature -}}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Founder's Letter",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "founder_letter_header",
+        "label": "Founder's Letter Header Content",
+        "default": "Our journey embarked in 2014 when our quest for improved health and a connection with nature ignited --"
+      },
+      {
+        "type": "richtext",
+        "id": "founder_letter_content",
+        "label": "Founder's Letter Content",
+        "default": "<p>we started splitting time between Los Angeles and Jackson, Wyoming.  After building successful careers in entertainment and tech, we married, had our first child, and found the Teton Mountain Range to be the perfect playground to raise our new family. As we traveled between the pollution of LA and the dry harsh climate of the high alpine, we noticed our skin began to suffer. Stacy, a clean ingredients enthusiast, had access to a variety of quality, non-toxic women’s skincare products, but for Jared, we simply couldn’t find a men’s brand that stacked up.</p><p>In 2016, we became inspired to take action. We hired an expert team of green scientists, herbalists and formulators and, after two years of development, released The Good - a game-changing one-step, multi-functional face serum, backed by scientific studies. The Good is the first men’s skincare line in the US to be certified by MADE SAFE®  and ECOCERT, two of the world’s premiere non-toxic certification bodies. We’re proud to be pioneering the way for a contemporary breed of men’s clean skincare and hope you love it much as our friends and family do.”</p>"
+      },
+      {
+        "type": "image_picker",
+        "id": "founder_letter_signature_one",
+        "label": "Signature One"
+      },
+      {
+        "type": "range",
+        "id": "founder_letter_signature_one_height",
+        "label": "Signature One Height",
+        "min": 0,
+        "max": 46,
+        "unit": "px",
+        "default": 46
+      },
+      {
+        "type": "image_picker",
+        "id": "founder_letter_signature_two",
+        "label": "Signature Two"
+      },
+      {
+        "type": "range",
+        "id": "founder_letter_signature_two_height",
+        "label": "Signature Two Height",
+        "min": 0,
+        "max": 46,
+        "unit": "px",
+        "default": 46
+      },
+      {
+        "type": "richtext",
+        "id": "founder_letter_digital_signature",
+        "label": "Digital Signature",
+        "default": "<p>Stacy Keibler & Jared Pobre</p><p>Co-Founders, Caldera + Lab</p>"
+      },
+      {
+        "type": "number",
+        "id": "number_lines",
+        "default": 10,
+        "label": "Lines Visible on Mobile",
+        "info": "This is how many lines will be visible initially on mobile"
+      }
+    ]
+  }
+{% endschema %}

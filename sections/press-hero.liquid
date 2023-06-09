@@ -1,0 +1,50 @@
+<section class="press__hero hero" id="js-hero" {%- if section.settings.hero_background -%}style="background-image: url('{{- section.settings.hero_background | img_url: '1200x' -}}');"{%- endif -%}>
+  <div class="press__hero-content press--faded" id="js-hero-content">
+    <span class="pre-header text--light">{{- section.settings.upper_heading -}}</span>
+    <h1 class="press__hero-title text--light">{{- section.settings.main_header -}}</h1>
+  </div>
+  <div class="press__hero-logos" {%- if 3 < section.blocks.size -%}data-press-logo-slider{%- else -%}data-press-logo-static{%- endif -%}>
+    {%- for block in section.blocks -%}
+      <div class="press-logo__container">
+        <img class="press-logo press--faded" data-press-logo src="{{- block.settings.press_logo_image | img_url: "master" -}}" alt="{{- block.settings.press_logo_image.alt -}}" />
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Press Hero",
+    "settings": [
+      {
+        "type": "text",
+        "id": "upper_heading",
+        "label": "Upper Header",
+        "default": "press"
+      },
+      {
+        "type": "text",
+        "id": "main_header",
+        "label": "Main Header",
+        "default": "Look Ma', we made it."
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_background",
+        "label": "Hero Background"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "press_logo",
+        "name": "Press Logo",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"press_logo_image",
+            "label":"Press Logo"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

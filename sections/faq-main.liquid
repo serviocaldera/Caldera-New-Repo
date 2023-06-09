@@ -1,0 +1,128 @@
+<div class="faq-group">
+  <h3>Popular Questions</h3>
+  <ul>
+    {% for block in section.blocks %}
+      {% if block.type == 'popular-question' %}
+        <li>
+          <span class="faq__question" data-faq-question>{{ block.settings.faq_question }}<span class="faq-toggle">{%- include 'icon' with 'plus' -%}</span></span>
+          <p class="faq__answer">{{ block.settings.faq_answer }}</p>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+<div class="faq-group">
+  <h3>How To Use</h3>
+  <ul>
+    {% for block in section.blocks %}
+      {% if block.type == 'how-to-use' %}
+        <li>
+          <span class="faq__question" data-faq-question>{{ block.settings.faq_question }}<span class="faq-toggle">{%- include 'icon' with 'plus' -%}</span></span>
+          <p class="faq__answer">{{ block.settings.faq_answer }}</p>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+<div class="faq-group">
+  <h3>About Caldera+Lab</h3>
+  <ul>
+    {% for block in section.blocks %}
+      {% if block.type == 'about' %}
+        <li>
+          <span class="faq__question" data-faq-question>{{ block.settings.faq_question }}<span class="faq-toggle">{%- include 'icon' with 'plus' -%}</span></span>
+          <p class="faq__answer">{{ block.settings.faq_answer }}</p>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+<div id="shipping"></div>
+<div class="faq-group" >
+  <h3>Shipping & Returns</h3>
+  <ul>
+    {% for block in section.blocks %}
+      {% if block.type == 'shipping-returns' %}
+        <li>
+          <span class="faq__question" data-faq-question>{{ block.settings.faq_question }}<span class="faq-toggle">{%- include 'icon' with 'plus' -%}</span></span>
+          <p class="faq__answer">{{ block.settings.faq_answer }}</p>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+{% schema %}
+  {
+    "name": "FAQs",
+    "blocks": [
+      {
+        "type": "popular-question",
+        "name": "Popular Question",
+        "limit": 10,
+        "settings": [
+          {
+            "type":"text",
+            "id":"faq_question",
+            "label":"FAQ Question"
+          },
+          {
+            "type":"textarea",
+            "id":"faq_answer",
+            "label":"FAQ Answer"
+          }
+        ]
+      },
+      {
+        "type": "how-to-use",
+        "name": "How To Use",
+        "limit": 10,
+        "settings": [
+          {
+            "type":"text",
+            "id":"faq_question",
+            "label":"FAQ Question"
+          },
+          {
+            "type":"textarea",
+            "id":"faq_answer",
+            "label":"FAQ Answer"
+          }
+        ]
+      },
+      {
+        "type": "about",
+        "name": "About Caldera+Lab",
+        "limit": 10,
+        "settings": [
+          {
+            "type":"text",
+            "id":"faq_question",
+            "label":"FAQ Question"
+          },
+          {
+            "type":"textarea",
+            "id":"faq_answer",
+            "label":"FAQ Answer"
+          }
+        ]
+      },
+      {
+        "type": "shipping-returns",
+        "name": "Shipping & Returns",
+        "limit": 10,
+        "settings": [
+          {
+            "type":"text",
+            "id":"faq_question",
+            "label":"FAQ Question"
+          },
+          {
+            "type":"textarea",
+            "id":"faq_answer",
+            "label":"FAQ Answer"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,43 @@
+{% if page.metafields.custom_fields["enable_ambassador_favourite"] == 1 %}
+    <div class="vipStoryFav">
+        {% if page.metafields.custom_fields["ambassador_bg_image_desk"] != blank %}
+            <div class="vipStoryFav__bgImg vipStoryFav__bgImg--desk">
+                <img src='{{ page.metafields.custom_fields["ambassador_bg_image_desk"] }}' alt="cl">  
+            </div>
+        {% endif %}     
+        {% if page.metafields.custom_fields["ambassador_bg_image_mobile"] != blank %}   
+            <div class="vipStoryFav__bgImg vipStoryFav__bgImg--mobile">
+                <img src='{{ page.metafields.custom_fields["ambassador_bg_image_mobile"] }}' alt="cl">  
+            </div>
+        {% endif %}    
+
+        <div class="vipStoryFav__overlay">
+            {% if page.metafields.custom_fields["ambassador_overlay_image"] != blank %}
+                <div class="vipStoryFav__overlay-image vipStoryFav__overlay-image--desk">
+                    <img src='{{ page.metafields.custom_fields["ambassador_overlay_image"] }}' alt="cl">  
+                </div>
+            {% endif %}
+            {% if page.metafields.custom_fields["ambassador_overlay_image_mob"] != blank %}
+                <div class="vipStoryFav__overlay-image vipStoryFav__overlay-image--mobile">
+                    <img src='{{ page.metafields.custom_fields["ambassador_overlay_image_mob"] }}' alt="cl">  
+                </div>
+            {% endif %}
+            <div class="vipStoryFav__overlay-content">
+                <div class="vipStoryFav__content-inner">
+                    {% if page.metafields.custom_fields["ambassador_overlay_title"] != blank %}
+                        <h4 class="vipStoryFav__overlay-title">{{ page.metafields.custom_fields["ambassador_overlay_title"] }}</h4>
+                    {% endif %}                   
+                    {% if page.metafields.custom_fields["ambassador_overlay_copy"] != blank %}     
+                        <div class="vipStoryFav__overlay-copy">{{ page.metafields.custom_fields["ambassador_overlay_copy"] }}</div>
+                    {% endif %}  
+                    {% if page.metafields.custom_fields["ambassador_overlay_button_text"] != blank %}                      
+                        <a href="{{ page.metafields.custom_fields["ambassador_overlay_button_url"] }}" class="vipStoryFav__overlay-button vipStoryFav__overlay-button--desk">{{ page.metafields.custom_fields["ambassador_overlay_button_text"] }}</a> 
+                    {% endif %}  
+                    {% if page.metafields.custom_fields["ambassador_overlay_button_text"] != blank %}                      
+                        <a href="{{ page.metafields.custom_fields["ambassador_overlay_button_url"] }}" class="vipStoryFav__overlay-button vipStoryFav__overlay-button--mobile">{{ page.metafields.custom_fields["ambassador_overlay_button_text"] }}</a> 
+                    {% endif %}                          
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

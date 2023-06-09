@@ -1,0 +1,37 @@
+<div class="c-homeOurStory">
+  <div class="wrapper">
+    <div class="c-homeOurStory__content">
+      <h4 class="c-homeOurStory__title">
+          {{ section.settings.title }}
+      </h4>
+      <p>
+          <a href="{{ section.settings.link }}" class="c-homeOurStory__link">{{ section.settings.link_text }}</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Our Story",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"World-renowned scientists developed an 100% all natural  and non-toxic product with unmatched results."
+      },
+      {
+        "type":"text",
+        "id":"link_text",
+        "label":"Link Text",
+        "default":"OUR STORY"
+      },
+      {
+        "type":"url",
+        "id":"link",
+        "label":"Link"
+      }
+    ]
+  }
+{% endschema %}

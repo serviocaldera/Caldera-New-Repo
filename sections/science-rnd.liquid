@@ -1,0 +1,99 @@
+<div class="c-scienceRnd">
+    <div class="c-scienceRnd__main">
+        <div class="wrapper">
+            <div class="c-scienceRnd__mainRow">
+                <div class="c-scienceRnd__content">
+                    <h3 class="c-scienceRnd__title">{{ section.settings.title }}</h3>
+                    <div class="c-scienceRnd__mainCopy">
+                        {{ section.settings.main-copy }}
+                    </div>
+                </div>
+                <div class="c-scienceRnd__logos">
+                   <div class="c-scienceRnd__logosRow">
+                        {% for block in section.blocks %}
+                            <div class="c-scienceRnd__logosItem">
+                               <img data-src="{{ block.settings.logos | img_url: 'master' }}" class="lazyload" />
+                            </div>
+                        {% endfor %}
+                   </div>
+                </div>    
+            </div> 
+        </div>
+    </div>
+    <!--c-scienceRnd__main-->
+    <div class="c-scienceRnd__bottom">
+        <div class="c-scienceRnd__container">
+            <div class="c-scienceRnd__bottomRow">
+                <div class="c-scienceRnd__bottomContent">
+                    <div class="c-scienceRnd__bottomBox">
+                        <h4 class="c-scienceRnd__heading">
+                            {{ section.settings.heading }}
+                        </h4>
+                        <div class="c-scienceRnd__copy">
+                            {{ section.settings.copy }}    
+                        </div>    
+                    </div>
+                </div>
+                <div class="c-scienceRnd__bottomImage">
+                    <img data-src="{{ section.settings.image-mobile | img_url: 'master' }}" class="lazyload c-scienceRnd__imageMobile" />
+                    <img data-src="{{ section.settings.image-desktop | img_url: 'master' }}" class="lazyload c-scienceRnd__imageDesktop" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Science R&D",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default": "Research & Development"
+      },
+      {
+        "type":"html",
+        "id":"main-copy",
+        "label":"Main Copy",
+        "default": "We create hundreds of formulas on paper, and then prototype dozens of complexes. We repeat these steps until we land on a synergy of antioxidants, adaptogens, calming and healing elements. It takes several years to perfect each formula, and we’re proud that every stage of R&D meets the standards of several cutting edge certification agencies."
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"heading",
+        "default": "Pushing Science Further"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default": "Our rigorous formulation process led us to the Wild Antioxidant Complex™, the essential component in our skincare line. This super potent botanical concentrate is the result of augmenting wild medicinal botanicals with organic, plant-based actives. "
+      },
+      {
+        "type":"image_picker",
+        "id":"image-desktop",
+        "label":"Image Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"image-mobile",
+        "label":"Image Mobile"
+      }
+    ],
+    "blocks": [
+        {
+            "type": "logos",
+            "name": "Logos",
+            "settings": [
+                {
+                    "type":"image_picker",
+                    "id":"logos",
+                    "label":"Logos"
+                }
+            ]
+        }
+    ]
+  }
+{% endschema %}

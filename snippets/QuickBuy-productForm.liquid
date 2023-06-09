@@ -1,0 +1,80 @@
+<form action="/cart/add" method="post" enctype="multipart/form-data" id="add-item-form" data-cart-submit="data-cart-submit" data-productid="{{product.id}}" class="c-productInfo__form">
+    {% if product.metafields.custom_fields["enable_pre_order_product"] == 1 %}
+        <input type="hidden" value="{{ product.title }}" id="preorderItem" name="properties[Pre Order Item]">
+    {% endif %}
+    <div class="c-productInfo__subscription">
+        {% include 'QuickBuy-upscribeOptions' %}
+        {% if product.available %}
+            {% if product.metafields.custom_fields["enable_pre_order_product"] != 1 %}
+                {%comment%}
+                    <div class="cu-membership cu-membership--desktop">
+                        <h6 class="cu-membership__title">Already have a membership?</h6>
+                        <p class="cu-membership__info">If you currently have a membership you can add products directly to your existing subscriptions and skip checking out. It’s quick and easy and you can receive all your products at the same time!</p>
+                        <span class="cu-membership__btn cu-membership__btn--login">Log In Now</span>
+                        <span class="cu-membership__btn cu-membership__btn--add">Add to current subscription</span>
+                    </div>
+                    <div class="cu-membership cu-membership--mobile">
+                        <h6 class="cu-membership__title">Already have a membership?</h6>
+                        <span class="cu-membership__btn cu-membership__btn--login">Log In Now</span>
+                        <span class="cu-membership__btn cu-membership__btn--add">Add to current subscription</span>
+                        <p class="cu-membership__info">If you currently have a membership you can add products directly to your existing subscriptions and skip checking out.</p>
+                    </div>
+                {%endcomment%}
+            {% endif %}
+        {% endif %}
+    </div>
+    <!--c-productInfo__subscription-->
+    <div class="c-productInfo__variants">
+        <select id="product-select-{{ product.id }}" name="id" class="c-productInfo__variantSelect" data-variant-select data-productid="{{product.id}}">
+            {% for variant in product.variants %}
+                {% if variant.available %}
+                    <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                {% else %}
+                    <option disabled="disabled">
+                        {{ variant.title }} - Sold Out
+                    </option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+    </div>
+    <div class="c-productInfo__submit">
+
+        {% if product.available %}
+            <div class = "quantityAdjust">
+                <spam class = "subQty">-</spam>
+                <spam class = "actualQTY">1</spam>
+                <spam class = "addQty">+</spam>
+            </div>
+            <button type="submit" name="add" data-add-to-cart id="AddToCart" class="js-addtocart btn btn--primary{% if settings.cart_limit_enable and cart.item_count > 0 %} disabled{% endif %}">
+                {%- assign money_price = product.selected_or_first_available_variant.price | money -%}
+                {%comment%}
+                  <!-- {%- assign membership_discount = money_price | times: 0.2 -%} -->
+                  <!-- {%- assing membership_total = money_price | minus membership_discount | money  -%} -->
+                <span class="c-productInfo__btnPrice">
+                    {% if product.metafields.custom_fields["enable_pre_order_product"] == 1 %}
+                        <span>{{ current_variant.price | money | remove: '.00' }}</span>
+                    {% else %}
+                        <span class="upscribe-price-item-regular price-item price-item--regular u-hidden" data-regular-price>{{ money_price | remove: '.00' }}</span>
+
+                        <span class="upscribe-price-item-sale price-item price-item--sale" data-sale-price>{{ money_price | remove: '.00' }}</span>
+                    {% endif %}
+                </span>
+                {%endcomment%}
+                <span class="c-productInfo__btnText">
+                                    {% if product.metafields.custom_fields["enable_pre_order_product"] == 1 %}
+                                        Pre-Order
+                                    {% else %}
+                                        Add To Cart
+                                    {% endif %}
+                                </span>
+                                <span class="QuickBuy-current-price">
+
+                                </span>
+            </button>
+        {% else %}
+            <div class="btn btn--primary btn--oos">Sold Out</div>
+        {% endif %}
+    </div>
+    <!--c-productInfo__footer-->
+</form>

@@ -1,0 +1,125 @@
+<div class="c-storyModes">
+    <div class="wrapper">
+        <div class="c-storyModes__header">
+            <h3 class="c-storyModes__title">{{ section.settings.title }}</h3>
+            <div class="c-storyModes__mainCopy">{{ section.settings.main-copy }}</div>    
+        </div>
+        <div class="c-storyModes__topRow">
+            {% for block in section.blocks %}
+            <div class="c-storyModes__topItem">
+                <div class="c-storyModes__topBox">
+                  <div class="c-storyModes__number">
+                      {{ block.settings.number }}
+                  </div>
+                  <div class="c-storyModes__topCopy">
+                      {{ block.settings.copy }}
+                  </div>  
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="c-storyModes__bottomRow">
+            <div class="c-storyModes__bottomItem">
+                <div class="c-storyModes__bottomCopy">
+                     {{ section.settings.content-left }}     
+                </div>
+            </div>
+            <div class="c-storyModes__bottomItem">
+                <div class="c-storyModes__bottomCopy">
+                     {{ section.settings.content-right }}     
+                </div>
+            </div>
+        </div>
+        <div class="c-storyModes__bottomRow">
+            <div class="c-storyModes__bottomItem">
+                <div class="c-storyModes__image">
+                    <img src="{{ section.settings.image-left | img_url: 'master' }}" data-src="{{ section.settings.image-left | img_url: 'master' }}" />    
+                </div>
+                <div class="c-storyModes__imageCopy">
+                    {{ section.settings.image-left-copy }}
+                </div>
+            </div>
+            <div class="c-storyModes__bottomItem">
+                <div class="c-storyModes__image">
+                    <img src="{{ section.settings.image-right | img_url: 'master' }}" data-src="{{ section.settings.image-right | img_url: 'master' }}" />    
+                </div>
+                <div class="c-storyModes__imageCopy">
+                    {{ section.settings.image-right-copy }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+  {
+    "name": "Three Modes",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"Look inside our clinical trial."
+      },
+      {
+        "type":"html",
+        "id":"main-copy",
+        "label":"Main copy",
+        "default":"Of course we wanted to know what our clinical trial participants thought of the changes in their skin, but we didn’t stop there. The Good was validated with three separate modes of assessment:"
+      },
+      {
+        "type":"html",
+        "id":"content-left",
+        "label":"Content left",
+        "default":"A leading U.S. clinical research firm conducted an 8-week study of The Good with a group of 53 healthy male volunteers, aged 37 to 64. Participants represented a diverse mix of ethnicities, skin tones, and facial hair types."
+      },
+      {
+        "type":"image_picker",
+        "id":"image-left",
+        "label":"Image left"
+      },
+      {
+        "type":"html",
+        "id":"image-left-copy",
+        "label":"Image Left Copy",
+        "default": "The average participant started with an ~4.5 rating of fine lines and wrinkles. After 8 weeks, that number dropped to ~3.9."
+      },
+      {
+        "type":"html",
+        "id":"content-right",
+        "label":"Content Right",
+        "default":"All skin types were represented (dry, normal, and oily). Face and skin changes were evaluated ~24 hours after initial use, at four weeks and eight weeks of continued use."
+      },
+      {
+        "type":"image_picker",
+        "id":"image-right",
+        "label":"Image Right"
+      },
+      {
+        "type":"html",
+        "id":"image-right-copy",
+        "label":"Image Right Copy",
+        "default": "The average participant started with a skin elasticity rating of ~0.35. After 8 weeks, that number increased to ~0.42."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Blocks",
+        "settings": [
+          {
+            "type": "text",
+            "label": "Number",
+            "id": "number" 
+          },
+          {
+            "type": "html",
+            "label": "Copy",
+            "id": "copy" 
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

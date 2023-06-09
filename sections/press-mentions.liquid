@@ -1,0 +1,60 @@
+<div class="press__mentions headline headline--large">
+  <div class="wrapper press-wrapper">
+    <h3 class="press__mentions-header pre-header text--light">{{- section.settings.mentions_heading -}}</h3>
+    <div class="grid grid--press-mentions">
+      <div class="grid__item grid__item--press-mentions">
+        <div class="metion-quotes" data-mention-slider-quotes>
+          {% for block in section.blocks %}
+            <div class="mention-quote text-center">
+              <p class="text--light">{{- block.settings.press_quote_text -}}</p>
+            </div>
+          {% endfor %}
+        </div>
+        <hr class="press__mentions-break">
+      </div>
+      <div class="grid__item medium--two-thirds push--medium--one-sixth press__mentions-logos">
+        <div data-mentions-slider-logos>
+          {%- for block in section.blocks -%}
+            <div class="mention__logo-container text-center">
+              <img class="mention__logo" data-press-mention-logo src="{{- block.settings.press_logo_image | img_url: 'master' -}}" alt="{{- block.settings.press_logo_image.alt -}}">
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Honorable Mentions",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "text",
+        "id": "mentions_heading",
+        "label": "Mentions Header",
+        "default": "Honorable Mentions"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "press_mention",
+        "name": "Press Mention",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"press_logo_image",
+            "label":"Press Logo"
+          },
+          {
+            "type": "text",
+            "id": "press_quote_text",
+            "label": "Press Quote "
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,116 @@
+<div class="FeaturedReviews{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}" style="background-image:url({{section.settings.background | img_url: 'master'}}); background-size:100% 100%;">
+  <h2 class="FeaturedReviews_heading">
+    1530+ Customer Reviews
+  </h2>
+  <img class="FeaturedReviews_img lozad" data-src="{{section.settings.stars_img | img_url: 'medium'}}">
+  <p class="FeaturedReviews_subheading">
+    Based on reviews over all products 
+  </p>
+
+  <div class="swiper FeaturedReviews_swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper FeaturedReviews_swiper-wrapper">
+      <!-- Slides -->
+      {% for block in section.blocks %}
+
+      <div class="swiper-slide FeaturedReviews_swiper-slide">
+        <div class="FeaturedReviews_swiper-slide-wrapper">
+          <div class="FeaturedReviews_swiper-slide-wrapper-img">
+            {% render 'lozad-image', image: block.settings.review_img %}
+            {% comment %}<img class="lozad" data-src="{{block.settings.review_img | img_url: 'master'}}">{% endcomment %}
+            <div class="FeaturedReviews_swiper-slide-text-wrapper">
+              <p class="FeaturedReviews_swiper-slide-text">{{block.settings.review_text}}</p>
+            </div>
+          </div>
+          <div class="FeaturedReviews_swiper-slide-info">
+           i
+          </div>
+          <h3 class="FeaturedReviews_swiper-slide-heading">
+            {{block.settings.review_name}}
+          </h3>
+        </div>
+      </div>
+
+      {%endfor%}
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const swiperReviews = new Swiper('.FeaturedReviews_swiper', {
+  // Optional parameters
+  loop: true,
+  slidesPerView: "auto",
+  centeredSlides: true,
+  spaceBetween: 80,
+
+        breakpoints: {
+          300: {
+            spaceBetween: 20,
+          },
+          600: {
+          
+            spaceBetween: 80,
+          },
+        },
+});
+
+$(".FeaturedReviews_swiper").hover(function() {
+    (this).swiper.autoplay.stop();
+}, function() {
+    (this).swiper.autoplay.start();
+});
+</script>
+{% schema %}
+{
+  "name": "Featured Reviews",
+  "tag": "section",
+  "class": "featured-reviews",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "stars_img",
+      "label": "Stars Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "review_img",
+          "label": "Review Image"
+        },
+        {
+          "type": "text",
+          "id": "review_text",
+          "label": "Review Hover Text"
+        },
+        {
+          "type": "text",
+          "id": "review_name",
+          "label": "Review Author"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+        "name": "Featured Reviews"
+    }
+]
+}
+{% endschema %}

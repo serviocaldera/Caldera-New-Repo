@@ -1,0 +1,566 @@
+
+{% assign product = all_products.the-regimen %}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+<div class="ResultsPage_wrapper">
+<div class="wrapper c-pdpProduct ResultsPage">
+   
+
+    <div class="c-product__row ResultsPage-row-wrapper">
+
+       
+        
+        <div class="c-product__col c-productInfo__col ResultsPage_column">   
+                         
+        <h3 class="ResultsPage_column-heading">Your Recommended Subscription</h3>
+        <h2 class="ResultsPage_column-title">Ships Every <span class="ResultsPage_column-range">60 Days</span></h2>
+        <div class="ResultsPage_results-wrapper">
+            <h3 class="ResultsPage_results-title">Because you selected...</h3>
+            <div class="ResultsPage_results-title-wrapper">
+                <div class="ResultsPage_result1">
+                    <img class="ResultsPage_result1-img">
+                    <p class="ResultsPage_result1-text"></p>
+                </div>
+                <div class="ResultsPage_result2">
+                    <img class="ResultsPage_result2-img">
+                    <p class="ResultsPage_result2-text"></p>
+                </div>
+            </div>
+            <p class="ResultsPage_result-text">Based on your responses, we estimate you should receive a shipment of our 3-product regimen every <span class="ResultsPage_column-range2">45 days</span>. Remember you can easily pause, adjust or cancel from within your account at any time.</p>
+            {%assign price1 = all_products['the-good'].price %}
+            {%assign price2 = all_products['the-clean-slate'].price %}
+            {%assign price3 = all_products['the-base-layer'].price %}
+            
+            
+            {%if all_products['the-good'].available == false %}
+                {%assign oos1 = "The Good" %}
+             
+                {%endif%}
+
+            {%if all_products['the-base-layer'].available == false%}
+                {%assign oos2 = "The Base Layer" %}
+            
+            {%endif%}
+
+            {%if all_products['the-clean-slate'].available == false%}
+                {%assign oos3 = "The Clean Slate" %}
+               
+            {%endif%}
+           
+            {%if oos1 or oos2 or oos3 %}
+          
+                <div class="ResultsPage_oos-message">
+                    <p class="ResultsPage_oos-message-heading">Currently Out of Stock:
+                        {%if oos1%}
+                            {{oos1}}  
+                        {%endif%}
+                        {%if oos2%} 
+                            {{oos2}}  
+                        {%endif%}
+                        {%if oos3%}  
+                            {{oos3}}  
+                        {%endif%}
+                    </p>
+                    <p class="ResultsPage_oos-message-subheading">
+                        You can still purchase a portion of The Regimen at a discounted price ($189 originally). Any future subscriptions will include Out of Stock products when they are made available.
+                    </p>
+                </div>
+            {%endif%}
+        </div>
+            {% if product.metafields.custom_fields["enable_combobuy_section"] == 1 %}
+                <div class="comboBuy">
+
+                                
+                    {% if product.metafields.custom_fields["combobuy_products"] != blank %}
+                        <div class="comboBuy__products">
+                            {% for item in product.metafields.custom_fields["combobuy_products"] %}
+                                {% if item["combobuy_prodhandle"] != blank %}
+                                    {% assign metaproduct = all_products[item["combobuy_prodhandle"]] %}
+                                {% endif %}
+
+
+                                {% assign pdt_discount = metaproduct.metafields.sf_upscribe.discount_amount %}
+                                {% unless pdt_discount contains '.' %}
+                                    {% assign pdt_discount = pdt_discount | replace: '%', '.0%' %}
+                                {% endunless %}
+                                <div class="comboBuy__prod added {% if metaproduct.available %}comboBuy__prod--active{% else %} comboBuy__prod--oos{% endif %}" 
+                                data-varient-id="{{ metaproduct.selected_or_first_available_variant.id }}"
+                                data-product-handle="{{ metaproduct.title }}"
+                                data-regular-price="{{ metaproduct.price }}"
+                                data-discount-percentage="{{ pdt_discount }}"
+                                data-subscription-enable="{{ metaproduct.metafields.sf_upscribe.enable_subscription }}" 
+                                data-interval-frequency="{{ metaproduct.metafields.sf_upscribe.interval_frequency }}" 
+                                data-subscription-title="{{ metaproduct.metafields.sf_upscribe.subscription_product_title | format_money }}" 
+                                data-interval-unit="{{ metaproduct.metafields.sf_upscribe.interval_unit }}" 
+                                >
+                                    
+                                    {% if item["combobuy_prodthumb"] != blank %}
+                                        <div class="comboBuy__prodThumb">
+                                            <img src="{{ item["combobuy_prodthumb"] }}" alt="{{ metaproduct.title }}">
+                                        </div>
+                                    {% else %}
+                                        <div class="comboBuy__prodThumb">
+                                            <img src="{{ metaproduct.selected_or_first_available_variant.featured_image | img_url: 'master' }}" alt="{{ metaproduct.title }}">
+                                        </div>
+                                    {% endif %}  
+                                
+                                    <div class="comboBuy__prodDetails">
+                                        {% if metaproduct.title != blank %}<span class="comboBuy__prodTitle">{{ metaproduct.title }}</span>{% endif %}     
+                                        {% if item["combobuy_prodtype"] != blank %}<span class="comboBuy__prodType">{{ item["combobuy_prodtype"] }}</span>{% endif %}  
+                                    </div>
+
+                                    <div class="comboBuy__prodValue comboBuy__prodValue--discounted">
+                                        {% if metaproduct.price != blank %}
+                                            <span class="comboBuy__prodPrice comboBuy__prodPrice--regular">{{ metaproduct.price | money | remove: '.00'}}</span>
+                                        {% endif %}
+                                        <span class="comboBuy__prodPrice comboBuy__prodPrice--discounted">$00</span>
+                                        <div class="comboBuy__prodCheck">{% render 'icon-check-orange' %}</div>
+                                    </div>
+
+                                </div>
+                            {% endfor %} 
+                        </div>   
+                    {% endif %}
+            
+                    <div class="comboBuy__purchaseType ResultsPage_selector">
+                        <div class="comboBuy__purchaseType-selector ResultsPage_check-parent comboBuy__purchaseSelector--otp ">
+                            <div class="comboBuy__purchaseType-selectorInner ResultsPage_check-wrapper">
+                                <span class="comboBuy__purchaseType-check ResultsPage_check">{% render 'icon-check-orange' %}</span>
+                                <div class="comboBuy__purchaseType-details ResultsPage_check-title-details">
+                                    <p class="comboBuy__purchaseType-title ResultsPage_check-title">One Time Purchase</p>
+                                    <p class="comboBuy__purchaseType-title ResultsPage_check-title">{{cart.currency.symbol}}<span class="ResultsPage_check-title-price-var">{{product.price | money_without_currency}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comboBuy__purchaseType-selector ResultsPage_check-parent comboBuy__purchaseSelector--subs comboBuy__purchaseSelector--active">
+                            <div class="comboBuy__purchaseType-selectorInner ResultsPage_check-wrapper">
+                                <span class="comboBuy__purchaseType-check ResultsPage_check">{% render 'icon-check-orange' %}</span>
+                                <div class="comboBuy__purchaseType-details ResultsPage_check-title-details">
+                                    <p class="comboBuy__purchaseType-title ResultsPage_check-title ResultsPage_check-title-desk">Membership • Save 20%</p>
+                                    <p class="comboBuy__purchaseType-title ResultsPage_check-title ResultsPage_check-title-mob">Membership<br><span>Save 20%</span></p>
+                                
+                                    <p class="comboBuy__purchaseType-title ResultsPage_check-title ResultsPage_check-title-price"><span class="ResultsPage_check-title-final-price"><span class="ResultsPage_check-title-before-price-after"></span> <span class="ResultsPage_check-title-before-price">{{product.price | money}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comboBuy__frequency ResultsPage_frequency">
+                        <div class="comboBuy__frequency-heading ResultsPage_frequency-wrapper">
+                            <span class="comboBuy__frequency-title ResultsPage_frequency-title">choose frequency</span>
+                            <div class="c-productFrequency c-productFrequencyNeedHelp">
+                            </div>
+                        </div>
+                        <div class="comboBuy__frequency-selector">
+                            <div class="comboBuy__frequency-item ResultsPage_frequency-item"><span>45 days</span></div>
+                            <div class="comboBuy__frequency-item ResultsPage_frequency-item comboBuy__frequency-item--active"><span class="ResultsPage_frequency-popular">Popular</span><span>60 days</span></div>
+                            <div class="comboBuy__frequency-item ResultsPage_frequency-item"><span>75 days</span></div>
+                        </div>
+                    </div>
+
+                    <div class="ResultsPage_button-wrapper">
+                        <div class="comboBuy__addtocart-value comboBuy__addtocart-value--discounted ResultsPage_button-subwrapper">
+                            <div class="ResultsPage_number-count">
+                                <span class="ResultsPage_minus">-</span>
+                                <span class="ResultsPage_text" >1</span>
+                                <span class="ResultsPage_plus">+</span>
+                            </div>
+                        </div>
+                        <div class="comboBuy__addtocart comboBuy__addtocart--active ResultsPage_button">
+                             <span class="comboBuy__addtocart-price comboBuy__addtocart-price--discounted"></span>
+                            <span class="comboBuy__addtocart-text">Add To Cart</span>
+                        </div>
+                    </div>
+                   <div class="ResultsPage_retake-wrapper">
+                       {% render "icon-retake" %}
+                       <a href="/pages/quiz">Retake Quiz</a>
+                   </div>
+
+
+                </div>
+            {% endif %}
+        </div>
+        <div class="c-product__col c-productImage__col ResultsPage_image-slider-col">
+            <div class="c-productImage__gallery">
+                <div class="c-productImage__featured ResultsPage-slider" >
+                    <div class="swiper-wrapper">
+                    {% for image in product.images limit: 3 %}
+                        <div class="c-productImages swiper-slide">
+                            <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="ResultsPage-swiper-overlay">
+                    The Full Regimen <div class="ResultsPage-swiper-overlay-dot"></div>
+                </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    .comboBuy__products{
+        display:none;
+    }
+@media (max-width:400px) {
+   .gorgias-chat-key-eam2gc{
+        right: 3px !important;
+        bottom: 54px !important;
+   }
+}
+   
+</style>
+<div class="ResultsPage-discount-wrapper">
+    <p class="ResultsPage-discount-wrapper-text">A 15% discount has been applied to your cart!</p>
+    <p class="ResultsPage-discount-wrapper-text-bold">CODE: OFF10</p>
+</div>
+<script>
+    
+    
+    (function () {
+        let oosMessageCheck = document.querySelector(".ResultsPage_oos-message-heading");
+        if(oosMessageCheck){
+            let price1 = "{{price1 | money_without_currency }}";
+    let price2 = "{{price2 | money_without_currency }}";
+   
+    let price3 = "{{price3 | money_without_currency }}";
+    let reducesPrices = [parseInt(price2, 10),parseInt(price1, 10),parseInt(price3, 10)];
+    let renPrice1 = reducesPrices[0];
+    let renPrice2 = reducesPrices[1];
+    let renPrice3 = reducesPrices[2];
+    let varSpan = document.querySelector(".ResultsPage_check-title-price-var");
+    let varSpanOrig = document.querySelector(".ResultsPage_check-title-before-price");
+    let varSpanDis = document.querySelector(".ResultsPage_check-title-before-price-after");
+    let oosMessage = document.querySelector(".ResultsPage_oos-message-heading").innerText;
+  if(oosMessage.includes("Base Layer")){
+    reducesPrices.pop(renPrice1)
+  }else if(oosMessage.includes("The Good")){
+    reducesPrices.pop(renPrice2)
+  }else if(oosMessage.includes("Clean Slate")){
+    reducesPrices.pop(renPrice3)
+  }
+
+  setTimeout(()=>{
+    let discPrice = document.querySelector(".comboBuy__addtocart-price--discounted");
+  if(reducesPrices.length > 1){
+    let sumPrices = reducesPrices.reduce(function (previousValue, currentValue) {
+    return previousValue + currentValue;
+    });
+   varSpan.innerHTML =  sumPrices;
+   varSpanOrig.innerHTML = "{{cart.currency.symbol}}" + sumPrices;
+   varSpanDis.innerHTML = discPrice.innerText;
+  }
+  },100)
+        }
+    
+  
+    let price11 = "{{price1 | money_without_currency }}";
+    let price22 = "{{price2 | money_without_currency }}";
+    let price33 = "{{price3 | money_without_currency }}";
+    let reducesPricess = [parseInt(price22, 10),parseInt(price11, 10),parseInt(price33, 10)];
+    const sum = reducesPricess.reduce((partialSum, a) => partialSum + a, 0);
+    let beforePrice = document.querySelector(".ResultsPage_check-title-final-price");
+    let originalPrice = document.querySelector(".ResultsPage_check-title:nth-of-type(2)");
+     originalPrice.textContent = `{{cart.currency.symbol}}${sum}`
+   let priceOne = document.querySelector(".ResultsPage_column-range");
+   let priceTwo = document.querySelector(".ResultsPage_column-range2");
+   priceOne.innerText = localStorage.getItem("quizDays")+" Days";
+   priceTwo.innerText = localStorage.getItem("quizDays")+ " days";
+  let result1 = document.querySelector(".ResultsPage_result1-img");
+  let result2 = document.querySelector(".ResultsPage_result2-img");
+  let resultTxt1 = document.querySelector(".ResultsPage_result1-text");
+  let resultTxt2 = document.querySelector(".ResultsPage_result2-text");
+  let y = localStorage.getItem("quizAnswerOneText");
+  let x = localStorage.getItem("quizAnswerThreeText");
+  console.log(x,y,result1,result2);
+  if (x == "Humid"){
+    result1.src = "https://cdn.shopify.com/s/files/1/0079/7193/0170/files/humid_-_circle_6f7ce1f0-1f2d-406e-a123-ca4b8aaf5e69.svg?v=1641922950";
+    resultTxt1.innerHTML = x;
+  }else if(x == "Mild"){
+    result1.src = "https://cdn.shopify.com/s/files/1/0079/7193/0170/files/mild_-_circle_12cc656f-dd41-4ad2-8c6c-12a13615005d.svg?v=1641922950";
+    resultTxt1.innerHTML = x;
+}else if(x == "Dry"){
+    result1.src = "https://cdn.shopify.com/s/files/1/0079/7193/0170/files/dry_-_circle_4284078c-85a5-48bb-8234-8cbb6a99549f.svg?v=1641922949";
+    resultTxt1.innerHTML = x;
+}else if(x == "Cold"){
+    result1.src = "https://cdn.shopify.com/s/files/1/0079/7193/0170/files/cold_-_circle_582325ee-d177-49ff-a9ab-f7b2e709fc7f.svg?v=1641922950";
+    resultTxt1.innerHTML = x;
+}
+  if(y == "Oily"){
+    result2.src = "https://cdn.shopify.com/s/files/1/0079/7193/0170/files/oily_skin_-_circle_11996231-cd29-479b-a1ab-0cf0501cd483.svg?v=1641922949";
+    resultTxt2.innerHTML = y;
+}else if(y == "Dry"){
+    result2.src = "https://cdn.shopify.com/s/files/1/0079/7193/0170/files/dry_skin_-_circle_d31a3a11-b2d4-4ea6-99ae-63c28c9f1aa9.svg?v=1641922949";
+    resultTxt2.innerHTML = y;
+}else if(y == "Normal"){
+    result2.src = "https://cdn.shopify.com/s/files/1/0079/7193/0170/files/normal_skin_-_circle_744ad09b-45e4-4370-9c86-962afc09cd8d.svg?v=1641922949";
+    resultTxt2.innerHTML = y;  
+}
+
+const swiper = new Swiper('.ResultsPage-slider', {
+ 
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+});
+
+
+
+
+function scrollFunction() {
+
+    var element = document.getElementById('pdpComboReviews');
+    var headerOffset = 105;
+    var elementPosition = element.getBoundingClientRect().top;
+    var offsetPosition = elementPosition - headerOffset;
+    window.scrollTo({
+         top: offsetPosition,
+         behavior: "smooth"
+    });
+}
+    let optionSelectAll = document.querySelectorAll(".ResultsPage_frequency-item");
+    let optionRendered = document.querySelector(".ResultsPage_column-range").textContent;
+    if(optionRendered.includes("45")){
+        optionSelectAll[0].classList.add("comboBuy__frequency-item--active");
+        optionSelectAll[1].classList.remove("comboBuy__frequency-item--active")
+        optionSelectAll[2].classList.remove("comboBuy__frequency-item--active")
+    }else if(optionRendered.includes("60")){
+        optionSelectAll[0].classList.remove("comboBuy__frequency-item--active");
+        optionSelectAll[1].classList.add("comboBuy__frequency-item--active")
+        optionSelectAll[2].classList.remove("comboBuy__frequency-item--active")
+    }
+    else if(optionRendered.includes("75")){
+        optionSelectAll[0].classList.remove("comboBuy__frequency-item--active");
+        optionSelectAll[1].classList.remove("comboBuy__frequency-item--active")
+        optionSelectAll[2].classList.add("comboBuy__frequency-item--active")
+    }
+    const productElts = Array.from(document.querySelectorAll('.comboBuy__prod'));
+    const productValues = Array.from(document.querySelectorAll('.comboBuy__prodValue'))
+    const dPriceElts = Array.from(document.querySelectorAll('.comboBuy__prodPrice--discounted'));
+    const rPriceElts = Array.from(document.querySelectorAll('.comboBuy__prodPrice--regular'));
+    const purchaseTypeSelector = Array.from(document.querySelectorAll('.comboBuy__purchaseType-selector'));
+    const frequencyItems = Array.from(document.querySelectorAll('.comboBuy__frequency-item'));
+    const purchaseSelectorOTP = document.querySelector('.comboBuy__purchaseSelector--otp');
+    const frequencySelector = document.querySelector('.comboBuy__frequency');
+    const addToCartButton = document.querySelector('.comboBuy__addtocart');
+    const addToCartText = document.querySelector('.comboBuy__addtocart-text');
+    const addToCartValue = document.querySelector('.comboBuy__addtocart-value');
+    const addToCartPriceDiscounted = document.querySelector('.comboBuy__addtocart-price--discounted');
+   // const addToCartPriceRegular = document.querySelector('.comboBuy__addtocart-price--regular');
+    let inputValueResultsHTML = document.querySelector(".ResultsPage_text");
+    let inputValueResults = document.querySelector(".ResultsPage_text").textContent;
+    let inputValueResultInt = parseInt(inputValueResults);
+    let inputMinusResults = document.querySelector(".ResultsPage_minus");
+    let inputPlusResults = document.querySelector(".ResultsPage_plus");
+
+    inputMinusResults.addEventListener("click", ()=>{
+        if(inputValueResultInt != 0){
+            --inputValueResultInt;
+        }
+        inputValueResultsHTML.innerHTML = inputValueResultInt;
+        
+    })
+    inputPlusResults.addEventListener("click", ()=>{
+      
+            ++inputValueResultInt;
+            inputValueResultsHTML.innerHTML = inputValueResultInt;
+           
+    })
+
+    // quiz recommendations dom
+    const quizSubPrice = document.querySelector('.c-productInfo__priceSub');
+    const quizRegPrice = document.querySelector('.c-productInfo__priceOneTime');
+    
+    let totalDiscountedAmount = 0;
+    let totalRegularAmount = 0;
+    let selectedFrequency = '60 days';
+    let purchaseType = 'subscription'
+
+    calcProdSubPrice  = elt => {
+        const regPrice = parseFloat(elt.dataset.regularPrice) / 100;
+        const discountPercentage = parseFloat(elt.dataset.discountPercentage);
+        const discountedPrice = Math.round(regPrice - ((regPrice * discountPercentage)/100))
+        elt.dataset.discountedPriceUpscribe = `${discountedPrice}.00`;
+        elt.dataset.discountedPrice = discountedPrice;
+    } 
+
+    calculateTotalAmount = () => {
+        totalDiscountedAmount = 0
+        totalRegularAmount = 0;
+        productElts.map(elt => {
+           if(elt.classList.contains('comboBuy__prod--active')){
+                totalDiscountedAmount += parseFloat(elt.dataset.discountedPrice)
+                //totalRegularAmount += parseFloat(elt.dataset.regularPrice / 100)
+                totalRegularAmount += Math.round(parseFloat(elt.dataset.regularPrice / 100))
+           }
+        })
+    }
+
+    mainuplateTotalPrice = () =>{
+        addToCartPriceDiscounted.textContent = `{{cart.currency.symbol}}${totalDiscountedAmount}`
+        //addToCartPriceRegular.textContent = `{{cart.currency.symbol}}${totalRegularAmount}`
+        beforePrice.textContent = `{{cart.currency.symbol}}${totalDiscountedAmount}` 
+    }
+    
+    removeDiscountedPrice = () => {
+        addToCartValue.classList.remove('comboBuy__addtocart-value--discounted')
+        productValues.map(elt => elt.classList.remove('comboBuy__prodValue--discounted'))
+    }
+    
+    applyDiscountedPrice = () => {
+        addToCartValue.classList.add('comboBuy__addtocart-value--discounted')
+        productValues.map(elt => elt.classList.add('comboBuy__prodValue--discounted'))
+    }
+
+    // itteration over product elements
+    productElts.map(elt => {
+        calcProdSubPrice(elt)
+            if(elt.classList.contains('comboBuy__prod--oos')){
+                elt.querySelector('.comboBuy__prodType').textContent = "Sold Out"
+                elt.querySelector('.comboBuy__prodTitle').style.color = "#a1a1a1"
+            }
+        elt.addEventListener('click', e => {
+            let selectedProduct =  e.target.closest('.comboBuy__prod');
+            if(!selectedProduct.classList.contains('comboBuy__prod--oos')){
+                selectedProduct.classList.toggle('comboBuy__prod--active')
+                calculateTotalAmount();
+                mainuplateTotalPrice();
+            }
+           /* if(totalRegularAmount === 0 && purchaseType === "subscription")addToCartPriceRegular.style.display = 'none'
+            else addToCartPriceRegular.style.display = 'block'*/
+            if(totalRegularAmount === 0) addToCartButton.classList.remove('comboBuy__addtocart--active')
+            else addToCartButton.classList.add('comboBuy__addtocart--active')
+
+        })
+    })
+    
+    // itteration over Product discount price span
+    dPriceElts.map(elt => {
+        const discountedPrice = elt.closest('.comboBuy__prod').dataset.discountedPrice
+        elt.textContent = `{{cart.currency.symbol}}${parseFloat(discountedPrice)}`
+    })
+
+    // itterate over purchase type selector elts
+    purchaseTypeSelector.map(elt => {
+        elt.addEventListener('click', e => {
+            purchaseTypeSelector.map(elt => {
+                elt.classList.remove('comboBuy__purchaseSelector--active')
+            })
+            e.target.closest('.comboBuy__purchaseType-selector').classList.add('comboBuy__purchaseSelector--active')
+
+            if(purchaseSelectorOTP.classList.contains('comboBuy__purchaseSelector--active')) {
+                removeDiscountedPrice()
+                frequencySelector.style.display = "none";
+                purchaseType = "otp";
+               // addToCartPriceRegular.style.display = 'block';
+            }
+            else {
+                applyDiscountedPrice()
+                frequencySelector.style.display = "block"
+                purchaseType = "subscription"
+            }
+           // if(totalRegularAmount === 0 && purchaseType === "subscription")addToCartPriceRegular.style.display = 'none'
+        })
+    })
+
+    // itterate over frequency items
+    frequencyItems.map(elt => {
+        elt.addEventListener('click', e => {
+            frequencyItems.map(elt => {
+                elt.classList.remove('comboBuy__frequency-item--active')
+            })
+            e.target.closest('.comboBuy__frequency-item').classList.add('comboBuy__frequency-item--active')
+
+            if(elt.classList.contains('comboBuy__frequency-item--active')){
+                selectedFrequency = elt.querySelector('span').textContent;
+            }
+        })
+    })
+
+    addSelectedToCartSub = () => {
+        let addItemsArray = [];
+        productElts.map(elt => {
+            if(elt.classList.contains('comboBuy__prod--active')){
+               addItemsArray.push({
+                    id: elt.dataset.varientId, 
+                    quantity: 1, 
+                    properties:{
+                        "SubscriptionEnable": `${elt.dataset.subscriptionEnable}`,
+                        "Interval Frequency": `${elt.dataset.intervalFrequency}`,
+                        "Subscription Product Title": `${elt.dataset.subscriptionTitle}`,
+                        "Discount Amount": `${elt.dataset.discountPercentage}`,
+                        "Subscription Amount": `${elt.dataset.discountedPriceUpscribe}`,
+                        "Subscription": `${selectedFrequency}`,
+                        "Interval Unit": `${elt.dataset.intervalUnit}`
+                    }
+               })
+            }
+        })
+        addToCartSub(addItemsArray)
+    }
+
+    addToCartSub = (addItemsArray) => {
+        CartJS.addItems(addItemsArray)        
+    }
+
+
+    addSelectedToCartOTP = () => {
+       
+        let addItemsArray = [];
+        productElts.map(elt => {
+           if(elt.classList.contains('comboBuy__prod--active')){
+                addItemsArray.push({
+                    id: elt.dataset.varientId, 
+                    quantity: 1
+                })
+           }
+        })
+        addToCartOTP(addItemsArray)
+    }
+
+    addToCartOTP = (addItemsArray) => {
+        CartJS.addItems(addItemsArray)        
+    }
+
+    addToCartButton.addEventListener('click', () => {
+      
+        if(purchaseSelectorOTP.classList.contains('comboBuy__purchaseSelector--active') && purchaseSelectorOTP.classList.contains('comboBuy__purchaseSelector--otp') ){
+            for(let n = 0;n < inputValueResultInt;n++){addSelectedToCartOTP()};
+        } 
+        else {
+            for(let n = 0;n < inputValueResultInt;n++){addSelectedToCartSub()};
+        
+        
+        }
+    });
+
+    calculateTotalAmount();
+    mainuplateTotalPrice()
+
+    $(document).ready(function(){
+        $('.c-productFrequency__text').click(function(){
+        $('.c-productFrequency__dropdown').fadeOut();
+        $(this).parents('.c-productFrequency').find('.c-productFrequency__dropdown').fadeIn();
+        });
+
+        $('.c-productFrequency__close').click(function(){
+        $('.c-productFrequency__dropdown').fadeOut();
+        return false;
+        }); 
+
+        $(document).on('cart.requestComplete', function() {
+            addToCartText.textContent = "Add To Cart"
+        });
+    });
+
+    quizRegPrice.textContent = `{{cart.currency.symbol}}${totalRegularAmount}`;
+    quizSubPrice.textContent = `{{cart.currency.symbol}}${totalDiscountedAmount}`;
+
+})();
+   
+</script>   

@@ -1,0 +1,97 @@
+{% comment %}
+{{ reviewer["name"] }} = Reviewer Name
+{{ reviewer["credentials"] }} = Reviewer Credentials
+{{ reviewer["imageUrl"] }} = Reviewer Image URL
+{{ reviewer["bio"] }} = Reviewer Biography
+{% endcomment %}
+
+<div class="eatblock">
+  <div class="eatblock__image-wrapper">
+    <img class="eatblock__image" alt="Profile photo for {{ reviewer["name"] }}" src="{{ reviewer["imageUrl"] }}">
+  </div>
+  <div class="eatblock__content">
+    <h3 class="eatblock__header">{{ reviewer["name"] }} <span class="eatblock__credentials">{{ reviewer["credentials"] }}</span></h3>
+    <p class="eatblock__bio">{{ reviewer["bio"] }}</p>
+  </div>
+  <span id="eatb-created-tag">Powered by <a id="eatb-created-link" target="_blank" href="https://gr0.com/">GR0</a></span>
+</div>
+
+{% style %}
+.eatblock {
+	position: relative;
+	width: 100%;
+	max-width: 768px;
+	padding: 2rem;
+	margin: 2rem auto;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	border: 1px solid #CCC;
+	border-radius: 4px;
+	box-shadow: 0 10px 10px #CCC;
+}
+
+.eatblock__image-wrapper {
+	position: relative;
+	width: 200px;
+	padding-top: 200px;
+}
+
+.eatblock__image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.eatblock__content {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding: 0;
+	padding-left: 1rem;
+}
+
+.eatblock__header {
+	padding: 0;
+	margin: 0;
+	font-size: 2rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.eatblock__credentials {
+	font-weight: 400;
+	font-size: 1.25rem;
+	text-transform: none;
+}
+
+.eatblock__bio {
+	max-width: 300px;
+}
+
+#eatb-created-tag {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	text-align: right;
+	font-size: 8px;
+	font-weight: 300;
+}
+
+#eatb-created-link {
+	text-decoration: none;
+	color: #0062c2;
+}
+
+#eatb-created-link:visited {
+	color: #0062c2;
+}
+{% endstyle %}

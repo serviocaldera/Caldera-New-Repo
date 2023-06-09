@@ -1,0 +1,29 @@
+<div class="c-certMessage">
+    <div class="wrapper">
+        <div class="c-certMessage__content">
+            <h4 class="c-certMessage__heading">{{ section.settings.heading }}</h4>
+            <div class="c-certMessage__copy">
+                {{ section.settings.copy }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Certification Message",
+    "settings": [
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading",
+        "default":"Integrity isn’t an accident. It’s a choice."
+      },
+      {
+        "type":"richtext",
+        "id":"copy",
+        "label":"Copy"
+      }
+    ]
+  }
+{% endschema %}

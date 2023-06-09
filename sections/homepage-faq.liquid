@@ -1,0 +1,63 @@
+<div class="faq">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--one-half push--medium--one-quarter small--two-thirds push--small--one-sixth text-center">
+        <h3>{{ section.settings.faq_title }}</h3>
+        <ul class="text-left">
+          {% for block in section.blocks %}
+            <li>
+              <span class="faq__question" data-faq-question>{{ block.settings.faq_question }}<span class="faq-toggle">{%- include 'icon' with 'plus' -%}</span></span>
+              <p class="faq__answer">{{ block.settings.faq_answer }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+        {% if section.settings.faq_link %}
+          <a href="{{ section.settings.faq_link }}" class="btn btn--secondary">{{ section.settings.faq_link_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "FAQs",
+    "settings": [
+      {
+        "type":"text",
+        "id":"faq_title",
+        "label":"FAQ Section Title",
+        "default":"FAQs"
+      },
+      {
+        "type":"url",
+        "id":"faq_link",
+        "label":"FAQ Section Link"
+      },
+      {
+        "type":"text",
+        "id":"faq_link_text",
+        "label":"FAQ Section Link Text",
+        "default":"Read all FAQs"
+      }
+    ],
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "type": "faq",
+        "name": "FAQ",
+        "settings": [
+          {
+            "type":"text",
+            "id":"faq_question",
+            "label":"FAQ Question"
+          },
+          {
+            "type":"textarea",
+            "id":"faq_answer",
+            "label":"FAQ Answer"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

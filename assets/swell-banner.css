@@ -1,0 +1,234 @@
+.banner{
+	 margin-bottom: 7rem;
+}
+.rewards-banner{
+	display: flex;
+	height: 34rem;
+}
+.banner .show-at-mobile{
+	display: none;
+}
+.rewards-banner div{
+    width: 50%;
+    background-color: #22221e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.banner-img{
+	background-image: url(//cdn.shopify.com/s/files/1/0079/7193/0170/t/561/assets/swell-banner.png?v=75220138979452028161686232122);
+    background-size: cover;
+    background-position-x: center;
+}
+.banner h1{
+  height: 32px;
+  font-size: 74.75px;
+  line-height: 0.46;
+  letter-spacing: normal;
+  text-align: left;
+  color: white;
+}
+#banner-logo{
+  width: 54.6px;
+  height: 125px;
+  object-fit: contain;
+  background-color: var(--white);
+}
+.banner p{
+    font-size: 14.625px;
+    font-weight: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    text-align: left;
+    color: #fcfbf2;
+    margin-left: 90px;
+}
+.join p:nth-of-type(1){
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #000000;
+    font-weight: 600;
+}
+.banner h2{
+	font-size: 25px;
+    line-height: 1.38;
+    letter-spacing: normal;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #000000;
+    margin-bottom: 2rem;
+}
+.join p,.banner a{
+    font-size: 13px;
+    letter-spacing: 0.90px;
+    color: #000000;
+    margin-left: 0;
+}
+.banner a{
+	text-decoration: underline;
+}
+.join{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+}
+.join input{
+    color: white;
+    background-color: #ad6d25;
+    border: none;
+    width: 147px;
+    height: 35px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 3.64px;
+    margin-bottom: 1.5rem;
+    margin-left: .3rem;
+    margin-right: .3rem;
+}
+.join h3{
+    font-size: 27px;
+    line-height: 1.38;
+    letter-spacing: normal;
+    text-align: center;
+}
+.join div{
+    margin-top: .5rem;
+}
+.input-login{
+    width: 169px !important;
+}
+.text-to-account{
+	display: none;
+}
+@media screen and (max-width: 1200px){
+	.rewards-banner{
+		height: 28rem;
+	}
+}
+@media screen and (max-width: 1000px){
+	.rewards-banner{
+		height: 25rem;
+	}
+	.banner h1{
+		font-size: 60px;
+		height: 26px;
+	}
+	.banner p{
+    	font-size: 12px;
+    	margin-left: 80px;		
+	}
+	.join p{
+		margin-left: 0rem;
+	}
+}
+@media screen and (max-width: 800px){
+	.rewards-banner{
+		flex-direction: column-reverse;
+	    height: max-content;	
+	}
+	.banner-img{
+	    height: -webkit-fill-available !important;	
+	}
+	.rewards-banner div{
+		width: 100%;
+	}
+	.rewards-banner div:nth-of-type(1){
+		padding-top: 2rem;
+    	padding-bottom: 4rem;
+	}
+	#banner-logo{
+	    width: 58px;	
+	}
+	.banner h1{
+		font-size: 106px;
+	    margin-bottom: 3rem;	
+	}
+	.banner .show-at-leptop{
+		display: none;
+	}
+	.banner .show-at-mobile{
+		display: flex;
+	}
+	.banner p{
+		font-size: 24px;
+	    margin-left: 80px;
+	    color: #fcfbf2;
+	    text-align: center;
+	    line-height: 29px;
+        margin-left: 0;
+	}
+	.join p:nth-of-type(1){
+		font-size: 18px;
+	}
+	.banner h2{
+		margin-top: 0.5rem;
+	    font-size: 24px;
+	    line-height: 28px;
+	}
+	.join input{
+		width: 255px;
+	    height: 53px;
+	    font-size: 18px;
+	}
+	.join p,.join a{
+		color: black;
+    	font-weight: 100;
+        font-size: 20px;	
+	}
+	.input-login{
+	    width: 237px !important;
+	    height: 46px !important;
+	    font-size: 14px !important;
+	    margin-bottom: .7rem !important;
+	}
+	.join div{
+		display: flex;
+    	flex-direction: column;
+	}
+}
+@media screen and (max-width: 500px)
+{
+	.banner-img{
+		height: 28rem !important;
+	}
+	#banner-logo{
+		width: 47px;
+    	height: 85px;
+	}
+	.banner h1{
+		font-size: 92px;
+    	margin-bottom: 2rem;
+	}
+	.banner p{
+		font-size: 18px;
+		line-height: 25px;
+	}
+	.join p:nth-of-type(1) {
+    	font-size: 14px;
+	}
+	.banner h2{
+	    font-size: 19px;
+	    line-height: 24px;
+	    margin-bottom: 1.5rem;
+	}
+	.join input{
+	    width: 204px;
+    	height: 42px;
+    	font-size: 15px;
+	}
+	.join p, .join a{
+	    font-size: 17px;
+	}
+	.banner {
+    	margin-bottom: 3rem;
+	}
+}
+@media screen and (max-width: 400px){
+	.banner-img {
+	    height: 23rem !important;
+	}
+}

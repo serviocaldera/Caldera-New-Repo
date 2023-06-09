@@ -1,0 +1,52 @@
+<div class="story__hero">
+    <div class="hero__image" style="background-image: url({{ section.settings.hero_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.hero_mobile_image %}{{ section.settings.hero_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.hero_image | img_url: '2880x' }}" data-mobile-image-check></div>
+    <div class="wrapper">
+        <div class="grid--full">
+            <div class="grid__item large--one-half medium--one-half one-whole">
+                <div class="c-storyHero__content">
+                    <div class="c-storyHero__heading">{{ section.settings.heading }}</div>
+                    <h2 class="c-storyHero__title">{{ section.settings.title }}</h2>
+                    <div class="c-storyHero__copy">{{ section.settings.copy }}</div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>
+<div id="second-section-start"></div>
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"hero_image",
+        "label":"Hero Image",
+        "info":"Recommended dimensions: 1440px x 1500px"
+      },
+      {
+        "type":"image_picker",
+        "id":"hero_mobile_image",
+        "label":"Hero Mobile Image",
+        "info":"Recommended dimensions: 750px x 592px"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"High Performance  Skincare. Vetted  by Science."
+      },
+       {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading",
+        "default":"proven results"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default":"This is the highest calibre skincare. But trust should be earned, so every claim we make about The Good is substantiated by scientific data from an independent U.S. clinical trial and the first-of-its-kind antioxidant study."
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,105 @@
+<div class="hero3__track">
+  {% for block  in section.blocks %}
+  <div class="hero3__slide">
+    <div class="hero3__container">
+      <div class="hero3__text">
+        <p class="hero3__subtitle">{{ block.settings.subtitle }}</p>
+
+        <h2 class="hero3__title">{{ block.settings.title }}</h2>
+
+        <a href="{{ block.settings.button_url }}" class="btn btn--primary">{{ block.settings.button_text }}</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+{% schema %}
+{
+  "name": "Hero 3",
+  "tag": "section",
+  "class": "hero3",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_autorotate",
+      "label": "Enable Auto-rotate"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Hero Slider",
+      "type": "hero-slider",
+      "settings": [
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Main Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mob",
+          "label": "Main Image Mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_secondary",
+          "label": "Secondary Image"
+        },
+        {
+          "type": "text",
+          "id": "vimeo",
+          "label": "Vimeo ID"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Sub-title"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "copy",
+          "label": "Copy"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button url"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "link Text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "link url"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

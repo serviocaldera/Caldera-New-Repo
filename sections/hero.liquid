@@ -1,0 +1,99 @@
+<div class="hero-home">
+  
+  <picture class="hero-home__picture"> 
+    <source media="(max-width: 767px)" srcset="{{ section.settings.hero_mobile_image | img_url: 'master' }}">
+    <source media="(min-width: 768px)" srcset="{{ section.settings.hero_image | img_url: 'master' }}">
+    <img src="{{ section.settings.hero_mobile_image | img_url: '1x' }}" alt="cl">  
+  </picture>
+
+  <div class="hero-home__content">
+    {% if section.settings.hero_title %}
+      <h1 class="hero-home__title">{{ section.settings.hero_title }}</h1>
+    {% endif %}
+    {% if section.settings.hero_sub_title %}
+      <div class="hero-home__sub-title">{{ section.settings.hero_sub_title }}</div>
+    {% endif %}
+    {% if section.settings.hero_link %}
+      <div class="hero-home__cta"><a href="{{ section.settings.hero_link }}">{{ section.settings.hero_link_text }}</a></div>
+    {% endif %}
+    {% if section.settings.enable_quiz_link == true %}
+      <div class="hero-home__quiz-link" data-quiz-click>{{ section.settings.quiz_link_text }}</div>
+    {% endif %}
+  </div>
+  <div class="hero-home__icons">
+    {% for block in section.blocks %}
+      {% if block.settings.cert_icon %}
+        <div class="hero-home__icon">
+          <img src="{{ block.settings.cert_icon | img_url: 'master' }}" />
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"hero_image",
+        "label":"Hero Image",
+        "info":"Recommended dimensions: 2880px x 1350px"
+      },
+      {
+        "type":"image_picker",
+        "id":"hero_mobile_image",
+        "label":"Hero Mobile Image"
+      },
+      {
+        "type":"text",
+        "id":"hero_title",
+        "label": "Hero Title",
+        "default":"Introduce your skin to The Good."
+      },
+      {
+        "type":"html",
+        "id":"hero_sub_title",
+        "label":"Hero 'Sub Title'"
+      },
+      {
+        "type":"url",
+        "id":"hero_link",
+        "label":"Hero Button Link"
+      },
+      {
+        "type":"text",
+        "id":"hero_link_text",
+        "label":"Hero Button Text",
+        "default":"Shop Now"
+      },
+      {
+        "type":"checkbox",
+        "id":"enable_quiz_link",
+        "label":"Enable Quiz Link",
+        "default": false
+      },
+      {
+        "type":"text",
+        "id":"quiz_link_text",
+        "label":"Quiz Link Text",
+        "default":"Get a personalized plan"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "hero",
+        "name": "block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "cert_icon",
+            "label": "Certification Icon"
+          }
+        ]
+      }
+    ] 
+  }
+{% endschema %}

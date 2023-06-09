@@ -1,0 +1,34 @@
+{% if product.metafields.custom_fields.blk2_cover-image and product.metafields.custom_fields["blk2_headline+paragraph"] and product.metafields.custom_fields.blk2_cta %}
+  <div class="product-single__routine">
+    <div class="wrapper">
+      <div class="grid--full grid--rev">
+        <div class="grid__item medium--seven-twelfths small--one-half">
+          <div class="product-single__routine-image">
+            {% if product.metafields.custom_fields.blk2_sub-headline %}
+              <span class="pre-header" data-text-parallax>{{ product.metafields.custom_fields.blk2_sub-headline }}</span>
+            {% endif %}
+            <img src="{{ product.metafields.custom_fields.blk2_cover-image }}" alt="One Step Routine">
+            {% if product.metafields.custom_fields.blk2_video_link %}
+              <a href="#product-video-popup" data-popup-trigger>{% include 'icon' with 'play' %}</a>
+              <div id="product-video-popup" class="popup mfp-hide mfp-with-anim product-video-popup">
+                <div class="popup__content">
+                  <video class="product-video-popup__video" poster="{{ product.metafields.custom_fields.blk2_cover-image }}" controls>
+                    <source src="{{ product.metafields.custom_fields.blk2_video_link }}" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="grid__item large--one-third medium--five-twelfths small--one-half">
+          <div class="product-single__routine-details">
+            {{ product.metafields.custom_fields["blk2_headline+paragraph"] }}
+            {% if product.metafields.custom_fields.blk2_video_link or product.metafields.custom_fields.blk2_link %}
+              <a href="{% if product.metafields.custom_fields.blk2_video_link %}#product-video-popup{% elsif product.metafields.custom_fields.blk2_link %}{{ product.metafields.custom_fields.blk2_link }}{% endif %}" class="btn btn--primary" {% if product.metafields.custom_fields.blk2_video_link %}data-popup-trigger{% endif %}>{{ product.metafields.custom_fields.blk2_cta }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

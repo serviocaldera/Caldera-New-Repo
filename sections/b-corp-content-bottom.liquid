@@ -1,0 +1,55 @@
+<div class="c-bcorpContent c-bcorpContent--isRight">
+    <div class="wrapper">
+        <div class="c-bcorpContent__row">
+            <div class="c-bcorpContent__image">
+                <span class="c-bcorpContent__sideLine">{{ section.settings.sideline }}</span>
+                <img src="{{ section.settings.mobile-image | img_url: 'master' }}" alt="{{ section.settings.title }}" class="c-bcorpContent__image--mobile" />
+                <img src="{{ section.settings.desktop-image | img_url: 'master' }}" alt="{{ section.settings.title }}" class="c-bcorpContent__image--desktop" />
+            </div>
+            <div class="c-bcorpContent__copy">
+                <h4 class="c-bcorpContent__heading">
+                    {{ section.settings.heading }}
+                </h4>
+                <div class="c-bcorpContent__text">
+                    {{ section.settings.text }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image + Content Bottom",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"desktop-image",
+        "label":"Desktop image"
+      },
+      {
+        "type":"image_picker",
+        "id":"mobile-image",
+        "label":"Mobile image"
+      },
+      {
+        "type":"text",
+        "id":"heading",
+        "label":"Heading",
+        "default": "Accountability Isn’t Always Easy. But It’s Right."
+      },
+      {
+        "type":"html",
+        "id":"text",
+        "label":"Content",
+        "default": "The B Corp designation doesn’t just prove where Caldera currently excels. It also legally binds us to future social and environmental performance standards. Year after year. We’re in this for the long haul, and we wouldn’t have it any other way."
+      },
+      {
+        "type":"text",
+        "id":"sideline",
+        "label":"Side Line",
+        "default": "ABIDING COMMITMENT"
+      }
+    ]
+  }
+{% endschema %}

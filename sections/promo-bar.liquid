@@ -1,0 +1,58 @@
+{%- if section.settings.enable_promo_bar -%}
+	<div class="promo-bar{% if template.directory == 'customers' or template.name == blank or template.name contains 'cart' or template == 'page' %} always-opaque{% endif %}" data-promo-bar>
+		{%- if section.settings.link -%}
+			<a class="promo-bar__link" href="{{ section.settings.link }}">
+				{% if shop.money_with_currency_format contains 'USD' %}
+					<span class="promo-bar__text">{{ section.settings.title }}</span>
+				{% else %}
+					<span class="promo-bar__text">{{ section.settings.international-title }}</span>
+				{% endif %}
+			</a>
+		{%- else -%}
+			{% if shop.money_with_currency_format contains 'USD' %}
+				<span class="promo-bar__text">{{ section.settings.title }}</span>
+			{% else %}
+				<span class="promo-bar__text">{{ section.settings.international-title }}</span>
+			{% endif %}
+		{%- endif -%}
+		<button class="promo-bar__close" data-close-promo>{%- include 'icon' with 'close' -%}</button>
+	</div>
+{%- endif -%}
+ <script>
+  $(".promo-bar__close").click(function(){
+      $('.pdp-regular-template').addClass("promo-bar--removed");
+      $('body').addClass("promo-bar--removed-body");
+  });
+ </script>
+{% schema %}
+	{
+		"name": "Promo Bar",
+		"class": "section-promo-bar",
+		"settings": [
+			{
+			   "type": "checkbox",
+			   "id": "enable_promo_bar",
+			   "label": "Enable promo bar?",
+			   "default": false
+			},
+			{
+				"id": "title",
+				"type": "text",
+				"label": "Promo Bar Text",
+				"default": "This is a global announcement bar!"
+			},
+			{
+				"id": "international-title",
+				"type": "text",
+				"label": "Promo Bar Text (international)",
+				"default": "60 day guarantee"
+			},
+			{
+				"type": "url",
+				"id": "link",
+				"label": "Promo Bar Link",
+				"info": "Clicking anywhere on the promo bar takes you here."
+			}
+		]
+	}
+{% endschema %}

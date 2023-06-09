@@ -1,0 +1,99 @@
+{%- if settings.checkout_feed_enable -%}
+<section id="ImagesFeed">
+    <div class="ImagesFeed-inner" data-logo-container >
+        <div class="ImagesFeed-thumbs"{% if settings.direction == "right" %} dir="rtl"{% endif %} >
+            {% capture scrollFeed %}
+                {% for count in (0..15) %}
+                  {% assign checkout_feed_img_key = 'checkout_feed_img_' | append: count %}
+                  {% assign checkout_feed_img = settings.[checkout_feed_img_key] %}
+                    {% if checkout_feed_img != null %}
+                        <div class="ImagesFeed-slider_thumbs" style="width: 125px">
+                            <img src="{{checkout_feed_img | img_url:'125x125', crop:'center'}}" alt="{% if checkout_feed_img.alt %}satisfied customer{% else %}{{ checkout_feed_img.alt }}{% endif %}" />
+                        </div>
+                     {% endif %}
+                {% endfor %}
+            {% endcapture %}
+            {{scrollFeed}}
+            {{scrollFeed}}
+        </div>
+
+    </div>
+</section>
+
+<script>
+$( document ).ready(function() {
+    $('#ImagesFeed .ImagesFeed-thumbs').slick({
+        slidesToShow: 15,
+        autoplay: true,
+        arrows: false,
+        dots:false,
+        autoplaySpeed: 0,
+        speed: 9000,
+        cssEase:'linear',
+        infinite: true,
+        focusOnSelect: false,
+        pauseOnFocus: false,
+        pauseOnHover: false,
+        {% if settings.direction == "right" %}
+        rtl: true,
+        {% endif %}
+        responsive: [
+            {
+              breakpoint: 1750,
+              settings: {
+                slidesToShow: 13,
+              }
+            },
+            {
+              breakpoint: 1600,
+              settings: {
+                slidesToShow: 12,
+              }
+            },
+            {
+              breakpoint: 1500,
+              settings: {
+                slidesToShow: 11,
+              }
+            },
+            {
+              breakpoint: 1300,
+              settings: {
+                slidesToShow: 9,
+              }
+            },
+            {
+              breakpoint: 1150,
+              settings: {
+                slidesToShow: 8,
+              }
+            },
+            {
+              breakpoint: 960,
+              settings: {
+                slidesToShow: 7,
+              }
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 5,
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 4,
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 3,
+              }
+            },
+        ]
+    });
+});
+</script>
+{%- endif -%}

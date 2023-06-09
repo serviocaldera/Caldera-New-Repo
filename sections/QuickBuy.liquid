@@ -1,0 +1,238 @@
+<div class="QuickBuy{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+  <h2 class="QuickBuy_heading">Featured Products</h2>
+    <div class="swiper QuickBuy_swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        {% for block in section.blocks %}
+  
+        <div class="swiper-slide QuickBuy_swiper-slide">
+          <a href="/products/{{ block.settings.product }}" target="_blank">
+            <div class="QuickBuy_swiper-slide-wrapper">
+            <div class="QuickBuy_swiper-slide-subwrapper">
+              {% render 'lozad-image', image: block.settings.product_image , class: 'QuickBuy_img' %}
+              {% comment %}<img class="QuickBuy_img lozad" data-src="{{block.settings.product_image | img_url: 'master'}}">{% endcomment %}
+              {% render 'lozad-image', image: block.settings.product_image_hover , class: 'QuickBuy_img-hover' %}
+              {% comment %}<img class="QuickBuy_img-hover lozad" data-src="{{block.settings.product_image_hover | img_url: 'master'}}">{% endcomment %}
+              <div class="QuickBuy_swiper-reviews">
+                <div class="c-productInfo__review QuickBuy-reviews">
+                  <a href="#productReview" >
+                      <span class="yotpo-overlay"></span>
+                      <div class="yotpo bottomLine" data-product-id="{{ block.settings.product.id }}"></div>
+                  </a>
+                </div>
+              </div>
+            
+            </div>
+            <a href="/products/{{ block.settings.product }}" target="_blank">
+              <h3 class="QuickBuy_swiper-title">{{block.settings.product_title}}</h3>
+              <h4 class="QuickBuy_swiper-subtitle">{{block.settings.product_subtitle}}</h4>
+            </a>
+            {% assign product = block.settings.product %}
+         
+           
+            {% include 'QuickBuy-cartForm', product %}
+            </div>
+        </a>
+        </div>
+  
+        {%endfor%}
+      </div>
+      {%comment%}<div class="swiper-pagination swiper-pagination-QuickBuy"></div>{%endcomment%}
+    </div>
+  
+  </div>
+  
+  <script>
+    const swiperQuickBuy = new Swiper('.QuickBuy_swiper', {
+    // Optional parameters
+    slidesPerView: 3,
+   /* pagination: {
+          el: ".swiper-pagination-QuickBuy",
+          clickable: true,
+          renderBullet: function (index, className) {
+            return '<span class="' + className + '">' + (index + 1) + "</span>";
+          },
+        },*/
+    spaceBetween: 20,
+          breakpoints: {
+            300: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            800: {
+              slidesPerView: 3,
+              centeredSlides: false,
+            
+            },
+          },
+  });
+  
+
+  (function(){
+    let a = document.querySelectorAll(".QuickBuy__cf-time-selected");
+    let b = document.querySelectorAll(".QuickBuy__cf-times");
+    let c = document.querySelectorAll(".QuickBuy__cf-time-drop");
+    let d = document.querySelectorAll(".QuickBuy__cf-time");
+    let f = document.querySelectorAll(".QuickBuy__cf-membership-select");
+    var x = window.matchMedia("(max-width: 800px)")
+    let cart = document.querySelectorAll("#CartCount");
+    let currCart;
+    let h = document.querySelectorAll(".QuickBuy__cf-time-selector");
+    let g = document.querySelectorAll(".QuickBuy__cf-single-select");
+    let atc = document.querySelectorAll(".QuickBuy__cf-atc");
+    for(let e = 0;e<3;e++){
+      g[e].classList.add("selected");
+      f[e].addEventListener("click",()=>{
+        if(g[e].classList.contains("selected")){
+          g[e].classList.remove("selected");
+          f[e].classList.add("selected");
+          if (x.matches) {
+            h[e].style.display = "flex";
+          }else{
+            h[e].style.display = "block";
+          }
+          
+        }else {
+          f[e].classList.add("selected");
+          if (x.matches) {
+            h[e].style.display = "flex";
+          }else{
+            h[e].style.display = "block";
+          }
+        }
+      })
+      g[e].addEventListener("click",()=>{
+        if(f[e].classList.contains("selected")){
+          f[e].classList.remove("selected");
+          g[e].classList.add("selected");
+          h[e].style.display = "none";
+        }else {
+          g[e].classList.add("selected");
+          h[e].style.display = "none";
+        }
+      })
+      a[e].addEventListener("click",()=>{
+      if(a[e].classList.contains("visited")){
+        a[e].classList.remove("visited");
+        b[e].classList.remove("open");
+      }else{
+        a[e].classList.add("visited");
+        b[e].classList.add("open");
+      }
+    })
+    atc[e].addEventListener("click",()=>{
+      if(cart[0].classList.contains("u-hidden")){
+        cart[0].classList.remove("u-hidden")
+        currCart=  parseInt(cart.textContent);
+        ++currCart
+        cart.innerHTML = currCart;
+      }else{
+        currCart=  parseInt(cart.textContent);
+        ++currCart
+        cart.innerHTML = currCart;
+      }
+      if(cart[1].classList.contains("u-hidden")){
+        cart[1].classList.remove("u-hidden")
+        currCart=  parseInt(cart.textContent);
+        ++currCart
+        cart.innerHTML = currCart;
+      }else{
+        currCart=  parseInt(cart.textContent);
+        ++currCart
+        cart.innerHTML = currCart;
+      }
+   
+        if(g[e].classList.contains("selected")){
+        CartJS.addItem(c[e].dataset.id, 1, {
+              
+            });
+      }else if(f[e].classList.contains("selected")){
+        CartJS.addItem(c[e].dataset.id, 1, {
+          "Discount Amount": c[e].dataset.discount,
+          "Interval Frequency": c[e].dataset.frequency,
+          "Interval Unit": c[e].dataset.unit,
+          "Subscription":  c[e].textContent + ' days' ,
+          "Subscription Amount": c[e].dataset.price,
+          "Subscription Product Title": c[e].dataset.title
+        });
+      }
+      
+      
+      
+     
+    })
+    }
+    for(let i = 0;i<9;i++){
+      d[i].addEventListener("click",()=>{
+
+      if(i<3){
+        c[0].innerHTML =  d[i].dataset.option
+         a[0].classList.remove("visited");
+        b[0].classList.remove("open");
+      }else if(i<6){
+        c[1].innerHTML =  d[i].dataset.option
+        a[1].classList.remove("visited");
+        b[1].classList.remove("open");
+      }else{
+        c[2].innerHTML =  d[i].dataset.option
+      }  a[2].classList.remove("visited");
+        b[2].classList.remove("open");
+      })
+    }
+  
+  })();
+
+  </script>
+  {% schema %}
+  {
+    "name": "Quick Buy",
+    "tag": "section",
+    "class": "quick-buy-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "section_classname",
+        "label": "Section Class Name"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Product",
+        "type": "product",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "product_image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "product_image_hover",
+            "label": "Hover Image"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "product_title",
+            "label": "Product Title"
+          },
+          {
+            "type": "text",
+            "id": "product_subtitle",
+            "label": "Product SubTitle"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+          "name": "Quick Buy"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,29 @@
+{
+  "shopify": {
+    "checkout": {
+      "order_summary": {
+        "shipping_default_value": "Calculated at next step",
+        "expand_order_summary": "Have a discount code? Click Here"
+      }
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title_html": "Here's your {{ value }} gift card for {{ shop }}!",
+      "subtext": "Thank You For Shopping At Caldera + Lab!",
+      "qr_image_alt": "This is a QR code",
+      "gift_card_code": "Gift card code",
+      "copy_code": "Copy Code",
+      "copy_code_success": "Copied!",
+      "disabled": "Disabled",
+      "expired": "Expired on {{ expiry }}",
+      "active": "Expires on {{ expiry }}",
+      "redeem_html": "Use this code at checkout to redeem your {{ value }} gift card",
+      "shop_link": "Return Home",
+      "print": "Print this gift card",
+      "remaining_html": "{{ balance }} left",
+      "add_to_apple_wallet": "Add to Apple Wallet",
+      "print_gift_card": "Print Gift Card"
+    }
+  }
+}

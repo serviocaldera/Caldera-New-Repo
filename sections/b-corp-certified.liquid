@@ -1,0 +1,44 @@
+<div class="c-bcorpCertified">
+    <div class="wrapper">
+        <div class="c-bcorpCertified__row">
+            <div class="c-bcorpCertified__image">
+                <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title }}" />
+            </div>
+            <div class="c-bcorpCertified__content">
+                <div class="c-bcorpCertified__box">
+                    <h4 class="c-bcorpCertified__heading">
+                        {{ section.settings.title }}
+                    </h4>
+                    <div class="c-bcorpCertified__copy">
+                        {{ section.settings.copy }}
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Certified",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Logo"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default": "Good For People and The Planet"
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy",
+        "default": "Caldera + Lab was founded with one pioneering goal: to build a results-driven men’s skincare brand that was uncompromising in its commitment to social and environmental wellbeing. As a result, we are now one of only 70 US-based personal care companies to receive the prestigious B Corp certification. "
+      }
+    ]
+  }
+{% endschema %}

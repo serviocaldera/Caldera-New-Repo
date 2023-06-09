@@ -1,0 +1,1141 @@
+{% assign selector = '.c-productInfo__col' %}
+{% assign selectHeight = '60' %}
+<style>
+    .submit-message,
+    .customize-btn {
+        display: none;
+    }
+    .cu-option span {
+        color: #3d3d38;
+    }
+    .days-60:before {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 1px;
+        line-height: 12px;
+        text-align: center;
+        opacity: 0.5;
+        color: #3D3D38;
+    }
+    {{ selector }}.sticky .cu-optionsGrid.open .cu-option__option.is-active .days-60:before {
+        color: #FFFFFF;
+    }
+    .c-productInfo__subscription .cu-productTypeSelect__itemContent {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+    .c-productInfo__subscription .cu-productTypeSelect__itemContent > input {
+        display: none;
+    }
+    .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel:before,
+    .cu-option.is-active:before {
+        content: "";
+        background: url('{{ 'icon-check-new.svg' | asset_url }}') no-repeat center center;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 20px;
+        height: 20px;
+        z-index: 1;
+    }
+    {{ selector }}.sticky .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel:before,
+    {{ selector }}.sticky .cu-option.is-active:before {
+        display: none;
+    }
+    {{ selector }}.sticky .c-productInfo__subscription .cu-productTypeSelect__itemContent {
+        justify-content: center;
+    }
+
+    {{ selector }}.sticky .membershipDiscount:before,
+    {{ selector }}.sticky .oneTimePrice:before,
+    {{ selector }}.sticky #getDiscountPrice:before,
+    {{ selector }}.sticky #getOriginalPrice:before {
+        content: " • ";
+    }
+    {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap.is-active #getDiscountPrice,
+    {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap.is-active #getOriginalPrice{
+        color: #fff;
+    }
+
+    {{ selector }}.sticky .quantityAdjust {
+        min-width: 110px;
+        margin-right: 20px;
+        font-weight: bold;
+        background-color: #fff;
+    }
+    {{ selector }}.sticky {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        background-color: #f7f6f3;
+        z-index: 10001;
+        width: 100%;
+        max-width: unset;
+        padding: 20px 100px 18px;
+        align-items: center;
+    }
+    /* /products/the-deep */
+    {{ selector }}.sticky .c-productAccordions,
+    {{ selector }}.sticky .c-productInfo__icons {
+        display: none;
+    }
+
+    {{ selector }}.sticky .c-productInfo__description.c-productInfo__description--desktop,
+    {{ selector }}.sticky .cu-membership.cu-membership--desktop,
+    {{ selector }}.sticky .c-productInfo__currentVariant {
+        display: none;
+    }
+
+    {{ selector }}.sticky .c-productInfo__footer {
+        display: none;
+    }
+    {{ selector }}.sticky .c-productInfo__btnText {
+        font-size: 16px;
+        font-family: Avenir LT Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    }
+    {{ selector }}.sticky .price-item {
+        font-size: 16px;
+    }
+
+    {{ selector }}.sticky .c-productInfo__description.c-productInfo__description--mobile,
+    {{ selector }}.sticky .c-productInfo__excerpt--mobile,
+    {{ selector }}.sticky .cu-membership.cu-membership--mobile {
+        display: none;
+    }
+    /*desktop*/
+    {{ selector }}.sticky .cu-productTypeSelect .cu-productTypeSelect__itemWrap .cu-productTypeSelect__itemLabel,
+    {{ selector }}.sticky .cu-productTypeSelect__itemBox,
+    {{ selector }}.sticky .cu-option {
+        background-color: #e9e6df;
+        border: none;
+    }
+    {{ selector }}.sticky .cu-option.is-active .cu-option__mainText {
+        background: transparent;
+    }
+    @media only screen and (min-width: 992px) {
+        {{ selector }}.sticky .cu-productTypeSelect__itemSub .cu-productTypeSelect__itemContent {
+            width: 90%;
+        }
+        {{ selector }}.sticky .c-productInfo__submit {
+            margin: 0;
+            width: calc(275px + 110px);
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemText-price {
+
+        }
+        {{ selector }}.sticky .cu-option__mainText {
+            min-height: 60px;
+            background-color: transparent;
+        }
+        {{ selector }}.sticky .rc_label_frequency__header {
+            display: none;
+        }
+        {{ selector }}.sticky {
+            display: flex;
+        }
+        {{ selector }}.sticky .c-productInfo__header--desktop {
+            margin-bottom: 5px;
+        }
+        /* face one */
+        {{ selector }}.sticky .c-productInfo__btnPrice {
+            padding: 0;
+        }
+        {{ selector }}.sticky .cu-options.cu-options--frequency {
+            width: unset;
+            order: -1;
+        }
+        {{ selector }}.sticky .cu-upscribe,
+        {{ selector }}.sticky #add-item-form,
+        {{ selector }}.sticky .comboBuy{
+            display: flex;
+        }
+        {{ selector }}.sticky .c-productInfo__subscription {
+            display: flex;
+            align-items: center;
+        }
+        {{ selector }}.sticky .cu-upscribe {
+            margin-top: 0;
+            width: 247px;
+            height: 70px;
+        }
+        {{ selector }}.sticky #add-item-form {
+            margin-left: auto;
+        }
+        {{ selector }}.sticky .cu-options--frequency {
+            margin-top: 0;
+        }
+        {{ selector }}.sticky .c-productInfo__review {
+            margin: 0;
+        }
+        {{ selector }}.sticky .c-productInfo__title {
+            left: 0;
+            font-size: 23px;
+            text-align: left;
+        }
+        /*first select*/
+        {{ selector }}.sticky .cu-productTypeSelect__itemBox {
+            min-height: {{ selectHeight | append: 'px' }};
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap.is-active {
+
+        }
+        {{ selector }}.sticky .cu-productTypeSelect .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemBox:before {
+            display: none;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemBox:before {
+            display: block;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemBox .cu-productTypeSelect__itemText,
+        {{ selector }}.sticky .cu-productTypeSelect__itemBox .cu-productTypeSelect__itemText-price{
+            font-size: 11px;
+            letter-spacing: .6px;
+            font-weight: 700;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect {
+            position: absolute;
+            bottom: 0;
+            max-height: {{ selectHeight | plus: 10 | append: 'px' }};
+            overflow: hidden;
+            width: 305px;
+            transition: all .3s;
+            margin: 0 20px 0 -75px;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel .cu-productTypeSelect__itemBox {
+            background: transparent;
+        }
+        {{ selector }}.sticky .cu-optionsGrid:after,
+        {{ selector }}.sticky .cu-productTypeSelect:after {
+            content: '';
+            cursor: pointer;
+            pointer-events: none;
+            position: absolute;
+            right: 15px;
+            top: 7px;
+            height: 13px;
+            width: 13px;
+            /*bottom: 28px;*/
+            background: url("{{ 'sticky-arrow.png' | asset_url }}") no-repeat center center;
+            background-size: contain;
+            transition: all .3s;
+        }
+        {{ selector }}.sticky .cu-optionsGrid.open:after,
+        {{ selector }}.sticky .cu-productTypeSelect.open:after {
+            transform: rotate(180deg);
+            background: url("{{ 'sticky-arrow-white.png' | asset_url }}") no-repeat center center;
+            background-size: contain;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemLabel input {
+            display: none;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open {
+            max-height: 210px;
+        }
+
+        {{ selector }}.sticky .cu-productTypeSelect > * {
+            display: block;
+            width: 100%;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap {
+            max-height: 0;
+            overflow: hidden;
+            transition: all .3s;
+        }
+        {{ selector }}.sticky .cu-optionsGrid.open .cu-option__option.is-active {
+            background-color: #80894f;
+            order: 1;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemLabel {
+            border: none;
+        }
+        {{ selector }}.sticky .cu-optionsGrid.open .cu-option__option.is-active .cu-option__mainText span {
+            color: #fff;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel {
+            border: none;
+            background-color: #e9e6df;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap.is-active {
+            order: 1;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel {
+            background-color: #80894f;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemText {
+            color: #fff;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap.is-active {
+
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open .cu-productTypeSelect__itemWrap,
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap.is-active {
+            max-height: {{ selectHeight | plus: 10 | append: 'px' }};
+        }
+
+        {{ selector }}.sticky .cu-productTypeSelect .trigger {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect.open .trigger {
+            display: none;
+        }
+        /* second select */
+        {{ selector }}.sticky .cu-optionsGrid {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: -{{ selectHeight | plus: 10 | times: 3 | plus: 85 | append: 'px' }};
+            max-height: {{ selectHeight | plus: 10 | append: 'px' }};
+            height: {{ selectHeight | plus: 10 | append: 'px' }};
+            overflow: hidden;
+            width: 205px;
+            transition: all .3s;
+        }
+        {{ selector }}.sticky .cu-optionsGrid .cu-option__mainText span {
+            font-size: 14px;
+            letter-spacing: .6px;
+            font-weight: 700;
+        }
+        {{ selector }}.sticky .cu-optionsGrid.open {
+            max-height: {{ selectHeight | plus: 10 | times: 3 | append: 'px' }};
+            height: {{ selectHeight | plus: 10 | times: 3 | append: 'px' }};
+            display: flex;
+            flex-wrap: wrap;
+        }
+        {{ selector }}.sticky .cu-optionsGrid .cu-option__option{
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            transition: all .3s;
+            padding: 0;
+            border: none;
+            background-color: #e9e6df;
+        }
+        {{ selector }}.sticky .cu-optionsGrid.open .cu-option__option,
+        {{ selector }}.sticky .cu-optionsGrid .cu-option__option.is-active{
+            max-height: {{ selectHeight | plus: 10 | append: 'px' }};
+            padding: 4px;
+        }
+
+        {{ selector }}.sticky .cu-optionsGrid .cu-option.is-active .cu-option__mainText:before {
+            display: none;
+        }
+        {{ selector }}.sticky .cu-optionsGrid.open .cu-option.is-active .cu-option__mainText:before {
+            display: block;
+        }
+
+        {{ selector }}.sticky .cu-optionsGrid .trigger {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+        }
+        {{ selector }}.sticky .cu-optionsGrid.open .trigger {
+            display: none;
+        }
+        {{ selector }}.sticky .customize-btn,
+        {{ selector }}.sticky .submit-message {
+            display: none;
+        }
+    }
+    /*mobile*/
+    @media only screen and (max-width:  991px) {
+        {{ selector }}.sticky {
+            padding-top: 0;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel .cu-productTypeSelect__itemBox,
+        {{ selector }}.sticky .cu-option__mainText {
+            background: transparent;
+        }
+
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap {
+            height: 60px;
+        }
+
+        {{ selector }}.sticky .c-productInfo__submit {
+            margin: 0;
+        }
+        {{ selector }}.sticky .submit-message,
+        {{ selector }}.sticky .customize-btn {
+            display: block;
+        }
+        {{ selector }}.sticky .quantityAdjust {
+            display: none;
+        }
+        {{ selector }}.sticky .c-productInfo__subscription {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all .3s
+        }
+        {{ selector }}.sticky.open .c-productInfo__subscription {
+            max-height: 300px;
+            opacity: 1;
+        }
+        {{ selector }}.sticky .c-productAccordions,
+        {{ selector }}.sticky .rc_label_frequency__header .c-productFrequency.c-productFrequencyNeedHelp {
+            display: none;
+        }
+        {{ selector }}.sticky .c-productInfo__submit {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        {{ selector }}.sticky .submit-message {
+            width: 100%;
+            height: 20px;
+            text-align: center;
+            margin: 10px 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        {{ selector }}.sticky .customize-btn {
+            width: 35%;
+            margin-right: 5%;
+            display: flex;
+            align-items: center;
+            /*border: 1px solid #AF5D00;*/
+            font-weight: bold;
+            position: relative;
+            cursor: pointer;
+            padding: 0 18px;
+            background-color: #e9e6df;
+        }
+        {{ selector }}.sticky .customize-btn:after {
+            content: '';
+            position: absolute;
+            right: 18px;
+            height: 13px;
+            width: 13px;
+            bottom: 28px;
+            background: url("{{ 'sticky-arrow.png' | asset_url }}") no-repeat center center;
+            background-size: contain;
+            transition: all .3s;
+        }
+        {{ selector }}.sticky.open .customize-btn:after {
+            transform: rotate(180deg);
+        }
+        {{ selector }}.sticky .c-productInfo__submit button[type="submit"] {
+            width: 60%;
+        }
+        {{ selector }}.sticky .cu-upscribe {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 0;
+        }
+        {{ selector }}.sticky .cu-options--frequency {
+            order: -1;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect {
+            width: 100%;
+            margin-top: 20px;
+        }
+        {{ selector }}.sticky {
+            padding-top: 0;
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+        {{ selector }}.sticky .rc_label_frequency__header {
+            padding-top: 0;
+        }
+        {{ selector }}.sticky .customize-btn:after {
+            content: '';
+            position: absolute;
+            height: 10px;
+            width: 10px;
+            bottom: 19px;
+            background: url("{{ 'sticky-arrow.png' | asset_url }}") no-repeat center center;
+            background-size: contain;
+            transition: all .3s;
+        }
+        {{ selector }}.sticky .customize-btn .customize-btn-text,
+        {{ selector }}.sticky .cu-productTypeSelect__itemText,
+        {{ selector }}.sticky .cu-option__mainText{
+            font-size: 14px;
+        }
+        {{ selector }}.sticky .cu-optionsTitle,
+        {{ selector }}.sticky .c-productInfo__btnText,
+        {{ selector }}.sticky .c-productInfo__btnPrice .price-item {
+            font-size: 14px;
+        }
+        {{ selector }}.sticky .c-productInfo__btnPrice {
+            padding: 0 0 2px 0;
+        }
+        {{ selector }}.sticky .c-productInfo__submit button[type="submit"] {
+            max-height: 50px;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemBox {
+            min-height: 50px !important;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemBox,
+        {{ selector }}.sticky .cu-option__mainText {
+            min-height: 45px;
+        }
+        /*
+        {{ selector }}.sticky .cu-option__mainText:before,
+        {{ selector }}.sticky .cu-productTypeSelect__itemBox:before {
+            transform: scale(.7);
+            margin-top: -5px;
+            margin-left: -5px;
+            background: url('{{ 'icon-check-new.svg' | asset_url }}') no-repeat center center;
+        }
+        */
+        {{ selector }}.sticky .submit-message {
+            font-size: 14px;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap {
+            width: 100%;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel,
+        {{ selector }}.sticky .cu-option.is-active {
+            background-color: #80894f;
+            border: none;
+            color: #fff;
+        }
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel .cu-productTypeSelect__itemText,
+        {{ selector }}.sticky .cu-productTypeSelect__itemWrap.is-active .cu-productTypeSelect__itemLabel .cu-productTypeSelect__itemText-price{
+            color: #fff;
+        }
+        {{ selector }}.sticky .cu-option {
+            margin-right: 2%;
+            width: 32%;
+        }
+        {{ selector }}.sticky .cu-option:nth-of-type(3){
+            margin-right: 0;
+        }
+        {{ selector }}.sticky .comboBuy__addtocart .comboBuy__addtocart-text {
+            font-weight: 800;
+            letter-spacing: 2.4px;
+            width: 65%;
+        }
+        body #chat-button {
+            transition: all .25s;
+        }
+        body.show-sticky #chat-button {
+            bottom: 100px;
+        }
+        body.show-sticky.pdp_sticky_active #chat-button {
+            bottom: 340px;
+        }
+        body.show-sticky.pdp_sticky_active.sticky-plan-onetime #chat-button{
+            bottom: 240px;
+        }
+    }
+{%- if template.suffix == 'pdp-combo' -%}
+    .c-product__col .comboBuy__frequency {
+        display: block;
+    }
+    .c-product__col.hide-frequency .comboBuy__frequency {
+        display: none;
+    }
+    .comboBuy__frequency-item:not(:last-child) {
+        border-right: 1px solid #d1cfcc;
+    }
+    .comboBuy__frequency-item.comboBuy__frequency-item--active {
+        border-right: 1px solid #af5d00;
+    }
+    {{ selector }}.sticky .comboBuy .comboVideo__content-copy { display:none }
+    {{ selector }}.sticky .comboBuy__purchaseType-badge,
+    {{ selector }}.sticky .comboBuy .comboBuy__purchaseType .comboBuy__purchaseType-line,
+    {{ selector }}.sticky .comboBuy .comboBuy__title,
+    {{ selector }}.sticky .comboBuy .comboBuy__products,
+    {{ selector }}.sticky .comboBuy .c-productFrequency.c-productFrequencyNeedHelp {
+        display: none;
+    }
+    {{ selector }}.sticky .comboBuy .comboBuy__purchaseType-check {
+        border: none !important;
+    }
+    {{ selector }}.sticky .comboBuy__purchaseSelector--subs {
+        border-bottom: 1px solid #d1cfcc;
+    }
+    {{ selector }}.sticky .comboBuy__frequency-item,
+    {{ selector }}.sticky .comboBuy__purchaseType-selector {
+        background-color: #e9e6df;
+        border: none;
+    }
+    {{ selector }}.sticky .comboBuy__frequency-item:after {
+        border: 5px solid #f7f6f3;
+    }
+    /*desktop*/
+    @media only screen and (min-width: 992px) {
+        {{ selector }}.sticky .buyProductClass {
+            margin-bottom: -5px;
+            height: 70px;
+        }
+        {{ selector }}.sticky {
+            padding: 5px 100px 0;
+        }
+        {{ selector }}.sticky .comboBuy {
+            margin-left: auto;
+            align-items: center;
+            min-height: 115px;
+        }
+        {{ selector }}.sticky .comboBuy .comboBuy__frequency {
+            order: -1;
+            position: relative;
+            left: -345px;
+            width: 205px;
+            height: 70px;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-details {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-title {
+            width: 100%;
+            text-align: center;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-details > p,
+        {{ selector }}.sticky .comboBuy__frequency-item span {
+            font-size: 14px;
+            letter-spacing: .8px;
+            color: #21211e;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+        {{ selector }}.sticky .comboBuy .comboBuy__addtocart {
+            width: 240px;
+            height: 70px;
+        }
+        {{ selector }}.sticky .comboBuy .comboBuy__addtocart .comboBuy__addtocart-text,
+        {{ selector }}.sticky .comboBuy .comboBuy__addtocart .comboBuy__addtocart-value span {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 2.4px;
+        }
+        {{ selector }}.sticky .comboBuy .comboBuy__addtocart-price--regular {
+            margin-left: 0;
+        }
+        {{ selector }}.sticky .comboBuy__addtocart {
+            margin-bottom: -6px;
+        }
+        {{ selector }}.sticky .c-productInfo__title--comboPDP {
+            margin-bottom: 0;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector .comboBuy__frequency-item.comboBuy__frequency-item--active{
+            order: -1;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector.open .comboBuy__frequency-item.comboBuy__frequency-item--active{
+            background-color: #80894f;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector:after,
+        {{ selector }}.sticky .comboBuy__purchaseType:after {
+            content: '';
+            cursor: pointer;
+            pointer-events: none;
+            position: absolute;
+            right: 15px;
+            height: 13px;
+            width: 13px;
+            bottom: 28px;
+            background: url("{{ 'sticky-arrow.png' | asset_url }}") no-repeat center center;
+            background-size: contain;
+            transition: all .3s;
+        }
+
+        {{ selector }}.sticky .comboBuy__frequency-selector.open:after,
+        {{ selector }}.sticky .comboBuy__purchaseType.open:after {
+            transform: rotate(180deg);
+            background: url("{{ 'sticky-arrow-white.png' | asset_url }}") no-repeat center center;
+            background-size: contain;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector .trigger,
+        {{ selector }}.sticky .comboBuy__purchaseType .trigger {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector.open .trigger,
+        {{ selector }}.sticky .comboBuy__purchaseType.open .trigger {
+            display: none;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #21211e;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseSelector--active {
+            order: -1;
+            border-color: #d1cfcc;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType.open .comboBuy__purchaseSelector--active {
+            order: 1;
+        }
+
+        {{ selector }}.sticky .comboBuy__purchaseType.open .comboBuy__purchaseSelector--active {
+            background-color: #80894f;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType.open .comboBuy__purchaseSelector--active .comboBuy__purchaseType-title{
+            color: #fff;
+        }
+        {% comment %}
+        {{ selector }}.sticky .comboBuy__purchaseType.open .comboBuy__purchaseSelector--active:after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            height: 12px;
+            width: 16px;
+            background: url("{{ 'active-checkmark.svg' | asset_url }}") no-repeat center center;
+            background-size: contain;
+        }
+        {% endcomment%}
+        {{ selector }}.sticky .comboBuy__frequency-selector.open .comboBuy__frequency-item--active {
+            order: 1;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector .comboBuy__frequency-item--active > svg {
+            display: none;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector.open .comboBuy__frequency-item--active > span {
+            color: #fff;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-selector {
+            width: 100%;
+            border: none;
+        }
+
+        {{ selector }}.sticky .comboBuy__purchaseType-badge {
+            display: none;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-selectorInner {
+            height: {{ selectHeight | append: 'px' }};
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-item {
+            height: {{ selectHeight | plus: 10 | append: 'px' }};
+            position: relative;
+        }
+        {% comment %}
+        {{ selector }}.sticky .comboBuy__frequency-item:after {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border: 5px solid #f7f6f3;
+            left: 0;
+            top: 0;
+        }
+        {% endcomment %}
+        {{ selector }}.sticky .comboBuy__frequency-item.comboBuy__frequency-item--active {
+            background-color: #f7f6f3;
+        }
+
+        {{ selector }}.sticky .comboBuy__frequency-item:not(:last-child) {
+            border: none;
+            background-color: #e9e6df;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-item.comboBuy__frequency-item--active:not(:last-child) {
+            border-color: #d1cfcc;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType {
+            position: absolute;
+            bottom: -5px;
+            max-height: {{ selectHeight | plus: 10 | append: 'px' }};
+            overflow: hidden;
+            width: 305px;
+            transition: max-height .3s;
+            margin-left: -120px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        {{ selector }}.sticky.hide-frequency .comboBuy__purchaseType {
+            margin-left: -325px;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType.open {
+            max-height: {{ selectHeight | plus: 10 | times: 2 | append: 'px' }};
+        }
+        {{ selector }}.sticky.one-time-helper .comboBuy__purchaseType {
+            margin-left: -225px;
+        }
+
+        {{ selector }}.sticky .comboBuy__frequency-selector {
+            position: absolute;
+            bottom: 0;
+            flex-wrap: wrap;
+            max-height: {{ selectHeight | plus: 10 | append: 'px' }};
+            overflow: hidden;
+            width: 205px;
+            transition: all .3s;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector.open {
+            max-height: {{ selectHeight | plus: 10 | times: 3 | append: 'px' }};
+        }
+        {{ selector }}.sticky .comboBuy__frequency-heading {
+            display: none;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector > * {
+            width: 100%;
+        }
+        {{ selector }}.sticky .comboBuy__addtocart-value {
+            width: 45%;
+        }
+        {{ selector }}.sticky .comboBuy__addtocart-text {
+            width: 60%;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-check {
+            display: none;
+        }
+    }
+    /*tablet adjustment*/
+    @media only screen and (max-width: 1024px) and (min-width: 992px)  {
+        {{ selector }}.sticky .comboBuy {
+            margin-top: 0;
+        }
+        {{ selector }}.sticky .comboBuy .comboBuy__frequency {
+            margin: 0;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType {
+            margin-bottom: 27px;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-selector.comboBuy__purchaseSelector--otp .comboBuy__purchaseType-selectorInner {
+            height: 68px;
+        }
+    }
+    /*mobile*/
+    @media only screen and (max-width:  991px) {
+        .comboBuy__purchaseType-badge {
+            width: 110px;
+            position: initial;
+            text-align: center;
+        }
+        .comboBuy__purchaseSelector--subs .comboBuy__purchaseType-check {
+            width: 26px;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseSelector--active .comboBuy__purchaseType-selectorInner {
+            background-color: transparent;
+        }
+        {{ selector }}.sticky .buyProductClass {
+            flex-wrap: wrap;
+            margin-bottom: 0;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType .comboBuy__purchaseType-selector.comboBuy__purchaseSelector--active {
+            /*border-bottom: 1px solid #af5d00;*/
+            background-color: #80894f;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType .comboBuy__purchaseType-selector.comboBuy__purchaseSelector--active .comboBuy__purchaseType-title {
+            color: #fff;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-selector .trigger,
+        {{ selector }}.sticky .comboBuy__purchaseType .trigger {
+            display: none;
+        }
+        {{ selector }}.sticky .comboBuy {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 0;
+        }
+        {{ selector }}.sticky .comboBuy > * {
+            width: 100%;
+        }
+        {{ selector }}.sticky .comboBuy .comboBuy__frequency {
+            order: -1;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 0;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType > * {
+            width: 100%;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType > * > * {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        {{ selector }}.sticky .comboBuy__frequency-item.comboBuy__frequency-item--active {
+            background-color: #e9e6df;
+        }
+
+        {{ selector }}.sticky .comboBuy__frequency-item.comboBuy__frequency-item--active {
+            background-color: #80894f;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-item.comboBuy__frequency-item--active > span {
+            color: #fff;
+        }
+        {{ selector }}.sticky  .comboBuy > .customize-btn {
+            width: 35%;
+            max-height: 68px;
+        }
+        {{ selector }}.sticky  .comboBuy .comboBuy__addtocart {
+            width: 60%;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType,
+        {{ selector }}.sticky .comboBuy__frequency {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType {
+            margin: 0;
+        }
+        {{ selector }}.sticky .comboBuy__frequency {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        {{ selector }}.sticky.open .comboBuy__frequency {
+            max-height: 105px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        {{ selector }}.sticky.open .comboBuy__purchaseType {
+            max-height: 140px;
+            margin: 1rem 0 0;
+        }
+        /*was in max-width 580px*/
+        {{ selector }}.sticky .comboBuy__frequency-item span,
+        {{ selector }}.sticky .comboBuy__purchaseType-title {
+            font-size: 14px;
+            text-transform: capitalize;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-title {
+            font-weight: 700;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-title,
+        {{ selector }}.sticky .cu-optionsTitle,
+        {{ selector }}.sticky .comboBuy__addtocart > *,
+        {{ selector }}.sticky .comboBuy__addtocart .comboBuy__addtocart-value > * {
+            font-size: 14px;
+        }
+        {{ selector }} .comboBuy__addtocart-text {
+            width: 60%;
+        }
+        {{ selector }}.sticky .cu-optionsTitle {
+            font-weight: 900;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-item {
+            height: 55px;
+            padding: 15px 0;
+            width: 32%;
+            margin-right: 2%;
+        }
+        {{ selector }}.sticky .comboBuy__frequency-item:nth-of-type(3) {
+            margin-right: 0;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType > * {
+            height: 55px;
+            padding: 15px 5px;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-check {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-title,
+        {{ selector }}.sticky .comboBuy__purchaseType-details {
+            width: 100%;
+            text-align: center;
+        }
+        {{ selector }}.sticky .comboBuy__addtocart-value {
+            flex-wrap: wrap;
+        }
+        {{ selector }}.sticky .comboBuy__addtocart-value > * {
+            margin: 0;
+        }
+        {{ selector }}.sticky .comboBuy__purchaseType-check > svg,
+        {{ selector }}.sticky .comboBuy__frequency-item > svg{
+            height: 9px;
+            left: 6px;
+            display: none;
+        }
+        {{ selector }}.sticky .customize-btn,
+        {{ selector }}.sticky .comboBuy .comboBuy__addtocart {
+            height: 50px;
+        }
+    }
+    @media only screen and (max-width:  473px) {
+        .comboBuy__purchaseType-badge {
+            top: unset;
+            bottom: 0;
+        }
+    }
+{%- endif -%}
+</style>
+<script>
+    class StickyForm {
+        constructor(selector) {
+            this.build_class = 'sticky';
+            this.form = document.querySelector(selector);
+            if(this.form){
+               const wrapper = this.form.closest('.c-product__row');
+               if(wrapper){
+                   wrapper.style.height = wrapper.offsetHeight + 20 + 'px';
+               }
+               this.selectInputs();
+               this.mobileTriggerForSelects();
+               this.init();
+            }
+        }
+        applyMessage(){
+                let productTypeSelect = this.form.querySelector('.cu-productTypeSelect .is-active');
+                if(productTypeSelect){
+                    let message = '';
+                    if(productTypeSelect.classList.contains('cu-productTypeSelect__itemSub')){
+                        let firstTxt = productTypeSelect.querySelector('.cu-productTypeSelect__itemText');
+                        if(firstTxt){
+                            message += firstTxt.innerHTML;
+                        }
+                        let optionsGrid = this.form.querySelector('.cu-optionsGrid .is-active');
+                        if(optionsGrid){
+                            let secondTxt = optionsGrid.querySelector('.cu-option__mainText span');
+                            if(secondTxt){
+                                message += ' • '
+                                message += secondTxt.innerHTML;
+                            }
+                        }
+                    }else{
+                        let firstTxt = productTypeSelect.querySelector('.cu-productTypeSelect__itemText');
+                        if(firstTxt){
+                            message += firstTxt.innerHTML;
+                        }
+                    }
+                    this.message.innerHTML = message;
+                }
+        }
+        mobileTriggerForSelects(){
+            let submitWrap = this.form.querySelector('.c-productInfo__submit');
+            if(submitWrap){
+                this.customize = document.createElement('div');
+                this.customize.classList.add('customize-btn');
+                this.customize.innerHTML = `
+                <span class="customize-btn-text">Customize</span>
+                `;
+                submitWrap.prepend(this.customize);
+                this.customize.addEventListener('click', () => {
+                    this.form.classList.toggle('open');
+                    document.body.classList.toggle('pdp_sticky_active');
+                })
+                this.message = document.createElement('div');
+                this.message.classList.add('submit-message');
+                submitWrap.prepend(this.message);
+                this.applyMessage();
+                }
+        }
+        insertAfter(referenceNode, newNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+        initFirstSelectInput(form_selector){
+            let select_input = this.form.querySelector('.'+form_selector);
+            if(select_input){
+                let isTrigger = select_input.querySelector('.trigger');
+                if(!isTrigger){
+                    let triggerHelper = document.createElement('div');
+                    triggerHelper.classList.add('trigger');
+                    select_input.append(triggerHelper);
+                    triggerHelper.addEventListener('click', () => {
+                        select_input.classList.add('open');
+                    })
+                }
+                let closeTriggers = [];
+                    closeTriggers = select_input.querySelectorAll('.cu-productTypeSelect__itemWrap');
+                    if(closeTriggers){
+                        closeTriggers.forEach(closeTrigger => {
+                            if(closeTrigger.classList.contains('is-active')){
+                                closeTrigger.addEventListener('click', () => {
+                                    select_input.classList.remove('open');
+                                })
+                            }else{
+                                closeTrigger.addEventListener('click', () => {
+                                    let timeout = setTimeout(() => {
+                                        this.initFirstSelectInput(form_selector);
+                                        this.initSecondSelectInput('cu-optionsGrid');
+                                        this.applyMessage();
+                                        clearTimeout(timeout);
+                                    }, 1000);
+                                })
+                            }
+                        })
+                    }
+            }
+        }
+        initSecondSelectInput(form_selector){
+            let select_input = this.form.querySelector('.'+form_selector);
+            if(select_input) {
+                let isTrigger = select_input.querySelector('.trigger');
+                if(!isTrigger){
+                    let triggerHelper = document.createElement('div');
+                    triggerHelper.classList.add('trigger');
+                    select_input.append(triggerHelper);
+                    triggerHelper.addEventListener('click', () => {
+                        select_input.classList.add('open');
+                    })
+                }
+                let closeTriggers = [];
+                    closeTriggers = select_input.querySelectorAll('.cu-option__option');
+
+                if(closeTriggers){
+                    closeTriggers.forEach(closeTrigger => {
+                        closeTrigger.addEventListener('click', () => {
+                            select_input.classList.remove('open');
+                            this.applyMessage();
+                        })
+                    })
+                }
+            }
+        }
+        selectInputs(){
+            this.initFirstSelectInput('cu-productTypeSelect');
+            this.initSecondSelectInput('cu-optionsGrid');
+        }
+        // getPoints(){
+        //     let points = {
+        //         'trigger_point': this.form.offsetTop,
+        //         'scroll_offset': window.pageYOffset
+        //     };
+        //     if(window.innerWidth < 992){
+        //         points.trigger_point += this.heightKepperHeight;
+        //     }else{
+        //         points.trigger_point += this.form.offsetHeight;
+        //     }
+        //     return points;
+        // }
+        build(){
+            var formheight = $(".c-productInfo__col").outerHeight();
+            if($(window).scrollTop() >= $('#sticky-start').offset().top){
+                if(!this.form.classList.contains(this.build_class)){
+                    this.form.classList.add(this.build_class);
+                    document.body.classList.add('show-sticky');
+                    $("#height-keeper").css("height", formheight + 40)
+                }
+            }else{
+                if(this.form.classList.contains(this.build_class)){
+                    this.form.classList.remove(this.build_class);
+                    document.body.classList.remove('show-sticky');
+                    $("#height-keeper").css("height", 0)
+                }
+            }
+        }
+        init(){
+            this.build();
+            window.addEventListener('scroll', (e) => {
+                this.build();
+            })
+        }
+    }
+    window.addEventListener('load', function (){
+        console.log('====================================');
+        new StickyForm('{{ selector }}'); console.log('STICKY FORM INIT');
+        console.log('====================================');
+    })
+</script>

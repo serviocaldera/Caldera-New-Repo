@@ -1,0 +1,51 @@
+<div class="c-landerHero">
+    <div class="wrapper">
+        <div class="c-landerHero__row">
+            <div class="c-landerHero__image">
+                <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.heading }}" />
+            </div>
+            <div class="c-landerHero__content">
+                <h2 class="c-landerHero__heading">{{ section.settings.heading }}</h2>
+                <div class="c-landerHero__copy">
+                    {{ section.settings.copy }}
+                </div>
+                <a href="{{ section.settings.btnurl }}" data-animate-scroll class="btn btn--primary c-landerHero__btn">{{ section.settings.btntext }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--c-landerHero-->
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+        },
+        {
+            "type":"text",
+            "id":"heading",
+            "label":"Heading",
+            "default":"'Your Best Skin Ever.'  - Dr. Hyman"
+        },
+        {
+            "type":"html",
+            "id":"copy",
+            "label":"Copy"
+        },
+        {
+            "type":"text",
+            "id":"btntext",
+            "label":"Button Text",
+            "default":"get 20% off"
+        },
+        {
+            "type":"url",
+            "id":"btnurl",
+            "label":"Button Url"
+        }
+    ]
+  }
+{% endschema %}

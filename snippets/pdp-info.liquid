@@ -1,0 +1,1038 @@
+{% assign pdt_discount = product.metafields.sf_upscribe.discount_amount %}
+{% unless pdt_discount contains '.' %}
+    {% assign pdt_discount = pdt_discount | replace: '%', '.0%' %}
+{% endunless %}
+<div class="wrapper pdp-regular-template">
+  {% assign current_variant = product.selected_or_first_available_variant %}
+
+  <div class="c-product__row">
+      <div class="c-product__col c-productImage__col">
+          <div class="c-productImage__gallery">
+              <div class="c-productImage__featured c-productImage__featured-regularTemplate" data-pdp-image-slider>
+                  {% for image in product.images %}
+                      <div class="c-productImages">
+                          <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ product.title | escape }}" class="lazyload" />
+                      </div>
+                  {% endfor %}
+              </div>
+              {% if product.images.size > 1 %}
+                  <div class="c-productImage__thumbs c-productImage__thumbs-regularTemplate{% if product.metafields.custom_fields["enable_combobuy_section"] == 1 %} c-productImage__thumbs--comboBuy{% endif %}" data-pdp-sliderthumb-slider>
+                      {% for image in product.images %}
+                          <div class="c-productImage__item">
+                              <img src="{{ image | img_url: '2x' }}" data-src="{{ image | img_url: 'master' }}" alt="{{ image.alt | escape }}" class="c-productImage__img lazyload" />
+                          </div>
+                      {% endfor %}
+                  </div>
+              {% endif %}
+          </div>    
+      </div>
+      <div class="c-product__col c-productInfo__col">   
+          <div class="c-productInfo__col--wrapper{% if product.available == false %} oos-sticky--wrapper{% endif %}">             
+          <div class="c-productInfo__header">
+              <div class="c-productInfo__currentVariant">
+                  {% if product.metafields.custom_fields["product_informtion_type"] != blank %}
+                      <span class="c-productInfo__productType">{{ product.metafields.custom_fields["product_informtion_type"] }}</span>
+                  {% endif %}
+                  {% comment %} | {{ current_variant.title }} {% endcomment %} 
+              </div>
+              <h1 class="c-productInfo__title" itemprop="name">{{ product.title }}</h1>
+
+              <div class="c-productInfo__review">
+               {%- if product.metafields.custom_fields["enable_combobuy_section"] == 1 -%}    
+                      <a href="#productReview" class="animate-scroll" onclick="scrollFunction();">
+                      <span class="yotpo-overlay"></span>
+                      <div class="yotpo bottomLine yotpo-small" data-product-id="2144685883450" data-yotpo-element-id="3">
+                          <div class="yotpo-display-wrapper" style="visibility: hidden;">
+                              <div class="standalone-bottomline" data-source="default" tabindex="-1">
+                                  <div class="yotpo-bottomline pull-left  star-clickable" tabindex="0">
+                                      <span class="yotpo-stars">
+                                          <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                          <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                          <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                          <span class="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                                          <span class="yotpo-icon yotpo-icon-half-star rating-star pull-left"></span>
+                                      </span>
+                                      <span class="text-m review-stars">{{section.settings.reviews_number}}</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </a>
+                   {%- else -%}      
+                      <a href="#productReview" class="animate-scroll">
+                          <span class="yotpo-overlay"></span>
+                          <div class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
+                      </a>
+                   {%- endif -%}
+              </div>
+          </div>
+
+          {% if product.metafields.custom_fields["enable_new_product_icons"] == 1 %}
+              <div class="c-productInfo__icons"> 
+                  {% for item in product.metafields.custom_fields["product_icons_new"] %}
+                      
+                      <div class="c-productInfo__icon c-productInfo__icon--regular">
+                          {% if item["icon_image"] != blank %}
+                              <div class="c-productInfo__icon-image">
+                                  <img src="{{ item["icon_image"] }}" class="c-productInfo__icon--img" 
+                                  {% if item["icon_title"] != blank %}
+                                  alt="{{ item["icon_title"] }} icon" {% else %} alt="product feature icon"
+                                  {% endif %}
+                                  >
+                              </div>                 
+                          {% endif %}                                            
+                          {% if item["icon_title"] != blank %}                          
+                              <span class="c-productInfo__icon-title">{{ item["icon_title"] }}</span>
+                          {% endif %}    
+                      </div>
+                  {% endfor %}                                        
+              </div>
+          {% endif %} 
+
+
+          {% if product.metafields.custom_fields["combobuy_products"] != blank %}
+              <div class="c-productInfo__icons combobuy__icons"> 
+                   {%- assign oos-exists = 0 -%}
+                   {%- for item in product.metafields.custom_fields["combobuy_products"] -%}
+                      {%- if item["combobuy_prodhandle"] != blank -%}
+                          {%- assign metaproduct = all_products[item["combobuy_prodhandle"]] -%}
+                      {%- endif -%}
+                      {%- if metaproduct.available == false -%} 
+                          {%- assign oos-exists = 1 -%}
+                      {%- endif -%}
+                      <div class="c-productInfo__icon{% if metaproduct.available %} c-productInfo__icon--active{% else %} c-productInfo__icon--oos{% endif %}">
+                        
+                          {% if item["combobuy_prodthumb"] != blank %}
+                              <div class="c-productInfo__icon-image combobuy_icons-image">
+                                  <img src="{{ item["combobuy_prodthumb"] }}" class="c-productInfo__icon--img" 
+                                  {% if metaproduct.title != blank %}
+                                  alt="{{ item["icon_title"] }} icon" {% else %} alt="product feature icon"
+                                  {% endif %}
+                                  >
+                              </div>                 
+                          {% endif %}   
+
+                          {% if metaproduct.title != blank %}                         
+                              <span class="c-productInfo__icon-title c-productInfo__icon-title--combo">{{ metaproduct.title }}</span>
+                          {% endif %}  
+
+                          <div class="c-productInfo__info {% if metaproduct.available %} c-productInfo__info--active{% else %} c-productInfo__info--oos{% endif %}">
+                              Sold Out
+                          </div>
+                      </div>
+                  {% endfor %}                                        
+              </div>
+          {% endif %}  
+        
+          <div class="c-productInfo__description{% if product.metafields.custom_fields["combobuy_products"] != blank %} comboBuy__prod-description{% if oos-exists > 0 %} oos-exists{% endif %}{% endif %}">
+              {% if product.metafields.custom_fields["enable_product_excerpt"] == 1 %}
+                  <div class="c-productInfo__excerpt">
+                      {% if product.metafields.custom_fields["product_excerpt_title"] != blank %}
+                          <h3 class="c-productInfo__excerpt-title">{{ product.metafields.custom_fields["product_excerpt_title"] }}</h3>
+                      {% endif %} 
+                      {% if product.metafields.custom_fields["product_excerpt_content"] != blank %}
+                          <div class="c-productInfo__excerpt-content">{{ product.metafields.custom_fields["product_excerpt_content"] }}</div>
+                      {% endif %}    
+                  </div>  
+              {% else %}
+                  {% if product.metafields.custom_fields["enable_quiz_description"] == 1 %}
+                      <div class="c-productInfo__quizDes">
+                          <div class="c-productInfo__text" data-original>
+                              {{ product.description }}
+                          </div>
+                          {% if product.metafields.custom_fields["quiz_description_normal"] != blank %}
+                          <div class="c-productInfo__text" data-normal>
+                              {{ product.metafields.custom_fields["quiz_description_normal"] }}
+                          </div>
+                          {% endif %}
+                          {% if product.metafields.custom_fields["quiz_description_oily"] != blank %}
+                          <div class="c-productInfo__text" data-oily>
+                              {{ product.metafields.custom_fields["quiz_description_oily"] }}
+                          </div>
+                          {% endif %}
+                          {% if product.metafields.custom_fields["quiz_description_dry"] != blank %}
+                          <div class="c-productInfo__text" data-dry>
+                              {{ product.metafields.custom_fields["quiz_description_dry"] }}
+                          </div>
+                          {% endif %}
+                      </div>
+                  {% else %}
+                      {{ product.description }}
+                  {% endif %}
+              {% endif %}
+          </div>
+
+          <div id="add-item-form">
+          {%- if product.available or product.metafields.custom_fields["combobuy_products"] != blank  -%}
+              {% if product.metafields.custom_fields["enable_pre_order_product"] == 1 %}
+                  <input type="hidden" value="{{ product.title }}" id="preorderItem" name="properties[Pre Order Item]">
+              {% endif %}
+                  {% include 'upscribe-subscription-product' %}
+          {%- else -%}
+              {%- for variant in product.variants -%}
+                  {%-assign variantID = variant.id -%}
+              {%- endfor -%}
+              <div class="oos-wrapper">
+                 {%- if section.settings.oos-title -%}
+                      <h5 class="oos-title oos-info--hide">{{section.settings.oos-title}}</h5>
+                  {%- endif -%}
+                  
+                  {%- if section.settings.oos-text -%}
+                      <p class="oos-description oos-info--hide">{{section.settings.oos-text}}</p>
+                  {%- endif -%}
+                  <form action="" id="oos-form" class="oos-info--hide">
+                      <input id="oos-form-customer_email" name="oos-form-customer_email" class="oos-form-input" value="" placeholder="Email Address" />
+                      <div class="oos-form--posting">Please wait...</div>
+                      <div class="c-productInfo__submit oos-form-submit">
+                          <button id="oos-btn" class="btn btn--primary oos-btn-klaviyo" href="#">
+                          <span class="c-productInfo__btnText">{{section.settings.oos-btn}}</span>
+                          </button>
+                      </div>
+                  </form>
+                  <div class="oos-info oos-info--success" style="display:none">{{section.settings.oos-success | escape_html}}</div>
+                  <div class="oos-info oos-info--error" style="display:none">{{section.settings.oos-error | escape_html}}</div>
+                  <script>
+                      $(document).ready(function() {
+                        var KlaviyoCheck = $('#oos-btn');
+                        if (KlaviyoCheck.lenght > 0){
+                          $("#oos-btn").click(function(event ) {
+                            event.preventDefault();
+                            $("#oos-form").addClass("active-loader");
+                            var email = $('#oos-form-customer_email').val();
+                            $.ajax({
+                              type:"POST",
+                              url: "https://a.klaviyo.com/onsite/components/back-in-stock/subscribe",
+                              data:{
+                                a:"Pckb5m",
+                                email: email,
+                                variant:"{{variantID}}",
+                                platform:"shopify"
+                              },
+                                success: function(response) {
+                                   $(".oos-form").removeClass("active-loader");
+                                   $(".oos-info--success").show();
+                                   $(".oos-info--error").hide();
+                                   $(".oos-info--hide").hide();
+                                   $(".oos-wrapper").addClass("oos-wrapper--width");
+                                },
+                                error: function(response) {
+                                   $(".oos-form").removeClass("active-loader");
+                                    $("#oos-form-customer_email").addClass("oos-form-input--error");
+                                    $(".oos-info--error").show();
+                                    $(".oos-info--success").hide();
+                                }
+                            });
+                          });
+                        }
+                      });
+                      </script>
+              </div>
+          {%- endif -%}
+          </div>
+          
+          <div class="c-productInfo__footer ">
+                      <div class="c-productInfo__footerLinks c-productInfo__footerLinks--regular-template">
+                          {%- if section.settings.risk-free-usa or section.settings.risk-free-world -%}
+                          <div class="c-productFrequency c-productFrequencyReturn">
+                              <div class="c-productFrequency__text">
+                                   <span class="c-productFrequency__icon">{% include 'icon-risk-free-new' %} </span>
+                                  <span class="c-productFrequency__link">
+                                  {%- if shop.money_with_currency_format contains 'USD' -%}
+                                      {%- if product.metafields.custom_fields["product_risk_free_usa"] != blank -%}
+                                        {{ product.metafields.custom_fields["product_risk_free_usa"] }}
+                                       {%- else -%}
+                                        {{ section.settings.risk-free-usa }}
+                                       {%- endif -%}
+                                  {%- else -%} 
+                                       {%- if product.metafields.custom_fields["product_risk_free_world"] != blank -%}
+                                        {{ product.metafields.custom_fields["product_risk_free_world"] }}
+                                       {%- else -%}
+                                        {{ section.settings.risk-free-world }}
+                                       {%- endif -%}
+                                  {%- endif -%}
+                                  </span>
+                              </div>
+                              <div class="c-productFrequency__dropdown">
+                                  <div class="c-productFrequency__heading">
+                                      {% include 'icon-return' %}
+                                      <span>
+                                      {%- if shop.money_with_currency_format contains 'USD' -%}
+                                           {%- if product.metafields.custom_fields["product_risk_free_usa"] != blank -%}
+                                            {{ product.metafields.custom_fields["product_risk_free_usa"] }}
+                                           {%- else -%}
+                                            {{ section.settings.risk-free-usa }}
+                                           {%- endif -%}
+                                      {%- else -%} 
+                                           {%- if product.metafields.custom_fields["product_risk_free_world"] != blank -%}
+                                            {{ product.metafields.custom_fields["product_risk_free_world"] }}
+                                           {%- else -%}
+                                            {{ section.settings.risk-free-world }}
+                                           {%- endif -%}
+                                      {%- endif -%}
+                                      </span>
+                                  </div>
+                                  <a href="#" class="c-productFrequency__close">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon" viewBox="0 0 20 20"><path d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"/></svg>
+                                  </a>
+                                  <div class="c-productFrequency__content">
+                                      {%- if product.metafields.custom_fields["product_return_policy"] != blank -%}
+                                      {{ product.metafields.custom_fields["product_return_policy"] }}
+                                     {%- else -%}
+                                       {{ section.settings.return-policy }}
+                                     {%- endif -%}
+                                  </div>
+                              </div>
+                          </div>
+                          {%- endif -%}
+                          {%- if section.settings.shipping-details-text -%}
+                          <div class="c-productFrequency c-productFrequencyShipping">
+                              <div class="c-productFrequency__text c-productFrequency__last">
+                                  <span class="c-productFrequency__icon">{% include 'icon-shipping-box-new' %} </span>
+                                  <span class="c-productFrequency__link">
+                                  {{ section.settings.shipping-details-text }}
+                                </span>
+                              </div>
+                              <div class="c-productFrequency__dropdown">
+                                  <div class="c-productFrequency__heading">
+                                      {% include 'icon-shipping' %}
+                                      <span>{{ section.settings.shipping-details-text }}</span>
+                                  </div>
+                                  <a href="#" class="c-productFrequency__close">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon" viewBox="0 0 20 20"><path d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"/></svg>
+                                  </a>
+                                  <div class="c-productFrequency__content"> 
+                                    {%- if product.metafields.custom_fields["product_shipping_details"] != blank -%}
+                                      {{ product.metafields.custom_fields["product_shipping_details"] }}
+                                     {%- else -%}
+                                      {{ section.settings.shipping-details }}
+                                     {%- endif -%}
+                                  </div>
+                              </div>
+                          </div>
+                          {%- endif -%}
+
+                      </div>
+                  </div>
+                  <!--c-productInfo__footer-->
+
+          <div class="c-productAccordions">
+              {% if product.metafields.custom_fields["enable_full_product_descrip"] == 1 %}
+                  <div class="c-productInfo__content">
+                      {% if product.metafields.custom_fields["full_product_descrip_content"] != blank %}
+                      <h5 class="c-productInfo__heading" data-pdp-accordion-toggle>
+                          Full product description
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--plus">{% include 'icon-accordion-plus' %}</span>
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--minus">{% include 'icon-accordion-minus' %}</span>
+                      </h5> 
+                      <div class="c-productInfo__copy" data-pdp-accordion-content>
+                          {{ product.metafields.custom_fields["full_product_descrip_content"] }}
+                      {% endif %}
+                      </div>   
+                  </div>
+              {% endif %}
+              {% if product.metafields.custom_fields["enable_how_to_use_section"] == 1 %}
+                  <div class="c-productInfo__content">
+                      {% if product.metafields.custom_fields["how_to_use_content"] != blank %}
+                      <h5 class="c-productInfo__heading" data-pdp-accordion-toggle>
+                          How To Use
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--plus">{% include 'icon-accordion-plus' %}</span>
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--minus">{% include 'icon-accordion-minus' %}</span>
+                      </h5> 
+                      <div class="c-productInfo__copy" data-pdp-accordion-content>
+                          {{ product.metafields.custom_fields["how_to_use_content"] }}
+                      {% endif %}
+                      </div>   
+                  </div>
+              {% endif %}
+              {% if product.metafields.custom_fields["enable_ingredients"] == 1 %}
+                  <div class="c-productInfo__content">
+                      {% if product.metafields.custom_fields["ingredients_content"] != blank %}
+                      <h5 class="c-productInfo__heading" data-pdp-accordion-toggle>
+                          Ingredients
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--plus">{% include 'icon-accordion-plus' %}</span>
+                          <span class="c-productInfo__heading-icon c-productInfo__heading-icon--minus">{% include 'icon-accordion-minus' %}</span>
+                      </h5> 
+                      <div class="c-productInfo__copy" data-pdp-accordion-content>
+                          {{ product.metafields.custom_fields["ingredients_content"] }}
+                      {% endif %}
+                      </div>   
+                  </div>
+              {% endif %}
+          </div>
+          </div>
+      </div>
+      <div id="height-keeper"></div>
+  </div>
+  <div id="sticky-start"></div>
+</div>
+
+{% include 'popup-modal' %}
+
+{%-  comment -%}
+  CARTjs - adding to cart (for both single and combo products)
+{%-  endcomment -%}
+
+{%- if product.available or product.metafields.custom_fields["combobuy_products"] != blank  -%}
+<script type="text/javascript">
+   var items = [];
+   var discountCheck = $('#getDiscountPrice');
+   var discount = '{{ pdt_discount }}';
+   var discountPercentage = parseFloat(discount.replace('%',''));
+  $('.cu-productTypeSelect .cu-productTypeSelect__itemBox').click(function(){
+      var parentEl = $(this).parent().parent();
+      parentEl.addClass('is-active');
+      parentEl.siblings().removeClass('is-active');
+      if($(parentEl).hasClass('cu-productTypeSelect__itemOneTime')){
+          $('.cu-options--frequency').css('display','none');
+          $('.form__addtocart').attr('data-frequency', '');
+          var discount = $('#getOriginalPrice').text();
+            $('#AddToCart .cu__total-price').text(discount)
+      }else{
+          $('.cu-options--frequency').css('display','block');
+          $('.form__addtocart').attr('data-frequency', '60 day')
+          var discount = $('#getDiscountPrice').find('strike').attr('data-discounted');
+            $('#AddToCart .cu__total-price').text(discount)
+      }
+  })
+
+  var clicked;
+  $('.cu-optionsGrid .cu-option__option ').click(function(){
+      $(this).addClass('is-active');
+      $(this).siblings().removeClass('is-active');
+      clicked = $(this).find('.day-to-select').text();
+      $('.form__addtocart').attr('data-frequency', clicked)
+  });
+  
+  $('.form__addtocart').click(function() {
+      var selectedFrequency = $(this).attr('data-frequency');   
+      var items = [];
+      var quantity = $('.quantityAdjust .actualQTY').text();
+      console.log(quantity)
+      if($('.comboBuy__products .comboBuy__prod').length > 0){
+          
+          $('.comboBuy__products .comboBuy__prod').each(function(){
+              if($(this).hasClass('comboBuy__prod--active')){
+                  //console.log($(this).attr('data-discount-percentage'))
+                  var discount = $(this).attr('data-discount-percentage');
+                  var discountPercentage = parseFloat(discount.replace('%',''));
+                  var price = parseFloat($(this).attr('data-regular-price') / 100);
+                  var discount_amount = Math.round(price - (discountPercentage / 100) * price);
+                  
+                  if(selectedFrequency){
+                      items.push({
+                          id: $(this).attr('data-varient-id'),
+                          quantity: quantity,
+                          properties: {
+                              'Subscription Product Title': $(this).attr('data-subscription-title'),
+                              'Subscription': selectedFrequency,
+                              'Subscription Amount': parseInt(discount_amount)
+                          }
+                      })
+                  }else {
+                      items.push({
+                          id: $(this).attr('data-varient-id'),
+                          quantity: quantity
+                      })
+                  }
+              }
+          })
+      }else {
+          var properties = [];
+          
+          var discount_amount = '{{discountTotal | money_without_currency}}';
+          if(selectedFrequency){
+              properties.push({
+                  'Subscription Product Title': $('.cu-subscription-inputs').attr('data-subscription-title'),
+                  'Subscription': selectedFrequency,
+                  'Subscription Amount': discount_amount
+              });
+          }
+          items.push({
+              id: $('.cu-subscription-inputs').attr('data-varient-id'),
+              quantity: quantity,
+              properties: properties[0]
+          })
+      }
+      //console.log(items)
+      CartJS.addItems(items,{
+          "success": function(data, textStatus, jqXHR) {
+              const cartCounts = document.querySelectorAll('#CartCount.u-hidden');
+              if(cartCounts && cartCounts.length) {
+                  cartCounts.forEach(cartCount => {
+                      cartCount.classList.remove('u-hidden');
+                  })
+              }
+          }
+      })
+  });
+
+  var discount = $('#getDiscountPrice').find('strike').attr('data-discounted');
+    $('#AddToCart .cu__total-price').text(discount)
+
+  document.querySelector(".subQty").addEventListener("click", ()=>{
+      if(parseInt(document.querySelector(".actualQTY").textContent) > 1){
+          document.querySelector(".actualQTY").textContent = parseInt(document.querySelector(".actualQTY").textContent)-1;
+          var discount = $('#getDiscountPrice').find('strike').attr('data-discounted');
+      }
+  });
+
+  document.querySelector(".addQty").addEventListener("click", ()=>{
+      document.querySelector(".actualQTY").textContent = parseInt(document.querySelector(".actualQTY").textContent)+1
+        var discount = $('#getDiscountPrice').find('strike').attr('data-discounted');
+  });
+
+
+
+  setTimeout(function(){
+      $('.cu-optionsGrid .cu-option:nth-child(2)').trigger("click");
+  }, 100);
+</script>
+  {%- endif  -%}
+<script type="text/javascript">
+  function scrollFunction() {
+      if(window.pageYOffset > 1200){
+          const id = 'pdpComboReviews';
+          const yOffset = -105;
+          const element = document.getElementById(id);
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({top: y, behavior: 'smooth'});
+      }else {
+          var element = document.getElementById('pdpComboReviews');
+          var headerOffset = 105;
+          var elementPosition = element.getBoundingClientRect().top;
+          var offsetPosition = elementPosition - headerOffset;
+          window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+          });
+      }
+  }
+</script>
+<script>
+  $('.promo-bar').addClass('is-opaque');
+  $('.nav-mobile').addClass('is-opaque');
+  $('.nav-desktop').addClass('is-opaque');
+
+  $('.c-productFrequency__text').click(function(){
+      $('.c-productFrequency__dropdown').fadeOut();
+      $(this).parents('.c-productFrequency').find('.c-productFrequency__dropdown').fadeIn();
+  });
+
+  $('.c-productFrequency__close').click(function(){
+      $('.c-productFrequency__dropdown').fadeOut();
+      return false;
+  });
+</script>
+
+{%- comment -%}
+  Code that could be removed?
+{%- endcomment -%}
+
+<script>
+{%- comment -%}
+  // function repeat() {
+  //     let currentDiv1 = document.querySelectorAll(".c-productInfo__review");
+  //         currentDiv1.forEach(e => {
+  //             let link1 = e.querySelector(".animate-scroll")
+  //             let link1Text =  link1.href;
+
+  //             link1.querySelector(".text-m").href = link1Text
+  //         })
+  //              if(currentDiv1){
+  //                 stopInterval();
+  //             }
+  // }
+  // const myInterval = setInterval(repeat, 500);
+  // function stopInterval() {
+  //         clearInterval(myInterval);
+  // }
+{%- endcomment -%}
+  const custIdJS = {{ customer.id | json}};
+  const productNameJS = {{product.title | json}};
+  const variantId = {{product.selected_or_first_available_variant.id | json}};
+  const promoLoaderImg = "";
+  const variantPrice = parseFloat({{ current_variant.price | money | remove: '.00' | json }}.slice(1));
+  const productDiscount = parseFloat({{ pdt_discount | json }});
+  const discountedPrice = Math.round(variantPrice - ((variantPrice * productDiscount)/100));
+
+  //DOM ELEMENTS
+  // btns on pdp
+  const membershipLoginBtn = document.querySelectorAll('.cu-membership__btn--login')
+  const membershipAddBtn = document.querySelectorAll('.cu-membership__btn--add')
+  // general content on popup modal
+  const popupModel = document.querySelector('.popup-modal');
+  const popupContent = document.querySelector('.popup-modal__content');
+  const popupBody = document.querySelector('.popup-modal__body');
+  const popupClose = document.querySelector('.popup-modal__close')
+  const popupTitle = document.querySelector('.popup-modal__title');
+  const popupDescription = document.querySelector('.popup-modal__description');
+  const popupLoader = document.querySelector('.popup-modal__loader');
+  // content on popup from
+  const cuForm = document.querySelector('.cu-form');
+  const footerCta = document.querySelector('.cu-form__footer-cta');
+  const custLoginForm = document.getElementById('customer_login');
+
+  const membershipState = {
+      item: false,
+      itemActive: false,
+  }
+  
+  // Util functions
+  const openModal = () => {
+      popupModel.classList.remove('popup-modal--hidden');
+      popupContent.classList.remove('popup-modal__content--hidden');
+  }
+  
+  const closeModal = () => {
+      popupModel.classList.add('popup-modal--hidden');
+      popupContent.classList.add('popup-modal__content--hidden');
+  }
+  
+  //switching "login/add to subscription" buttons on PDP
+  if(custIdJS) Array.from(membershipAddBtn).map(btn => btn.style.display = 'block')
+  else Array.from(membershipLoginBtn).map(btn => btn.style.display = 'block')
+  
+  Array.from(membershipLoginBtn).map(btn => btn.addEventListener('click', openModal))
+
+  // closing popup
+  popupClose.addEventListener('click', closeModal)
+  footerCta.addEventListener('click', closeModal)
+
+  
+  // on form submit
+  custLoginForm.addEventListener('submit', event => {
+      localStorage.formSubmitted = true;
+  })
+
+  // generating subscription/memberships that a user has subscribed for 
+  populateSubscriptionItems = item => {
+      if(item.active){
+          const date = new Date(item.next.date);
+          const day = date.getDate()
+          const month = date.getMonth()
+          const year = date.getFullYear()
+          const shipsOn = `${month}/${day}/${year}`;
+          return (`<div class="activeSub" data-membershipId="${item.id}" data-nextId="${item.next.id}">
+                      <div class="activeSub__header">
+                          {% render 'icon-check-white' %}
+                          <span class="activeSub__title">Ships on ${shipsOn} Every ${item.interval} Days</span>
+                      </div>
+                      <div class="activeSub__body">
+                          <h6 class="activeSub__info-title">Currently Includes</h6>
+                          <span class="activeSub__info">${item.items.map(i => i.title ).join(' + ')}</span>
+                          <h6 class="activeSub__info-title">Ships to</h6>
+                          <span class="activeSub__info">${item.shipping_address.address1}, ${item.shipping_address.city}, ${item.shipping_address.province_code}, ${item.shipping_address.zip}</span>
+                      </div>
+                  </div>`)
+          }
+  }
+
+  // mainuplate popup for message after login
+  mainuplatePopupMessage = () => {
+      if(membershipState.item){
+          popupBody.innerHTML = 
+          `<h5 class="popup-modal__title">Manage your account</h5>
+          <p class="popup-modal__description"> It looks like you have a membership, but none of your subscriptions are active.</p>
+          <p class="popup-modal__description"> To add new products to your subscription click below to manage your account and add products directly from your account portal.</p>
+          <a class="popup-modal__manageAccount-btn" href="https://calderalab.com/account?view=subscriptions#/">Manage Account</a>
+          <span class="popup-modal__continueShopping-link">Continue Shopping</span>`
+          document.querySelector('.popup-modal__continueShopping-link').addEventListener('click', closeModal)
+          
+          if(membershipState.itemActive){
+              popupBody.innerHTML = 
+              `<h5 class="popup-modal__title">Success! You are Logged in!</h5>
+              <p class="popup-modal__description">Please wait while we lookup information on your account.</p>
+              <span class="popup-modal__continueSubscription-btn">Continue Subscription</span>`
+              const continueSubsBtn = document.querySelector('.popup-modal__continueSubscription-btn');
+              continueSubsBtn.style.display = 'none';
+              continueSubsBtn.addEventListener('click', () => 
+              {
+                  getSubscriptionList().then(() => {
+                      mainuplatePopupPurchaseType();
+                  })
+              })
+              setTimeout(() => {
+                 continueSubsBtn.click()
+              }, 3000)
+          }               
+      }
+      else{
+          popupBody.innerHTML = 
+          `<h5 class="popup-modal__title">Continue Shopping</h5>
+          <p class="popup-modal__description">It looks like you have an account, but no membership. This means you have never subscribed to a product with us, but have only bought products on a one time basis.</p>
+          <p class="popup-modal__description">If you would like to subscribe to a product on a recurring basis, or buy a product one time please continue shopping on this page and check out. If you subscribe to a product, you will be able to manage your membership and shop in your account from then on.</p>
+          <span class="popup-modal__continueShopping-btn">Continue Shopping</span>`
+          document.querySelector('.popup-modal__continueShopping-btn').addEventListener('click', closeModal)
+      }
+  }
+  
+  // mainuplate popup for displaying purchase type
+  mainuplatePopupPurchaseType = () => {
+      popupBody.innerHTML =
+      `<h5 class="popup-modal__title" style="line-height: 1.4">Purchase ${productNameJS} just once OR add it to all your ongoing membership shipments?</h5>
+      <p class="popup-modal__description style="line-height: 1.5">Whether you choose to purchase this product once or include it with your future membership orders, we'll combine this purchase with your existing order to receive all your products at the same time. You'll save on shipping plus fewer deliveries are better for the environment.</p>
+      <p class="popup-modal__description" style="line-height: 1.5">If you have multiple memberships you'll select which one to add this to on the next page.</p>
+      <span class="popup-modal__onetime-btn">Just This Once</span>
+      <span class="popup-modal__subscribe-btn">Subscribe</span>
+      <p class="popup-modal__promo-upcomming">Do you have a coupon code to apply?  You'll enter it shortly.</p>`
+      
+      document.querySelector('.popup-modal__onetime-btn').addEventListener('click', () => {
+          localStorage.purchaseType = 'one-time'
+          mainuplatePopupSubscriptions();
+          openModal()
+      })
+
+      document.querySelector('.popup-modal__subscribe-btn').addEventListener('click', () => {
+          localStorage.purchaseType = 'subscription'
+          mainuplatePopupSubscriptions();
+          openModal()
+      })
+  }  
+  // mainuplate popup for displaying list of active subscriptions to which user can add the current product variant
+  mainuplatePopupSubscriptions = () => {
+      popupBody.innerHTML =
+      `<span class="popup-modal__back-link">{% include 'icon-arrow-back' %}Back</span>
+      <h5 class="popup-modal__title">Select a membership you'd like to add this product to</h5>
+      <p class="popup-modal__description">Quickly and easily add this product to your selected membership for an additional {{cart.currency.symbol}}${discountedPrice}.</p>
+      ${subsItems.map(item => populateSubscriptionItems(item)).join('')}
+      <span class="popup-modal__continueSubscription-btn">Continue</span>
+      <p class="popup-modal__promo-upcomming">Do you have a coupon code to apply?  You'll enter it shortly.</p>`
+
+      popupBody.querySelector('.popup-modal__continueSubscription-btn').addEventListener('click', mainuplatePopupPromo)
+      popupBody.querySelector('.popup-modal__back-link').addEventListener('click', mainuplatePopupPurchaseType)
+
+      // selecting the subscription from the list of active subscriptions
+      Array.from(document.querySelectorAll('.activeSub')).map(elt => {
+          elt.addEventListener('click', () => {
+              Array.from(elt.parentElement.querySelectorAll('.activeSub')).map(item => item.classList.remove('activeSub--active'))
+              elt.classList.toggle('activeSub--active')
+              if(elt.classList.contains('activeSub--active')){
+                  window.membId = elt.dataset.membershipid;
+                  window.nexId = elt.dataset.nextid;
+              }
+          })
+      })
+
+      // setting the first membership as active
+      const firstSubsItem = Array.from(document.querySelectorAll('.activeSub'))[0];
+      firstSubsItem.classList.add('activeSub--active');
+      window.membId = firstSubsItem.dataset.membershipid;
+      window.nexId = firstSubsItem.dataset.nextid;
+  }    
+  
+  // mainuplate popup that allows a user to type and apply a promo code
+  mainuplatePopupPromo = () => {
+      popupBody.innerHTML =
+      `<span class="popup-modal__back-link">{% include 'icon-arrow-back' %}Back</span>
+      <h5 class="popup-modal__title">Have a coupon code?</h5>
+      <p class="popup-modal__description" style="text-align:center;">Lucky you!  Enter it below to apply the savings to your order.</p>
+      <div class="popup-modal__flex-wrapper">
+          <input class="popup-modal__promo-input" type="text" placeholder="Promo Code"> 
+          <span class="popup-modal__promo-submit" style="padding: 1rem">Apply</span>
+      </div>    
+      <div class="popup-modal__promo-message"></div>
+      <span class="popup-modal__promo-finalize">Finish and Place Order</span>`
+
+      document.querySelector('.popup-modal__promo-submit').addEventListener('click', applyPromo);
+      document.querySelector('.popup-modal__promo-finalize').addEventListener('click', updateSubscription);
+      popupBody.querySelector('.popup-modal__back-link').addEventListener('click', mainuplatePopupSubscriptions)
+  }     
+  
+  // mainuplate popup for displaying a success message and finalizing subscription
+  mainuplatePopupSuccess = () => {
+      const selectedMembership = subsItems.filter(i => i.id == membId)[0];
+      const date = new Date(selectedMembership.next.date);
+      const day = date.getDate()
+      const month = date.getMonth()
+      const year = date.getFullYear()
+      const shipsOn = `${month}/${day}/${year}`;
+      
+      let descriptionMsg = '';
+      if(localStorage.purchaseType == 'subscription') descriptionMsg = `${productNameJS} is now added to your subscription on ${shipsOn} and will ship Every ${selectedMembership.interval} Days for an additional {{cart.currency.symbol}}${discountedPrice}.`
+      else descriptionMsg = `${productNameJS} is now added to your subscription on ${shipsOn} and will ship One Time with the rest of your products within this subscription.`;
+      
+      // alert('mainuplated for success')
+      popupBody.innerHTML =
+      `<h5 class="popup-modal__title">Success!</h5>
+      <p class="popup-modal__description">${descriptionMsg}</p>
+      <img class="popup-modal__success-img" src="{{ product.selected_or_first_available_variant.featured_image  | img_url: 'master' }}" />
+      <a class="popup-modal__manageAccount-btn" href="https://calderalab.com/account?view=subscriptions#/">Manage Account</a>
+      <span class="popup-modal__continueShopping-link">Continue Shopping</span>`
+      document.querySelector('.popup-modal__continueShopping-link').addEventListener('click', closeModal)
+  }   
+
+  // Generating Auth token
+  generateAuthToken = async () => {
+      const settings = {
+          method: 'POST',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+          }
+      };
+      try {
+          const respGen = await fetch(`https://endpoint.upscribe.io/customer/token/generate/calderalab.myshopify.com/${custIdJS}`, settings);
+          const data = await respGen.json();
+          const respFetch = await fetch('https://calderalab.com/pages/upscribe-token')
+          // const respFetch = await fetch('https://192.168.1.3:3000/pages/upscribe-token')
+          const fetchedString = await respFetch.text();
+          const doc = new DOMParser().parseFromString(fetchedString, 'text/html')
+          return doc.querySelector('.up-token').textContent;
+      } 
+      catch (e) {
+          return e;
+      }    
+  }
+
+  // Get subscription list
+  getSubscriptionList = async () => {
+      popupBody.style.display = 'none'
+      popupLoader.style.display = 'block';
+      openModal()
+      window.metaTokenJS = await generateAuthToken();
+      const settings = {
+          method: 'GET',
+          headers: {
+              'x-upscribe-access-token': metaTokenJS,
+          }   
+      };
+      try {
+          const fetchResponse = await fetch(`https://endpoint.upscribe.io/subscriptions/calderalab.myshopify.com/${custIdJS}`, settings);
+          const data = await fetchResponse.json();
+          window.subsItems = data.items;
+          if(subsItems.length ){
+              membershipState.item = true;
+              subsItems.map(item => {
+                  if(item.active){
+                      membershipState.itemActive = true;
+                  }
+              })
+          }
+          popupLoader.style.display = 'none';
+          popupBody.style.display = 'block'
+      } 
+      catch (e) {
+          return e;
+      }    
+  }
+
+  // after login form is submitted
+  if(localStorage.formSubmitted && custIdJS){
+      getSubscriptionList().then(() => {
+          mainuplatePopupMessage();
+          localStorage.removeItem('formSubmitted')
+      })
+  }
+  
+  Array.from(membershipAddBtn).map(btn => btn.addEventListener('click', () => {
+      getSubscriptionList().then(() => {
+          if(membershipState.item){
+              if(membershipState.itemActive){
+                  mainuplatePopupPurchaseType();
+              }
+              else mainuplatePopupMessage();
+          }
+          else mainuplatePopupMessage();
+      })
+  }))
+  
+  // Apply Promo Code
+  applyPromo = async () => {
+      const promoInputValue = document.querySelector('.popup-modal__promo-input').value;
+      const promoSubmitBtn = document.querySelector('.popup-modal__promo-submit')
+      const promoMsg = document.querySelector('.popup-modal__promo-message');
+      promoMsg.textContent = '';
+      if(promoInputValue){    
+          promoSubmitBtn.innerHTML = `<img class="popup-modal__promo-loader" src="{{'ajax-loader.gif' | asset_img_url: '30x'}}" alt="loading">`
+          const data = { 'discount_code': promoInputValue }
+          const options = {   
+              method: `POST`,
+              body: JSON.stringify(data),
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  'x-upscribe-access-token': metaTokenJS,
+              }
+          }
+          try{
+              const resp = await fetch(`https://endpoint.upscribe.io/subscription/queue/${membId}/${nexId}`, options)
+              window.promoRespData = await resp.json();
+          }
+          catch (e) {
+              console.log(e)
+          }
+
+          if(promoRespData.error){
+              promoMsg.textContent = 'Not a valid promo code';
+              promoSubmitBtn.textContent = `Apply`
+          }
+          else{
+              promoMsg.innerHTML = `<p>Hooray! Discount applied.  You're saving <span class="popup-modal__promo-amt">{{cart.currency.symbol}}${parseFloat(promoRespData.coupon_discount).toFixed(2)}</span> on your next order</p>`
+              promoMsg.style.color = '#657543';
+              promoSubmitBtn.textContent = `Apply`
+          }
+      }
+      else {
+          promoMsg.textContent = "Please enter a value";
+      }
+  }
+
+  // Update subscription
+  updateSubscription = async () => {
+      const data = {"items":[{"variant_id":variantId,"quantity":1}]}
+      const options = {
+          method: `POST`,
+          body: JSON.stringify(data),
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'x-upscribe-access-token': metaTokenJS,
+          }
+      };
+      // Adding product variant to existing active membership on recurring/subscription
+      if(localStorage.purchaseType == 'subscription'){
+          popupBody.style.display = 'none'
+          popupLoader.style.display = 'block';
+          try{
+              const resp = await fetch(`https://endpoint.upscribe.io/subscription/update/calderalab.myshopify.com/${custIdJS}/${membId}`, options)
+              const respData = await resp.json();
+              console.log(respData);
+              mainuplatePopupSuccess()
+              popupLoader.style.display = 'none';
+              popupBody.style.display = 'block'
+              dlSubPurchase(respData);
+          }
+          catch(e){
+              console.log(e)
+          }
+      }
+
+      // Adding product variant to existing active membership on recurring/subscription
+      else{
+          popupBody.style.display = 'none'
+          popupLoader.style.display = 'block';
+          try{
+              const resp = await fetch(`https://endpoint.upscribe.io/subscription/queue/${membId}/${nexId}`, options)
+              const respData = await resp.json()
+              console.log(respData)
+              popupLoader.style.display = 'none';
+              popupBody.style.display = 'block'
+              mainuplatePopupSuccess()
+              dlPurchase(respData);
+          }
+          catch (e) {
+              console.log(e)
+          }
+      }
+  }   
+
+  dlSubPurchase = (data) => {
+      if(window.ElevarGtmSuite){
+          ElevarGtmSuite.utils.pushToDataLayer(
+          {
+              'event': 'dl_subscription_purchase',
+              "user_properties":{
+                  "customer_id": "{{ customer.id }}",
+                  "customer_email": "{{ customer.email }}",
+                  "customer_first_name": "{{ customer.first_name }}",
+                  "customer_order_count": "{{ customer.orders_count }}",
+                  "customer_total_spent": "{{ customer.total_spent }}"
+              },
+              'ecommerce': {
+                  'purchase': {
+                      'actionField': {
+                          'id': data.shopify_order_id,
+                          'coupon': data.coupon_discount,
+                          'discount_amount': data.total_discount,
+                          'affiliation': 'Upscribe_upgrade',
+                          'revenue': discountedPrice,
+                          'sub_total': discountedPrice
+                      },
+                      'products': [
+                          {
+                              'name': "{{product.title }}",
+                              'product_id': "{{product.id}}",
+                              'id': "{{ product.selected_or_first_available_variant.sku }}",
+                              'variant_id': "{{ product.selected_or_first_available_variant.id }}",
+                              'price': discountedPrice
+                          }
+                      ]
+                  },
+                  'checkout': {
+                      'actionField': {
+                          'id': data.shopify_order_id,
+                          'coupon': data.coupon_discount,
+                          'discount_amount': data.total_discount,
+                          'affiliation': 'Upscribe_upgrade',
+                          'revenue': discountedPrice,
+                          'sub_total': discountedPrice
+                      },
+                      'products': [
+                          {
+                              'name': "{{product.title }}",
+                              'product_id': "{{product.id}}",
+                              'id': "{{ product.selected_or_first_available_variant.sku }}",
+                              'variant_id': "{{ product.selected_or_first_available_variant.id }}",
+                              'price': discountedPrice
+                          }
+                      ]
+                  }
+              }
+          })  
+      }         
+  }
+  
+  dlPurchase = (data) => {
+      if(window.ElevarGtmSuite){
+          ElevarGtmSuite.utils.pushToDataLayer(
+              {
+              'event': 'dl_purchase',
+              "user_properties":{
+              "customer_id": "{{ customer.id }}",
+              "customer_email": "{{ customer.email }}",
+              "customer_first_name": "{{ customer.first_name }}",
+              "customer_order_count": "{{ customer.orders_count }}",
+              "customer_total_spent": "{{ customer.total_spent }}"
+              },
+              'ecommerce': {
+                  'purchase': {
+                      'actionField': {
+                          'id': data.shopify_order_id,
+                          'coupon': data.coupon_discount,
+                          'discount_amount': data.total_discount,
+                          'affiliation': 'Shopify',
+                         'revenue': variantPrice,
+                          'sub_total': variantPrice
+                      },
+                      'products': [
+                          {
+                              'name': "{{product.title }}",
+                              'product_id': "{{product.id}}",
+                              'id': "{{ product.selected_or_first_available_variant.sku }}",
+                              'variant_id': "{{ product.selected_or_first_available_variant.id }}",
+                              'price': variantPrice
+                          }
+                      ]
+                  },
+                  'checkout': {
+                      'actionField': {
+                          'id': data.shopify_order_id,
+                          'coupon': data.coupon_discount,
+                          'discount_amount': data.total_discount,
+                          'affiliation': 'Shopify',
+                          'revenue': variantPrice,
+                          'sub_total': variantPrice
+                      },
+                      'products': [
+                          {
+                              'name': "{{product.title }}",
+                              'product_id': "{{product.id}}",
+                              'id': "{{ product.selected_or_first_available_variant.sku }}",
+                              'variant_id': "{{ product.selected_or_first_available_variant.id }}",
+                              'price': variantPrice
+                          }
+                      ]
+                  }
+              }
+          })  
+      }
+  }
+</script>

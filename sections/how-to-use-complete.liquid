@@ -1,0 +1,70 @@
+<div class="htuComplete">
+    <div class="htuComplete__content">
+        {% if section.settings.htuComplete_title %}
+            <h3 class="htuComplete__title">{{ section.settings.htuComplete_title }}</h3>
+        {% endif %}
+        {% if section.settings.htuComplete_copy %}
+            <p class="htuComplete__copy">{{ section.settings.htuComplete_copy }}</p>
+        {% endif %}
+        {% if section.settings.htuComplete_link_text %}
+            <div class="htuComplete__cta"><a href="{{ section.settings.htuComplete_link }}">{{ section.settings.htuComplete_link_text }}</a></div>
+        {% endif %}
+    </div>  
+    
+    <picture class="htuComplete__image"> 
+        <source media="(max-width: 1023px)" srcset="{{ section.settings.htuComplete_image_mobile | img_url: 'master' }}">
+        <source media="(min-width: 1024px)" srcset="{{ section.settings.htuComplete_image | img_url: 'master' }}">
+        <img src="{{ section.settings.htuComplete_image_mobile | img_url: '1x' }}" alt="cl">  
+    </picture>
+    
+    {% if section.settings.htuComplete_link_text_mobile %}
+        <div class="htuComplete__cta htuComplete__cta--mobile"><a href="{{ section.settings.htuComplete_link }}">{{ section.settings.htuComplete_link_text_mobile }}</a></div>
+    {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "How to Use complete",
+  "settings": [
+    {
+      "type":"text",
+      "id":"htuComplete_title",
+      "label": "Complete Title",
+      "default":"The Complete Regimen"
+    },
+    {
+        "type":"html",
+        "id":"htuComplete_copy",
+        "label":"Complete Copy",
+        "default":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "type":"url",
+        "id":"htuComplete_link",
+        "label":"Complete Button Link"
+    },
+    {
+        "type":"text",
+        "id":"htuComplete_link_text",
+        "label":"Complete Button Text",
+        "default":"shop the regimen"
+    },
+    {
+        "type":"text",
+        "id":"htuComplete_link_text_mobile",
+        "label":"Complete Button Text Mobile",
+        "default":"buy the regimen"
+    },
+    {
+        "type":"image_picker",
+        "id":"htuComplete_image",
+        "label":"Complete Image"
+    },
+    {
+        "type":"image_picker",
+        "id":"htuComplete_image_mobile",
+        "label":"Complete Image Mobile"
+    }
+  ]
+}
+{% endschema %}

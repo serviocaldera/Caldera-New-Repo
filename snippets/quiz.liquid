@@ -1,0 +1,232 @@
+<div class="c-quiz" data-quiz-modal>
+	<div class="c-quiz__overlay"></div>
+	<div class="c-quiz__outter">
+		<div class="c-quiz__main">
+			<div class="c-quiz__loader" data-quiz-loader>
+				<span>
+					{%- include 'icon' with 'badge' -%}	
+				</span>
+			</div>
+			<div class="c-quiz__continue" data-quiz-continue>
+				<a href="#" class="c-quiz__close" data-quiz-close>{% include 'icon-x' %}</a>
+				<div class="c-quizStepBar__main">
+					<div class="c-quiz__continueText">Continue Quiz</div>
+					<div class="c-quiz__continueBar">
+						<span></span>
+					</div>
+				</div>	
+			</div>
+			<a href="#" class="c-quiz__close c-quiz__closeDesktop" data-quiz-desktop>{% include 'icon-x' %}</a>
+			<div class="c-quiz__inner is-hide">
+				<a href="#" class="c-quiz__close c-quiz__closeMobile" data-quiz-close >{% include 'icon-x' %}</a>
+				<div class="c-quizStepBar--desktop">
+					<a href="#" class="c-quiz__back" data-back-stepone>{% include 'icon-arrow-back' %}</a>
+					<a href="#" class="c-quiz__back" data-back-steptwo>{% include 'icon-arrow-back' %}</a>
+					<a href="#" class="c-quiz__back" data-back-stepthree>{% include 'icon-arrow-back' %}</a>
+					<div class="c-quizStepBar__main ">
+						<div class="c-quizStepBar__text">Step 1 of 4</div>
+						<div class="c-quizStepBar__bar">
+							<span></span>
+						</div>
+					</div>	
+				</div>
+				<div class="c-quizStep c-quizStep--stepOne" data-step-one>
+					
+					<div class="c-quizStepBar--mobile">
+						<div class="c-quizStepBar__main">
+							<div class="c-quizStepBar__text">Step 1 of 4</div>
+							<div class="c-quizStepBar__bar">
+									<span></span>
+							</div>
+						</div>
+					</div>
+					<div class="c-quizStep__content">
+						<h4 class="c-quizStep__heading"></h4>
+						<div class="c-quizBlockList__row" data-step-one-answer>
+							<div class="c-quizBlockList__item">
+								<div class="c-quizBlockList__box">
+									{% include 'icon-oil' %}
+									<span class="c-quizBlockList__name"></span>
+								</div>
+							</div>
+							<!--c-quizBlockList__item-->
+							<div class="c-quizBlockList__item">
+								<div class="c-quizBlockList__box">
+									{% include 'icon-normal' %}
+									<span class="c-quizBlockList__name"></span>
+								</div>
+							</div>
+							<!--c-quizBlockList__item-->
+							<div class="c-quizBlockList__item">
+								<div class="c-quizBlockList__box">
+									{% include 'icon-dry' %}
+									<span class="c-quizBlockList__name"></span>
+								</div>
+							</div>
+							<!--c-quizBlockList__item-->
+						</div>
+						<div class="c-quizStep__text">Let’s identify your natural skin state.</div>
+						<a href="#" class="btn btn--primary c-quiz__btn disabled" data-button-stepone>Next</a>
+					</div>
+				</div>
+				<!--c-quizStep--stepOne-->
+
+				<div class="c-quizStep c-quizStep--stepTwo" data-step-two>
+					<div class="c-quizStepBar--mobile">
+						<a href="#" class="c-quiz__back" data-back-stepone>{% include 'icon-arrow-back' %}</a>
+						<div class="c-quizStepBar__main">
+							<div class="c-quizStepBar__text">Step 2 of 4</div>
+							<div class="c-quizStepBar__bar">
+								<span></span>
+							</div>
+						</div>
+					</div>
+					<div class="c-quizStep__content">
+						<h4 class="c-quizStep__heading"></h4>
+						<div class="c-quizList__row" data-step-two-answer>
+							<div class="c-quizList__item">
+								<span class="c-quizList__name"></span>
+							</div>
+							<div class="c-quizList__item">
+								<span class="c-quizList__name" ></span>
+							</div>
+							<div class="c-quizList__item">
+								<span class="c-quizList__name"></span>
+							</div>
+							<div class="c-quizList__item">
+								<span class="c-quizList__name"></span>
+							</div>
+							<div class="c-quizList__item">
+								<span class="c-quizList__name"></span>
+							</div>
+							<div class="c-quizList__item u-hidden">
+								<span class="c-quizList__name"></span>
+							</div>
+						</div>
+						<div class="c-quizStep__text">We’ve all got ‘em. Select all that apply.</div>
+						<a href="#" class="btn btn--primary c-quiz__btn disabled" data-button-steptwo>Next</a>
+					</div>
+				</div>
+				<!--c-quizStep--stepTwo-->
+	 
+				<div class="c-quizStep c-quizStep--stepThree" data-step-three>
+					<div class="c-quizStepBar--mobile">
+						<a href="#" class="c-quiz__back" data-back-steptwo>{% include 'icon-arrow-back' %}</a>
+						<div class="c-quizStepBar__main">
+							<div class="c-quizStepBar__text">Step 3 of 4</div>
+							<div class="c-quizStepBar__bar">
+									<span></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="c-quizStep__content">
+						<h4 class="c-quizStep__heading">What Climate Do You Spend  Most Of Your Time In?</h4>
+						<div class="c-quizBlockList__row" data-step-three-answer>
+							<div class="c-quizBlockList__item">
+								<div class="c-quizBlockList__box">
+									{% include 'icon-humid' %}
+									<span class="c-quizBlockList__name"></span>
+								</div>
+							</div>
+							<!--c-quizBlockList__item-->
+							<div class="c-quizBlockList__item">
+								<div class="c-quizBlockList__box">
+									{% include 'icon-dry-weather' %}
+									<span class="c-quizBlockList__name"></span>
+								</div>
+							</div>
+							<!--c-quizBlockList__item-->
+							<div class="c-quizBlockList__item">
+								<div class="c-quizBlockList__box">
+									{% include 'icon-cold' %}
+									<span class="c-quizBlockList__name"></span>
+								</div>
+							</div>
+							<!--c-quizBlockList__item-->
+							<div class="c-quizBlockList__item">
+								<div class="c-quizBlockList__box">
+									{% include 'icon-mild' %}
+									<span class="c-quizBlockList__name"></span>
+								</div>
+							</div>
+							<!--c-quizBlockList__item-->
+						</div>
+						<div class="c-quizStep__text">Your environment impacts your microbiome.</div>
+						<a href="#" class="btn btn--primary c-quiz__btn disabled" data-button-stepthree>Next</a>
+					</div>
+				</div>
+				<!--c-quizStep--stepThree-->
+
+				<div class="c-quizStep c-quizStep--stepFour" data-step-four>
+					<div class="c-quizStepBar--mobile">
+						<a href="#" class="c-quiz__back" data-back-stepthree>{% include 'icon-arrow-back' %}</a>
+						<div class="c-quizStepBar__main">
+							<div class="c-quizStepBar__text">Step 4 of 4</div>
+							<div class="c-quizStepBar__bar">
+									<span></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="c-quizStep__content">
+						<h4 class="c-quizStep__heading">Which age range are you in?</h4>
+						<div class="c-quizListAge__row" data-step-four-answer>
+							<div class="c-quizListAge__item">
+								<span class="c-quizListAge__name"></span>
+							</div>
+							<div class="c-quizListAge__item">
+								<span class="c-quizListAge__name"></span>
+							</div>
+							<div class="c-quizListAge__item">
+								<span class="c-quizListAge__name"></span>
+							</div>
+							<div class="c-quizListAge__item">
+								<span class="c-quizListAge__name"></span>
+							</div>
+							<div class="c-quizListAge__item">
+								<span class="c-quizListAge__name"></span>
+							</div>
+							<div class="c-quizListAge__item">
+								<span class="c-quizListAge__name"></span>
+							</div>
+						</div>
+						<div class="c-quizStep__text">Your skin’s needs change over time.</div>
+						<a href="#" class="btn btn--primary c-quiz__btn disabled" data-button-stepfour>GET RESULTS</a>
+					</div>
+				</div>
+				<!--c-quizStep--four-->
+
+				<div class="c-quizStep c-quizStep--stepResult" data-step-result>
+					<div class="c-quizStep__main">
+						<div class="c-quizStepResult">
+							<div class="c-quizStepResult__content">
+								<div class="c-quizStepResult__icon">
+									<span>
+										{%- include 'icon' with 'badge' -%}	
+									</span>
+								</div>
+								<p class="c-quizStepResult__copy">Gathering your results...</p>
+							</div>
+						</div>	
+					</div>
+				</div>
+				<!--c-quizStep--stepResult-->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="c-quizKlaviyo">
+    <form id="quiz_signup" class="klaviyo_styling klaviyo_gdpr_embed_J3xsK8" action="//manage.kmail-lists.com/subscriptions/subscribe" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="GET" target="_blank" novalidate="novalidate">
+    <input type="hidden" name="g" value="J3xsK8">
+    <input type="hidden" name="$fields" value="$consent">
+    <input type="hidden" name="$list_fields" value="$consent">
+    <input class="" type="email" value="" name="email" id="k_id_email" placeholder="Your email" />
+    <div class="klaviyo_messages">
+      <div class="success_message" style="display:none;"></div>
+      <div class="error_message" style="display:none;"></div>
+    </div>
+    <button type="submit" id="js-quiz-submit-btn" class="klaviyo_submit_button">Subscribe</button>
+  </form>
+</div> 

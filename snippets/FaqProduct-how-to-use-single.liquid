@@ -1,0 +1,89 @@
+{%- liquid
+    assign howtouse_content = product.metafields.custom_fields.howtouse_content 
+    assign vimeo_id = product.metafields.custom_fields.vimeo_id
+    assign vimeo_id_h = product.metafields.custom_fields.vimeo_id_h
+    assign howtouse_product = product.metafields.custom_fields.howtouse_product
+    assign howtouse_product_title = product.metafields.custom_fields.howtouse_product_title
+    assign howtouse_product_image = product.metafields.custom_fields.howtouse_product_image
+    assign hwotouse_product_subtitle = product.metafields.custom_fields.hwotouse_product_subtitle 
+-%}
+
+{%- if product.metafields.custom_fields.howtouse_content != blank -%}
+  <div class="HowToUseSingle-wrapper accordion__body-wrapper">
+    
+    <div class="HowToUseSingle-wrapper--left">
+        <div>{{ product.metafields.custom_fields.howtouse_content }}</div>
+
+        {% if product.metafields.custom_fields["howtouse_icons"] != blank %}
+          <div class="HowToUseSingle-wrapper-icons">
+          {% for item in product.metafields.custom_fields["howtouse_icons"] %}
+              <div class="HowToUseSingle-wrapper-icons--icon_wrapper">
+                {% if item.icon != blank %}
+                  <div class="HowToUseSingle-wrapper-icons--icon_wrapper--icon_item">
+                    <div>
+                      <span>{{ item.icon }}</span>
+                      {% if item.title != blank %}
+                        <span class="desktop-only">{{ item.title }}</span>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endif %}
+                {% if item.explanation != blank %}
+                  <div class="HowToUseSingle-wrapper-icons--text_item">{% if item.title != blank %}<span class="mobile-only">{{ item.title }}: </span>{% endif %}{{ item.explanation }}</div>
+                {% endif %}
+              </div>
+
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {%- if howtouse_product != blank -%}
+        <p class="HowToUseSingle-featured_product--heading">{{howtouse_product_title}}</p>
+          <div class="HowToUseSingle-featured_product">
+            <div class="HowToUseSingle-featured_product--image">{{ howtouse_product_image }}</div>
+            <div class="HowToUseSingle-featured_product--info">
+              <div class="yotpo-group-review-stars HowToUseSingle-featured_product--info--stars">
+                <span class="yotpo--gra-star-icon"></span>
+                  
+                <span class="yotpo--gra-star-icon"></span>
+            
+                <span class="yotpo--gra-star-icon"></span>
+            
+                <span class="yotpo--gra-star-icon"></span>
+            
+                <span class="yotpo--gra-star-icon"></span>
+              </div>
+              <h5 class="HowToUseSingle-featured_product--product_title">{{ all_products[howtouse_product].title }}</h5>
+              <div  class="HowToUseSingle-featured_product--product_subtitle">{{ hwotouse_product_subtitle }}</div>
+              <div class="HowToUseSingle-featured_product--price">{{ all_products[howtouse_product].price | money }}</div>
+              <div class="HowToUseSingle-featured_product--button button" data-product-price="{{ all_products[howtouse_product].price | money }}" data-variant-id="{{ all_products[howtouse_product].selected_or_first_available_variant.id }}">Add to cart</div>
+            </div>
+          </div>
+        {%- endif -%}
+    </div>
+    <div class="HowToUseSingle-wrapper--right">
+      {% if vimeo_id != blank %}
+        {% assign ratio = product.metafields["accordion"]["video_ration"] %}
+        {% assign ratio_mob = product.metafields["accordion"]["video_ratio_mob"] %}
+        {% if ratio contains ':' or ratio_mob contains ':' %}
+            <style>
+              {% if ratio contains ':' %} @media only screen and (min-width: 1025px) { .video-wrapper { aspect-ratio: {{ ratio | replace: ':', ' / ' }}; } } {% endif %}
+              {% if ratio_mob contains ':' %}  @media only screen and (max-width: 1024px) { .video-wrapper { aspect-ratio: {{ ratio_mob | replace: ':', ' / ' }}; } } {% endif %}
+            </style>
+        {% endif %}
+        <div class="video-wrapper">
+          <iframe id="faq-video" class="HowToUseSingle-video" src="https://player.vimeo.com/video/{{ vimeo_id }}?{% if vimeo_id_h != blank %}h={{vimeo_id_h}}&{% endif %}background=0&autoplay=0&loop=0&portrait=0&byline=0&title=0?controls=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    $('.HowToUseSingle-featured_product--button').click(function(e) {
+      e.preventDefault();
+        var productId = $(this).attr('data-variant-id');
+        CartJS.addItem(productId, 1);
+    });
+</script>
+{%- endif -%}

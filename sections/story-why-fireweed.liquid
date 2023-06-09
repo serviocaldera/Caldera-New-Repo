@@ -1,0 +1,95 @@
+<div class="story__fireweed" style="background-image: url({{ section.settings.fireweed_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.fireweed_mobile_image %}{{ section.settings.fireweed_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.fireweed_image | img_url: '2880x' }}" data-mobile-image-check>
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--five-twelfths push--medium--seven-twelfths small--one-half push--small--one-half">
+        <div class="block__content text--light">
+          <h4 class="text--light">{{ section.settings.fireweed_headline }}</h4>
+          <p>{{ section.settings.fireweed_content }}</p>
+          {% if section.settings.fireweed_link %}
+            <a href="{{ section.settings.fireweed_link }}" class="btn btn--primary">{{ section.settings.fireweed_link_text }}</a>
+          {% endif %}
+          <div class="brand-bar">
+            <div class="wrapper">
+              <div class="grid">
+                <div class="grid__item medium--two-thirds push--medium--one-sixth">
+                  <div class="brand-bar__items">
+                    {% for block in section.blocks %}
+                      <div class="brand-bar__item">
+                        {% if block.settings.brand_image_url != blank %}
+                        <a href="{{ block.settings.brand_image_url }}" target="_blank">
+                          <img src="{{ block.settings.brand_image | img_url: '80x' }}" data-rjs="{{ block.settings.brand_image | img_url: '160x' }}" alt="">
+                        </a>
+                        {% else %}
+                          <img src="{{ block.settings.brand_image | img_url: '80x' }}" data-rjs="{{ block.settings.brand_image | img_url: '160x' }}" alt="">
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Fireweed",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"fireweed_image",
+        "label":"Fireweed Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"fireweed_mobile_image",
+        "label":"Fireweed Mobile Image"
+      },
+      {
+        "type":"text",
+        "id":"fireweed_headline",
+        "label":"Fireweed Headline",
+        "default":"Our first-string player?<br>Fireweed."
+      },
+      {
+        "type":"textarea",
+        "id":"fireweed_content",
+        "label":"Fireweed Content",
+        "default":"Fireweed is a powerful and resilient plant trusted for centuries to bring skin back to life. Our process captures the highest potency of every bud and leaf so you can look your best."
+      },
+      {
+        "type":"url",
+        "id":"fireweed_link",
+        "label":"Fireweed Section Link"
+      },
+      {
+        "type":"text",
+        "id":"fireweed_link_text",
+        "label":"Fireweed Section Link Text",
+        "default":"Learn More"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "brand",
+        "name": "brand",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"brand_image",
+            "label":"Brand Image",
+            "info":"Image Dimensions: 160px x 160px"
+          },
+          {
+            "type":"url",
+            "id":"brand_image_url",
+            "label":"Brand Image Url"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

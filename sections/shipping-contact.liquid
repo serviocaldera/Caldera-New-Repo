@@ -1,0 +1,69 @@
+<div class="c-shippingContact">
+    <div class="wrapper">
+        <div class="c-shippingContact__content">
+            <div class="c-shippingContact__header">
+                <h4 class="c-shippingContact__title">
+                    {{ section.settings.title }}
+                </h4>
+                <div class="c-shippingContact__copy">
+                    {{ section.settings.copy }}
+                </div>
+            </div>
+            <div class="c-shippingContact__icons">
+                {% for block in section.blocks %}
+                    <div class="c-shippingContact__item">
+                        <img src="{{ block.settings.image | img_url: "master" }}" class="c-shippingContact__image">
+                        <p class="c-shippingContact__link">
+                            <a href="{{ block.settings.contact-url }}">
+                                {{ block.settings.contact-copy }}
+                            </a>    
+                        </p>
+                        
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+{% schema %}
+{
+    "name": "Shipping Contact",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "html",
+            "id": "copy",
+            "label": "copy"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "contentcolumn",
+            "name": "Contact Block",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Icon"
+                },
+                {
+                    "type": "text",
+                    "id": "contact-copy",
+                    "label": "Contact Copy"
+                },
+                {
+                    "type": "text",
+                    "id": "contact-url",
+                    "label": "Contact Url"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,78 @@
+{% comment %}
+Usage (to be placed in article.liquid):
+{% render 'eatb-wrapper', article: article %}
+{% endcomment %}
+
+
+{% if shop.metafields.eat_blocks.default_reviewer != blank %}
+
+
+{% comment %}Assigning variables{% endcomment %}
+
+
+{% unless shop.metafields.eat_blocks.default_reviewer.value == blank %}
+{% assign eatb_default_reviewer = shop.metafields.eat_blocks.default_reviewer.value %}
+{% else %}
+{% assign eatb_default_reviewer = shop.metafields.eat_blocks.default_reviewer %}
+{% endunless %}
+
+{% if shop.metafields.eat_blocks.default_behavior != blank %}
+{% unless shop.metafields.eat_blocks.default_behavior.value == blank %}
+{% assign eatb_default_behavior = shop.metafields.eat_blocks.default_behavior.value %}
+{% else %}
+{% assign eatb_default_behavior = shop.metafields.eat_blocks.default_behavior %}
+{% endunless %}
+{% else %}
+{% assign eatb_default_behavior = 'hide' %}
+{% endif %}
+
+{% if article.metafields.eat_blocks.behavior != blank %}
+{% unless article.metafields.eat_blocks.behavior.value == blank %}
+{% assign eatb_behavior = article.metafields.eat_blocks.behavior.value %}
+{% else %}
+{% assign eatb_behavior = article.metafields.eat_blocks.behavior %}
+{% endunless %}
+{% endif %}
+
+{% if article.metafields.eat_blocks.profile != blank %}
+{% unless article.metafields.eat_blocks.profile.value == blank %}
+{% assign eatb_profile = article.metafields.eat_blocks.profile.value %}
+{% else %}
+{% assign eatb_profile = article.metafields.eat_blocks.profile %}
+{% endunless %}
+{% endif %}
+
+
+{% comment %}Validation{% endcomment %}
+
+
+{% if eatb_behavior != 'hide' %}
+{% if eatb_behavior == 'show' %}
+{% assign eatb_show_block = true %}
+{% else %}
+{% if eatb_default_behavior == 'show' %}
+{% assign eatb_show_block = true %}
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% if eatb_profile != blank %}
+{% assign eatb_reviewer = eatb_profile %}
+{% else %}
+{% assign eatb_reviewer = eatb_default_reviewer %}
+{% endif %}
+
+
+{% comment %}Render custom template{% endcomment %}
+
+
+{% if eatb_show_block == true %}
+
+<div id="eatb-wrapper-root" style="width:100%">
+{% render 'eatb-block-template', reviewer: eatb_reviewer %}
+</div>
+<script src="https://api.gr0.com/scripts/eat-blocks/validator.js" async="" defer=""></script>
+
+{% endif %}
+
+{% endif %}

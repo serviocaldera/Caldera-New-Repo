@@ -1,0 +1,72 @@
+<div class="story__study" style="background-image: url({{ section.settings.study_image | img_url: '2880x' }});">
+  <div class="study__mobile-image small--hide">
+    <img src="{{ section.settings.study_mobile_image | img_url: '1984x' }}" alt="{{ section.setrtings.study_mobile_image.alt }}">
+  </div>
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--five-twelfths push--medium--seven-twelfths small--one-half push--small--one-half">
+        <div class="study__arrow">
+          <svg width="106px" height="500px" viewBox="0 0 228 1073" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Group" transform="translate(-1420.000000, -132.000000)">
+                      <g id="Pointer-&amp;-Bracket" transform="translate(1420.000000, 133.000000)">
+                          <path d="M0,0 L35,0 L35,1071 L0,1071" id="Bracket" stroke="#FFFFFF" stroke-dasharray="4,3"></path>
+                          <g id="Pointer" transform="translate(36.000000, 88.000000)">
+                              <path d="M0,6.6 L188.968421,6.6" id="Path-11" stroke="#FFFFFF" stroke-dasharray="4,3"></path>
+                              <ellipse id="Oval-2" fill="#FFFFFF" cx="186.947368" cy="5.5" rx="5.05263158" ry="5.5"></ellipse>
+                          </g>
+                      </g>
+                  </g>
+              </g>
+          </svg>
+        </div>
+        <div class="study__content">
+          <h4 class="text--light">{{ section.settings.study_headline }}</h4>
+          <ul class="study__stats">
+            <li>
+              <p><strong>87% would recommend</strong> the product to friends</p>
+              <div class="stat-bar">
+                <span class="stat-bar--fill" data-aos="slide-right" data-aos-offset="100" data-aos-once="true" data-aos-duration="1000" style="width: 87%;"></span>
+              </div>
+            </li>
+            <li>
+              <p><strong>85% showed improved evenness</strong> of skin tone</p>
+              <div class="stat-bar">
+                <span class="stat-bar--fill" data-aos="slide-right" data-aos-offset="100" data-aos-once="true" data-aos-duration="1000" style="width: 85%;"></span>
+              </div>
+            </li>
+            <li>
+              <p><strong>80%</strong> reported that skin became <strong>tighter</strong></p>
+              <div class="stat-bar">
+                <span class="stat-bar--fill" data-aos="slide-right" data-aos-offset="100" data-aos-once="true" data-aos-duration="1000" style="width: 80%;"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Study",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"study_image",
+        "label":"Study Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"study_mobile_image",
+        "label":"Study Mobile Image"
+      },
+      {
+        "type":"text",
+        "id":"study_headline",
+        "label":"Study Headline",
+        "default":"<span>96%</span> of men reported that their skin looked healthier in an 8 week clinical study."
+      }
+    ]
+  }
+{% endschema %}

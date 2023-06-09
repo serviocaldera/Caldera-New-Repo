@@ -1,0 +1,69 @@
+<div {% if section.settings.section_classname %}class="{{ section.settings.section_classname }}"{% endif %}>
+  <picture>
+    <source media="(max-width:649px)" srcset="{{ section.settings.background_image_mobile | img_url: '650x' }}">
+    <source media="(min-width:650px)" srcset="{{ section.settings.background_image | img_url: '1920x' }}">
+    <img src="{{ section.settings.background_image | img_url: '1920x' }}" alt="{{ section.settings.title }}">
+  </picture>
+
+  <div class="copy-with-bg__container">
+    <div class="copy-with-bg__text">
+      <h2 class="copy-with-bg__title">{{ section.settings.title }}</h2>
+
+      <p class="copy-with-bg__copy">{{ section.settings.copy }}</p>
+
+      {% if section.settings.button_url != blank %}
+        <a class="btn btn--primary" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Copy With Background",
+  "class": "copy-with-bg",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button TEXT"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background Image Mobile"
+    },
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Copy With Background",
+      "category": "Caldera"
+    }
+  ]
+}
+{% endschema %}

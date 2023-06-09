@@ -1,0 +1,122 @@
+.hidden-purches{
+	display: none !important;
+}
+.purches{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .9);
+    z-index: 3333;
+    padding-top: 8rem;
+    flex-direction: column-reverse;
+}
+.purches .referral{
+    padding-left: 4rem;
+    padding-right: 25rem;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    height: auto;
+    position: relative;
+    background-color: #21211f;
+}
+.purches .refer{
+	padding-left: 0rem;
+    width: max-content;
+}
+.purches .referral-img{
+	display: none;
+}
+.purches .popup-close{
+    top: -4rem;
+    right: 0%;
+}
+.purches-hidden{
+	display: none;
+}
+.purches .thank-you{
+    color: white;
+    font-size: 40px;
+    position: absolute;
+    top: -5rem;
+    left: 0%;
+}
+.purches .refer-logo{
+	display: none;
+}
+.purches .popup-logo{
+	content: url(//cdn.shopify.com/s/files/1/0079/7193/0170/t/561/assets/swell-purchase-img.png?v=58903334892072640451686232135);
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+    width: 130px;
+}
+@media screen and (max-width: 1100px)
+{
+	.purches .popup-logo{
+	    top: 3rem;
+    	right: 3rem;
+    	width: 115px;	
+	}
+	.purches .referral{
+		padding-left: 3rem;
+    	padding-right: 18rem;
+    	padding-bottom: 2rem;
+    	padding-top: 0rem;
+	}
+	.purches .thank-you{
+		font-size: 35px;
+		top: -4rem;
+	}
+	.purches .popup-close{
+		top: -3rem;
+	}
+	.purches .refer{
+		padding-top: 4rem;
+	}
+}
+@media screen and (max-width: 700px)
+{
+	.purches .popup-logo{
+		content: url(//cdn.shopify.com/s/files/1/0079/7193/0170/t/561/assets/swell-referral-img2.png?v=61493431445906820391686232139);
+		position: unset;
+		width: 135px;
+	}
+	.purches .referral{
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+	.purches .img-to-mobile{
+		display: none;
+	}
+	.purches .referral{
+		padding-left: 0;
+    	padding-right: 0;
+        padding-bottom: 0rem;
+	}
+	.purches .refer {
+    	padding-top: 0rem;   
+     	padding-bottom: 0rem;
+	}
+	.purches .thank-you {
+	    font-size: 28px;
+	    top: -2rem;
+	}
+	.purches .popup-close {
+		width: 16px;
+	    right: 0%;
+	    top: -2rem;
+	}
+}
+@media screen and (max-width: 400px)
+{
+	.purches .referral{
+		width: 96%;
+	}
+	.purches{
+		padding-top: 2rem;
+	}
+}

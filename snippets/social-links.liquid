@@ -1,0 +1,25 @@
+<ul class="social-links">
+  {%- if settings.instagram_url != blank -%}
+    <li class="social-links__item">
+      <a target="_blank" class="social-links__link" href="{{ settings.instagram_url }}" title="Instagram">
+        {%- include 'icon' with 'instagram' -%}
+      </a>
+    </li>
+  {%- endif -%}
+
+  {%- if settings.facebook_url != blank -%}
+    <li class="social-links__item">
+      <a target="_blank" class="social-links__link" href="{{ settings.facebook_url }}" title="Facebook">
+        {%- include 'icon' with 'facebook' -%}
+      </a>
+    </li>
+  {%- endif -%}
+
+  {%- if settings.twitter_url != blank -%}
+    <li class="social-links__item">
+      <a target="_blank" class="social-links__link" href="{{ settings.twitter_url }}" title="Twitter">
+        {%- include 'icon' with 'twitter' -%}
+      </a>
+    </li>
+  {%- endif -%}
+</ul>

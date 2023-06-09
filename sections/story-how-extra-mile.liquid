@@ -1,0 +1,95 @@
+<div class="story__extra-mile" style="background-image: url({{ section.settings.extra-mile_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.extra-mile_mobile_image %}{{ section.settings.extra-mile_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.extra-mile_image | img_url: '2880x' }}" data-mobile-image-check>
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--five-twelfths push--medium--seven-twelfths small--one-half push--small--one-half">
+        <div class="block__content text--light">
+          <h4 class="text--light">{{ section.settings.extra-mile_headline }}</h4>
+          <p>{{ section.settings.extra-mile_content }}</p>
+          {% if section.settings.extra-mile_link %}
+            <a href="{{ section.settings.extra-mile_link }}" class="btn btn--primary">{{ section.settings.extra-mile_link_text }}</a>
+          {% endif %}
+          <div class="brand-bar">
+            <div class="wrapper">
+              <div class="grid">
+                <div class="grid__item medium--two-thirds push--medium--one-sixth">
+                  <div class="brand-bar__items">
+                    {% for block in section.blocks %}
+                      <div class="brand-bar__item">
+                        {% if block.settings.brand_image_url != blank %}
+                        <a href="{{ block.settings.brand_image_url }}" target="_blank">
+                          <img src="{{ block.settings.brand_image | img_url: '80x' }}" data-rjs="{{ block.settings.brand_image | img_url: '160x' }}" alt="">
+                        </a>
+                        {% else %}
+                          <img src="{{ block.settings.brand_image | img_url: '80x' }}" data-rjs="{{ block.settings.brand_image | img_url: '160x' }}" alt="">
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Extra Mile",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"extra-mile_image",
+        "label":"Extra Mile Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"extra-mile_mobile_image",
+        "label":"Extra Mile Mobile Image"
+      },
+      {
+        "type":"text",
+        "id":"extra-mile_headline",
+        "label":"Extra Mile Headline",
+        "default":"We believe in going the extra mile."
+      },
+      {
+        "type":"textarea",
+        "id":"extra-mile_content",
+        "label":"Extra Mile Content",
+        "default":"Caldera + Lab is proud to be the first Made Safe men's brand and the first Ecocert men's brand in the United States. Even our wood top is certified sustainably sourced and we donate 10% of our net profits to charities that support cleaner living."
+      },
+      {
+        "type":"url",
+        "id":"extra-mile_link",
+        "label":"extra-mile Section Link"
+      },
+      {
+        "type":"text",
+        "id":"extra-mile_link_text",
+        "label":"Extra Mile Section Link Text",
+        "default":"See for Yourself"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "brand",
+        "name": "brand",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"brand_image",
+            "label":"Brand Image",
+            "info":"Image Dimensions: 160px x 160px"
+          },
+          {
+            "type":"url",
+            "id":"brand_image_url",
+            "label":"Brand Image Url"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

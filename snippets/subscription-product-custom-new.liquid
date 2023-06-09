@@ -1,0 +1,364 @@
+{% if product.metafields.subscriptions.subscription_id %}
+	{% comment %}Subscriptions Powered by ReCharge Payments: Meta Fields{% endcomment %}
+    	{% comment %}Widget settings{% endcomment %}
+			{% assign widget_settings = shop.metafields.subscriptions %}
+			<script>
+				window.product_data = {{ product | json }};
+			</script>
+    	{% if widget_settings.subscription_active == 'true' %}
+    		{% assign subscription_active = true %}
+    	{% else %}
+    		{% assign subscription_active = false %}
+    	{% endif %}
+    	{% if widget_settings.select_subscription_first == 'true' %}
+    		{% assign select_subscription_first = true %}
+    	{% else %}
+    		{% assign select_subscription_first = false %}
+    	{% endif %}
+        {% if widget_settings.disable_duplicates == 'true' %}
+            {% assign disable_duplicates = true %}
+        {% else %}
+            {% assign disable_duplicates = false %}
+        {% endif %}
+    	{% comment %}Subscription settings{% endcomment %}
+    	{% assign subscription_product = product.metafields.subscriptions %}
+    	{% assign subscription_id = subscription_product.subscription_id %}
+    	{% assign shipping_interval_unit_type = subscription_product.shipping_interval_unit_type | default: 'Days' %}
+    	{% assign shipping_interval_frequency = subscription_product.shipping_interval_frequency | split: ',' | default: 30 %}
+    	{% assign product_tags = product.tags | remove: ' ' | downcase %}
+    	{% if subscription_product.is_subscription_only == 'true' or product_tags contains 'subscriptiononly' %}
+    		{% assign subscription_only = true %}
+    	{% else %}
+    		{% assign subscription_only = false %}
+    	{% endif %}
+    	{% comment %}Discount settings{% endcomment %}
+    	{% assign discount_percentage = subscription_product.discount_percentage | round: 2 %}
+    	{% assign discount_floor = subscription_product.discount_percentage | floor %}
+    	{% if discount_percentage == discount_floor %}
+    		{% assign discount_percentage = discount_floor %}
+    	{% endif %}
+    	{% comment %}Widget translation{% endcomment %}
+    	{% assign label_onetime = widget_settings.onetime_message | default: "One-time purchase" %}
+    	{% assign label_autodeliver = widget_settings.subscribe_message | default: "Subscribe &amp; save" %}
+    	{% assign label_deliver_every = widget_settings.widget_deliver_every | default: "Deliver Every" %}
+    	{% assign label_unit_type = subscription_product.label_unit_type | default: shipping_interval_unit_type %}
+		{% assign subscription_details_label = widget_settings.subscription_details_verbiage | default: "Subscription details" %}
+		{% assign how_it_works_text = widget_settings.how_it_works | default: "<strong>How subscriptions work</strong><br><br>Products are automatically delivered on your schedule. No obligation, modify or cancel your subscription anytime." %}
+		{% assign learnmore_link = widget_settings.learnmore_verbiage | default: "Learn more..." %}
+        {% comment %}Popup settings{% endcomment %}
+		{% if widget_settings.show_subscription_details == 'false' %}
+			{% assign show_widget = false %}
+		{% else %}
+			{% assign show_widget = true %}
+		{% endif %}
+		{% if widget_settings.show_subscription_details_icon == 'false' %}
+			{% assign show_widget_icon = false %}
+		{% else %}
+			{% assign show_widget_icon = true %}
+		{% endif %}
+		{% if widget_settings.show_learnmore == 'false' %}
+			{% assign show_learnmore = false %}
+		{% else %}
+			{% assign show_learnmore = true %}
+		{% endif %}
+		{% if widget_settings.show_poweredby == 'false' %}
+			{% assign show_poweredby = false %}
+		{% else %}
+			{% assign show_poweredby = true %}
+		{% endif %}
+    	{% comment %}Custom styling{% endcomment %}
+    	{% assign widget_label_color = widget_settings.font_color | default: "#000000" %}
+    	{% assign widget_active_color = widget_settings.active_color | default: "#676767" %}
+    	{% assign widget_active_bg = widget_settings.background_color | default: "#F8F8F8" %}
+    	{% assign widget_icon = widget_settings.widget_icon | default: "black" %}
+    	{% if widget_icon == "white" %}
+    		{% assign widget_icon = "//rechargestatic-bootstrapheroes.netdna-ssl.com/static/images/widget/rc_widget__icon__white@2x.png" %}
+    	{% else %}
+    		{% assign widget_icon = "//rechargestatic-bootstrapheroes.netdna-ssl.com/static/images/widget/rc_widget__icon__black@2x.png" %}
+    	{% endif %}
+    	{% assign popup_zindex = widget_settings.popup_zindex | default: "56" %}
+    	{% assign popup_background_color = widget_settings.popup_background_color | default: "#474747" %}
+    	{% assign popup_text_color = widget_settings.popup_text_color | default: "#FFFFFF" %}
+    	{% assign popup_link_color = widget_settings.popup_link_color | default: "#4DD6B7" %}
+    	{% assign recharge_custom_css = widget_settings.custom_css | defalut: "" %}
+		{% comment %}Learn more link{% endcomment %}
+		{% if widget_settings.learnmore_url %}
+			{% if widget_settings.learnmore_url contains "rechargepayments.com/subscribe-with-recharge" %}
+				{% capture learnmore_url %}http://rechargepayments.com/subscribe-with-recharge?utm_source=shopify%20store&utm_medium=customer%20link&utm_campaign=Shopify%20store%20back%20link&shop_name={{ shop.name | url_param_escape }}&shop={{ shop.permanent_domain }}{% endcapture %}
+			{% else %}
+				{% assign learnmore_url = widget_settings.learnmore_url %}
+			{% endif %}
+		{% else %}
+			{% capture learnmore_url %}http://rechargepayments.com/subscribe-with-recharge?utm_source=shopify%20store&utm_medium=customer%20link&utm_campaign=Shopify%20store%20back%20link&shop_name={{ shop.name | url_param_escape }}&shop={{ shop.permanent_domain }}{% endcapture %}
+		{% endif %}
+		{% comment %}Powered by badge{% endcomment %}
+		{% if widget_settings.poweredby_url %}
+			{% if widget_settings.poweredby_url contains "rechargepayments.com/subscribe-with-recharge" %}
+				{% capture poweredby_url %}http://rechargepayments.com/subscribe-with-recharge?utm_source=shopify%20store&utm_medium=customer%20link&utm_campaign=Shopify%20store%20back%20link&shop_name={{ shop.name | url_param_escape }}&shop={{ shop.permanent_domain }}{% endcapture %}
+			{% else %}
+				{% assign poweredby_url = widget_settings.poweredby_url %}
+			{% endif %}
+		{% else %}
+			{% capture poweredby_url %}http://rechargepayments.com/subscribe-with-recharge?utm_source=shopify%20store&utm_medium=customer%20link&utm_campaign=Shopify%20store%20back%20link&shop_name={{ shop.name | url_param_escape }}&shop={{ shop.permanent_domain }}{% endcapture %}
+		{% endif %}
+	<!-- Subscriptions Powered by ReCharge Payments: CSS -->
+	<link href="//rechargeassets-bootstrapheroes-rechargeapps.netdna-ssl.com/static/css/rcWidget.css" rel="stylesheet" type="text/css">
+	<style>
+		/* Widget: Purchase options */
+		label.rc_label {
+			color: {{ widget_label_color }};
+		}
+		div.rc_block__type--active {
+			background-color: {{ widget_active_bg }};
+		}
+		div.rc_block__type--active label.rc_label {
+			color: {{ widget_active_color }};
+		}
+		/* Widget: Popup */
+		div.rc_popup__block {
+			z-index: {{ popup_zindex }};
+		}
+		div.rc_popup__block:before {
+			border-bottom-color: {{ popup_background_color }};
+		}
+		div.rc_popup__block {
+			background-color: {{ popup_background_color }} !important;
+		}
+		div.rc_popup__close,
+		div.rc_popup__block__content,
+		div.rc_popup__block__content strong {
+			color: {{ popup_text_color }} !important;
+		}
+		div.rc_popup__block__content a {
+			color: {{ popup_link_color }} !important;
+		}
+		/* ReCharge CSS */
+		{{ recharge_custom_css }}
+		/* Add Custom CSS Below */
+		#AddToCart {
+			visibility: visible !important;
+		}
+	</style>
+
+
+
+
+
+
+
+	<!-- Subscriptions Powered by ReCharge Payments: HTML -->
+	<div id="rc_container" class="rc_container__main {% if subscription_only %}rc_subscription-only{% endif %}">
+		<input name="" id="rc_subscription_id" value="{{ subscription_id }}">
+		<input name="" id="rc_shipping_interval_unit_type" value="{{ shipping_interval_unit_type }}">
+		<select id="rc_duplicate_selector" class="styled replaced no-js" style="display: none;">
+			{% for variant in product.variants %}
+        {%- assign variantID = variant.metafields.subscriptions.discount_variant_id -%}
+				<option value="{{ variantID }}">{{ variantID }}</option>
+			{% endfor %}
+		</select>
+		{% unless subscription_only %}
+			<div data-blocktype='onetime' class="rc_block rc_block__type rc_block__type__onetime {% unless select_subscription_first %}rc_block__type--active{% endunless %}">
+				<label for="rc_purchase_type_onetime" class="rc_label rc_label__onetime">
+					<div class="rc_label__box">
+						<div class="rc_label__content">
+							<input type="radio" id="rc_purchase_type_onetime" name="purchase_type" value="onetime" data-variant-id="{{- product.variants[0].id -}}" {% unless select_subscription_first %}checked{% endunless %} class="rc_radio rc_radio__onetime">
+							 <span class="rc_labelText">One - Time <br/>Purchase</span>
+							 <span id="rc_price_onetime" style="display: none;" class="rc_price rc_price__onetime"></span>
+							<span class="rc_price rc_price__onetime">{{ current_variant.price | money_without_trailing_zeros }}</span>
+						</div>	
+					</div>
+					
+				</label>
+			</div>
+		{% endunless %}
+		<div data-blocktype='autodeliver' class="rc_block rc_block__type rc_block__type__autodeliver {% if select_subscription_first %}rc_block__type--active{% endif %}" {% if subscription_only and shipping_interval_frequency.size == 1 %}style="display: none;"{% endif %}>
+			{% unless subscription_only %}
+				<label for="rc_purchase_type_autodeliver" class="rc_label rc_label__autodeliver">
+					<div class="rc_label__box">
+						<div class="rc_label__content">
+							<input type="radio" name="purchase_type" id="rc_purchase_type_autodeliver" value="autodeliver" {% if select_subscription_first %}checked{% endif %} class="rc_radio rc_radio__autodeliver" {% if subscription_only %}style="display: none;"{% endif %} data-variant-id="{{- variantID -}}">
+							<span class="rc_labelText">Membership<br> Savings</span>
+							<span id="rc_price_autodeliver" class="rc_price rc_price__autodeliver">${{- product.variants[0].metafields.subscriptions.discount_variant_price | remove: '.00' -}}</span>
+							<span class="rc_label__discount">
+							{% if discount_percentage > 0 %}{{ discount_percentage | floor }}% Off {% endif %}
+							<span class="rc_label__more-info">
+							  {%- include 'icon' with 'question' -%}
+							  <span class="rc__tooltip">
+							    <strong>{{ subscription_details_label }}</strong>
+							    {{ how_it_works_text }}
+							  </span>
+							</span>
+							</span>
+						</div>
+					</div>
+				</label>
+     
+			{% endunless %}
+		</div>
+	</div>
+			<div id="rc_autodeliver_options" class="rc_block rc_block__type__options" style="display: block;">
+				<div for="rc_shipping_interval_frequency" class="rc_label__deliver_every">
+					<div class="rc_label_frequency__header">
+						<div class="rc_label__delivery">choose frequency</div>
+						<div class="c-productFrequency c-productFrequencyNeedHelp">
+							<div class="c-productFrequency__text c-productFrequency__textQuiz" data-quiz-click>
+								<span class="c-quizText__desktop">Unsure of frequency? Take quiz.</span>
+                            	<span class="c-quizText__mobile">Take frequency quiz.</span>
+							</div>
+						</div>
+						<!--
+						<div class="c-productFrequency c-productFrequencyNeedHelp">
+		                    <div class="c-productFrequency__text c-productFrequency__textNeedHelp">
+	                    		Need help <span>with frequency</span>?
+	                    		<?xml version="1.0" encoding="UTF-8"?>
+								<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+								    <title>time-alarm</title>
+								    <desc>Created with Sketch.</desc>
+								    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+								        <g id="NEW-CALDERA-FREQUENCY" transform="translate(-1291.000000, -604.000000)" stroke="#B9680C">
+								            <g id="time-alarm" transform="translate(1291.000000, 604.000000)">
+								                <polyline id="Path" points="5.5 6.5 8.5 9.5 11.5 9.5"></polyline>
+								                <path d="M0.645,5 C0.551,4.683 0.5,4.348 0.5,4 C0.5,2.067 2.067,0.5 4,0.5 C4.536,0.5 5.044,0.621 5.498,0.836" id="Path"></path>
+								                <path d="M15.355,5 C15.449,4.683 15.5,4.348 15.5,4 C15.5,2.067 13.933,0.5 12,0.5 C11.464,0.5 10.956,0.621 10.502,0.836" id="Path"></path>
+								                <circle id="Oval" cx="8" cy="9" r="6.5"></circle>
+								                <path d="M1.5,15.5 L3.404,13.596" id="Path"></path>
+								                <path d="M14.5,15.5 L12.596,13.596" id="Path"></path>
+								            </g>
+								        </g>
+								    </g>
+								</svg>
+	                    	</div>
+		                    <div class="c-productFrequency__dropdown">
+		                        <div class="c-productFrequency__heading">
+		                        	Recommended Frequency
+		                        </div>
+		                        <a href="#" class="c-productFrequency__close">
+		                        	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon" viewBox="0 0 20 20"><path d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"/></svg>
+		                        </a>
+		                        <div class="c-productFrequency__content">
+		                            <div class="c-productFrequency__item">
+		                                <span class="c-productFrequency__colOne">
+		                                    30 days 
+		                                </span>
+		                                <span class="c-productFrequency__colTwo">
+		                                    If using every night and have dry to normal skin.   
+		                                </span>
+		                            </div>
+		                            <div class="c-productFrequency__item">
+		                                <span class="c-productFrequency__colOne">
+		                                    45 days
+		                                </span>
+		                                <span class="c-productFrequency__colTwo">
+		                                    If using mostly every night and have oily skin or live in a humid climate.
+		                                </span>
+		                            </div>
+		                            <div class="c-productFrequency__item">
+		                                <span class="c-productFrequency__colOne">
+		                                    60 days
+		                                </span>
+		                                <span class="c-productFrequency__colTwo">
+		                                    If using more sparingly, you have oily skin and live in a humid climate.  
+		                                </span>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                -->	
+					</div>
+					
+					{% if shipping_interval_frequency.size == 1 %}
+						<span class="rc_label__frequency">
+							{{ shipping_interval_frequency[0] }}
+							{% if shipping_interval_frequency[0] == "1" and label_unit_type == 'Months' or label_unit_type == 'Weeks' %}
+								{{ label_unit_type | remove: 's' }}
+							{% else %}
+								{{ label_unit_type }}
+							{% endif %}
+						</span>
+					{% endif %}
+
+					<div class="rc_frequencySelecter" data-frequency-selecter>
+						{% for frequency in shipping_interval_frequency %}      
+		                  <div data-handle="{{ frequency }}" class="rc_frequencySelecter__item">
+		                    <div class="rc_frequencySelecter__box">
+			                    <div class="rc_frequencySelecter__content">
+			                    	{{ frequency }}
+				                    {% if frequency == "1" and label_unit_type == 'Months' or label_unit_type == 'Weeks' %}
+				                      {{ label_unit_type | remove: 's' }}
+				                    {% else %}
+				                      {{ label_unit_type }}
+				                    {% endif %}
+			                    </div>
+			       
+		                	</div>
+		                  </div>
+		                {% endfor %}
+	                </div>
+			          <!--div class="results__dropdown dropdown" data-dropdown data-product-dropdown>
+			            {% for frequency in shipping_interval_frequency %}
+			              {% if forloop.first %}
+			                <span data-handle="{{ frequency }}" name="properties[{{ frequency }}]">
+			                  {{ frequency }}
+			                  {% if frequency == "1" and label_unit_type == 'Months' or label_unit_type == 'Weeks' %}
+			                    {{ label_unit_type | remove: 's' }}
+			                  {% else %}
+			                    {{ label_unit_type }}
+			                  {% endif %}
+			                </span>
+			              {% endif %}
+									{% endfor %}
+			            <ul>
+			              {% for frequency in shipping_interval_frequency %}
+			                {% unless forloop.first %}
+			                  <li data-handle="{{ frequency }}">
+			                    {{ frequency }}
+			                    {% if frequency == "1" and label_unit_type == 'Months' or label_unit_type == 'Weeks' %}
+			                      {{ label_unit_type | remove: 's' }}
+			                    {% else %}
+			                      {{ label_unit_type }}
+			                    {% endif %}
+			                  </li>
+			                {% endunless %}
+			              {% endfor %}
+			            </ul>
+			          </div-->
+					<select name="" id="rc_shipping_interval_frequency" class="rc_select rc_select__frequency styled replaced" {% if shipping_interval_frequency.size == 1 %}style="display: none;"{% endif %} data-subscription-select>
+						{% for frequency in shipping_interval_frequency %}
+							<option value="{{ frequency }}">
+								{{ frequency }}
+								{% if frequency == "1" and label_unit_type == 'Months' or label_unit_type == 'Weeks' %}
+									{{ label_unit_type | remove: 's' }}
+								{% else %}
+									{{ label_unit_type }}
+								{% endif %}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+
+			</div>
+	<script src="//rechargeassets-bootstrapheroes-rechargeapps.netdna-ssl.com/static/js/widget.js"></script>
+	<script>
+		if (!ReCharge) { var ReCharge = new rcWidget; }
+		var myProduct = {
+			active: {{ subscription_active }},
+			id: {{ product.id }},
+			subscription_id: {{ subscription_id }},
+			shop_currency: "{{ shop.currency }}",
+			money_format: '{{ shop.money_format }}',
+			disable_duplicates: {{ disable_duplicates }},
+			subscription_only: {{ subscription_only }},
+			select_subscription_first: {{ select_subscription_first }},
+			shipping_interval_unit_type: "{{ shipping_interval_unit_type }}",
+			shipping_interval_frequency: [{% for interval in shipping_interval_frequency %}{{ interval }}, {% endfor %}],
+			discount_percentage: {{ discount_percentage }},
+			variant_to_duplicate: { {% for variant in product.variants %}{{ variant.id }}:'{{ variant.metafields.subscriptions.discount_variant_id }}', {% endfor %} },
+			variant_to_price: { {% for variant in product.variants %}{{ variant.id }}:'{{ variant.price }}', {% endfor %} },
+			duplicate_to_price: { {% for variant in product.variants %}{{ variant.metafields.subscriptions.discount_variant_id }}: '{{ variant.metafields.subscriptions.discount_variant_price | replace: ".", "" }}', {% endfor %} },
+		};
+		document.addEventListener("DOMContentLoaded", function() {
+			ReCharge.addProduct(myProduct);
+		});
+	</script>
+
+{% endif %}

@@ -1,0 +1,31 @@
+{% if section.settings.cart_guarantee_enable %}
+  <div class="cart__guarantee text-center">
+    <h4>{{ section.settings.cart_guarantee_title }}</h4>
+    <p class="text--small">{{ section.settings.cart_guarantee_content }}</p>
+  </div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Guarantee",
+    "settings": [
+      {
+        "type":"checkbox",
+        "id":"cart_guarantee_enable",
+        "label":"Enable Guarantee Box",
+        "default": true
+      },
+      {
+        "type":"text",
+        "id":"cart_guarantee_title",
+        "label":"Guarantee Title",
+        "default":"Our Guarantee"
+      },
+      {
+        "type":"textarea",
+        "id":"cart_guarantee_content",
+        "label":"Guarantee Content",
+        "default":"Your happiness is our number one priority. If for any reason you don’t find our product satisfactory, we will be happy to issue you a full refund within 60 days of receiving your order."
+      }
+    ]
+  }
+{% endschema %}

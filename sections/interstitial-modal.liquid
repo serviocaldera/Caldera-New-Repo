@@ -1,0 +1,175 @@
+<div class="c-interstitialModal modal" data-modal="interstitial-modal" id="interstitial-modal">
+    <div class="modal__backdrop c-interstitialModal__backDrop"></div>
+    <div class="c-interstitialModal__container modal__content ">
+        <div class="c-interstitialModal__inner">
+            <div class="c-interstitialModal__content">
+                <a class="c-interstitialModal__close js-modal-subscribe-checkout">
+                    <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g id="Gut-Landing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Desktop_interstitial-screen-selector" transform="translate(-1084.000000, -313.000000)" fill="#AF5D00" fill-rule="nonzero">
+                                <g id="Group-4" transform="translate(289.000000, 283.000000)">
+                                    <g id="Group-2" transform="translate(53.000000, 30.000000)">
+                                        <path d="M748.971481,8 L742.213013,1.2415322 C741.928996,0.957514526 741.928996,0.497030907 742.213013,0.213013231 C742.497031,-0.0710044102 742.957515,-0.0710044102 743.241532,0.213013231 L750,6.97148103 L756.758468,0.213013231 C757.042485,-0.0710044102 757.502969,-0.0710044102 757.786987,0.213013231 C758.071004,0.497030907 758.071004,0.957514526 757.786987,1.2415322 L751.028519,8 L757.786987,14.7584678 C758.071004,15.0424855 758.071004,15.5029691 757.786987,15.7869868 C757.502969,16.0710044 757.042485,16.0710044 756.758468,15.7869868 L750,9.02851897 L743.241532,15.7869868 C742.957515,16.0710044 742.497031,16.0710044 742.213013,15.7869868 C741.928996,15.5029691 741.928996,15.0424855 742.213013,14.7584678 L748.971481,8 Z" id="Path"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+                <div class="c-interstitialModal__header">
+                    <h6 class="c-interstitialModal__heading">{{ section.settings.heading }} </h6>
+                    <h3 class="c-interstitialModal__title">
+                        {{ section.settings.title }}
+                    </h3>
+                </div>
+                <div class="c-interstitialProduct__content">
+                    <h6 class="c-interstitialProduct__title">{{ section.settings.content-heading }}</h6>
+                    <div class="c-interstitialProduct__row">
+                        <div class="c-interstitialProduct__box">
+                            <div class="c-interstitialProduct__image">
+                                <img src="{{ section.settings.product-image | img_url: "master" }}" />
+                            </div>
+                            <div class="c-interstitialProduct__info">
+                                <div class="c-interstitialProduct__name">{{ section.settings.product-name }}</div>
+                                <div class="c-interstitialProduct__price">
+                                    <strike>{{ section.settings.product-price }}</strike>
+                                    <span>{{ section.settings.product-subscribe-price }}</span>
+                                </div>
+                                <div class="c-interstitialBtnArea c-interstitialBtn--tablet">
+                                    <a href="#" class="btn btn--secondary c-interstitialBtn js-modal-subscribe">
+                                        {{ section.settings.btn-text }}
+                                        <svg width="16px" height="9px" viewBox="0 0 16 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <g id="Gut-Landing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g id="Desktop_interstitial-screen-selector" transform="translate(-894.000000, -671.000000)" fill="#AF5D00">
+                                                    <g id="Group-4" transform="translate(289.000000, 283.000000)">
+                                                        <g id="Group-2" transform="translate(53.000000, 30.000000)">
+                                                            <g id="noun_down-chevron_613794" transform="translate(551.000000, 350.000000)">
+                                                                <g id="Group" transform="translate(8.793502, 8.992493) scale(-1, 1) rotate(135.000000) translate(-8.793502, -8.992493) translate(2.793502, 2.992493)">
+                                                                    <path d="M11.8076252,1.81694341 L11.8076252,10.9346874 C11.8076252,11.3223084 11.4934137,11.6360523 11.1062603,11.6360523 C10.7191068,11.6360523 10.4048954,11.3223084 10.4048954,10.9346874 L10.4048954,1.81694341 L1.28715136,1.81694341 C0.899997923,1.81694341 0.585786438,1.5031995 0.585786438,1.11557849 C0.585786438,0.728425048 0.899997923,0.414213562 1.28715136,0.414213562 L11.0987791,0.414213562 C11.2867449,0.414213562 11.4672294,0.489025821 11.6000212,0.62181758 C11.7328129,0.755076915 11.8076252,0.935093912 11.8076252,1.12305971 L11.8076252,1.81694341 Z" id="Path"></path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </a>  
+                                    <div class="c-interstitialDropDown js-modal-subscribe-dropdown">
+                                        {% for block in section.blocks %}
+                                            <a href="#" data-value="{{ block.settings.subscribe-value }}">EVERY {{ block.settings.subscribe-value }} DAYS</a>
+                                        {% endfor %}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="c-interstitialBtnArea c-interstitialBtn--mobile">
+                            <a href="#" class="btn btn--secondary c-interstitialBtn js-modal-subscribe">
+                                {{ section.settings.btn-text }}
+                                <svg width="16px" height="9px" viewBox="0 0 16 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g id="Gut-Landing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Desktop_interstitial-screen-selector" transform="translate(-894.000000, -671.000000)" fill="#AF5D00">
+                                            <g id="Group-4" transform="translate(289.000000, 283.000000)">
+                                                <g id="Group-2" transform="translate(53.000000, 30.000000)">
+                                                    <g id="noun_down-chevron_613794" transform="translate(551.000000, 350.000000)">
+                                                        <g id="Group" transform="translate(8.793502, 8.992493) scale(-1, 1) rotate(135.000000) translate(-8.793502, -8.992493) translate(2.793502, 2.992493)">
+                                                            <path d="M11.8076252,1.81694341 L11.8076252,10.9346874 C11.8076252,11.3223084 11.4934137,11.6360523 11.1062603,11.6360523 C10.7191068,11.6360523 10.4048954,11.3223084 10.4048954,10.9346874 L10.4048954,1.81694341 L1.28715136,1.81694341 C0.899997923,1.81694341 0.585786438,1.5031995 0.585786438,1.11557849 C0.585786438,0.728425048 0.899997923,0.414213562 1.28715136,0.414213562 L11.0987791,0.414213562 C11.2867449,0.414213562 11.4672294,0.489025821 11.6000212,0.62181758 C11.7328129,0.755076915 11.8076252,0.935093912 11.8076252,1.12305971 L11.8076252,1.81694341 Z" id="Path"></path>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>  
+                            <div class="c-interstitialDropDown js-modal-subscribe-dropdown">
+                                {% for block in section.blocks %}
+                                    <a href="#" data-value="{{ block.settings.subscribe-value }}">EVERY {{ block.settings.subscribe-value }} DAYS</a>
+                                {% endfor %}
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="c-interstitialModal__footer">
+                    <a href="#" class="c-interstitialModal__checkout js-modal-subscribe-checkout">{{ section.settings.checkout-text }}</a>    
+                </div>
+                
+            </div>    
+        </div>
+    </div>
+</div>
+<!--c-interstitialModal-->
+
+{% schema %}
+  {
+    "name": "Interstitial Modal",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Want To Save Money?"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Switch to a Subscription and Save 20%.  Easily Edit Your Subscription at Any Time!"
+      },
+      {
+        "type": "text",
+        "id": "content-heading",
+        "label": "Content Heading",
+        "default": "Eligible Product"
+      },
+      {
+        "type": "image_picker",
+        "id": "product-image",
+        "label": "Product Image"
+      },
+      {
+        "type": "text",
+        "id": "product-name",
+        "label": "Product Name",
+        "default": "The Good Multifunctional Face Serum"
+      },
+      {
+        "type": "text",
+        "id": "product-price",
+        "label": "Product Price",
+        "default": "$97"
+      },
+      {
+        "type": "text",
+        "id": "product-subscribe-price",
+        "label": "Product Subscribe Price",
+        "default": "$77"
+      },
+      {
+        "type": "text",
+        "id": "btn-text",
+        "label": "Btn Text",
+        "default": "subscribe & save 20%"
+      },
+      {
+        "type": "text",
+        "id": "checkout-text",
+        "label": "Checkout Text",
+        "default": "No Thanks, proceed to Checkout"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "subscribe",
+        "name": "Subscribe Value",
+        "settings": [
+          {
+            "type":"text",
+            "id":"subscribe-value",
+            "label":"Value",
+            "info":"Add the Recharge Ruleset Value"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

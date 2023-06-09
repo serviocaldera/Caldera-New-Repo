@@ -1,0 +1,71 @@
+{% assign price = product.price %}
+{% assign calculated_discount = product.metafields.sf_upscribe.discount_amount | replace: '%', '' | divided_by: 100.0 %}
+{% assign takeOffAmount = price | times: calculated_discount %}
+{% assign discountAmount = price | minus: takeOffAmount %}
+<div class="QuickBuy__cf-wrapper" >
+
+  <div class="QuickBuy__cf-time-selector" {%unless product.available%}style="display:none;"{%endunless%}>
+   
+    <div class="QuickBuy__cf-times">
+      <div data-option="45"  class="QuickBuy__cf-time">
+        45 Days
+      </div>
+      <div data-option="60"  class="QuickBuy__cf-time">
+        60 Days
+      </div>
+      <div data-option="75" class="QuickBuy__cf-time">
+        75 Days
+      </div>
+    </div>
+    <div class="QuickBuy__cf-time-selected">
+      Every <span class="QuickBuy__cf-time-drop" data-discount="{{product.metafields.sf_upscribe.discount_amount}}" data-id="{{product.first_available_variant.id}}" data-title="{{- product.metafields.sf_upscribe.subscription_product_title -}}" data-price="{{discountAmount | money_without_currency  | remove:'.00'}}" data-frequency="{{- product.metafields.sf_upscribe.interval_frequency -}}" data-unit="{{- product.metafields.sf_upscribe.interval_unit -}}">60</span> Days
+      <span class="">
+        <?xml version="1.0" encoding="UTF-8"?>
+        <svg width="12px" height="8px" viewBox="0 0 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title>Arrow - down</title>
+            <g id="🏠-Home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Home---Desktop---Winter" transform="translate(-346.000000, -3197.000000)" fill="#3D3D38" fill-rule="nonzero">
+                    <g id="Featured" transform="translate(0.000000, 2650.000000)">
+                        <g id="content" transform="translate(100.000000, 100.000000)">
+                            <g id="products" transform="translate(0.000000, 102.000000)">
+                                <g id="one-time" transform="translate(0.000000, 318.000000)">
+                                    <g id="45" transform="translate(15.000000, 17.000000)">
+                                        <polygon id="Arrow---down" transform="translate(237.095703, 14.194298) scale(1, -1) translate(-237.095703, -14.194298) " points="237.095703 10.5857864 242.898513 16.3885962 241.484299 17.8028098 237.095 13.414 232.707107 17.8028098 231.292893 16.3885962"></polygon>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+  
+  <div class="QuickBuy__cf-membership-select" {%unless product.available%}style="display:none;"{%endunless%}>
+    <div class="QuickBuy__cf-select-circle">
+      
+    </div>
+      <p class="QuickBuy__cf-text">Membership <span>Save 20%</span></p>
+      <p class="QuickBuy__cf-text-curr">{%if cart.currency.iso == "USD"%}${{discountAmount | money_without_currency  | remove:'.00'}}{%else%}{{cart.currency.symbol}}{{discountAmount | money_without_currency  | remove:'.00'}}{%endif%}</p>
+  </div>
+  <div class="QuickBuy__cf-single-select selected" {%unless product.available%}style="display:none;"{%endunless%}>
+    <div class="QuickBuy__cf-select-circle">
+      <div class="QuickBuy__cf-select-circle-inner">
+
+      </div>
+    </div>
+    <p class="QuickBuy__cf-text">One-Time Purchase</p>
+    <p class="QuickBuy__cf-text-curr">{%if cart.currency.iso == "USD"%}${{price | money_without_currency | remove: '.00'}}{%else%}{{cart.currency.symbol}}{{price | money_without_currency | remove: '.00'}}{%endif%}</p>
+</div>
+
+{%if product.available%}
+<div class="QuickBuy__cf-atc ">
+  <p class="QuickBuy__cf-atc-text">ADD TO CART</p>
+  {%else%}
+  <div class="QuickBuy__cf-atc QuickBuy__cf-atc-oos">
+  <p class="QuickBuy__cf-atc-text QuickBuy__cf-atc-text-oos">SOLD OUT</p>
+  {%endif%}
+</div>
+</div>

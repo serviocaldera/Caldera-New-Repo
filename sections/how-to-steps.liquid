@@ -1,0 +1,52 @@
+<div class="c-howToSteps">
+    <div class="wrapper c-howToSteps__container">
+        <div class="c-howToSteps__row">
+            {% for block in section.blocks %}
+            <div class="c-howToSteps__item">
+                <div class="c-howToSteps__box">
+                    <div class="c-howToSteps__icon">
+                        {{ block.settings.icon }}
+                    </div>
+                    <div class="c-howToSteps__copy">{{ block.settings.copy }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="c-howToSteps__mainCopy">
+            {{ section.settings.main-copy }}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "How to Use Steps",
+        "settings": [
+            {
+                "type":"html",
+                "id":"main-copy",
+                "label":"Main Copy",
+                "default":"The Good is lightweight and designed to absorb quickly, so you’ll never feel greasy."
+            }
+        ],
+        "max_blocks": 4,
+        "blocks": [
+            {
+                "type": "step",
+                "name": "How To Use Step",
+                "settings": [
+                    {
+                        "type":"html",
+                        "id":"icon",
+                        "label":"SVG Icon"
+                    },
+                    {
+                        "type":"html",
+                        "id":"copy",
+                        "label":"Copy"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

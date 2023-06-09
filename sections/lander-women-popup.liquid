@@ -1,0 +1,42 @@
+{% include 'landers-popup' %}
+
+{% schema %}
+  {
+    "name": "Exit Intent Modal",
+    "settings": [
+        {
+            "type":"image_picker",
+            "id":"image-desktop",
+            "label":"Image Desktop"
+        },
+        {
+            "type":"image_picker",
+            "id":"image-mobile",
+            "label":"Image Mobile"
+        },
+        {
+            "type":"text",
+            "id":"heading",
+            "label":"Heading",
+            "default":"20% OFF + Free Shipping"
+        },
+        {
+            "type":"text",
+            "id":"subheading",
+            "label":"Sub Heading",
+            "default":"Not ready?"
+        },
+        {
+            "type":"html",
+            "id":"copy",
+            "label":"Copy",
+            "default":"Enter your email to save Dr Hyman’s special offer." 
+        },
+        {
+            "type":"text",
+            "id":"form",
+            "label":"Klaviyo Form"
+        }
+    ]
+  }
+{% endschema %}

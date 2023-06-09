@@ -1,0 +1,31 @@
+<div class="c-landerLogo">
+    <div class="wrapper">
+        <div class="c-landerLogo__content">
+            {% for block in section.blocks %}
+              <div class="c-landerLogo__item">
+                <img src="{{ block.settings.image | img_url: 'master' }}" class="c-landerLogo__image" />
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!--c-landerLogo-->
+
+{% schema %}
+  {
+    "name": "Logos",
+    "blocks": [
+      {
+        "type": "logo-block",
+        "name": "Logos",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Logo"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

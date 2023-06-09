@@ -1,0 +1,136 @@
+{% assign _section = section.settings %}
+{% if _section.pre_order == true %}
+<div class="hpPreOrder" style="margin-bottom: 30px;">      
+    <div class="wrapper">
+        <h4 class="hpPreOrder__heading"> {{ _section.heading }}</h4>
+        <div class="hpPreOrder__content">
+            <div class="hpPreOrder__item hpPreOrder__item--CS">
+                <div class="hpPreOrder__images">
+                    <picture class="hpPreOrder__image hpPreOrder__image--primary"> 
+                        <source media="(max-width: 1023px)" data-srcset="{{ _section.csPrimaryMob | img_url: '336x'}}">
+                        <source media="(min-width: 1024px)" data-srcset="{{ _section.csPrimaryDesk | img_url: '619x'}}">
+                        <img class="lazyload" src="{{ _section.csPrimaryMob | img_url: '336x'}}" data-src="{{ _section.csPrimaryMob | img_url: '336x'}}" alt="tb">  
+                    </picture>
+                    <picture class="hpPreOrder__image hpPreOrder__image--secondary"> 
+                        <source media="(max-width: 1023px)" data-srcset="{{ _section.csSecondaryMob | img_url: '336x'}}">
+                        <source media="(min-width: 1024px)" data-srcset="{{ _section.csSecondaryDesk | img_url: '619x'}}">
+                        <img class="lazyload" src="{{ _section.csSecondaryMob | img_url: '336x'}}" data-src="{{ _section.csSecondaryMob | img_url: '336x'}}" alt="tb">  
+                    </picture>
+                    <a href="{{_section.btnLinkSlate}}" class="btn btn--primary hpPreOrder__cta">{{ _section.btnCS }}</a>
+                </div>
+                <p class="hpPreOrder__itemDescrip hpPreOrder__itemDescrip--CS">{{ _section.CSDescrip }}</p>
+            </div>
+            <div class="hpPreOrder__item hpPreOrder__item--BL">
+                <div class="hpPreOrder__images">
+                    <picture class="hpPreOrder__image hpPreOrder__image--primary"> 
+                        <source media="(max-width: 1023px)" data-srcset="{{ _section.blPrimaryMob | img_url: '336x'}}">
+                        <source media="(min-width: 1024px)" data-srcset="{{ _section.blPrimaryDesk | img_url: '619x'}}">
+                        <img class="lazyload" src="{{ _section.blPrimaryMob | img_url: '336x'}}" data-src="{{ _section.blPrimaryMob | img_url: '336x'}}" alt="tb">  
+                    </picture>
+                    <picture class="hpPreOrder__image hpPreOrder__image--secondary"> 
+                        <source media="(max-width: 1023px)" data-srcset="{{ _section.blSecondaryMob | img_url: '336x'}}">
+                        <source media="(min-width: 1024px)" data-srcset="{{ _section.blSecondaryDesk | img_url: '619x'}}">
+                        <img class="lazyload" src="{{ _section.blSecondaryMob | img_url: '336x'}}" data-src="{{ _section.blSecondaryMob | img_url: '336x'}}" alt="tb">  
+                    </picture>
+                    <a href="{{_section.btnLinkLayer}}" class="btn btn--primary hpPreOrder__cta">{{ _section.btnBL }}</a>
+                </div>
+                <p class="hpPreOrder__itemDescrip hpPreOrder__itemDescrip--BL">{{ _section.BLDescrip }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}              
+                
+{% schema %}
+{
+    "name":"PreOrder-section",
+    "settings":[
+        {
+            "type":"checkbox",
+            "id":"pre_order",
+            "label":"Pre-Order section",
+            "default": false
+        },
+        {
+            "type":"text",
+            "id":"heading",
+            "label":"section heading",
+            "default": "Meet our new products. They will transform your skincare routine."
+        },
+        {
+            "type":"html",
+            "id":"CSDescrip",
+            "label":"Clean Slate Description",
+            "default": "A lightweight, pH-balanced cleanser made with biome-friendly probiotics and mineral-rich glacial ocean silt extracts; it leaves all skin types feeling invigorated and sublimely refreshed."
+        },
+        {
+            "type":"html",
+            "id":"BLDescrip",
+            "label":"Base Layer Description",
+            "default": "A nutrient-dense, nourishing moisturizer with defense against environmental stress, pollution, and blue light radiation powered by  botanical ingredients, plant stem cells and adaptogenic actives."
+        },
+        {
+            "type":"text",
+            "id":"btnCS",
+            "label":"Clean Slate CTA",
+            "default": "The clean slate"
+        },
+        {
+            "type":"text",
+            "id":"btnBL",
+            "label":"Base Layer CTA",
+            "default": "The base layer"
+        },
+        {
+            "type":"url",
+            "id":"btnLinkSlate",
+            "label":"Clean Slate CTA Link"
+        },
+        {
+            "type":"url",
+            "id":"btnLinkLayer",
+            "label":"Basic Layer CTA Link"
+        },
+        {
+            "type":"image_picker",
+            "id":"csPrimaryMob",
+            "label":"clean slate primary mobile"
+        },
+        {
+            "type":"image_picker",
+            "id":"csPrimaryDesk",
+            "label":"clean slate primary desktop"
+        },
+        {
+            "type":"image_picker",
+            "id":"csSecondaryMob",
+            "label":"clean slate Secondary mobile"
+        },
+        {
+            "type":"image_picker",
+            "id":"csSecondaryDesk",
+            "label":"clean slate Secondary desktop"
+        },
+        {
+            "type":"image_picker",
+            "id":"blPrimaryMob",
+            "label":"base layer primary mobile"
+        },
+        {
+            "type":"image_picker",
+            "id":"blPrimaryDesk",
+            "label":"base layer primary desktop"
+        },
+        {
+            "type":"image_picker",
+            "id":"blSecondaryMob",
+            "label":"base layer Secondary mobile"
+        },
+        {
+            "type":"image_picker",
+            "id":"blSecondaryDesk",
+            "label":"base layer Secondary desktop"
+        }
+    ]
+}
+{% endschema %}

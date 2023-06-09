@@ -1,0 +1,71 @@
+<div class="c-pdpResult">
+    <div class="wrapper">
+        <h4 class="c-pdpSection__heading c-pdpResult__title">{{ section.settings.title }}</h4>
+        <div class="c-pdpResult__main">
+            <div class="c-pdpResult__row" data-pdp-result-slider>
+                {% for block in section.blocks %}
+                    <div class="c-pdpResult__item {{ block.settings.class }}">
+                        {% assign imgAlt = block.settings.heading | strip_html %}
+                        <img src="{{ block.settings.image | img_url: "master" }}" class="c-pdpResult__image" alt="{{imgAlt}}" />
+                        <div class="c-pdpResult__content">
+                            <img src="{{ block.settings.icon | img_url: "master" }}" class="c-pdpResult__icon" alt="icon" />
+                            <h6 class="c-pdpResult__heading">{{ block.settings.heading }}</h6>
+                            <div class="c-pdpResult__copy">
+                                {{ block.settings.copy }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>    
+        </div>
+        
+    </div>
+</div>
+<!--c-pdpInd-->
+
+{% schema %}
+  {
+    "name": "PDP Result",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default":"96% Of Men Reported Healthier + Energetic Looking Skin"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "contentcolumn",
+        "name": "Result Blocks",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon",
+                "label": "Icon"
+            },
+            {
+                "type": "text",
+                "id": "heading",
+                "label": "Heading"
+            },
+            {
+                "type": "html",
+                "id": "copy",
+                "label": "Copy"
+            },
+            {
+                "type": "text",
+                "id": "class",
+                "label": "Class Name"
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,134 @@
+<div class="ingredients-mob">
+  <div class="accordion__list accordion__list--mob">
+
+    {% for item in product.metafields.huemor.ingredients.value %}
+
+      <div class="accordion__item">
+        <p class="accordion__title js-accordion js-update-main">
+          <span class="accordion__text">
+            <img class="accordion__image" src="{{ item.icon }}" alt="{{ item.name }}">
+          
+            <span>{{ item.name }}</span>
+          </span>
+
+          <i class="accordion__icon accordion__icon--small"></i>
+        </p>
+    
+        <div class="accordion__body js-accordion-expand">
+          <div class="ingredients-slider" id="ingredients-slider--mob{{- forloop.index -}}" data-tab="{{ forloop.index }}">
+            <div class="ingredients-slider__track">
+    
+              {% for item_c in item.ingredients %}
+                <div class="ingredients-slider__item">
+                  <div class="ingredients-slider__item-image">
+                    <img src="{{ item_c.image }}" alt="{{ item_c.title }}">
+                  </div>
+
+                  <p class="ingredients-slider__item-title">{{ item_c.title }}</p>
+                  
+                  <p class="ingredients-slider__item-subtitle">{{ item_c.subtitle }}</p>
+
+                  <p class="ingredients-slider__item-description">{{ item_c.body }}</p>
+                </div>
+              {% endfor %}
+    
+            </div>
+
+            <p class="show-all-ingredients js-all-ingredients-m" data-tab="{{ forloop.index }}">All Ingredients for {{ item.name }}</p>
+
+            <div class="swiper-control">
+              <img class="ingr-prev-{{- forloop.index -}}" src="{{ 'ingr-left.svg' | asset_url }}" alt="slide prev">
+    
+              <img class="ingr-next-{{- forloop.index -}}" src="{{ 'ingr-right.svg' | asset_url }}" alt="slide next">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+    
+  </div>
+
+  {% for item in product.metafields.huemor.ingredients.value %}
+    <div class="all-ingredients-data-m" data-tab="{{ forloop.index }}">
+      <span class="all-ingredients-data-close js-all-ingredients-close-m">✕</span>
+      <div class="all-ingredients-data--body">
+       <p>{{ item.all-ingredients }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+
+<script>
+   document.querySelectorAll('.js-all-ingredients-m').forEach(item => {
+      item.addEventListener('click', function(){
+        let tab = this.dataset.tab;
+
+        item.closest('.accordion').classList.add('accordion--overlay');
+        item.closest('.accordion__item--1l').querySelector(`.all-ingredients-data-m[data-tab="${tab}"]`).classList.add('all-ingredients-data-m--active');
+      });
+    });
+
+    document.addEventListener('click', function(event) {
+      let ignoreTarget1 = document.querySelector('.all-ingredients-data-m--active');
+      
+      if (ignoreTarget1) {
+        let isClickInsideTarget1 = ignoreTarget1.contains(event.target);
+
+        if (!isClickInsideTarget1 && !event.target.classList.contains('show-all-ingredients')) {
+          //console.log('close me');
+          document.querySelector('.all-ingredients-data-m--active').classList.remove('all-ingredients-data-m--active');
+          document.querySelector('.accordion--overlay').classList.remove('accordion--overlay');
+        }
+      }
+    });
+
+    document.querySelectorAll('.js-all-ingredients-close-m').forEach(item => {
+      item.addEventListener('click', function(){
+        document.querySelector('.all-ingredients-data-m--active').classList.remove('all-ingredients-data-m--active');
+        document.querySelector('.accordion--overlay').classList.remove('accordion--overlay');
+      });
+    });
+
+  window.addEventListener('load', ()=> {
+    let ingredients_slider1 = new Swiper("#ingredients-slider--mob1", {
+      slidesPerView: 'auto',
+      slidesPerGroup: 1,
+      spaceBetween: 25,
+      wrapperClass: 'ingredients-slider__track',
+      slideClass: 'ingredients-slider__item',
+      speed: 500,
+      navigation: {
+        nextEl: ".ingr-next-1",
+        prevEl: ".ingr-prev-1",
+      }
+    });
+
+    let ingredients_slider2 = new Swiper("#ingredients-slider--mob2", {
+      slidesPerView: 'auto',
+      slidesPerGroup: 1,
+      spaceBetween: 25,
+      wrapperClass: 'ingredients-slider__track',
+      slideClass: 'ingredients-slider__item',
+      speed: 500,
+      navigation: {
+        nextEl: ".ingr-next-2",
+        prevEl: ".ingr-prev-2",
+      }
+    });
+
+    let ingredients_slider3 = new Swiper("#ingredients-slider--mob3", {
+      slidesPerView: 'auto',
+      slidesPerGroup: 1,
+      spaceBetween: 25,
+      wrapperClass: 'ingredients-slider__track',
+      slideClass: 'ingredients-slider__item',
+      speed: 500,
+      navigation: {
+        nextEl: ".ingr-next-3",
+        prevEl: ".ingr-prev-3",
+      }
+    });
+  });
+</script>

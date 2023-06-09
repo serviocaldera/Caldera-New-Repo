@@ -1,0 +1,139 @@
+{%- if product.metafields.huemor.clinical_results_copy -%}
+  <div class="clinical-results__container{% if section.settings.space_top %} space-top{% endif %}{% if section.settings.space_bottom %} space-bottom{% endif %}{% if section.settings.section_classname %} {{ section.settings.section_classname }}{% endif %}">
+    <div class="clinical-results__row">
+      <div class="clinical-results__text">
+        <h2 class="clinical-results__title">{{ section.settings.title }}</h2>
+
+        <p class="clinical-results__copy">{{ product.metafields.huemor.clinical_results_copy }}</p>
+
+        <ul class="clinical-results__list">
+          {% if product.metafields.huemor.clinical_results_proof_1_title != blank %}
+            <li>
+              <h3>{{ product.metafields.huemor.clinical_results_proof_1_title }}</h3>
+
+              <p>{{ product.metafields.huemor.clinical_results_proof_1_copy }}</p>
+            </li>
+          {% endif %}
+
+          {% if product.metafields.huemor.clinical_results_proof_2_title != blank %}
+            <li>
+              <h3>{{ product.metafields.huemor.clinical_results_proof_2_title }}</h3>
+
+              <p>{{ product.metafields.huemor.clinical_results_proof_2_copy }}</p>
+            </li>
+          {% endif %}
+
+          {% if product.metafields.huemor.clinical_results_proof_3_title != blank %}
+            <li>
+              <h3>{{ product.metafields.huemor.clinical_results_proof_3_title }}</h3>
+
+              <p>{{ product.metafields.my_fields.clinical_results_proof_3_copy }}</p>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <div class="clinical-results__slider js-cr-slider">
+        <div class="clinical-results__slider-track">
+          {% if product.metafields.huemor.clinical_results_image_1 != blank %}
+            <div class="clinical-results__slider-item">
+              <img src="{{ product.metafields.huemor.clinical_results_image_1 | img_url:'900x' }}" alt="Clinical Results">
+            </div>
+          {% endif %}
+
+          {% if product.metafields.huemor.clinical_results_image_2 != blank %}
+            <div class="clinical-results__slider-item">
+              <img src="{{ product.metafields.huemor.clinical_results_image_2 | img_url:'900x' }}" alt="Clinical Results">
+            </div>
+          {% endif %}
+
+          {% if product.metafields.huemor.clinical_results_image_3 != blank %}
+            <div class="clinical-results__slider-item">
+              <img src="{{ product.metafields.huemor.clinical_results_image_3 | img_url:'900x' }}" alt="Clinical Results">
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="swiper-pagination clinical-results__pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  {% if section.settings.background_image != blank %}
+    <style>
+      .clinical-results {
+        background: url('{{ section.settings.background_image | img_url: "1920x" }}') center/cover no-repeat;
+      }
+
+      {% if section.settings.background_image_mobile != blank %}
+      @media (max-width: 599px) {
+        .clinical-results {
+          background: url('{{ section.settings.background_image_mobile | img_url: "599x" }}') center/cover no-repeat;
+        }
+      }
+      {% endif %}
+    </style>
+  {% endif %}
+
+  <script>
+    window.addEventListener('load', ()=> {
+      let clinicalSlider = new Swiper(".js-cr-slider", {
+        wrapperClass: 'clinical-results__slider-track',
+        slideClass: 'clinical-results__slider-item',
+        slidesPerView: 1,
+        spaceBetween: 35,
+        speed: 500,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        }
+      });
+    })
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Clinical Results",
+  "class": "clinical-results",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "space_top",
+      "label": "Space Top"
+    },
+    {
+      "type": "checkbox",
+      "id": "space_bottom",
+      "label": "Space Bottom"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background Image Mobile"
+    },
+    {
+      "type": "text",
+      "id": "section_classname",
+      "label": "Section Class Name"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Clinical Results",
+      "category": "Caldera"
+    }
+  ]
+}
+{% endschema %}

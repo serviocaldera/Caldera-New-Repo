@@ -1,0 +1,71 @@
+<div class="c-quizUse">
+  <div class="wrapper">
+    <div class="c-quizUse__row">
+      <div class="c-quizUse__images">
+        <img class="c-quizUse__image c-quizUse__image--desktop lazyload" src="{{ section.settings.image_desktop | img_url: '2x' }}" data-src="{{ section.settings.image_desktop | img_url: 'master' }}" />
+        <img class="c-quizUse__image c-quizUse__image--mobile lazyload" src="{{ section.settings.image_mobile | img_url: '2x' }}" data-src="{{ section.settings.image_mobile | img_url: 'master' }}" />  
+      </div>
+      
+      <div class="c-quizUse__content">
+        <div class="c-quizUse__box">
+          {% if section.settings.icon != blank %}
+            <div class="c-quizUse__icon">{{ section.settings.icon}}</div>
+          {% endif %}
+          {% if section.settings.title != blank %}
+            <h4 class="c-quizUse__title">{{ section.settings.title}}</h4>
+          {% endif %}
+          {% if section.settings.copy != blank %}
+            <div class="c-quizUse__copy">{{ section.settings.copy}}</div>
+          {% endif %}
+          {% if section.settings.copy != btntext %}
+            <a href="#" class="btn btn--primary c-quizUse__btn" data-quiz-click><span>{{ section.settings.icon_mobile}}</span>{{ section.settings.btntext}}</a>  
+          {% endif %}
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Quiz Use",
+    "settings": [
+      {
+        "type":"html",
+        "id":"icon",
+        "label":"Icon"
+      },
+      {
+        "type":"image_picker",
+        "id":"image_desktop",
+        "label":"Image Desktop"
+      },
+      {
+        "type":"image_picker",
+        "id":"image_mobile",
+        "label":"Image Mobile"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "default": "Your Skin is One-Of-A-Kind."
+      },
+      {
+        "type":"html",
+        "id":"copy",
+        "label":"Copy"
+      },
+      {
+        "type":"html",
+        "id":"icon_mobile",
+        "label":"Icon Mobile"
+      },
+      {
+        "type":"text",
+        "id":"btntext",
+        "label":"Button Copy",
+        "default": "start now"
+      }
+    ]
+  }
+{% endschema %}

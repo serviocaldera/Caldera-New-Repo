@@ -1,0 +1,53 @@
+{% if section.settings.section %}
+<div class="c-socialProof">
+    {% if section.settings.stars %}
+    <div class="c-socialProof__stars">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" xmlns:v="https://vecta.io/nano"><path d="M7.98 0c-.157.008-.294.116-.343.273L5.9 5.77.378 5.806c-.164.001-.31.112-.36.276a.41.41 0 0 0 .136.445L4.602 9.96l-1.674 5.52a.41.41 0 0 0 .139.444c.133.1.312.102.446.002L8 12.55l4.487 3.376c.133.1.313.1.446-.002a.41.41 0 0 0 .139-.444l-1.673-5.52 4.448-3.433a.41.41 0 0 0 .136-.445c-.05-.164-.196-.275-.36-.276L10.1 5.77 8.36.273c-.054-.17-.21-.28-.38-.273z" fill="#AF5D00"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" xmlns:v="https://vecta.io/nano"><path d="M7.98 0c-.157.008-.294.116-.343.273L5.9 5.77.378 5.806c-.164.001-.31.112-.36.276a.41.41 0 0 0 .136.445L4.602 9.96l-1.674 5.52a.41.41 0 0 0 .139.444c.133.1.312.102.446.002L8 12.55l4.487 3.376c.133.1.313.1.446-.002a.41.41 0 0 0 .139-.444l-1.673-5.52 4.448-3.433a.41.41 0 0 0 .136-.445c-.05-.164-.196-.275-.36-.276L10.1 5.77 8.36.273c-.054-.17-.21-.28-.38-.273z" fill="#AF5D00"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" xmlns:v="https://vecta.io/nano"><path d="M7.98 0c-.157.008-.294.116-.343.273L5.9 5.77.378 5.806c-.164.001-.31.112-.36.276a.41.41 0 0 0 .136.445L4.602 9.96l-1.674 5.52a.41.41 0 0 0 .139.444c.133.1.312.102.446.002L8 12.55l4.487 3.376c.133.1.313.1.446-.002a.41.41 0 0 0 .139-.444l-1.673-5.52 4.448-3.433a.41.41 0 0 0 .136-.445c-.05-.164-.196-.275-.36-.276L10.1 5.77 8.36.273c-.054-.17-.21-.28-.38-.273z" fill="#AF5D00"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" xmlns:v="https://vecta.io/nano"><path d="M7.98 0c-.157.008-.294.116-.343.273L5.9 5.77.378 5.806c-.164.001-.31.112-.36.276a.41.41 0 0 0 .136.445L4.602 9.96l-1.674 5.52a.41.41 0 0 0 .139.444c.133.1.312.102.446.002L8 12.55l4.487 3.376c.133.1.313.1.446-.002a.41.41 0 0 0 .139-.444l-1.673-5.52 4.448-3.433a.41.41 0 0 0 .136-.445c-.05-.164-.196-.275-.36-.276L10.1 5.77 8.36.273c-.054-.17-.21-.28-.38-.273z" fill="#AF5D00"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" xmlns:v="https://vecta.io/nano"><path d="M7.98 0c-.157.008-.294.116-.343.273L5.9 5.77.378 5.806c-.164.001-.31.112-.36.276a.41.41 0 0 0 .136.445L4.602 9.96l-1.674 5.52a.41.41 0 0 0 .139.444c.133.1.312.102.446.002L8 12.55l4.487 3.376c.133.1.313.1.446-.002a.41.41 0 0 0 .139-.444l-1.673-5.52 4.448-3.433a.41.41 0 0 0 .136-.445c-.05-.164-.196-.275-.36-.276L10.1 5.77 8.36.273c-.054-.17-.21-.28-.38-.273z" fill="#AF5D00"/></svg>
+    </div>
+    {%endif%}
+    <div class="c-socialProof__content">
+        <span class="c-socialProof__copy">{{ section.settings.copy }}</span> 
+        <span class="c-socialProof__name">{{ section.settings.name }}</span>
+        {% if section.settings.stars %}<span class="c-socialProof__verified">| Verified Buyer</span>{%endif%}
+    </div>
+</div>
+{%endif%}
+{% schema %}
+  {
+    "name": "Social Proof",
+    "settings": [
+        {
+            "type":"checkbox",
+            "id":"section",
+            "label":"Enable Social Proof",
+            "default": false
+        },
+        {
+            "type":"checkbox",
+            "id":"stars",
+            "label":"Show Stars",
+            "default": true
+        },
+        {
+            "type":"html",
+            "id":"copy",
+            "label":"Copy"
+        },
+        {
+            "type":"text",
+            "id":"name",
+            "label":"Name"
+        },
+        {
+            "type":"checkbox",
+            "id":"verified",
+            "label":"Verified Buyer",
+            "default": true
+        }
+    ]
+  }
+{% endschema %}

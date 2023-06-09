@@ -1,0 +1,74 @@
+<div class="c-howToHowMuch">
+    <div class="wrapper c-howToHowMuch__container">
+        <div class="c-howToHowMuch__header">
+            <h3 class="c-howToHowMuch__title">{{section.settings.title}}</h3>
+            <p class="c-howToHowMuch__copy">
+                {{ section.settings.copy }}
+            </p>    
+        </div>
+        
+        <div class="c-howToHowMuch__main">
+            <div class="c-howToHowMuch__row">
+                {% for block in section.blocks %}
+                    <div class="c-howToHowMuch__item">
+                        <div class="c-howToHowMuch__box">
+                            <h6 class="c-howToHowMuch__heading">{{ block.settings.heading }}</h6>
+                            <div class="c-howToHowMuch__content">
+                                <p class="c-howToHowMuch__drops">
+                                    {{ block.settings.drops }}
+                                </p> 
+                                <div class="c-howToHowMuch__icon">
+                                    {{ block.settings.icon }}    
+                                </div>
+                            </div>
+                               
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "How to How Much",
+        "settings": [
+            {
+                "type":"text",
+                "id":"title",
+                "label":"Title",
+                "default":"How much of The Good do you need?"
+            },
+            {
+                "type":"html",
+                "id":"copy",
+                "label":"Copy",
+                "default":"Your climate will affect whether you need more or less for your skin type. Please use the recommendations below as a suggested starting point, or take an extra 60 seconds and get your personalized recommendations here."
+            }
+        ],
+        "blocks": [
+            {
+                "type": "step",
+                "name": "Drops",
+                "settings": [
+                    {
+                        "type":"text",
+                        "id":"heading",
+                        "label":"Heading"
+                    },
+                    {
+                        "type":"text",
+                        "id":"drops",
+                        "label":"Drops"
+                    },
+                    {
+                        "type":"html",
+                        "id":"icon",
+                        "label":"Icon Svg code"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

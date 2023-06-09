@@ -1,0 +1,16 @@
+<div class="brand-bar">
+  <div class="wrapper">
+    <div class="grid">
+      <div class="grid__item medium--two-thirds push--medium--one-sixth">
+        <div class="brand-bar__items">
+          {% for i in (1..4) %}
+            {% capture brand_image %}brand_image_{{ i }}{% endcapture %}
+            <div class="brand-bar__item">
+              <img src="{{ settings[brand_image] | img_url: '80x' }}" data-rjs="{{ settings[brand_image] | img_url: '160x' }}" alt="{{ settings[brand_image].alt }}">
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{% if page.metafields.custom_fields["enable_ambassador_video"] == 1 %}
+  <div class="vipStoryVideo">
+    <div class="wrapper">
+      <div class="vipStoryVideo__row">
+
+        {% if page.metafields.custom_fields["ambassador_video_url"] != blank %}
+          <div class="vipStoryVideo__video">
+            <video controls="" id="ambassadorVideo">
+              <source src="{{ page.metafields.custom_fields["ambassador_video_url"] }}" type="video/mp4">
+            </video>  
+          </div>
+        {% endif %}   
+
+        {% if page.metafields.custom_fields["ambassador_video_play_icon"] != blank %}
+          <div class="vipStoryVideo__thumb">{{ page.metafields.custom_fields["ambassador_video_play_icon"] }}</div>
+        {% endif %}              
+
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+  const videoThumb = document.querySelector('.vipStoryVideo__thumb')
+    videoThumb.addEventListener('click', e => {
+    videoThumb.style.display = 'none'  
+    document.querySelector('#ambassadorVideo').play();
+  })
+</script>

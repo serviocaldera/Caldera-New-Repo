@@ -1,0 +1,43 @@
+<div class="story__hero">
+  <div class="hero__image" style="background-image: url({{ section.settings.hero_image | img_url: '2880x' }});" data-mobile-image="{% if section.settings.hero_mobile_image %}{{ section.settings.hero_mobile_image | img_url: '1984x' }}{% endif %}" data-desktop-image="{{ section.settings.hero_image | img_url: '2880x' }}" data-mobile-image-check></div>
+  <div class="wrapper">
+    <div class="grid--full">
+      <div class="grid__item large--one-half medium--one-half one-whole">
+        <div class="hero__content">
+          <div class="about-hero-heading">ABOUT US</div>
+          <h2 class="about-hero-title">Our Process</h2>
+          
+          {% if section.settings.hero_content %}
+            <p class="text--light">{{ section.settings.hero_content }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="second-section-start"></div>
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"hero_image",
+        "label":"Hero Image",
+        "info":"Recommended dimensions: 1440px x 1500px"
+      },
+      {
+        "type":"image_picker",
+        "id":"hero_mobile_image",
+        "label":"Hero Mobile Image",
+        "info":"Recommended dimensions: 750px x 592px"
+      },
+      {
+        "type":"textarea",
+        "id":"hero_content",
+        "label":"Hero Content",
+        "default":"Our process uses naturally superior ingredients and is backed up by clinically proven results."
+      }
+    ]
+  }
+{% endschema %}

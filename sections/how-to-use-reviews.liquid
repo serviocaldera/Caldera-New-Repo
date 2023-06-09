@@ -1,0 +1,71 @@
+<div class="htuReviews">
+    {% if section.settings.section_title %}
+        <h3 class="htuReviews__title">{{ section.settings.section_title }}</h3>
+    {% endif %}
+    <div class="htuReviews__row">
+        <div class="htuReviews__slider-wrapper" data-reviewSlider>
+            {% for block in section.blocks %}
+            <div class="htuReviews__review">
+                <div class="htuReviews__review-image"> 
+                    <img class="lazyload" src="{{ block.settings.review_image | img_url: '1x' }}" data-src="{{ block.settings.review_image | img_url: 'master' }}" alt="cl">  
+                </div>
+                <div class="htuReviews__review-content"> 
+                    {% if block.settings.review_stars %}
+                        <div class="htuReviews__review-stars">{{ block.settings.review_stars }}</div>
+                    {% endif %}    
+                    {% if block.settings.review_copy %}
+                        <div class="htuReviews__review-copy">{{ block.settings.review_copy }}</div>
+                    {% endif %}    
+                    {% if block.settings.review_author %}
+                        <div class="htuReviews__review-author">{{ block.settings.review_author }}</div>
+                    {% endif %}    
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "How to Use Reviews",
+  "settings": [
+        {
+        "type":"text",
+        "id":"section_title",
+        "label": "Section Title",
+        "default":"Verified Reviews"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "reviews",
+            "name": "Review",
+            "settings": [
+                {
+                    "type":"image_picker",
+                    "id":"review_image",
+                    "label":"Review Image"
+                },
+                {
+                    "type":"html",
+                    "id":"review_stars",
+                    "label":"Review Stars SVG"
+                },
+                {
+                    "type":"html",
+                    "id":"review_copy",
+                    "label":"Complete Copy",
+                    "default":"“Super easy to use, and a little goes a long way. Dries really quick and your face doesn’t feel oily at all.”"
+                },
+                {
+                    "type":"text",
+                    "id":"review_author",
+                    "label":"Review Author",
+                    "default":"Edwin C."
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

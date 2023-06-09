@@ -1,0 +1,28 @@
+{% if product.metafields.custom_fields["enable_combocert_section"] == 1 %}
+    <div class="comboCert">
+        <div class="wrapper">
+            <div class="comboCert__row">
+                <div class="comboCert__content">
+                    <div class="comboCert__content-inner">
+                        {% if product.metafields.custom_fields["combocert_title"] != blank %}
+                            <h4 class="comboCert__content-title">{{ product.metafields.custom_fields["combocert_title"] }}</h4>
+                        {% endif %}
+                        {% if product.metafields.custom_fields["combocert_copy"] != blank %}
+                            <div class="combocert__content-copy">
+                                {{ product.metafields.custom_fields["combocert_copy"] }}
+                                {% if product.metafields.custom_fields["combocert_anchor"] != blank %}
+                                    <a href="{{ product.metafields.custom_fields["combocert_url"] }}" class="comboCert__content-link">{{ product.metafields.custom_fields["combocert_anchor"] }}</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if product.metafields.custom_fields["combocert_image"] != blank %}
+                    <div class="comboCert__image">
+                        <img src="{{ product.metafields.custom_fields["combocert_image"] }}" alt="{{ product.metafields.custom_fields["combocert_title"] }}">
+                    </div>   
+                {% endif %}                    
+            </div>
+        </div>
+    </div>
+{% endif %}

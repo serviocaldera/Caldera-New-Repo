@@ -1,0 +1,110 @@
+{%- include 'pdp-info' -%}
+{% schema %}
+  {
+    "name": "PDP Info",
+    "settings": [
+        {
+            "type":"text",
+            "id":"reviews_number",
+            "label":"Number of reviews",
+            "default":"1,721+ Reviews"
+        },
+        {
+            "type":"text",
+            "id":"upscribe_info",
+            "label":"Upscribe info",
+            "default":"Edit, pause, or cancel in your account at anytime"
+        },
+        {
+            "type":"text",
+            "id":"upscribe_info_oos",
+            "label":"Upscribe info Sold Out",
+            "default":"*Price not including "
+        },
+        {
+            "type":"text",
+            "id":"upscribe_info_soldOut",
+            "label":"Upscribe info Sold Out",
+            "default":"Future membership shipments will automatically include out of stock products when they are available. You can edit, pause, or cancel in your account at anytime."
+        },
+        {
+            "type":"header",
+            "content":"Risk Free link"
+        },
+        {
+            "type":"text",
+            "id":"risk-free-usa",
+            "label":"Risk Free USA title",
+            "default":"Risk Free For 60 Days."
+        },
+        {
+            "type":"text",
+            "id":"risk-free-world",
+            "label":"Risk Free World title",
+            "default":"Ships Fast + Risk Free for 60 Days."
+        },
+        {
+            "type":"html",
+            "id":"return-policy",
+            "label":"Risk Free popup",
+            "default":"We stand behind The Good with a 'No Questions Asked' 60-day satisfaction guarantee. Keep the bottle and we'll send you a 100% refund. It's that simple."
+        },
+        {
+            "type":"header",
+            "content":"Shipping Details link"
+        },
+        {
+            "type":"text",
+            "id":"shipping-details-text",
+            "label":"Shipping Details title",
+            "default":"Shipping Details"
+        },
+        {
+            "type":"html",
+            "id":"shipping-details",
+            "label":"Shipping Details popup",
+            "default":"Orders ship from our facility in the U.S. within 1-2 business days of receipt and for U.S. orders generally arrive at your doorstep 3-4 days later. International orders ship via various priority carriers and delivery time may vary by country. You will receive an email with a tracking number when your package ships, so you can follow The Good to your doorstep."
+        },
+        {
+            "type":"header",
+            "content":"Out of stock"
+        },
+        {
+            "type":"text",
+            "id":"oos-title",
+            "label":"Title",
+            "default":"Out of stock"
+        },
+        {
+            "type":"textarea",
+            "id":"oos-text",
+            "label":"Description text",
+            "default":"*Current subscriptions for The Base Layer are paused and will be automatically resumed when available."
+        },
+        {
+            "type":"text",
+            "id":"oos-btn",
+            "label":"Button",
+            "default":"Notify Me <i>When Available</i>"
+        },
+        {
+            "type":"textarea",
+            "id":"oos-success",
+            "label":"Button",
+            "default":"You're in! We'll let you know when it's back."
+        },
+        {
+            "type":"textarea",
+            "id":"oos-error",
+            "label":"Button",
+            "default":"Please check email address."
+        }
+    ],
+      "presets": [
+        {
+          "name": "PDP Info",
+          "category": "Caldera"
+        }
+      ]
+  }
+{% endschema %}
